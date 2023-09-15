@@ -1,0 +1,23 @@
+version: '3'
+services:
+  tbc_db:
+    image: mysql:8
+    restart: always
+    environment:
+      MYSQL_DATABASE: 'tbc_db'
+      # So you don't have to use root, but you can if you like
+      MYSQL_USER: 'guest'
+      # You can use whatever password you like
+      MYSQL_PASSWORD: 'guest'
+      # Password for root access
+      MYSQL_ROOT_PASSWORD: 'guest'
+      allowPublicKeyRetrieval: true
+      useSSL: false
+    ports:
+      - '3306:3306'
+    expose:
+      - '3306'
+    volumes:
+      - tbc_db_volume:/var/lib/mysql
+volumes:
+  tbc_db_volume:

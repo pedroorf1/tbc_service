@@ -18,15 +18,6 @@ export const add: TAddPerfil = async ({
     userid,
   };
 
-  {
-    photo;
-    name;
-    secondname;
-    socialname;
-    birthday;
-    userid;
-  }
-
   return dbclient.perfil
     .create({ data: dataPerfil })
     .then((value: any) => {

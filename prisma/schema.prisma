@@ -34,15 +34,10 @@ model User {
 model Perfil {
   id          BigInt     @id @default(autoincrement())
   photo       String?
-  nome        String
+  name        String
   secondname  String
   socialname  String?
   birthday    DateTime?
-  phone       String?
-  address     String?
-  complement  String?
-  state       String?
-  country     String?
   userId      BigInt? @unique
   user        User? @relation("perfil", fields: [userId], references: [id])
 }

@@ -1,27 +1,34 @@
-import perfilModel from "../database/domains/perfilModel";
+import dbclient from "../../prisma/client";
 import { TAddPerfil, TUpdatePerfil, TGetPerfil } from "../types/perfilTypes";
 
 export const add: TAddPerfil = async ({
-  userid,
+  photo,
   name,
   secondname,
   socialname,
-  preferedsocialname,
-  avatar,
-  birthDay,
+  birthday,
+  userid,
 }) => {
   const dataPerfil = {
-    userid,
+    photo,
     name,
     secondname,
     socialname,
-    preferedsocialname,
-    avatar,
-    birthDay,
+    birthday,
+    userid,
   };
 
-  return perfilModel
-    .create(dataPerfil)
+  {
+    photo;
+    name;
+    secondname;
+    socialname;
+    birthday;
+    userid;
+  }
+
+  return dbclient.perfil
+    .create({ data: dataPerfil })
     .then((value: any) => {
       return {
         status: true,
@@ -39,8 +46,8 @@ export const add: TAddPerfil = async ({
 };
 
 export const get: TGetPerfil = async (userid: string) => {
-  return perfilModel
-    .findOne({ userid })
+  return dbclient.perfil
+    .findUnique({ where: { id: parseInt(userid) } })
     .then((value: any) => {
       return value;
     })
@@ -54,21 +61,19 @@ export const update: TUpdatePerfil = async ({
   name,
   secondname,
   socialname,
-  preferedsocialname,
-  avatar,
-  birthDay,
+  photo,
+  birthday,
 }) => {
   const dataPerfil = {
     name,
     secondname,
     socialname,
-    preferedsocialname,
-    avatar,
-    birthDay,
+    photo,
+    birthday,
   };
 
-  return perfilModel
-    .updateOne({ userid }, dataPerfil)
+  return dbclient.perfil
+    .update({ where: { id: parseInt(userid) }, data: dataPerfil })
     .then((value: any) => {
       return value;
     })

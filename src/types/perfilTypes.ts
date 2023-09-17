@@ -1,29 +1,35 @@
 export type IPerfilPayload = {
-  userid: string;
   name: string;
   secondname: string;
-  socialname: string;
-  preferedsocialname: string;
-  avatar: string;
-  birthDay: Date;
+  socialname?: string;
+  photo?: string;
+  birthday: Date;
+  userid: string;
+};
+
+export type IPerfilPayloadUpdate = {
+  name?: string;
+  secondname?: string;
+  socialname?: string;
+  photo?: string;
+  birthday?: Date;
+  userid: string;
 };
 
 export type TAddPerfil = ({
-  userid,
   name,
   secondname,
   socialname,
-  preferedsocialname,
-  avatar,
-  birthDay,
+  photo,
+  birthday,
+  userid,
 }: IPerfilPayload) => Promise<any>;
 export type TGetPerfil = (userid: string) => Promise<any>;
 export type TUpdatePerfil = ({
-  userid,
   name,
   secondname,
   socialname,
-  preferedsocialname,
-  avatar,
-  birthDay,
-}: IPerfilPayload) => Promise<any>;
+  photo,
+  birthday,
+  userid,
+}: IPerfilPayloadUpdate) => Promise<any>;

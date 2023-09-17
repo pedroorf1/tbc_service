@@ -7,7 +7,7 @@ export const add: TAddPerfil = async ({
   secondname,
   socialname,
   birthday,
-  userid,
+  userId,
 }) => {
   const dataPerfil = {
     photo,
@@ -15,15 +15,15 @@ export const add: TAddPerfil = async ({
     secondname,
     socialname,
     birthday,
-    userid,
+    userId: parseInt(userId),
   };
 
-  return dbclient.perfil
+  return await dbclient.perfil
     .create({ data: dataPerfil })
     .then((value: any) => {
       return {
         status: true,
-        data: value,
+        data: JSON.parse(value),
         message: "Perfril cadastrado!",
       };
     })
@@ -37,9 +37,11 @@ export const add: TAddPerfil = async ({
 };
 
 export const get: TGetPerfil = async (userid: string) => {
-  return dbclient.perfil
-    .findUnique({ where: { id: parseInt(userid) } })
-    .then((value: any) => {
+  return await dbclient.perfil
+    .findFirst({ where: { userId: parseInt(userid) } })
+    .then(async (value: any) => {
+      console.log("\n Perfil get one: ", value);
+      value = JSON.stringify(value);
       return value;
     })
     .catch((err: any) => {
@@ -47,14 +49,10 @@ export const get: TGetPerfil = async (userid: string) => {
     });
 };
 
-export const update: TUpdatePerfil = async ({
+export const update: TUpdatePerfil = async (
   userid,
-  name,
-  secondname,
-  socialname,
-  photo,
-  birthday,
-}) => {
+  { name, secondname, socialname, photo, birthday }
+) => {
   const dataPerfil = {
     name,
     secondname,
@@ -66,7 +64,7 @@ export const update: TUpdatePerfil = async ({
   return dbclient.perfil
     .update({ where: { id: parseInt(userid) }, data: dataPerfil })
     .then((value: any) => {
-      return value;
+      return JSON.parse(value);
     })
     .catch((err: any) => {
       return err;

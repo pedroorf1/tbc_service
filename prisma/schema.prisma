@@ -34,8 +34,8 @@ model User {
 model Perfil {
   id          BigInt     @id @default(autoincrement())
   photo       String?
-  name        String
-  secondname  String
+  name        String?
+  secondname  String?
   socialname  String?
   birthday    DateTime?
   userId      BigInt? @unique

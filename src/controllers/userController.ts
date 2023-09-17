@@ -30,7 +30,7 @@ export const addOne = async (req: Request, res: Response): Promise<any> => {
   }
 
   res.send({
-    data: result.data,
+    data: JSON.stringify(result.data),
     message: "Usuário adicionado!",
     status: EStatusReturn.Success,
   });
@@ -50,7 +50,7 @@ export const getOne = async (req: Request, res: Response): Promise<any> => {
 
   const result = await get(_id);
   res.send({
-    data: result,
+    data: JSON.stringify(result),
     message: "Usuário encontrado!",
     status: EStatusReturn.Success,
   });

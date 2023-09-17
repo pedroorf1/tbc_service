@@ -4,7 +4,7 @@ export type IPerfilPayload = {
   socialname?: string;
   photo?: string;
   birthday: Date;
-  userid: string;
+  userId: string;
 };
 
 export type IPerfilPayloadUpdate = {
@@ -13,7 +13,6 @@ export type IPerfilPayloadUpdate = {
   socialname?: string;
   photo?: string;
   birthday?: Date;
-  userid: string;
 };
 
 export type TAddPerfil = ({
@@ -22,14 +21,10 @@ export type TAddPerfil = ({
   socialname,
   photo,
   birthday,
-  userid,
+  userId,
 }: IPerfilPayload) => Promise<any>;
 export type TGetPerfil = (userid: string) => Promise<any>;
-export type TUpdatePerfil = ({
-  name,
-  secondname,
-  socialname,
-  photo,
-  birthday,
-  userid,
-}: IPerfilPayloadUpdate) => Promise<any>;
+export type TUpdatePerfil = (
+  userId: string,
+  { name, secondname, socialname, photo, birthday }: IPerfilPayloadUpdate
+) => Promise<any>;

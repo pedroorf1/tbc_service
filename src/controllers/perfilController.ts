@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
-import EStatusReturn from "../types/statusReturn";
 import { add, get, update } from "../adapters/perfilAdapt";
 import { IPerfilPayload, IPerfilPayloadUpdate } from "../types/perfilTypes";
+import EStatusReturn from "../types/statusReturn";
 //CREATE
 export const addOne = async (req: Request, res: Response): Promise<any> => {
   const data: IPerfilPayload = {
@@ -28,10 +28,8 @@ export const addOne = async (req: Request, res: Response): Promise<any> => {
     return;
   }
 
-  console.log(data);
-
   const result = await add(data);
-  if (result.status == false) {
+  if (result?.status == false) {
     res.send({
       data: [],
       message: result.message,
@@ -74,23 +72,22 @@ export const updateOne = async (req: Request, res: Response): Promise<any> => {
     return;
   }
 
-  console.log(data);
-
-  const result = await update(userid, data);
-  if (result.status == false) {
-    res.send({
-      data: [],
-      message: result.message,
-      status: EStatusReturn.Error,
+  await update(userid, data)
+    .then(result => {
+      res.send({
+        data: result,
+        message: "Perfil atualizado!",
+        status: EStatusReturn.Success,
+      });
+    })
+    .catch(err => {
+      res.send({
+        err: err,
+        message: err.message,
+        status: EStatusReturn.Error,
+      });
     });
-    return;
-  }
 
-  res.send({
-    data: result.data,
-    message: "Perfil atualizado!",
-    status: EStatusReturn.Success,
-  });
   return;
 };
 

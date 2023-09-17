@@ -1,5 +1,6 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+
 const SECRET = process.env.TOKEN_SIGNE || "no secret";
 const tools = class {
   static async createPassword(pass: string) {
@@ -36,6 +37,27 @@ const tools = class {
       if (err) return { result: false };
       return { result: decoded };
     });
+  }
+  static async customJson(data: any) {
+    let newdata = { ...data };
+    for (let [key, value] of Object.entries(data)) {
+      if (typeof value == "bigint") {
+        newdata[key] = await tools.serializeBigInt(value);
+      }
+
+      console.log("\nnewdata: ", newdata);
+    }
+    return newdata;
+  }
+
+  static async serializeBigInt(value: any): Promise<string> {
+    return String(value).toString();
+  }
+
+  // Função para desserializar um valor bigint
+  static async deserializeBigInt(serializedValue: string): Promise<bigint> {
+    const deserializedValue = BigInt(serializedValue);
+    return deserializedValue;
   }
 };
 

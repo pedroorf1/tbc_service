@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "module": "ESNext",
-    "rootDirs": ["./"],
+    "rootDirs": ["./src"],
     "outDir": "./dist",
     "target": "ES5",
     "allowJs": true,
@@ -18,15 +18,17 @@
     "noImplicitAny": true,
     "inlineSourceMap": true,
     "useUnknownInCatchVariables": false,
+    "noEmit": true,
     "baseUrl": ".",
     "paths": {
-      "@src/*": ["./src/*"]
+      "@/*": ["./src/*"]
     }
   },
   "ts-node": {
-    "esm": true
+    "esm": true,
+    "require": ["tsconfig-paths/register"]
   },
   "lib": ["esnext"],
-  "include": ["src"],
+  "include": ["./src/**/*"],
   "exclude": ["node_modules"]
 }

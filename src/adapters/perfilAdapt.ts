@@ -1,5 +1,7 @@
 import dbclient from "../../prisma/client";
-import { TAddPerfil, TUpdatePerfil, TGetPerfil } from "../types/perfilTypes";
+import { TAddPerfil, TGetPerfil, TUpdatePerfil } from "../types/perfilTypes";
+
+import tools from "../helpers/tools";
 
 export const add: TAddPerfil = async ({
   photo,
@@ -20,12 +22,9 @@ export const add: TAddPerfil = async ({
 
   return await dbclient.perfil
     .create({ data: dataPerfil })
-    .then((value: any) => {
-      return {
-        status: true,
-        data: JSON.parse(value),
-        message: "Perfril cadastrado!",
-      };
+    .then(async (value: any) => {
+      const nvalue = await tools.customJson(value);
+      return JSON.stringify(nvalue);
     })
     .catch((err: any) => {
       return {
@@ -37,16 +36,10 @@ export const add: TAddPerfil = async ({
 };
 
 export const get: TGetPerfil = async (userid: string) => {
-  return await dbclient.perfil
-    .findFirst({ where: { userId: parseInt(userid) } })
-    .then(async (value: any) => {
-      console.log("\n Perfil get one: ", value);
-      value = JSON.stringify(value);
-      return value;
-    })
-    .catch((err: any) => {
-      return err;
-    });
+  const result = await dbclient.perfil.findFirst({
+    where: { userId: parseInt(userid) },
+  });
+  return await tools.customJson(result);
 };
 
 export const update: TUpdatePerfil = async (
@@ -61,8 +54,8 @@ export const update: TUpdatePerfil = async (
     birthday,
   };
 
-  return dbclient.perfil
-    .update({ where: { id: parseInt(userid) }, data: dataPerfil })
+  return await dbclient.perfil
+    .update({ where: { userId: parseInt(userid) }, data: dataPerfil })
     .then((value: any) => {
       return JSON.parse(value);
     })

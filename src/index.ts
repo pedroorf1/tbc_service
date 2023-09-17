@@ -1,8 +1,8 @@
-import express from "express";
-import dotenv from "dotenv";
-import cors from "cors";
 import bodyParser from "body-parser";
-import server from "./src/server";
+import cors from "cors";
+import dotenv from "dotenv";
+import express from "express";
+import server from "./server";
 dotenv.config();
 
 let server_path = process.env.SERVER_PATH || "http://localhost";

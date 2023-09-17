@@ -1,7 +1,8 @@
 {
   "compilerOptions": {
-    "sourceMap": true,
-    "rootDirs": ["./src"],
+    "module": "ESNext",
+    "rootDirs": ["./"],
+    "outDir": "./dist",
     "target": "ES5",
     "allowJs": true,
     "skipLibCheck": true,
@@ -11,12 +12,21 @@
     "strict": true,
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
-    "module": "CommonJS",
-    "moduleResolution": "node",
+    "moduleResolution": "Node",
     "resolveJsonModule": true,
-    "isolatedModules": true,
-    "noImplicitAny": true
+    "isolatedModules": false,
+    "noImplicitAny": true,
+    "inlineSourceMap": true,
+    "useUnknownInCatchVariables": false,
+    "baseUrl": ".",
+    "paths": {
+      "@src/*": ["./src/*"]
+    }
   },
+  "ts-node": {
+    "esm": true
+  },
+  "lib": ["esnext"],
   "include": ["src"],
   "exclude": ["node_modules"]
 }

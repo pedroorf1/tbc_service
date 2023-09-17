@@ -1,0 +1,140 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+//cmds
+//npx prisma generate
+//npx prisma db push
+
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+//USUERS
+model User {
+  id                BigInt    @id @default(autoincrement())
+  email             String @unique
+  password          String 
+  perfil            Perfil? @relation("perfil")
+  addres            Addres[] @relation("address")
+  contact           Contact[] @relation("contact")
+  degree            Degree[] @relation("degree")  
+  skills            Skills[] @relation("skills")  
+  experiences       Experiences[] @relation("experiences")  
+  projects          Projects[] @relation("projects")  
+  referecePrices    ReferecePrices[] @relation("referecePrices")  
+  refereces         Refereces[] @relation("refereces")  
+  userPoints        UserPoints[] @relation("userPoints")  
+}
+
+model Perfil {
+  id          BigInt     @id @default(autoincrement())
+  photo       String?
+  nome        String
+  secondname  String
+  socialname  String?
+  birthday    DateTime?
+  phone       String?
+  address     String?
+  complement  String?
+  state       String?
+  country     String?
+  userId      BigInt? @unique
+  user        User? @relation("perfil", fields: [userId], references: [id])
+}
+
+model Addres {
+  id          BigInt     @id @default(autoincrement())
+  address     String?
+  complement  String?
+  state       String?
+  country     String?
+  userId      BigInt?
+  user        User? @relation("address",fields: [userId], references: [id])
+}
+
+model Contact {
+  id          BigInt     @id @default(autoincrement())
+  email       String?
+  phone       String?
+  another     String?
+  userId      BigInt?
+  user        User? @relation("contact",fields: [userId], references: [id])
+}
+
+
+//SKILLS
+model Knowledgespace {
+  id          BigInt     @id @default(autoincrement())
+  code        String?
+  description String?
+  degree      Degree[] @relation("degree") 
+}
+
+model Degree {
+  id                    BigInt     @id @default(autoincrement())
+  code                  String?
+  description           String?
+  KnowledgespaceId      BigInt? @unique
+  Knowledgespace        Knowledgespace? @relation("degree", fields: [KnowledgespaceId], references: [id])
+  userId                BigInt? @unique
+  user                  User? @relation("degree", fields: [userId], references: [id])
+}
+
+model Skills {
+  id          BigInt     @id @default(autoincrement())
+  code        String?
+  description String?
+  userId      BigInt?
+  user        User? @relation("skills",fields: [userId], references: [id])
+}
+
+model Experiences {
+  id          BigInt     @id @default(autoincrement())
+  company     String
+  start       DateTime
+  end         DateTime?
+  iscurrent   Boolean?
+  userId      BigInt?
+  user        User? @relation("experiences",fields: [userId], references: [id])
+}
+
+model Projects {
+  id          BigInt     @id @default(autoincrement())
+  name        String
+  description String?
+  start       DateTime
+  end         DateTime?
+  iscurrent   Boolean?
+  userId      BigInt?
+  user        User? @relation("projects",fields: [userId], references: [id])
+}
+
+model Refereces {
+  id          BigInt     @id @default(autoincrement())
+  description String
+  value       Float
+  userId      BigInt?
+  user        User? @relation("refereces",fields: [userId], references: [id])
+}
+
+model ReferecePrices {
+  id          BigInt     @id @default(autoincrement())
+  name        String
+  description String
+  contacts    String
+  userId      BigInt?
+  user        User? @relation("referecePrices",fields: [userId], references: [id])
+}
+
+model UserPoints {
+  id          BigInt     @id @default(autoincrement())
+  value       BigInt
+  userId      BigInt?
+  user        User? @relation("userPoints",fields: [userId], references: [id])
+}
+

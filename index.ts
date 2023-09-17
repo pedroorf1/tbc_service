@@ -2,10 +2,10 @@ import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 import bodyParser from "body-parser";
+import server from "./src/server";
 dotenv.config();
 
 let server_path = process.env.SERVER_PATH || "http://localhost";
-import server from "./src/server";
 const app = express();
 
 app.use(server);

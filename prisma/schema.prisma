@@ -30,6 +30,8 @@ model User {
   referecePrices    ReferecePrices[] @relation("referecePrices")  
   refereces         Refereces[] @relation("refereces")  
   userPoints        UserPoints[] @relation("userPoints")  
+  feeds             Feed[] @relation("feed")  
+  comments          FeedComments[] @relation("comment")  
 }
 
 model Perfil {
@@ -132,5 +134,26 @@ model UserPoints {
   value       BigInt
   userId      BigInt?
   user        User? @relation("userPoints",fields: [userId], references: [id])
+}
+
+
+model Feed {
+  id              BigInt     @id @default(autoincrement())
+  title           String
+  img             String?
+  description     String?
+  react_positive  BigInt?
+  react_negative  BigInt?
+  react_smile     BigInt?
+  react_lovely    BigInt?
+  userId          BigInt?
+  user            User? @relation("feed",fields: [userId], references: [id])
+}
+
+model FeedComments {
+  id              BigInt     @id @default(autoincrement())
+  comment         String
+  userId          BigInt
+  user            User? @relation("comment",fields: [userId], references: [id])
 }
 

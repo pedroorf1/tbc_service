@@ -1,9 +1,11 @@
 import { Request, Response } from "express";
+
 import EStatusReturn from "../types/statusReturn";
 import { add, get, update } from "../adapters/userAdapt";
 import { TUserRegister } from "../types/userTypes";
+import { TControllers } from "../types/controllersTypes";
 
-export const addOne = async (req: Request, res: Response): Promise<any> => {
+export const addOne: TControllers = async (req, res) => {
   if (!req?.query) {
     res.send({
       data: [],
@@ -37,7 +39,7 @@ export const addOne = async (req: Request, res: Response): Promise<any> => {
   return;
 };
 
-export const getOne = async (req: Request, res: Response): Promise<any> => {
+export const getOne: TControllers = async (req, res) => {
   const _id = String(req?.query._id);
 
   if (!_id) {

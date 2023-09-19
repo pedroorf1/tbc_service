@@ -1,12 +1,8 @@
-import { Request, Response } from "express";
+import { login, validate } from "../adapters/authAdapt";
+import { ILogin } from "../types/authTypes";
+import { TControllers } from "../types/controllersTypes";
 
-import { login, validate, logout } from "../adapters/authAdapt";
-import { ILogin, TLogout, TValidate } from "../types/authTypes";
-
-export const atuthenticate = async (
-  req: Request,
-  res: Response
-): Promise<any> => {
+export const atuthenticate: TControllers = async (req, res) => {
   const data: ILogin = {
     email: String(req?.query.email),
     password: String(req?.query.password),
@@ -17,7 +13,7 @@ export const atuthenticate = async (
   });
 };
 
-export const validation = async (req: Request, res: Response): Promise<any> => {
+export const validation: TControllers = async (req, res) => {
   const token = String(req?.query.token);
   const result = await validate({ token });
   return res.send(result);

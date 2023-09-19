@@ -1,9 +1,11 @@
-import { Request, Response } from "express";
 import { add, get, update } from "../adapters/perfilAdapt";
-import { IPerfilPayload, IPerfilPayloadUpdate } from "../types/perfilTypes";
 import EStatusReturn from "../types/statusReturn";
+
+import { IPerfilPayload, IPerfilPayloadUpdate } from "../types/perfilTypes";
+import { TControllers } from "../types/controllersTypes";
+
 //CREATE
-export const addOne = async (req: Request, res: Response): Promise<any> => {
+export const addOne: TControllers = async (req, res) => {
   const data: IPerfilPayload = {
     userId: String(req?.query.userid || null).trim(),
     name: String(req?.query.name || null).trim(),
@@ -46,8 +48,7 @@ export const addOne = async (req: Request, res: Response): Promise<any> => {
   return;
 };
 //UPDATE
-export const updateOne = async (req: Request, res: Response): Promise<any> => {
-  const user = JSON.parse(req.headers.user as string);
+export const updateOne: TControllers = async (req, res) => {
   const userid = String(req?.query.userid || null).trim();
   const data: IPerfilPayloadUpdate = {
     name: String(req?.query.name || null).trim(),
@@ -92,7 +93,7 @@ export const updateOne = async (req: Request, res: Response): Promise<any> => {
 };
 
 //FINDONE
-export const getOne = async (req: Request, res: Response): Promise<any> => {
+export const getOne: TControllers = async (req, res) => {
   const _id = String(req?.query.userid);
 
   if (!_id) {

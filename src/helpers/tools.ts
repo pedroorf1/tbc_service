@@ -42,16 +42,14 @@ const tools = class {
     let newdata = { ...data };
     for (let [key, value] of Object.entries(data)) {
       if (typeof value == "bigint") {
-        newdata[key] = await tools.serializeBigInt(value);
+        newdata[key] = value.toString();
       }
-
-      console.log("\nnewdata: ", newdata);
     }
     return newdata;
   }
 
-  static async serializeBigInt(value: any): Promise<string> {
-    return String(value).toString();
+  static async serializeBigInt(value: BigInt): Promise<string> {
+    return value.toString().trim();
   }
 
   // Função para desserializar um valor bigint
@@ -59,6 +57,19 @@ const tools = class {
     const deserializedValue = BigInt(serializedValue);
     return deserializedValue;
   }
+
+  static strReplaceAt = function (
+    str: string,
+    index: number,
+    replacement: any
+  ) {
+    if (index >= str.length) {
+      return str.valueOf();
+    }
+    var a = String(str).split("");
+    a[index] = replacement;
+    return JSON.parse(a.join(""));
+  };
 };
 
 export default tools;

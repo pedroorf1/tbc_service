@@ -21,7 +21,7 @@ model User {
   email             String @unique
   password          String 
   perfil            Perfil? @relation("perfil")
-  addres            Addres[] @relation("address")
+  address           Address[] @relation("address")
   contact           Contact[] @relation("contact")
   degree            Degree[] @relation("degree")  
   skills            Skills[] @relation("skills")  
@@ -31,7 +31,9 @@ model User {
   refereces         Refereces[] @relation("refereces")  
   userPoints        UserPoints[] @relation("userPoints")  
   feeds             Feed[] @relation("feed")  
-  comments          FeedComments[] @relation("comment")  
+  comments          FeedComments[] @relation("comment")
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime? @updatedAt  
 }
 
 model Perfil {
@@ -43,16 +45,22 @@ model Perfil {
   birthday    DateTime?
   userId      BigInt? @unique
   user        User? @relation("perfil", fields: [userId], references: [id])
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime? @updatedAt  
 }
 
-model Addres {
-  id          BigInt     @id @default(autoincrement())
-  address     String?
-  complement  String?
-  state       String?
-  country     String?
-  userId      BigInt?
-  user        User? @relation("address",fields: [userId], references: [id])
+model Address {
+  id              BigInt     @id @default(autoincrement())
+  street          String?
+  number          String?
+  complement      String?
+  city            String?
+  state           String?
+  country         String?
+  userId          BigInt?
+  user            User? @relation("address",fields: [userId], references: [id])
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime? @updatedAt  
 }
 
 model Contact {
@@ -62,6 +70,8 @@ model Contact {
   another     String?
   userId      BigInt?
   user        User? @relation("contact",fields: [userId], references: [id])
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime? @updatedAt  
 }
 
 
@@ -71,6 +81,8 @@ model Knowledgespace {
   code        String?
   description String?
   degree      Degree[] @relation("degree") 
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime? @updatedAt  
 }
 
 model Degree {
@@ -81,6 +93,8 @@ model Degree {
   Knowledgespace        Knowledgespace? @relation("degree", fields: [KnowledgespaceId], references: [id])
   userId                BigInt? @unique
   user                  User? @relation("degree", fields: [userId], references: [id])
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime? @updatedAt  
 }
 
 model Skills {
@@ -89,6 +103,8 @@ model Skills {
   description String?
   userId      BigInt?
   user        User? @relation("skills",fields: [userId], references: [id])
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime? @updatedAt  
 }
 
 model Experiences {
@@ -99,6 +115,8 @@ model Experiences {
   iscurrent   Boolean?
   userId      BigInt?
   user        User? @relation("experiences",fields: [userId], references: [id])
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime? @updatedAt  
 }
 
 model Projects {
@@ -110,6 +128,8 @@ model Projects {
   iscurrent   Boolean?
   userId      BigInt?
   user        User? @relation("projects",fields: [userId], references: [id])
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime? @updatedAt  
 }
 
 model Refereces {
@@ -118,6 +138,8 @@ model Refereces {
   value       Float
   userId      BigInt?
   user        User? @relation("refereces",fields: [userId], references: [id])
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime? @updatedAt  
 }
 
 model ReferecePrices {
@@ -127,6 +149,8 @@ model ReferecePrices {
   contacts    String
   userId      BigInt?
   user        User? @relation("referecePrices",fields: [userId], references: [id])
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime? @updatedAt  
 }
 
 model UserPoints {
@@ -134,6 +158,8 @@ model UserPoints {
   value       BigInt
   userId      BigInt?
   user        User? @relation("userPoints",fields: [userId], references: [id])
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime? @updatedAt  
 }
 
 
@@ -148,6 +174,8 @@ model Feed {
   react_lovely    BigInt?
   userId          BigInt?
   user            User? @relation("feed",fields: [userId], references: [id])
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime? @updatedAt  
 }
 
 model FeedComments {
@@ -155,5 +183,7 @@ model FeedComments {
   comment         String
   userId          BigInt
   user            User? @relation("comment",fields: [userId], references: [id])
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime? @updatedAt  
 }
 

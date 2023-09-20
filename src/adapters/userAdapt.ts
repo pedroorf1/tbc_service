@@ -35,15 +35,15 @@ export const add: TAddUser = async ({ email, password, confirmepassword }) => {
         password: createPassword,
       },
     })
-    .then((value: any) => {
-      value.password = undefined;
+    .then(async (value: any) => {
+      delete value.password;
       return {
         status: true,
         data: value,
-        message: "Usuário cadastrado!",
       };
     })
     .catch((err: any) => {
+      console.log(err);
       return {
         status: false,
         error: err,

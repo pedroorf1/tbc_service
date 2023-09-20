@@ -1,8 +1,6 @@
 import dbclient from "../../prisma/client";
 import { TAddPerfil, TGetPerfil, TUpdatePerfil } from "../types/perfilTypes";
 
-import tools from "../helpers/tools";
-
 export const add: TAddPerfil = async ({
   photo,
   name,
@@ -23,8 +21,11 @@ export const add: TAddPerfil = async ({
   return await dbclient.perfil
     .create({ data: dataPerfil })
     .then(async (value: any) => {
-      const nvalue = await tools.customJson(value);
-      return JSON.stringify(nvalue);
+      return {
+        data: value,
+        status: true,
+        message: "Perfil adicionado com sucesso!",
+      };
     })
     .catch((err: any) => {
       return {
@@ -36,10 +37,25 @@ export const add: TAddPerfil = async ({
 };
 
 export const get: TGetPerfil = async (userid: string) => {
-  const result = await dbclient.perfil.findFirst({
-    where: { userId: parseInt(userid) },
-  });
-  return await tools.customJson(result);
+  const result = await dbclient.perfil
+    .findFirst({
+      where: { userId: parseInt(userid) },
+    })
+    .then(async (value: any) => {
+      return await value;
+    })
+    .catch((err: any) => {
+      return {
+        status: false,
+        error: err,
+        message: "Houve erro ao realizar a busca!",
+      };
+    });
+  return {
+    data: result,
+    status: true,
+    message: "Busca realizada com sucesso!",
+  };
 };
 
 export const update: TUpdatePerfil = async (
@@ -57,9 +73,17 @@ export const update: TUpdatePerfil = async (
   return await dbclient.perfil
     .update({ where: { userId: parseInt(userid) }, data: dataPerfil })
     .then((value: any) => {
-      return JSON.parse(value);
+      return {
+        data: value,
+        status: true,
+        message: "Perfil atualizado com sucesso!",
+      };
     })
     .catch((err: any) => {
-      return err;
+      return {
+        status: false,
+        error: err,
+        message: "Houve erro ao atualizar o perfil!",
+      };
     });
 };

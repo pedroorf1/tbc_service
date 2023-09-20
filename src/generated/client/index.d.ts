@@ -8,81 +8,332 @@ import $Types = runtime.Types // general types
 import $Public = runtime.Types.Public
 import $Utils = runtime.Types.Utils
 import $Extensions = runtime.Types.Extensions
-import $Result = runtime.Types.Result
 
 export type PrismaPromise<T> = $Public.PrismaPromise<T>
 
+
+export type UserPayload<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+  name: "User"
+  objects: {
+    perfil: PerfilPayload<ExtArgs> | null
+    address: AddressPayload<ExtArgs>[]
+    contact: ContactPayload<ExtArgs>[]
+    degree: DegreePayload<ExtArgs>[]
+    skills: SkillsPayload<ExtArgs>[]
+    experiences: ExperiencesPayload<ExtArgs>[]
+    projects: ProjectsPayload<ExtArgs>[]
+    referecePrices: ReferecePricesPayload<ExtArgs>[]
+    refereces: ReferecesPayload<ExtArgs>[]
+    userPoints: UserPointsPayload<ExtArgs>[]
+    feeds: FeedPayload<ExtArgs>[]
+    comments: FeedCommentsPayload<ExtArgs>[]
+  }
+  scalars: $Extensions.GetResult<{
+    id: bigint
+    email: string
+    password: string
+    createdAt: Date
+    updatedAt: Date | null
+  }, ExtArgs["result"]["user"]>
+  composites: {}
+}
 
 /**
  * Model User
  * 
  */
-export type User = $Result.DefaultSelection<Prisma.$UserPayload>
+export type User = runtime.Types.DefaultSelection<UserPayload>
+export type PerfilPayload<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+  name: "Perfil"
+  objects: {
+    user: UserPayload<ExtArgs> | null
+  }
+  scalars: $Extensions.GetResult<{
+    id: bigint
+    photo: string | null
+    name: string | null
+    secondname: string | null
+    socialname: string | null
+    birthday: Date | null
+    userId: bigint | null
+    createdAt: Date
+    updatedAt: Date | null
+  }, ExtArgs["result"]["perfil"]>
+  composites: {}
+}
+
 /**
  * Model Perfil
  * 
  */
-export type Perfil = $Result.DefaultSelection<Prisma.$PerfilPayload>
+export type Perfil = runtime.Types.DefaultSelection<PerfilPayload>
+export type AddressPayload<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+  name: "Address"
+  objects: {
+    user: UserPayload<ExtArgs> | null
+  }
+  scalars: $Extensions.GetResult<{
+    id: bigint
+    street: string | null
+    number: string | null
+    complement: string | null
+    city: string | null
+    state: string | null
+    country: string | null
+    userId: bigint | null
+    createdAt: Date
+    updatedAt: Date | null
+  }, ExtArgs["result"]["address"]>
+  composites: {}
+}
+
 /**
- * Model Addres
+ * Model Address
  * 
  */
-export type Addres = $Result.DefaultSelection<Prisma.$AddresPayload>
+export type Address = runtime.Types.DefaultSelection<AddressPayload>
+export type ContactPayload<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+  name: "Contact"
+  objects: {
+    user: UserPayload<ExtArgs> | null
+  }
+  scalars: $Extensions.GetResult<{
+    id: bigint
+    email: string | null
+    phone: string | null
+    another: string | null
+    userId: bigint | null
+    createdAt: Date
+    updatedAt: Date | null
+  }, ExtArgs["result"]["contact"]>
+  composites: {}
+}
+
 /**
  * Model Contact
  * 
  */
-export type Contact = $Result.DefaultSelection<Prisma.$ContactPayload>
+export type Contact = runtime.Types.DefaultSelection<ContactPayload>
+export type KnowledgespacePayload<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+  name: "Knowledgespace"
+  objects: {
+    degree: DegreePayload<ExtArgs>[]
+  }
+  scalars: $Extensions.GetResult<{
+    id: bigint
+    code: string | null
+    description: string | null
+    createdAt: Date
+    updatedAt: Date | null
+  }, ExtArgs["result"]["knowledgespace"]>
+  composites: {}
+}
+
 /**
  * Model Knowledgespace
  * 
  */
-export type Knowledgespace = $Result.DefaultSelection<Prisma.$KnowledgespacePayload>
+export type Knowledgespace = runtime.Types.DefaultSelection<KnowledgespacePayload>
+export type DegreePayload<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+  name: "Degree"
+  objects: {
+    Knowledgespace: KnowledgespacePayload<ExtArgs> | null
+    user: UserPayload<ExtArgs> | null
+  }
+  scalars: $Extensions.GetResult<{
+    id: bigint
+    code: string | null
+    description: string | null
+    KnowledgespaceId: bigint | null
+    userId: bigint | null
+    createdAt: Date
+    updatedAt: Date | null
+  }, ExtArgs["result"]["degree"]>
+  composites: {}
+}
+
 /**
  * Model Degree
  * 
  */
-export type Degree = $Result.DefaultSelection<Prisma.$DegreePayload>
+export type Degree = runtime.Types.DefaultSelection<DegreePayload>
+export type SkillsPayload<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+  name: "Skills"
+  objects: {
+    user: UserPayload<ExtArgs> | null
+  }
+  scalars: $Extensions.GetResult<{
+    id: bigint
+    code: string | null
+    description: string | null
+    userId: bigint | null
+    createdAt: Date
+    updatedAt: Date | null
+  }, ExtArgs["result"]["skills"]>
+  composites: {}
+}
+
 /**
  * Model Skills
  * 
  */
-export type Skills = $Result.DefaultSelection<Prisma.$SkillsPayload>
+export type Skills = runtime.Types.DefaultSelection<SkillsPayload>
+export type ExperiencesPayload<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+  name: "Experiences"
+  objects: {
+    user: UserPayload<ExtArgs> | null
+  }
+  scalars: $Extensions.GetResult<{
+    id: bigint
+    company: string
+    start: Date
+    end: Date | null
+    iscurrent: boolean | null
+    userId: bigint | null
+    createdAt: Date
+    updatedAt: Date | null
+  }, ExtArgs["result"]["experiences"]>
+  composites: {}
+}
+
 /**
  * Model Experiences
  * 
  */
-export type Experiences = $Result.DefaultSelection<Prisma.$ExperiencesPayload>
+export type Experiences = runtime.Types.DefaultSelection<ExperiencesPayload>
+export type ProjectsPayload<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+  name: "Projects"
+  objects: {
+    user: UserPayload<ExtArgs> | null
+  }
+  scalars: $Extensions.GetResult<{
+    id: bigint
+    name: string
+    description: string | null
+    start: Date
+    end: Date | null
+    iscurrent: boolean | null
+    userId: bigint | null
+    createdAt: Date
+    updatedAt: Date | null
+  }, ExtArgs["result"]["projects"]>
+  composites: {}
+}
+
 /**
  * Model Projects
  * 
  */
-export type Projects = $Result.DefaultSelection<Prisma.$ProjectsPayload>
+export type Projects = runtime.Types.DefaultSelection<ProjectsPayload>
+export type ReferecesPayload<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+  name: "Refereces"
+  objects: {
+    user: UserPayload<ExtArgs> | null
+  }
+  scalars: $Extensions.GetResult<{
+    id: bigint
+    description: string
+    value: number
+    userId: bigint | null
+    createdAt: Date
+    updatedAt: Date | null
+  }, ExtArgs["result"]["refereces"]>
+  composites: {}
+}
+
 /**
  * Model Refereces
  * 
  */
-export type Refereces = $Result.DefaultSelection<Prisma.$ReferecesPayload>
+export type Refereces = runtime.Types.DefaultSelection<ReferecesPayload>
+export type ReferecePricesPayload<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+  name: "ReferecePrices"
+  objects: {
+    user: UserPayload<ExtArgs> | null
+  }
+  scalars: $Extensions.GetResult<{
+    id: bigint
+    name: string
+    description: string
+    contacts: string
+    userId: bigint | null
+    createdAt: Date
+    updatedAt: Date | null
+  }, ExtArgs["result"]["referecePrices"]>
+  composites: {}
+}
+
 /**
  * Model ReferecePrices
  * 
  */
-export type ReferecePrices = $Result.DefaultSelection<Prisma.$ReferecePricesPayload>
+export type ReferecePrices = runtime.Types.DefaultSelection<ReferecePricesPayload>
+export type UserPointsPayload<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+  name: "UserPoints"
+  objects: {
+    user: UserPayload<ExtArgs> | null
+  }
+  scalars: $Extensions.GetResult<{
+    id: bigint
+    value: bigint
+    userId: bigint | null
+    createdAt: Date
+    updatedAt: Date | null
+  }, ExtArgs["result"]["userPoints"]>
+  composites: {}
+}
+
 /**
  * Model UserPoints
  * 
  */
-export type UserPoints = $Result.DefaultSelection<Prisma.$UserPointsPayload>
+export type UserPoints = runtime.Types.DefaultSelection<UserPointsPayload>
+export type FeedPayload<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+  name: "Feed"
+  objects: {
+    user: UserPayload<ExtArgs> | null
+  }
+  scalars: $Extensions.GetResult<{
+    id: bigint
+    title: string
+    img: string | null
+    description: string | null
+    react_positive: bigint | null
+    react_negative: bigint | null
+    react_smile: bigint | null
+    react_lovely: bigint | null
+    userId: bigint | null
+    createdAt: Date
+    updatedAt: Date | null
+  }, ExtArgs["result"]["feed"]>
+  composites: {}
+}
+
 /**
  * Model Feed
  * 
  */
-export type Feed = $Result.DefaultSelection<Prisma.$FeedPayload>
+export type Feed = runtime.Types.DefaultSelection<FeedPayload>
+export type FeedCommentsPayload<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+  name: "FeedComments"
+  objects: {
+    user: UserPayload<ExtArgs> | null
+  }
+  scalars: $Extensions.GetResult<{
+    id: bigint
+    comment: string
+    userId: bigint
+    createdAt: Date
+    updatedAt: Date | null
+  }, ExtArgs["result"]["feedComments"]>
+  composites: {}
+}
+
 /**
  * Model FeedComments
  * 
  */
-export type FeedComments = $Result.DefaultSelection<Prisma.$FeedCommentsPayload>
+export type FeedComments = runtime.Types.DefaultSelection<FeedCommentsPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -101,6 +352,9 @@ export type FeedComments = $Result.DefaultSelection<Prisma.$FeedCommentsPayload>
 export class PrismaClient<
   T extends Prisma.PrismaClientOptions = Prisma.PrismaClientOptions,
   U = 'log' extends keyof T ? T['log'] extends Array<Prisma.LogLevel | Prisma.LogDefinition> ? Prisma.GetEvents<T['log']> : never : never,
+  GlobalReject extends Prisma.RejectOnNotFound | Prisma.RejectPerOperation | false | undefined = 'rejectOnNotFound' extends keyof T
+    ? T['rejectOnNotFound']
+    : false,
   ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs
 > {
   [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['other'] }
@@ -121,17 +375,17 @@ export class PrismaClient<
    */
 
   constructor(optionsArg ?: Prisma.Subset<T, Prisma.PrismaClientOptions>);
-  $on<V extends U>(eventType: V, callback: (event: V extends 'query' ? Prisma.QueryEvent : Prisma.LogEvent) => void): void;
+  $on<V extends (U | 'beforeExit')>(eventType: V, callback: (event: V extends 'query' ? Prisma.QueryEvent : V extends 'beforeExit' ? () => Promise<void> : Prisma.LogEvent) => void): void;
 
   /**
    * Connect with the database
    */
-  $connect(): $Utils.JsPromise<void>;
+  $connect(): Promise<void>;
 
   /**
    * Disconnect from the database
    */
-  $disconnect(): $Utils.JsPromise<void>;
+  $disconnect(): Promise<void>;
 
   /**
    * Add a middleware
@@ -199,9 +453,9 @@ export class PrismaClient<
    * 
    * Read more in our [docs](https://www.prisma.io/docs/concepts/components/prisma-client/transactions).
    */
-  $transaction<P extends Prisma.PrismaPromise<any>[]>(arg: [...P], options?: { isolationLevel?: Prisma.TransactionIsolationLevel }): $Utils.JsPromise<runtime.Types.Utils.UnwrapTuple<P>>
+  $transaction<P extends Prisma.PrismaPromise<any>[]>(arg: [...P], options?: { isolationLevel?: Prisma.TransactionIsolationLevel }): Promise<runtime.Types.Utils.UnwrapTuple<P>>
 
-  $transaction<R>(fn: (prisma: Omit<PrismaClient, runtime.ITXClientDenyList>) => $Utils.JsPromise<R>, options?: { maxWait?: number, timeout?: number, isolationLevel?: Prisma.TransactionIsolationLevel }): $Utils.JsPromise<R>
+  $transaction<R>(fn: (prisma: Omit<PrismaClient, runtime.ITXClientDenyList>) => Promise<R>, options?: { maxWait?: number, timeout?: number, isolationLevel?: Prisma.TransactionIsolationLevel }): Promise<R>
 
 
   $extends: $Extensions.ExtendsHook<'extends', Prisma.TypeMapCb, ExtArgs>
@@ -214,7 +468,7 @@ export class PrismaClient<
     * const users = await prisma.user.findMany()
     * ```
     */
-  get user(): Prisma.UserDelegate<ExtArgs>;
+  get user(): Prisma.UserDelegate<GlobalReject, ExtArgs>;
 
   /**
    * `prisma.perfil`: Exposes CRUD operations for the **Perfil** model.
@@ -224,17 +478,17 @@ export class PrismaClient<
     * const perfils = await prisma.perfil.findMany()
     * ```
     */
-  get perfil(): Prisma.PerfilDelegate<ExtArgs>;
+  get perfil(): Prisma.PerfilDelegate<GlobalReject, ExtArgs>;
 
   /**
-   * `prisma.addres`: Exposes CRUD operations for the **Addres** model.
+   * `prisma.address`: Exposes CRUD operations for the **Address** model.
     * Example usage:
     * ```ts
-    * // Fetch zero or more Addres
-    * const addres = await prisma.addres.findMany()
+    * // Fetch zero or more Addresses
+    * const addresses = await prisma.address.findMany()
     * ```
     */
-  get addres(): Prisma.AddresDelegate<ExtArgs>;
+  get address(): Prisma.AddressDelegate<GlobalReject, ExtArgs>;
 
   /**
    * `prisma.contact`: Exposes CRUD operations for the **Contact** model.
@@ -244,7 +498,7 @@ export class PrismaClient<
     * const contacts = await prisma.contact.findMany()
     * ```
     */
-  get contact(): Prisma.ContactDelegate<ExtArgs>;
+  get contact(): Prisma.ContactDelegate<GlobalReject, ExtArgs>;
 
   /**
    * `prisma.knowledgespace`: Exposes CRUD operations for the **Knowledgespace** model.
@@ -254,7 +508,7 @@ export class PrismaClient<
     * const knowledgespaces = await prisma.knowledgespace.findMany()
     * ```
     */
-  get knowledgespace(): Prisma.KnowledgespaceDelegate<ExtArgs>;
+  get knowledgespace(): Prisma.KnowledgespaceDelegate<GlobalReject, ExtArgs>;
 
   /**
    * `prisma.degree`: Exposes CRUD operations for the **Degree** model.
@@ -264,7 +518,7 @@ export class PrismaClient<
     * const degrees = await prisma.degree.findMany()
     * ```
     */
-  get degree(): Prisma.DegreeDelegate<ExtArgs>;
+  get degree(): Prisma.DegreeDelegate<GlobalReject, ExtArgs>;
 
   /**
    * `prisma.skills`: Exposes CRUD operations for the **Skills** model.
@@ -274,7 +528,7 @@ export class PrismaClient<
     * const skills = await prisma.skills.findMany()
     * ```
     */
-  get skills(): Prisma.SkillsDelegate<ExtArgs>;
+  get skills(): Prisma.SkillsDelegate<GlobalReject, ExtArgs>;
 
   /**
    * `prisma.experiences`: Exposes CRUD operations for the **Experiences** model.
@@ -284,7 +538,7 @@ export class PrismaClient<
     * const experiences = await prisma.experiences.findMany()
     * ```
     */
-  get experiences(): Prisma.ExperiencesDelegate<ExtArgs>;
+  get experiences(): Prisma.ExperiencesDelegate<GlobalReject, ExtArgs>;
 
   /**
    * `prisma.projects`: Exposes CRUD operations for the **Projects** model.
@@ -294,7 +548,7 @@ export class PrismaClient<
     * const projects = await prisma.projects.findMany()
     * ```
     */
-  get projects(): Prisma.ProjectsDelegate<ExtArgs>;
+  get projects(): Prisma.ProjectsDelegate<GlobalReject, ExtArgs>;
 
   /**
    * `prisma.refereces`: Exposes CRUD operations for the **Refereces** model.
@@ -304,7 +558,7 @@ export class PrismaClient<
     * const refereces = await prisma.refereces.findMany()
     * ```
     */
-  get refereces(): Prisma.ReferecesDelegate<ExtArgs>;
+  get refereces(): Prisma.ReferecesDelegate<GlobalReject, ExtArgs>;
 
   /**
    * `prisma.referecePrices`: Exposes CRUD operations for the **ReferecePrices** model.
@@ -314,7 +568,7 @@ export class PrismaClient<
     * const referecePrices = await prisma.referecePrices.findMany()
     * ```
     */
-  get referecePrices(): Prisma.ReferecePricesDelegate<ExtArgs>;
+  get referecePrices(): Prisma.ReferecePricesDelegate<GlobalReject, ExtArgs>;
 
   /**
    * `prisma.userPoints`: Exposes CRUD operations for the **UserPoints** model.
@@ -324,7 +578,7 @@ export class PrismaClient<
     * const userPoints = await prisma.userPoints.findMany()
     * ```
     */
-  get userPoints(): Prisma.UserPointsDelegate<ExtArgs>;
+  get userPoints(): Prisma.UserPointsDelegate<GlobalReject, ExtArgs>;
 
   /**
    * `prisma.feed`: Exposes CRUD operations for the **Feed** model.
@@ -334,7 +588,7 @@ export class PrismaClient<
     * const feeds = await prisma.feed.findMany()
     * ```
     */
-  get feed(): Prisma.FeedDelegate<ExtArgs>;
+  get feed(): Prisma.FeedDelegate<GlobalReject, ExtArgs>;
 
   /**
    * `prisma.feedComments`: Exposes CRUD operations for the **FeedComments** model.
@@ -344,7 +598,7 @@ export class PrismaClient<
     * const feedComments = await prisma.feedComments.findMany()
     * ```
     */
-  get feedComments(): Prisma.FeedCommentsDelegate<ExtArgs>;
+  get feedComments(): Prisma.FeedCommentsDelegate<GlobalReject, ExtArgs>;
 }
 
 export namespace Prisma {
@@ -394,15 +648,15 @@ export namespace Prisma {
   /**
   * Extensions
   */
-  export import Extension = $Extensions.UserArgs
+  export type Extension = $Extensions.UserArgs
   export import getExtensionContext = runtime.Extensions.getExtensionContext
-  export import Args = $Public.Args
-  export import Payload = $Public.Payload
-  export import Result = $Public.Result
-  export import Exact = $Public.Exact
+  export type Args<T, F extends $Public.Operation> = $Public.Args<T, F>
+  export type Payload<T, F extends $Public.Operation> = $Public.Payload<T, F>
+  export type Result<T, A, F extends $Public.Operation> = $Public.Result<T, A, F>
+  export type Exact<T, W> = $Public.Exact<T, W>
 
   /**
-   * Prisma Client JS version: 5.3.1
+   * Prisma Client JS version: 4.16.2
    * Query Engine version: 61e140623197a131c2a6189271ffee05a7aa9a59
    */
   export type PrismaVersion = {
@@ -459,7 +713,7 @@ export namespace Prisma {
    *
    * @see https://www.prisma.io/docs/concepts/components/prisma-client/working-with-fields/working-with-json-fields#filtering-by-null-values
    */
-  export type InputJsonValue = string | number | boolean | InputJsonObject | InputJsonArray | { toJSON(): unknown }
+  export type InputJsonValue = string | number | boolean | InputJsonObject | InputJsonArray
 
   /**
    * Types of the values used to represent different kinds of `null` values when working with JSON fields.
@@ -529,6 +783,19 @@ export namespace Prisma {
     select: any
     include: any
   }
+  type HasSelect = {
+    select: any
+  }
+  type HasInclude = {
+    include: any
+  }
+  type CheckSelect<T, S, U> = T extends SelectAndInclude
+    ? 'Please either choose `select` or `include`'
+    : T extends HasSelect
+    ? U
+    : T extends HasInclude
+    ? U
+    : S
 
   /**
    * Get the type of the value, that the Promise holds.
@@ -538,7 +805,7 @@ export namespace Prisma {
   /**
    * Get the return type of a function which returns a Promise.
    */
-  export type PromiseReturnType<T extends (...args: any) => $Utils.JsPromise<any>> = PromiseType<ReturnType<T>>
+  export type PromiseReturnType<T extends (...args: any) => Promise<any>> = PromiseType<ReturnType<T>>
 
   /**
    * From T, pick a set of properties whose keys are in the union K
@@ -799,9 +1066,9 @@ export namespace Prisma {
   type MaybeTupleToUnion<T> = T extends any[] ? TupleToUnion<T> : T
 
   /**
-   * Like `Pick`, but additionally can also accept an array of keys
+   * Like `Pick`, but with an array
    */
-  type PickEnumerable<T, K extends Enumerable<keyof T> | keyof T> = Prisma__Pick<T, MaybeTupleToUnion<K>>
+  type PickArray<T, K extends Array<keyof T>> = Prisma__Pick<T, TupleToUnion<K>>
 
   /**
    * Exclude all keys with underscores
@@ -817,7 +1084,7 @@ export namespace Prisma {
   export const ModelName: {
     User: 'User',
     Perfil: 'Perfil',
-    Addres: 'Addres',
+    Address: 'Address',
     Contact: 'Contact',
     Knowledgespace: 'Knowledgespace',
     Degree: 'Degree',
@@ -845,37 +1112,36 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     meta: {
-      modelProps: 'user' | 'perfil' | 'addres' | 'contact' | 'knowledgespace' | 'degree' | 'skills' | 'experiences' | 'projects' | 'refereces' | 'referecePrices' | 'userPoints' | 'feed' | 'feedComments'
+      modelProps: 'user' | 'perfil' | 'address' | 'contact' | 'knowledgespace' | 'degree' | 'skills' | 'experiences' | 'projects' | 'refereces' | 'referecePrices' | 'userPoints' | 'feed' | 'feedComments'
       txIsolationLevel: Prisma.TransactionIsolationLevel
     },
     model: {
       User: {
-        payload: Prisma.$UserPayload<ExtArgs>
-        fields: Prisma.UserFieldRefs
+        payload: UserPayload<ExtArgs>
         operations: {
           findUnique: {
             args: Prisma.UserFindUniqueArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$UserPayload> | null
+            result: $Utils.PayloadToResult<UserPayload> | null
           }
           findUniqueOrThrow: {
             args: Prisma.UserFindUniqueOrThrowArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$UserPayload>
+            result: $Utils.PayloadToResult<UserPayload>
           }
           findFirst: {
             args: Prisma.UserFindFirstArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$UserPayload> | null
+            result: $Utils.PayloadToResult<UserPayload> | null
           }
           findFirstOrThrow: {
             args: Prisma.UserFindFirstOrThrowArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$UserPayload>
+            result: $Utils.PayloadToResult<UserPayload>
           }
           findMany: {
             args: Prisma.UserFindManyArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$UserPayload>[]
+            result: $Utils.PayloadToResult<UserPayload>[]
           }
           create: {
             args: Prisma.UserCreateArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$UserPayload>
+            result: $Utils.PayloadToResult<UserPayload>
           }
           createMany: {
             args: Prisma.UserCreateManyArgs<ExtArgs>,
@@ -883,11 +1149,11 @@ export namespace Prisma {
           }
           delete: {
             args: Prisma.UserDeleteArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$UserPayload>
+            result: $Utils.PayloadToResult<UserPayload>
           }
           update: {
             args: Prisma.UserUpdateArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$UserPayload>
+            result: $Utils.PayloadToResult<UserPayload>
           }
           deleteMany: {
             args: Prisma.UserDeleteManyArgs<ExtArgs>,
@@ -899,7 +1165,7 @@ export namespace Prisma {
           }
           upsert: {
             args: Prisma.UserUpsertArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$UserPayload>
+            result: $Utils.PayloadToResult<UserPayload>
           }
           aggregate: {
             args: Prisma.UserAggregateArgs<ExtArgs>,
@@ -916,32 +1182,31 @@ export namespace Prisma {
         }
       }
       Perfil: {
-        payload: Prisma.$PerfilPayload<ExtArgs>
-        fields: Prisma.PerfilFieldRefs
+        payload: PerfilPayload<ExtArgs>
         operations: {
           findUnique: {
             args: Prisma.PerfilFindUniqueArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$PerfilPayload> | null
+            result: $Utils.PayloadToResult<PerfilPayload> | null
           }
           findUniqueOrThrow: {
             args: Prisma.PerfilFindUniqueOrThrowArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$PerfilPayload>
+            result: $Utils.PayloadToResult<PerfilPayload>
           }
           findFirst: {
             args: Prisma.PerfilFindFirstArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$PerfilPayload> | null
+            result: $Utils.PayloadToResult<PerfilPayload> | null
           }
           findFirstOrThrow: {
             args: Prisma.PerfilFindFirstOrThrowArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$PerfilPayload>
+            result: $Utils.PayloadToResult<PerfilPayload>
           }
           findMany: {
             args: Prisma.PerfilFindManyArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$PerfilPayload>[]
+            result: $Utils.PayloadToResult<PerfilPayload>[]
           }
           create: {
             args: Prisma.PerfilCreateArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$PerfilPayload>
+            result: $Utils.PayloadToResult<PerfilPayload>
           }
           createMany: {
             args: Prisma.PerfilCreateManyArgs<ExtArgs>,
@@ -949,11 +1214,11 @@ export namespace Prisma {
           }
           delete: {
             args: Prisma.PerfilDeleteArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$PerfilPayload>
+            result: $Utils.PayloadToResult<PerfilPayload>
           }
           update: {
             args: Prisma.PerfilUpdateArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$PerfilPayload>
+            result: $Utils.PayloadToResult<PerfilPayload>
           }
           deleteMany: {
             args: Prisma.PerfilDeleteManyArgs<ExtArgs>,
@@ -965,7 +1230,7 @@ export namespace Prisma {
           }
           upsert: {
             args: Prisma.PerfilUpsertArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$PerfilPayload>
+            result: $Utils.PayloadToResult<PerfilPayload>
           }
           aggregate: {
             args: Prisma.PerfilAggregateArgs<ExtArgs>,
@@ -981,99 +1246,97 @@ export namespace Prisma {
           }
         }
       }
-      Addres: {
-        payload: Prisma.$AddresPayload<ExtArgs>
-        fields: Prisma.AddresFieldRefs
+      Address: {
+        payload: AddressPayload<ExtArgs>
         operations: {
           findUnique: {
-            args: Prisma.AddresFindUniqueArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$AddresPayload> | null
+            args: Prisma.AddressFindUniqueArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<AddressPayload> | null
           }
           findUniqueOrThrow: {
-            args: Prisma.AddresFindUniqueOrThrowArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$AddresPayload>
+            args: Prisma.AddressFindUniqueOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<AddressPayload>
           }
           findFirst: {
-            args: Prisma.AddresFindFirstArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$AddresPayload> | null
+            args: Prisma.AddressFindFirstArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<AddressPayload> | null
           }
           findFirstOrThrow: {
-            args: Prisma.AddresFindFirstOrThrowArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$AddresPayload>
+            args: Prisma.AddressFindFirstOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<AddressPayload>
           }
           findMany: {
-            args: Prisma.AddresFindManyArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$AddresPayload>[]
+            args: Prisma.AddressFindManyArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<AddressPayload>[]
           }
           create: {
-            args: Prisma.AddresCreateArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$AddresPayload>
+            args: Prisma.AddressCreateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<AddressPayload>
           }
           createMany: {
-            args: Prisma.AddresCreateManyArgs<ExtArgs>,
+            args: Prisma.AddressCreateManyArgs<ExtArgs>,
             result: Prisma.BatchPayload
           }
           delete: {
-            args: Prisma.AddresDeleteArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$AddresPayload>
+            args: Prisma.AddressDeleteArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<AddressPayload>
           }
           update: {
-            args: Prisma.AddresUpdateArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$AddresPayload>
+            args: Prisma.AddressUpdateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<AddressPayload>
           }
           deleteMany: {
-            args: Prisma.AddresDeleteManyArgs<ExtArgs>,
+            args: Prisma.AddressDeleteManyArgs<ExtArgs>,
             result: Prisma.BatchPayload
           }
           updateMany: {
-            args: Prisma.AddresUpdateManyArgs<ExtArgs>,
+            args: Prisma.AddressUpdateManyArgs<ExtArgs>,
             result: Prisma.BatchPayload
           }
           upsert: {
-            args: Prisma.AddresUpsertArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$AddresPayload>
+            args: Prisma.AddressUpsertArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<AddressPayload>
           }
           aggregate: {
-            args: Prisma.AddresAggregateArgs<ExtArgs>,
-            result: $Utils.Optional<AggregateAddres>
+            args: Prisma.AddressAggregateArgs<ExtArgs>,
+            result: $Utils.Optional<AggregateAddress>
           }
           groupBy: {
-            args: Prisma.AddresGroupByArgs<ExtArgs>,
-            result: $Utils.Optional<AddresGroupByOutputType>[]
+            args: Prisma.AddressGroupByArgs<ExtArgs>,
+            result: $Utils.Optional<AddressGroupByOutputType>[]
           }
           count: {
-            args: Prisma.AddresCountArgs<ExtArgs>,
-            result: $Utils.Optional<AddresCountAggregateOutputType> | number
+            args: Prisma.AddressCountArgs<ExtArgs>,
+            result: $Utils.Optional<AddressCountAggregateOutputType> | number
           }
         }
       }
       Contact: {
-        payload: Prisma.$ContactPayload<ExtArgs>
-        fields: Prisma.ContactFieldRefs
+        payload: ContactPayload<ExtArgs>
         operations: {
           findUnique: {
             args: Prisma.ContactFindUniqueArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$ContactPayload> | null
+            result: $Utils.PayloadToResult<ContactPayload> | null
           }
           findUniqueOrThrow: {
             args: Prisma.ContactFindUniqueOrThrowArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$ContactPayload>
+            result: $Utils.PayloadToResult<ContactPayload>
           }
           findFirst: {
             args: Prisma.ContactFindFirstArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$ContactPayload> | null
+            result: $Utils.PayloadToResult<ContactPayload> | null
           }
           findFirstOrThrow: {
             args: Prisma.ContactFindFirstOrThrowArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$ContactPayload>
+            result: $Utils.PayloadToResult<ContactPayload>
           }
           findMany: {
             args: Prisma.ContactFindManyArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$ContactPayload>[]
+            result: $Utils.PayloadToResult<ContactPayload>[]
           }
           create: {
             args: Prisma.ContactCreateArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$ContactPayload>
+            result: $Utils.PayloadToResult<ContactPayload>
           }
           createMany: {
             args: Prisma.ContactCreateManyArgs<ExtArgs>,
@@ -1081,11 +1344,11 @@ export namespace Prisma {
           }
           delete: {
             args: Prisma.ContactDeleteArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$ContactPayload>
+            result: $Utils.PayloadToResult<ContactPayload>
           }
           update: {
             args: Prisma.ContactUpdateArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$ContactPayload>
+            result: $Utils.PayloadToResult<ContactPayload>
           }
           deleteMany: {
             args: Prisma.ContactDeleteManyArgs<ExtArgs>,
@@ -1097,7 +1360,7 @@ export namespace Prisma {
           }
           upsert: {
             args: Prisma.ContactUpsertArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$ContactPayload>
+            result: $Utils.PayloadToResult<ContactPayload>
           }
           aggregate: {
             args: Prisma.ContactAggregateArgs<ExtArgs>,
@@ -1114,32 +1377,31 @@ export namespace Prisma {
         }
       }
       Knowledgespace: {
-        payload: Prisma.$KnowledgespacePayload<ExtArgs>
-        fields: Prisma.KnowledgespaceFieldRefs
+        payload: KnowledgespacePayload<ExtArgs>
         operations: {
           findUnique: {
             args: Prisma.KnowledgespaceFindUniqueArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$KnowledgespacePayload> | null
+            result: $Utils.PayloadToResult<KnowledgespacePayload> | null
           }
           findUniqueOrThrow: {
             args: Prisma.KnowledgespaceFindUniqueOrThrowArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$KnowledgespacePayload>
+            result: $Utils.PayloadToResult<KnowledgespacePayload>
           }
           findFirst: {
             args: Prisma.KnowledgespaceFindFirstArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$KnowledgespacePayload> | null
+            result: $Utils.PayloadToResult<KnowledgespacePayload> | null
           }
           findFirstOrThrow: {
             args: Prisma.KnowledgespaceFindFirstOrThrowArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$KnowledgespacePayload>
+            result: $Utils.PayloadToResult<KnowledgespacePayload>
           }
           findMany: {
             args: Prisma.KnowledgespaceFindManyArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$KnowledgespacePayload>[]
+            result: $Utils.PayloadToResult<KnowledgespacePayload>[]
           }
           create: {
             args: Prisma.KnowledgespaceCreateArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$KnowledgespacePayload>
+            result: $Utils.PayloadToResult<KnowledgespacePayload>
           }
           createMany: {
             args: Prisma.KnowledgespaceCreateManyArgs<ExtArgs>,
@@ -1147,11 +1409,11 @@ export namespace Prisma {
           }
           delete: {
             args: Prisma.KnowledgespaceDeleteArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$KnowledgespacePayload>
+            result: $Utils.PayloadToResult<KnowledgespacePayload>
           }
           update: {
             args: Prisma.KnowledgespaceUpdateArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$KnowledgespacePayload>
+            result: $Utils.PayloadToResult<KnowledgespacePayload>
           }
           deleteMany: {
             args: Prisma.KnowledgespaceDeleteManyArgs<ExtArgs>,
@@ -1163,7 +1425,7 @@ export namespace Prisma {
           }
           upsert: {
             args: Prisma.KnowledgespaceUpsertArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$KnowledgespacePayload>
+            result: $Utils.PayloadToResult<KnowledgespacePayload>
           }
           aggregate: {
             args: Prisma.KnowledgespaceAggregateArgs<ExtArgs>,
@@ -1180,32 +1442,31 @@ export namespace Prisma {
         }
       }
       Degree: {
-        payload: Prisma.$DegreePayload<ExtArgs>
-        fields: Prisma.DegreeFieldRefs
+        payload: DegreePayload<ExtArgs>
         operations: {
           findUnique: {
             args: Prisma.DegreeFindUniqueArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$DegreePayload> | null
+            result: $Utils.PayloadToResult<DegreePayload> | null
           }
           findUniqueOrThrow: {
             args: Prisma.DegreeFindUniqueOrThrowArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$DegreePayload>
+            result: $Utils.PayloadToResult<DegreePayload>
           }
           findFirst: {
             args: Prisma.DegreeFindFirstArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$DegreePayload> | null
+            result: $Utils.PayloadToResult<DegreePayload> | null
           }
           findFirstOrThrow: {
             args: Prisma.DegreeFindFirstOrThrowArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$DegreePayload>
+            result: $Utils.PayloadToResult<DegreePayload>
           }
           findMany: {
             args: Prisma.DegreeFindManyArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$DegreePayload>[]
+            result: $Utils.PayloadToResult<DegreePayload>[]
           }
           create: {
             args: Prisma.DegreeCreateArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$DegreePayload>
+            result: $Utils.PayloadToResult<DegreePayload>
           }
           createMany: {
             args: Prisma.DegreeCreateManyArgs<ExtArgs>,
@@ -1213,11 +1474,11 @@ export namespace Prisma {
           }
           delete: {
             args: Prisma.DegreeDeleteArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$DegreePayload>
+            result: $Utils.PayloadToResult<DegreePayload>
           }
           update: {
             args: Prisma.DegreeUpdateArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$DegreePayload>
+            result: $Utils.PayloadToResult<DegreePayload>
           }
           deleteMany: {
             args: Prisma.DegreeDeleteManyArgs<ExtArgs>,
@@ -1229,7 +1490,7 @@ export namespace Prisma {
           }
           upsert: {
             args: Prisma.DegreeUpsertArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$DegreePayload>
+            result: $Utils.PayloadToResult<DegreePayload>
           }
           aggregate: {
             args: Prisma.DegreeAggregateArgs<ExtArgs>,
@@ -1246,32 +1507,31 @@ export namespace Prisma {
         }
       }
       Skills: {
-        payload: Prisma.$SkillsPayload<ExtArgs>
-        fields: Prisma.SkillsFieldRefs
+        payload: SkillsPayload<ExtArgs>
         operations: {
           findUnique: {
             args: Prisma.SkillsFindUniqueArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$SkillsPayload> | null
+            result: $Utils.PayloadToResult<SkillsPayload> | null
           }
           findUniqueOrThrow: {
             args: Prisma.SkillsFindUniqueOrThrowArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$SkillsPayload>
+            result: $Utils.PayloadToResult<SkillsPayload>
           }
           findFirst: {
             args: Prisma.SkillsFindFirstArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$SkillsPayload> | null
+            result: $Utils.PayloadToResult<SkillsPayload> | null
           }
           findFirstOrThrow: {
             args: Prisma.SkillsFindFirstOrThrowArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$SkillsPayload>
+            result: $Utils.PayloadToResult<SkillsPayload>
           }
           findMany: {
             args: Prisma.SkillsFindManyArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$SkillsPayload>[]
+            result: $Utils.PayloadToResult<SkillsPayload>[]
           }
           create: {
             args: Prisma.SkillsCreateArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$SkillsPayload>
+            result: $Utils.PayloadToResult<SkillsPayload>
           }
           createMany: {
             args: Prisma.SkillsCreateManyArgs<ExtArgs>,
@@ -1279,11 +1539,11 @@ export namespace Prisma {
           }
           delete: {
             args: Prisma.SkillsDeleteArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$SkillsPayload>
+            result: $Utils.PayloadToResult<SkillsPayload>
           }
           update: {
             args: Prisma.SkillsUpdateArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$SkillsPayload>
+            result: $Utils.PayloadToResult<SkillsPayload>
           }
           deleteMany: {
             args: Prisma.SkillsDeleteManyArgs<ExtArgs>,
@@ -1295,7 +1555,7 @@ export namespace Prisma {
           }
           upsert: {
             args: Prisma.SkillsUpsertArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$SkillsPayload>
+            result: $Utils.PayloadToResult<SkillsPayload>
           }
           aggregate: {
             args: Prisma.SkillsAggregateArgs<ExtArgs>,
@@ -1312,32 +1572,31 @@ export namespace Prisma {
         }
       }
       Experiences: {
-        payload: Prisma.$ExperiencesPayload<ExtArgs>
-        fields: Prisma.ExperiencesFieldRefs
+        payload: ExperiencesPayload<ExtArgs>
         operations: {
           findUnique: {
             args: Prisma.ExperiencesFindUniqueArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$ExperiencesPayload> | null
+            result: $Utils.PayloadToResult<ExperiencesPayload> | null
           }
           findUniqueOrThrow: {
             args: Prisma.ExperiencesFindUniqueOrThrowArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$ExperiencesPayload>
+            result: $Utils.PayloadToResult<ExperiencesPayload>
           }
           findFirst: {
             args: Prisma.ExperiencesFindFirstArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$ExperiencesPayload> | null
+            result: $Utils.PayloadToResult<ExperiencesPayload> | null
           }
           findFirstOrThrow: {
             args: Prisma.ExperiencesFindFirstOrThrowArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$ExperiencesPayload>
+            result: $Utils.PayloadToResult<ExperiencesPayload>
           }
           findMany: {
             args: Prisma.ExperiencesFindManyArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$ExperiencesPayload>[]
+            result: $Utils.PayloadToResult<ExperiencesPayload>[]
           }
           create: {
             args: Prisma.ExperiencesCreateArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$ExperiencesPayload>
+            result: $Utils.PayloadToResult<ExperiencesPayload>
           }
           createMany: {
             args: Prisma.ExperiencesCreateManyArgs<ExtArgs>,
@@ -1345,11 +1604,11 @@ export namespace Prisma {
           }
           delete: {
             args: Prisma.ExperiencesDeleteArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$ExperiencesPayload>
+            result: $Utils.PayloadToResult<ExperiencesPayload>
           }
           update: {
             args: Prisma.ExperiencesUpdateArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$ExperiencesPayload>
+            result: $Utils.PayloadToResult<ExperiencesPayload>
           }
           deleteMany: {
             args: Prisma.ExperiencesDeleteManyArgs<ExtArgs>,
@@ -1361,7 +1620,7 @@ export namespace Prisma {
           }
           upsert: {
             args: Prisma.ExperiencesUpsertArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$ExperiencesPayload>
+            result: $Utils.PayloadToResult<ExperiencesPayload>
           }
           aggregate: {
             args: Prisma.ExperiencesAggregateArgs<ExtArgs>,
@@ -1378,32 +1637,31 @@ export namespace Prisma {
         }
       }
       Projects: {
-        payload: Prisma.$ProjectsPayload<ExtArgs>
-        fields: Prisma.ProjectsFieldRefs
+        payload: ProjectsPayload<ExtArgs>
         operations: {
           findUnique: {
             args: Prisma.ProjectsFindUniqueArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$ProjectsPayload> | null
+            result: $Utils.PayloadToResult<ProjectsPayload> | null
           }
           findUniqueOrThrow: {
             args: Prisma.ProjectsFindUniqueOrThrowArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$ProjectsPayload>
+            result: $Utils.PayloadToResult<ProjectsPayload>
           }
           findFirst: {
             args: Prisma.ProjectsFindFirstArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$ProjectsPayload> | null
+            result: $Utils.PayloadToResult<ProjectsPayload> | null
           }
           findFirstOrThrow: {
             args: Prisma.ProjectsFindFirstOrThrowArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$ProjectsPayload>
+            result: $Utils.PayloadToResult<ProjectsPayload>
           }
           findMany: {
             args: Prisma.ProjectsFindManyArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$ProjectsPayload>[]
+            result: $Utils.PayloadToResult<ProjectsPayload>[]
           }
           create: {
             args: Prisma.ProjectsCreateArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$ProjectsPayload>
+            result: $Utils.PayloadToResult<ProjectsPayload>
           }
           createMany: {
             args: Prisma.ProjectsCreateManyArgs<ExtArgs>,
@@ -1411,11 +1669,11 @@ export namespace Prisma {
           }
           delete: {
             args: Prisma.ProjectsDeleteArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$ProjectsPayload>
+            result: $Utils.PayloadToResult<ProjectsPayload>
           }
           update: {
             args: Prisma.ProjectsUpdateArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$ProjectsPayload>
+            result: $Utils.PayloadToResult<ProjectsPayload>
           }
           deleteMany: {
             args: Prisma.ProjectsDeleteManyArgs<ExtArgs>,
@@ -1427,7 +1685,7 @@ export namespace Prisma {
           }
           upsert: {
             args: Prisma.ProjectsUpsertArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$ProjectsPayload>
+            result: $Utils.PayloadToResult<ProjectsPayload>
           }
           aggregate: {
             args: Prisma.ProjectsAggregateArgs<ExtArgs>,
@@ -1444,32 +1702,31 @@ export namespace Prisma {
         }
       }
       Refereces: {
-        payload: Prisma.$ReferecesPayload<ExtArgs>
-        fields: Prisma.ReferecesFieldRefs
+        payload: ReferecesPayload<ExtArgs>
         operations: {
           findUnique: {
             args: Prisma.ReferecesFindUniqueArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$ReferecesPayload> | null
+            result: $Utils.PayloadToResult<ReferecesPayload> | null
           }
           findUniqueOrThrow: {
             args: Prisma.ReferecesFindUniqueOrThrowArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$ReferecesPayload>
+            result: $Utils.PayloadToResult<ReferecesPayload>
           }
           findFirst: {
             args: Prisma.ReferecesFindFirstArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$ReferecesPayload> | null
+            result: $Utils.PayloadToResult<ReferecesPayload> | null
           }
           findFirstOrThrow: {
             args: Prisma.ReferecesFindFirstOrThrowArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$ReferecesPayload>
+            result: $Utils.PayloadToResult<ReferecesPayload>
           }
           findMany: {
             args: Prisma.ReferecesFindManyArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$ReferecesPayload>[]
+            result: $Utils.PayloadToResult<ReferecesPayload>[]
           }
           create: {
             args: Prisma.ReferecesCreateArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$ReferecesPayload>
+            result: $Utils.PayloadToResult<ReferecesPayload>
           }
           createMany: {
             args: Prisma.ReferecesCreateManyArgs<ExtArgs>,
@@ -1477,11 +1734,11 @@ export namespace Prisma {
           }
           delete: {
             args: Prisma.ReferecesDeleteArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$ReferecesPayload>
+            result: $Utils.PayloadToResult<ReferecesPayload>
           }
           update: {
             args: Prisma.ReferecesUpdateArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$ReferecesPayload>
+            result: $Utils.PayloadToResult<ReferecesPayload>
           }
           deleteMany: {
             args: Prisma.ReferecesDeleteManyArgs<ExtArgs>,
@@ -1493,7 +1750,7 @@ export namespace Prisma {
           }
           upsert: {
             args: Prisma.ReferecesUpsertArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$ReferecesPayload>
+            result: $Utils.PayloadToResult<ReferecesPayload>
           }
           aggregate: {
             args: Prisma.ReferecesAggregateArgs<ExtArgs>,
@@ -1510,32 +1767,31 @@ export namespace Prisma {
         }
       }
       ReferecePrices: {
-        payload: Prisma.$ReferecePricesPayload<ExtArgs>
-        fields: Prisma.ReferecePricesFieldRefs
+        payload: ReferecePricesPayload<ExtArgs>
         operations: {
           findUnique: {
             args: Prisma.ReferecePricesFindUniqueArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$ReferecePricesPayload> | null
+            result: $Utils.PayloadToResult<ReferecePricesPayload> | null
           }
           findUniqueOrThrow: {
             args: Prisma.ReferecePricesFindUniqueOrThrowArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$ReferecePricesPayload>
+            result: $Utils.PayloadToResult<ReferecePricesPayload>
           }
           findFirst: {
             args: Prisma.ReferecePricesFindFirstArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$ReferecePricesPayload> | null
+            result: $Utils.PayloadToResult<ReferecePricesPayload> | null
           }
           findFirstOrThrow: {
             args: Prisma.ReferecePricesFindFirstOrThrowArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$ReferecePricesPayload>
+            result: $Utils.PayloadToResult<ReferecePricesPayload>
           }
           findMany: {
             args: Prisma.ReferecePricesFindManyArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$ReferecePricesPayload>[]
+            result: $Utils.PayloadToResult<ReferecePricesPayload>[]
           }
           create: {
             args: Prisma.ReferecePricesCreateArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$ReferecePricesPayload>
+            result: $Utils.PayloadToResult<ReferecePricesPayload>
           }
           createMany: {
             args: Prisma.ReferecePricesCreateManyArgs<ExtArgs>,
@@ -1543,11 +1799,11 @@ export namespace Prisma {
           }
           delete: {
             args: Prisma.ReferecePricesDeleteArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$ReferecePricesPayload>
+            result: $Utils.PayloadToResult<ReferecePricesPayload>
           }
           update: {
             args: Prisma.ReferecePricesUpdateArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$ReferecePricesPayload>
+            result: $Utils.PayloadToResult<ReferecePricesPayload>
           }
           deleteMany: {
             args: Prisma.ReferecePricesDeleteManyArgs<ExtArgs>,
@@ -1559,7 +1815,7 @@ export namespace Prisma {
           }
           upsert: {
             args: Prisma.ReferecePricesUpsertArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$ReferecePricesPayload>
+            result: $Utils.PayloadToResult<ReferecePricesPayload>
           }
           aggregate: {
             args: Prisma.ReferecePricesAggregateArgs<ExtArgs>,
@@ -1576,32 +1832,31 @@ export namespace Prisma {
         }
       }
       UserPoints: {
-        payload: Prisma.$UserPointsPayload<ExtArgs>
-        fields: Prisma.UserPointsFieldRefs
+        payload: UserPointsPayload<ExtArgs>
         operations: {
           findUnique: {
             args: Prisma.UserPointsFindUniqueArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$UserPointsPayload> | null
+            result: $Utils.PayloadToResult<UserPointsPayload> | null
           }
           findUniqueOrThrow: {
             args: Prisma.UserPointsFindUniqueOrThrowArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$UserPointsPayload>
+            result: $Utils.PayloadToResult<UserPointsPayload>
           }
           findFirst: {
             args: Prisma.UserPointsFindFirstArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$UserPointsPayload> | null
+            result: $Utils.PayloadToResult<UserPointsPayload> | null
           }
           findFirstOrThrow: {
             args: Prisma.UserPointsFindFirstOrThrowArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$UserPointsPayload>
+            result: $Utils.PayloadToResult<UserPointsPayload>
           }
           findMany: {
             args: Prisma.UserPointsFindManyArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$UserPointsPayload>[]
+            result: $Utils.PayloadToResult<UserPointsPayload>[]
           }
           create: {
             args: Prisma.UserPointsCreateArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$UserPointsPayload>
+            result: $Utils.PayloadToResult<UserPointsPayload>
           }
           createMany: {
             args: Prisma.UserPointsCreateManyArgs<ExtArgs>,
@@ -1609,11 +1864,11 @@ export namespace Prisma {
           }
           delete: {
             args: Prisma.UserPointsDeleteArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$UserPointsPayload>
+            result: $Utils.PayloadToResult<UserPointsPayload>
           }
           update: {
             args: Prisma.UserPointsUpdateArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$UserPointsPayload>
+            result: $Utils.PayloadToResult<UserPointsPayload>
           }
           deleteMany: {
             args: Prisma.UserPointsDeleteManyArgs<ExtArgs>,
@@ -1625,7 +1880,7 @@ export namespace Prisma {
           }
           upsert: {
             args: Prisma.UserPointsUpsertArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$UserPointsPayload>
+            result: $Utils.PayloadToResult<UserPointsPayload>
           }
           aggregate: {
             args: Prisma.UserPointsAggregateArgs<ExtArgs>,
@@ -1642,32 +1897,31 @@ export namespace Prisma {
         }
       }
       Feed: {
-        payload: Prisma.$FeedPayload<ExtArgs>
-        fields: Prisma.FeedFieldRefs
+        payload: FeedPayload<ExtArgs>
         operations: {
           findUnique: {
             args: Prisma.FeedFindUniqueArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$FeedPayload> | null
+            result: $Utils.PayloadToResult<FeedPayload> | null
           }
           findUniqueOrThrow: {
             args: Prisma.FeedFindUniqueOrThrowArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$FeedPayload>
+            result: $Utils.PayloadToResult<FeedPayload>
           }
           findFirst: {
             args: Prisma.FeedFindFirstArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$FeedPayload> | null
+            result: $Utils.PayloadToResult<FeedPayload> | null
           }
           findFirstOrThrow: {
             args: Prisma.FeedFindFirstOrThrowArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$FeedPayload>
+            result: $Utils.PayloadToResult<FeedPayload>
           }
           findMany: {
             args: Prisma.FeedFindManyArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$FeedPayload>[]
+            result: $Utils.PayloadToResult<FeedPayload>[]
           }
           create: {
             args: Prisma.FeedCreateArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$FeedPayload>
+            result: $Utils.PayloadToResult<FeedPayload>
           }
           createMany: {
             args: Prisma.FeedCreateManyArgs<ExtArgs>,
@@ -1675,11 +1929,11 @@ export namespace Prisma {
           }
           delete: {
             args: Prisma.FeedDeleteArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$FeedPayload>
+            result: $Utils.PayloadToResult<FeedPayload>
           }
           update: {
             args: Prisma.FeedUpdateArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$FeedPayload>
+            result: $Utils.PayloadToResult<FeedPayload>
           }
           deleteMany: {
             args: Prisma.FeedDeleteManyArgs<ExtArgs>,
@@ -1691,7 +1945,7 @@ export namespace Prisma {
           }
           upsert: {
             args: Prisma.FeedUpsertArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$FeedPayload>
+            result: $Utils.PayloadToResult<FeedPayload>
           }
           aggregate: {
             args: Prisma.FeedAggregateArgs<ExtArgs>,
@@ -1708,32 +1962,31 @@ export namespace Prisma {
         }
       }
       FeedComments: {
-        payload: Prisma.$FeedCommentsPayload<ExtArgs>
-        fields: Prisma.FeedCommentsFieldRefs
+        payload: FeedCommentsPayload<ExtArgs>
         operations: {
           findUnique: {
             args: Prisma.FeedCommentsFindUniqueArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$FeedCommentsPayload> | null
+            result: $Utils.PayloadToResult<FeedCommentsPayload> | null
           }
           findUniqueOrThrow: {
             args: Prisma.FeedCommentsFindUniqueOrThrowArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$FeedCommentsPayload>
+            result: $Utils.PayloadToResult<FeedCommentsPayload>
           }
           findFirst: {
             args: Prisma.FeedCommentsFindFirstArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$FeedCommentsPayload> | null
+            result: $Utils.PayloadToResult<FeedCommentsPayload> | null
           }
           findFirstOrThrow: {
             args: Prisma.FeedCommentsFindFirstOrThrowArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$FeedCommentsPayload>
+            result: $Utils.PayloadToResult<FeedCommentsPayload>
           }
           findMany: {
             args: Prisma.FeedCommentsFindManyArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$FeedCommentsPayload>[]
+            result: $Utils.PayloadToResult<FeedCommentsPayload>[]
           }
           create: {
             args: Prisma.FeedCommentsCreateArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$FeedCommentsPayload>
+            result: $Utils.PayloadToResult<FeedCommentsPayload>
           }
           createMany: {
             args: Prisma.FeedCommentsCreateManyArgs<ExtArgs>,
@@ -1741,11 +1994,11 @@ export namespace Prisma {
           }
           delete: {
             args: Prisma.FeedCommentsDeleteArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$FeedCommentsPayload>
+            result: $Utils.PayloadToResult<FeedCommentsPayload>
           }
           update: {
             args: Prisma.FeedCommentsUpdateArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$FeedCommentsPayload>
+            result: $Utils.PayloadToResult<FeedCommentsPayload>
           }
           deleteMany: {
             args: Prisma.FeedCommentsDeleteManyArgs<ExtArgs>,
@@ -1757,7 +2010,7 @@ export namespace Prisma {
           }
           upsert: {
             args: Prisma.FeedCommentsUpsertArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$FeedCommentsPayload>
+            result: $Utils.PayloadToResult<FeedCommentsPayload>
           }
           aggregate: {
             args: Prisma.FeedCommentsAggregateArgs<ExtArgs>,
@@ -1799,18 +2052,49 @@ export namespace Prisma {
   }
   export const defineExtension: $Extensions.ExtendsHook<'define', Prisma.TypeMapCb, $Extensions.DefaultArgs>
   export type DefaultPrismaClient = PrismaClient
+  export type RejectOnNotFound = boolean | ((error: Error) => Error)
+  export type RejectPerModel = { [P in ModelName]?: RejectOnNotFound }
+  export type RejectPerOperation =  { [P in "findUnique" | "findFirst"]?: RejectPerModel | RejectOnNotFound } 
+  type IsReject<T> = T extends true ? True : T extends (err: Error) => Error ? True : False
+  export type HasReject<
+    GlobalRejectSettings extends Prisma.PrismaClientOptions['rejectOnNotFound'],
+    LocalRejectSettings,
+    Action extends PrismaAction,
+    Model extends ModelName
+  > = LocalRejectSettings extends RejectOnNotFound
+    ? IsReject<LocalRejectSettings>
+    : GlobalRejectSettings extends RejectPerOperation
+    ? Action extends keyof GlobalRejectSettings
+      ? GlobalRejectSettings[Action] extends RejectOnNotFound
+        ? IsReject<GlobalRejectSettings[Action]>
+        : GlobalRejectSettings[Action] extends RejectPerModel
+        ? Model extends keyof GlobalRejectSettings[Action]
+          ? IsReject<GlobalRejectSettings[Action][Model]>
+          : False
+        : False
+      : False
+    : IsReject<GlobalRejectSettings>
   export type ErrorFormat = 'pretty' | 'colorless' | 'minimal'
 
   export interface PrismaClientOptions {
     /**
-     * Overwrites the datasource url from your schema.prisma file
+     * Configure findUnique/findFirst to throw an error if the query returns null. 
+     * @deprecated since 4.0.0. Use `findUniqueOrThrow`/`findFirstOrThrow` methods instead.
+     * @example
+     * ```
+     * // Reject on both findUnique/findFirst
+     * rejectOnNotFound: true
+     * // Reject only on findFirst with a custom error
+     * rejectOnNotFound: { findFirst: (err) => new Error("Custom Error")}
+     * // Reject on user.findUnique with a custom error
+     * rejectOnNotFound: { findUnique: {User: (err) => new Error("User not found")}}
+     * ```
      */
-    datasources?: Datasources
-
+    rejectOnNotFound?: RejectOnNotFound | RejectPerOperation
     /**
      * Overwrites the datasource url from your schema.prisma file
      */
-    datasourceUrl?: string
+    datasources?: Datasources
 
     /**
      * @default "colorless"
@@ -1866,10 +2150,8 @@ export namespace Prisma {
 
   export type PrismaAction =
     | 'findUnique'
-    | 'findUniqueOrThrow'
     | 'findMany'
     | 'findFirst'
-    | 'findFirstOrThrow'
     | 'create'
     | 'createMany'
     | 'update'
@@ -1883,7 +2165,6 @@ export namespace Prisma {
     | 'count'
     | 'runCommandRaw'
     | 'findRaw'
-    | 'groupBy'
 
   /**
    * These options are being passed into the middleware as "params"
@@ -1901,8 +2182,8 @@ export namespace Prisma {
    */
   export type Middleware<T = any> = (
     params: MiddlewareParams,
-    next: (params: MiddlewareParams) => $Utils.JsPromise<T>,
-  ) => $Utils.JsPromise<T>
+    next: (params: MiddlewareParams) => Promise<T>,
+  ) => Promise<T>
 
   // tested in getLogLevel.test.ts
   export function getLogLevel(log: Array<LogLevel | LogDefinition>): LogLevel | undefined;
@@ -1925,8 +2206,9 @@ export namespace Prisma {
    * Count Type UserCountOutputType
    */
 
+
   export type UserCountOutputType = {
-    addres: number
+    address: number
     contact: number
     degree: number
     skills: number
@@ -1940,7 +2222,7 @@ export namespace Prisma {
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
-    addres?: boolean | UserCountOutputTypeCountAddresArgs
+    address?: boolean | UserCountOutputTypeCountAddressArgs
     contact?: boolean | UserCountOutputTypeCountContactArgs
     degree?: boolean | UserCountOutputTypeCountDegreeArgs
     skills?: boolean | UserCountOutputTypeCountSkillsArgs
@@ -1958,7 +2240,7 @@ export namespace Prisma {
   /**
    * UserCountOutputType without action
    */
-  export type UserCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+  export type UserCountOutputTypeArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the UserCountOutputType
      */
@@ -1969,8 +2251,8 @@ export namespace Prisma {
   /**
    * UserCountOutputType without action
    */
-  export type UserCountOutputTypeCountAddresArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
-    where?: AddresWhereInput
+  export type UserCountOutputTypeCountAddressArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+    where?: AddressWhereInput
   }
 
 
@@ -2059,6 +2341,7 @@ export namespace Prisma {
    * Count Type KnowledgespaceCountOutputType
    */
 
+
   export type KnowledgespaceCountOutputType = {
     degree: number
   }
@@ -2072,7 +2355,7 @@ export namespace Prisma {
   /**
    * KnowledgespaceCountOutputType without action
    */
-  export type KnowledgespaceCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+  export type KnowledgespaceCountOutputTypeArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the KnowledgespaceCountOutputType
      */
@@ -2097,6 +2380,7 @@ export namespace Prisma {
    * Model User
    */
 
+
   export type AggregateUser = {
     _count: UserCountAggregateOutputType | null
     _avg: UserAvgAggregateOutputType | null
@@ -2117,18 +2401,24 @@ export namespace Prisma {
     id: bigint | null
     email: string | null
     password: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type UserMaxAggregateOutputType = {
     id: bigint | null
     email: string | null
     password: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type UserCountAggregateOutputType = {
     id: number
     email: number
     password: number
+    createdAt: number
+    updatedAt: number
     _all: number
   }
 
@@ -2145,18 +2435,24 @@ export namespace Prisma {
     id?: true
     email?: true
     password?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type UserMaxAggregateInputType = {
     id?: true
     email?: true
     password?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type UserCountAggregateInputType = {
     id?: true
     email?: true
     password?: true
+    createdAt?: true
+    updatedAt?: true
     _all?: true
   }
 
@@ -2170,7 +2466,7 @@ export namespace Prisma {
      * 
      * Determine the order of Users to fetch.
      */
-    orderBy?: UserOrderByWithRelationInput | UserOrderByWithRelationInput[]
+    orderBy?: Enumerable<UserOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
@@ -2234,8 +2530,8 @@ export namespace Prisma {
 
   export type UserGroupByArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     where?: UserWhereInput
-    orderBy?: UserOrderByWithAggregationInput | UserOrderByWithAggregationInput[]
-    by: UserScalarFieldEnum[] | UserScalarFieldEnum
+    orderBy?: Enumerable<UserOrderByWithAggregationInput>
+    by: UserScalarFieldEnum[]
     having?: UserScalarWhereWithAggregatesInput
     take?: number
     skip?: number
@@ -2246,10 +2542,13 @@ export namespace Prisma {
     _max?: UserMaxAggregateInputType
   }
 
+
   export type UserGroupByOutputType = {
     id: bigint
     email: string
     password: string
+    createdAt: Date
+    updatedAt: Date | null
     _count: UserCountAggregateOutputType | null
     _avg: UserAvgAggregateOutputType | null
     _sum: UserSumAggregateOutputType | null
@@ -2259,7 +2558,7 @@ export namespace Prisma {
 
   type GetUserGroupByPayload<T extends UserGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<UserGroupByOutputType, T['by']> &
+      PickArray<UserGroupByOutputType, T['by']> &
         {
           [P in ((keyof T) & (keyof UserGroupByOutputType))]: P extends '_count'
             ? T[P] extends boolean
@@ -2275,8 +2574,10 @@ export namespace Prisma {
     id?: boolean
     email?: boolean
     password?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
     perfil?: boolean | User$perfilArgs<ExtArgs>
-    addres?: boolean | User$addresArgs<ExtArgs>
+    address?: boolean | User$addressArgs<ExtArgs>
     contact?: boolean | User$contactArgs<ExtArgs>
     degree?: boolean | User$degreeArgs<ExtArgs>
     skills?: boolean | User$skillsArgs<ExtArgs>
@@ -2287,18 +2588,20 @@ export namespace Prisma {
     userPoints?: boolean | User$userPointsArgs<ExtArgs>
     feeds?: boolean | User$feedsArgs<ExtArgs>
     comments?: boolean | User$commentsArgs<ExtArgs>
-    _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
+    _count?: boolean | UserCountOutputTypeArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectScalar = {
     id?: boolean
     email?: boolean
     password?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
   }
 
   export type UserInclude<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     perfil?: boolean | User$perfilArgs<ExtArgs>
-    addres?: boolean | User$addresArgs<ExtArgs>
+    address?: boolean | User$addressArgs<ExtArgs>
     contact?: boolean | User$contactArgs<ExtArgs>
     degree?: boolean | User$degreeArgs<ExtArgs>
     skills?: boolean | User$skillsArgs<ExtArgs>
@@ -2309,43 +2612,18 @@ export namespace Prisma {
     userPoints?: boolean | User$userPointsArgs<ExtArgs>
     feeds?: boolean | User$feedsArgs<ExtArgs>
     comments?: boolean | User$commentsArgs<ExtArgs>
-    _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
+    _count?: boolean | UserCountOutputTypeArgs<ExtArgs>
   }
 
 
-  export type $UserPayload<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
-    name: "User"
-    objects: {
-      perfil: Prisma.$PerfilPayload<ExtArgs> | null
-      addres: Prisma.$AddresPayload<ExtArgs>[]
-      contact: Prisma.$ContactPayload<ExtArgs>[]
-      degree: Prisma.$DegreePayload<ExtArgs>[]
-      skills: Prisma.$SkillsPayload<ExtArgs>[]
-      experiences: Prisma.$ExperiencesPayload<ExtArgs>[]
-      projects: Prisma.$ProjectsPayload<ExtArgs>[]
-      referecePrices: Prisma.$ReferecePricesPayload<ExtArgs>[]
-      refereces: Prisma.$ReferecesPayload<ExtArgs>[]
-      userPoints: Prisma.$UserPointsPayload<ExtArgs>[]
-      feeds: Prisma.$FeedPayload<ExtArgs>[]
-      comments: Prisma.$FeedCommentsPayload<ExtArgs>[]
-    }
-    scalars: $Extensions.GetResult<{
-      id: bigint
-      email: string
-      password: string
-    }, ExtArgs["result"]["user"]>
-    composites: {}
-  }
-
-
-  type UserGetPayload<S extends boolean | null | undefined | UserDefaultArgs> = $Result.GetResult<Prisma.$UserPayload, S>
+  type UserGetPayload<S extends boolean | null | undefined | UserArgs> = $Types.GetResult<UserPayload, S>
 
   type UserCountArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = 
     Omit<UserFindManyArgs, 'select' | 'include'> & {
       select?: UserCountAggregateInputType | true
     }
 
-  export interface UserDelegate<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> {
+  export interface UserDelegate<GlobalRejectSettings extends Prisma.RejectOnNotFound | Prisma.RejectPerOperation | false | undefined, ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> {
     [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['User'], meta: { name: 'User' } }
     /**
      * Find zero or one User that matches the filter.
@@ -2358,9 +2636,9 @@ export namespace Prisma {
      *   }
      * })
     **/
-    findUnique<T extends UserFindUniqueArgs<ExtArgs>>(
+    findUnique<T extends UserFindUniqueArgs<ExtArgs>, LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
       args: SelectSubset<T, UserFindUniqueArgs<ExtArgs>>
-    ): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findUnique', 'User'> extends True ? Prisma__UserClient<$Types.GetResult<UserPayload<ExtArgs>, T, 'findUnique', never>, never, ExtArgs> : Prisma__UserClient<$Types.GetResult<UserPayload<ExtArgs>, T, 'findUnique', never> | null, null, ExtArgs>
 
     /**
      * Find one User that matches the filter or throw an error  with `error.code='P2025'` 
@@ -2376,7 +2654,7 @@ export namespace Prisma {
     **/
     findUniqueOrThrow<T extends UserFindUniqueOrThrowArgs<ExtArgs>>(
       args?: SelectSubset<T, UserFindUniqueOrThrowArgs<ExtArgs>>
-    ): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'findUniqueOrThrow'>, never, ExtArgs>
+    ): Prisma__UserClient<$Types.GetResult<UserPayload<ExtArgs>, T, 'findUniqueOrThrow', never>, never, ExtArgs>
 
     /**
      * Find the first User that matches the filter.
@@ -2391,13 +2669,13 @@ export namespace Prisma {
      *   }
      * })
     **/
-    findFirst<T extends UserFindFirstArgs<ExtArgs>>(
+    findFirst<T extends UserFindFirstArgs<ExtArgs>, LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
       args?: SelectSubset<T, UserFindFirstArgs<ExtArgs>>
-    ): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'findFirst'> | null, null, ExtArgs>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findFirst', 'User'> extends True ? Prisma__UserClient<$Types.GetResult<UserPayload<ExtArgs>, T, 'findFirst', never>, never, ExtArgs> : Prisma__UserClient<$Types.GetResult<UserPayload<ExtArgs>, T, 'findFirst', never> | null, null, ExtArgs>
 
     /**
      * Find the first User that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * throw `NotFoundError` if no matches were found.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
      * @param {UserFindFirstOrThrowArgs} args - Arguments to find a User
@@ -2411,7 +2689,7 @@ export namespace Prisma {
     **/
     findFirstOrThrow<T extends UserFindFirstOrThrowArgs<ExtArgs>>(
       args?: SelectSubset<T, UserFindFirstOrThrowArgs<ExtArgs>>
-    ): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'findFirstOrThrow'>, never, ExtArgs>
+    ): Prisma__UserClient<$Types.GetResult<UserPayload<ExtArgs>, T, 'findFirstOrThrow', never>, never, ExtArgs>
 
     /**
      * Find zero or more Users that matches the filter.
@@ -2431,7 +2709,7 @@ export namespace Prisma {
     **/
     findMany<T extends UserFindManyArgs<ExtArgs>>(
       args?: SelectSubset<T, UserFindManyArgs<ExtArgs>>
-    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'findMany'>>
+    ): Prisma.PrismaPromise<$Types.GetResult<UserPayload<ExtArgs>, T, 'findMany', never>>
 
     /**
      * Create a User.
@@ -2447,7 +2725,7 @@ export namespace Prisma {
     **/
     create<T extends UserCreateArgs<ExtArgs>>(
       args: SelectSubset<T, UserCreateArgs<ExtArgs>>
-    ): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'create'>, never, ExtArgs>
+    ): Prisma__UserClient<$Types.GetResult<UserPayload<ExtArgs>, T, 'create', never>, never, ExtArgs>
 
     /**
      * Create many Users.
@@ -2479,7 +2757,7 @@ export namespace Prisma {
     **/
     delete<T extends UserDeleteArgs<ExtArgs>>(
       args: SelectSubset<T, UserDeleteArgs<ExtArgs>>
-    ): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'delete'>, never, ExtArgs>
+    ): Prisma__UserClient<$Types.GetResult<UserPayload<ExtArgs>, T, 'delete', never>, never, ExtArgs>
 
     /**
      * Update one User.
@@ -2498,7 +2776,7 @@ export namespace Prisma {
     **/
     update<T extends UserUpdateArgs<ExtArgs>>(
       args: SelectSubset<T, UserUpdateArgs<ExtArgs>>
-    ): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'update'>, never, ExtArgs>
+    ): Prisma__UserClient<$Types.GetResult<UserPayload<ExtArgs>, T, 'update', never>, never, ExtArgs>
 
     /**
      * Delete zero or more Users.
@@ -2556,7 +2834,7 @@ export namespace Prisma {
     **/
     upsert<T extends UserUpsertArgs<ExtArgs>>(
       args: SelectSubset<T, UserUpsertArgs<ExtArgs>>
-    ): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'upsert'>, never, ExtArgs>
+    ): Prisma__UserClient<$Types.GetResult<UserPayload<ExtArgs>, T, 'upsert', never>, never, ExtArgs>
 
     /**
      * Count the number of Users.
@@ -2635,7 +2913,7 @@ export namespace Prisma {
         ? { orderBy: UserGroupByArgs['orderBy'] }
         : { orderBy?: UserGroupByArgs['orderBy'] },
       OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByFields extends TupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
       HavingFields extends GetHavingFields<T['having']>,
       HavingValid extends Has<ByFields, HavingFields>,
@@ -2683,10 +2961,7 @@ export namespace Prisma {
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
     >(args: SubsetIntersection<T, UserGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetUserGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the User model
-   */
-  readonly fields: UserFieldRefs;
+
   }
 
   /**
@@ -2695,73 +2970,76 @@ export namespace Prisma {
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__UserClient<T, Null = never, ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+  export class Prisma__UserClient<T, Null = never, ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> implements Prisma.PrismaPromise<T> {
+    private readonly _dmmf;
+    private readonly _queryType;
+    private readonly _rootField;
+    private readonly _clientMethod;
+    private readonly _args;
+    private readonly _dataPath;
+    private readonly _errorFormat;
+    private readonly _measurePerformance?;
+    private _isList;
+    private _callsite;
+    private _requestPromise?;
     readonly [Symbol.toStringTag]: 'PrismaPromise';
+    constructor(_dmmf: runtime.DMMFClass, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
 
-    perfil<T extends User$perfilArgs<ExtArgs> = {}>(args?: Subset<T, User$perfilArgs<ExtArgs>>): Prisma__PerfilClient<$Result.GetResult<Prisma.$PerfilPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
+    perfil<T extends User$perfilArgs<ExtArgs> = {}>(args?: Subset<T, User$perfilArgs<ExtArgs>>): Prisma__PerfilClient<$Types.GetResult<PerfilPayload<ExtArgs>, T, 'findUnique', never> | Null, never, ExtArgs>;
 
-    addres<T extends User$addresArgs<ExtArgs> = {}>(args?: Subset<T, User$addresArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AddresPayload<ExtArgs>, T, 'findMany'> | Null>;
+    address<T extends User$addressArgs<ExtArgs> = {}>(args?: Subset<T, User$addressArgs<ExtArgs>>): Prisma.PrismaPromise<$Types.GetResult<AddressPayload<ExtArgs>, T, 'findMany', never>| Null>;
 
-    contact<T extends User$contactArgs<ExtArgs> = {}>(args?: Subset<T, User$contactArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ContactPayload<ExtArgs>, T, 'findMany'> | Null>;
+    contact<T extends User$contactArgs<ExtArgs> = {}>(args?: Subset<T, User$contactArgs<ExtArgs>>): Prisma.PrismaPromise<$Types.GetResult<ContactPayload<ExtArgs>, T, 'findMany', never>| Null>;
 
-    degree<T extends User$degreeArgs<ExtArgs> = {}>(args?: Subset<T, User$degreeArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DegreePayload<ExtArgs>, T, 'findMany'> | Null>;
+    degree<T extends User$degreeArgs<ExtArgs> = {}>(args?: Subset<T, User$degreeArgs<ExtArgs>>): Prisma.PrismaPromise<$Types.GetResult<DegreePayload<ExtArgs>, T, 'findMany', never>| Null>;
 
-    skills<T extends User$skillsArgs<ExtArgs> = {}>(args?: Subset<T, User$skillsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SkillsPayload<ExtArgs>, T, 'findMany'> | Null>;
+    skills<T extends User$skillsArgs<ExtArgs> = {}>(args?: Subset<T, User$skillsArgs<ExtArgs>>): Prisma.PrismaPromise<$Types.GetResult<SkillsPayload<ExtArgs>, T, 'findMany', never>| Null>;
 
-    experiences<T extends User$experiencesArgs<ExtArgs> = {}>(args?: Subset<T, User$experiencesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExperiencesPayload<ExtArgs>, T, 'findMany'> | Null>;
+    experiences<T extends User$experiencesArgs<ExtArgs> = {}>(args?: Subset<T, User$experiencesArgs<ExtArgs>>): Prisma.PrismaPromise<$Types.GetResult<ExperiencesPayload<ExtArgs>, T, 'findMany', never>| Null>;
 
-    projects<T extends User$projectsArgs<ExtArgs> = {}>(args?: Subset<T, User$projectsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProjectsPayload<ExtArgs>, T, 'findMany'> | Null>;
+    projects<T extends User$projectsArgs<ExtArgs> = {}>(args?: Subset<T, User$projectsArgs<ExtArgs>>): Prisma.PrismaPromise<$Types.GetResult<ProjectsPayload<ExtArgs>, T, 'findMany', never>| Null>;
 
-    referecePrices<T extends User$referecePricesArgs<ExtArgs> = {}>(args?: Subset<T, User$referecePricesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReferecePricesPayload<ExtArgs>, T, 'findMany'> | Null>;
+    referecePrices<T extends User$referecePricesArgs<ExtArgs> = {}>(args?: Subset<T, User$referecePricesArgs<ExtArgs>>): Prisma.PrismaPromise<$Types.GetResult<ReferecePricesPayload<ExtArgs>, T, 'findMany', never>| Null>;
 
-    refereces<T extends User$referecesArgs<ExtArgs> = {}>(args?: Subset<T, User$referecesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReferecesPayload<ExtArgs>, T, 'findMany'> | Null>;
+    refereces<T extends User$referecesArgs<ExtArgs> = {}>(args?: Subset<T, User$referecesArgs<ExtArgs>>): Prisma.PrismaPromise<$Types.GetResult<ReferecesPayload<ExtArgs>, T, 'findMany', never>| Null>;
 
-    userPoints<T extends User$userPointsArgs<ExtArgs> = {}>(args?: Subset<T, User$userPointsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPointsPayload<ExtArgs>, T, 'findMany'> | Null>;
+    userPoints<T extends User$userPointsArgs<ExtArgs> = {}>(args?: Subset<T, User$userPointsArgs<ExtArgs>>): Prisma.PrismaPromise<$Types.GetResult<UserPointsPayload<ExtArgs>, T, 'findMany', never>| Null>;
 
-    feeds<T extends User$feedsArgs<ExtArgs> = {}>(args?: Subset<T, User$feedsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FeedPayload<ExtArgs>, T, 'findMany'> | Null>;
+    feeds<T extends User$feedsArgs<ExtArgs> = {}>(args?: Subset<T, User$feedsArgs<ExtArgs>>): Prisma.PrismaPromise<$Types.GetResult<FeedPayload<ExtArgs>, T, 'findMany', never>| Null>;
 
-    comments<T extends User$commentsArgs<ExtArgs> = {}>(args?: Subset<T, User$commentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FeedCommentsPayload<ExtArgs>, T, 'findMany'> | Null>;
+    comments<T extends User$commentsArgs<ExtArgs> = {}>(args?: Subset<T, User$commentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Types.GetResult<FeedCommentsPayload<ExtArgs>, T, 'findMany', never>| Null>;
 
+    private get _document();
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
      * @param onrejected The callback to execute when the Promise is rejected.
      * @returns A Promise for the completion of which ever callback is executed.
      */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>;
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): Promise<TResult1 | TResult2>;
     /**
      * Attaches a callback for only the rejection of the Promise.
      * @param onrejected The callback to execute when the Promise is rejected.
      * @returns A Promise for the completion of the callback.
      */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>;
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): Promise<T | TResult>;
     /**
      * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
      * resolved value cannot be modified from the callback.
      * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
      * @returns A Promise for the completion of the callback.
      */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>;
+    finally(onfinally?: (() => void) | undefined | null): Promise<T>;
   }
 
 
-
-  /**
-   * Fields of the User model
-   */ 
-  interface UserFieldRefs {
-    readonly id: FieldRef<"User", 'BigInt'>
-    readonly email: FieldRef<"User", 'String'>
-    readonly password: FieldRef<"User", 'String'>
-  }
-    
 
   // Custom InputTypes
 
   /**
-   * User findUnique
+   * User base type for findUnique actions
    */
-  export type UserFindUniqueArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+  export type UserFindUniqueArgsBase<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the User
      */
@@ -2776,6 +3054,17 @@ export namespace Prisma {
     where: UserWhereUniqueInput
   }
 
+  /**
+   * User findUnique
+   */
+  export interface UserFindUniqueArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> extends UserFindUniqueArgsBase<ExtArgs> {
+   /**
+    * Throw an Error if query returns no results
+    * @deprecated since 4.0.0: use `findUniqueOrThrow` method instead
+    */
+    rejectOnNotFound?: RejectOnNotFound
+  }
+      
 
   /**
    * User findUniqueOrThrow
@@ -2797,9 +3086,9 @@ export namespace Prisma {
 
 
   /**
-   * User findFirst
+   * User base type for findFirst actions
    */
-  export type UserFindFirstArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+  export type UserFindFirstArgsBase<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the User
      */
@@ -2817,7 +3106,7 @@ export namespace Prisma {
      * 
      * Determine the order of Users to fetch.
      */
-    orderBy?: UserOrderByWithRelationInput | UserOrderByWithRelationInput[]
+    orderBy?: Enumerable<UserOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
@@ -2841,9 +3130,20 @@ export namespace Prisma {
      * 
      * Filter by unique combinations of Users.
      */
-    distinct?: UserScalarFieldEnum | UserScalarFieldEnum[]
+    distinct?: Enumerable<UserScalarFieldEnum>
   }
 
+  /**
+   * User findFirst
+   */
+  export interface UserFindFirstArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> extends UserFindFirstArgsBase<ExtArgs> {
+   /**
+    * Throw an Error if query returns no results
+    * @deprecated since 4.0.0: use `findFirstOrThrow` method instead
+    */
+    rejectOnNotFound?: RejectOnNotFound
+  }
+      
 
   /**
    * User findFirstOrThrow
@@ -2866,7 +3166,7 @@ export namespace Prisma {
      * 
      * Determine the order of Users to fetch.
      */
-    orderBy?: UserOrderByWithRelationInput | UserOrderByWithRelationInput[]
+    orderBy?: Enumerable<UserOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
@@ -2890,7 +3190,7 @@ export namespace Prisma {
      * 
      * Filter by unique combinations of Users.
      */
-    distinct?: UserScalarFieldEnum | UserScalarFieldEnum[]
+    distinct?: Enumerable<UserScalarFieldEnum>
   }
 
 
@@ -2915,7 +3215,7 @@ export namespace Prisma {
      * 
      * Determine the order of Users to fetch.
      */
-    orderBy?: UserOrderByWithRelationInput | UserOrderByWithRelationInput[]
+    orderBy?: Enumerable<UserOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
@@ -2934,7 +3234,7 @@ export namespace Prisma {
      * Skip the first `n` Users.
      */
     skip?: number
-    distinct?: UserScalarFieldEnum | UserScalarFieldEnum[]
+    distinct?: Enumerable<UserScalarFieldEnum>
   }
 
 
@@ -2964,7 +3264,7 @@ export namespace Prisma {
     /**
      * The data used to create many Users.
      */
-    data: UserCreateManyInput | UserCreateManyInput[]
+    data: Enumerable<UserCreateManyInput>
     skipDuplicates?: boolean
   }
 
@@ -3081,23 +3381,23 @@ export namespace Prisma {
 
 
   /**
-   * User.addres
+   * User.address
    */
-  export type User$addresArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+  export type User$addressArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Addres
+     * Select specific fields to fetch from the Address
      */
-    select?: AddresSelect<ExtArgs> | null
+    select?: AddressSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well.
      */
-    include?: AddresInclude<ExtArgs> | null
-    where?: AddresWhereInput
-    orderBy?: AddresOrderByWithRelationInput | AddresOrderByWithRelationInput[]
-    cursor?: AddresWhereUniqueInput
+    include?: AddressInclude<ExtArgs> | null
+    where?: AddressWhereInput
+    orderBy?: Enumerable<AddressOrderByWithRelationInput>
+    cursor?: AddressWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: AddresScalarFieldEnum | AddresScalarFieldEnum[]
+    distinct?: Enumerable<AddressScalarFieldEnum>
   }
 
 
@@ -3114,11 +3414,11 @@ export namespace Prisma {
      */
     include?: ContactInclude<ExtArgs> | null
     where?: ContactWhereInput
-    orderBy?: ContactOrderByWithRelationInput | ContactOrderByWithRelationInput[]
+    orderBy?: Enumerable<ContactOrderByWithRelationInput>
     cursor?: ContactWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: ContactScalarFieldEnum | ContactScalarFieldEnum[]
+    distinct?: Enumerable<ContactScalarFieldEnum>
   }
 
 
@@ -3135,11 +3435,11 @@ export namespace Prisma {
      */
     include?: DegreeInclude<ExtArgs> | null
     where?: DegreeWhereInput
-    orderBy?: DegreeOrderByWithRelationInput | DegreeOrderByWithRelationInput[]
+    orderBy?: Enumerable<DegreeOrderByWithRelationInput>
     cursor?: DegreeWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: DegreeScalarFieldEnum | DegreeScalarFieldEnum[]
+    distinct?: Enumerable<DegreeScalarFieldEnum>
   }
 
 
@@ -3156,11 +3456,11 @@ export namespace Prisma {
      */
     include?: SkillsInclude<ExtArgs> | null
     where?: SkillsWhereInput
-    orderBy?: SkillsOrderByWithRelationInput | SkillsOrderByWithRelationInput[]
+    orderBy?: Enumerable<SkillsOrderByWithRelationInput>
     cursor?: SkillsWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: SkillsScalarFieldEnum | SkillsScalarFieldEnum[]
+    distinct?: Enumerable<SkillsScalarFieldEnum>
   }
 
 
@@ -3177,11 +3477,11 @@ export namespace Prisma {
      */
     include?: ExperiencesInclude<ExtArgs> | null
     where?: ExperiencesWhereInput
-    orderBy?: ExperiencesOrderByWithRelationInput | ExperiencesOrderByWithRelationInput[]
+    orderBy?: Enumerable<ExperiencesOrderByWithRelationInput>
     cursor?: ExperiencesWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: ExperiencesScalarFieldEnum | ExperiencesScalarFieldEnum[]
+    distinct?: Enumerable<ExperiencesScalarFieldEnum>
   }
 
 
@@ -3198,11 +3498,11 @@ export namespace Prisma {
      */
     include?: ProjectsInclude<ExtArgs> | null
     where?: ProjectsWhereInput
-    orderBy?: ProjectsOrderByWithRelationInput | ProjectsOrderByWithRelationInput[]
+    orderBy?: Enumerable<ProjectsOrderByWithRelationInput>
     cursor?: ProjectsWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: ProjectsScalarFieldEnum | ProjectsScalarFieldEnum[]
+    distinct?: Enumerable<ProjectsScalarFieldEnum>
   }
 
 
@@ -3219,11 +3519,11 @@ export namespace Prisma {
      */
     include?: ReferecePricesInclude<ExtArgs> | null
     where?: ReferecePricesWhereInput
-    orderBy?: ReferecePricesOrderByWithRelationInput | ReferecePricesOrderByWithRelationInput[]
+    orderBy?: Enumerable<ReferecePricesOrderByWithRelationInput>
     cursor?: ReferecePricesWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: ReferecePricesScalarFieldEnum | ReferecePricesScalarFieldEnum[]
+    distinct?: Enumerable<ReferecePricesScalarFieldEnum>
   }
 
 
@@ -3240,11 +3540,11 @@ export namespace Prisma {
      */
     include?: ReferecesInclude<ExtArgs> | null
     where?: ReferecesWhereInput
-    orderBy?: ReferecesOrderByWithRelationInput | ReferecesOrderByWithRelationInput[]
+    orderBy?: Enumerable<ReferecesOrderByWithRelationInput>
     cursor?: ReferecesWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: ReferecesScalarFieldEnum | ReferecesScalarFieldEnum[]
+    distinct?: Enumerable<ReferecesScalarFieldEnum>
   }
 
 
@@ -3261,11 +3561,11 @@ export namespace Prisma {
      */
     include?: UserPointsInclude<ExtArgs> | null
     where?: UserPointsWhereInput
-    orderBy?: UserPointsOrderByWithRelationInput | UserPointsOrderByWithRelationInput[]
+    orderBy?: Enumerable<UserPointsOrderByWithRelationInput>
     cursor?: UserPointsWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: UserPointsScalarFieldEnum | UserPointsScalarFieldEnum[]
+    distinct?: Enumerable<UserPointsScalarFieldEnum>
   }
 
 
@@ -3282,11 +3582,11 @@ export namespace Prisma {
      */
     include?: FeedInclude<ExtArgs> | null
     where?: FeedWhereInput
-    orderBy?: FeedOrderByWithRelationInput | FeedOrderByWithRelationInput[]
+    orderBy?: Enumerable<FeedOrderByWithRelationInput>
     cursor?: FeedWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: FeedScalarFieldEnum | FeedScalarFieldEnum[]
+    distinct?: Enumerable<FeedScalarFieldEnum>
   }
 
 
@@ -3303,18 +3603,18 @@ export namespace Prisma {
      */
     include?: FeedCommentsInclude<ExtArgs> | null
     where?: FeedCommentsWhereInput
-    orderBy?: FeedCommentsOrderByWithRelationInput | FeedCommentsOrderByWithRelationInput[]
+    orderBy?: Enumerable<FeedCommentsOrderByWithRelationInput>
     cursor?: FeedCommentsWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: FeedCommentsScalarFieldEnum | FeedCommentsScalarFieldEnum[]
+    distinct?: Enumerable<FeedCommentsScalarFieldEnum>
   }
 
 
   /**
    * User without action
    */
-  export type UserDefaultArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+  export type UserArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the User
      */
@@ -3330,6 +3630,7 @@ export namespace Prisma {
   /**
    * Model Perfil
    */
+
 
   export type AggregatePerfil = {
     _count: PerfilCountAggregateOutputType | null
@@ -3357,6 +3658,8 @@ export namespace Prisma {
     socialname: string | null
     birthday: Date | null
     userId: bigint | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type PerfilMaxAggregateOutputType = {
@@ -3367,6 +3670,8 @@ export namespace Prisma {
     socialname: string | null
     birthday: Date | null
     userId: bigint | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type PerfilCountAggregateOutputType = {
@@ -3377,6 +3682,8 @@ export namespace Prisma {
     socialname: number
     birthday: number
     userId: number
+    createdAt: number
+    updatedAt: number
     _all: number
   }
 
@@ -3399,6 +3706,8 @@ export namespace Prisma {
     socialname?: true
     birthday?: true
     userId?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type PerfilMaxAggregateInputType = {
@@ -3409,6 +3718,8 @@ export namespace Prisma {
     socialname?: true
     birthday?: true
     userId?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type PerfilCountAggregateInputType = {
@@ -3419,6 +3730,8 @@ export namespace Prisma {
     socialname?: true
     birthday?: true
     userId?: true
+    createdAt?: true
+    updatedAt?: true
     _all?: true
   }
 
@@ -3432,7 +3745,7 @@ export namespace Prisma {
      * 
      * Determine the order of Perfils to fetch.
      */
-    orderBy?: PerfilOrderByWithRelationInput | PerfilOrderByWithRelationInput[]
+    orderBy?: Enumerable<PerfilOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
@@ -3496,8 +3809,8 @@ export namespace Prisma {
 
   export type PerfilGroupByArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     where?: PerfilWhereInput
-    orderBy?: PerfilOrderByWithAggregationInput | PerfilOrderByWithAggregationInput[]
-    by: PerfilScalarFieldEnum[] | PerfilScalarFieldEnum
+    orderBy?: Enumerable<PerfilOrderByWithAggregationInput>
+    by: PerfilScalarFieldEnum[]
     having?: PerfilScalarWhereWithAggregatesInput
     take?: number
     skip?: number
@@ -3508,6 +3821,7 @@ export namespace Prisma {
     _max?: PerfilMaxAggregateInputType
   }
 
+
   export type PerfilGroupByOutputType = {
     id: bigint
     photo: string | null
@@ -3516,6 +3830,8 @@ export namespace Prisma {
     socialname: string | null
     birthday: Date | null
     userId: bigint | null
+    createdAt: Date
+    updatedAt: Date | null
     _count: PerfilCountAggregateOutputType | null
     _avg: PerfilAvgAggregateOutputType | null
     _sum: PerfilSumAggregateOutputType | null
@@ -3525,7 +3841,7 @@ export namespace Prisma {
 
   type GetPerfilGroupByPayload<T extends PerfilGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<PerfilGroupByOutputType, T['by']> &
+      PickArray<PerfilGroupByOutputType, T['by']> &
         {
           [P in ((keyof T) & (keyof PerfilGroupByOutputType))]: P extends '_count'
             ? T[P] extends boolean
@@ -3545,6 +3861,8 @@ export namespace Prisma {
     socialname?: boolean
     birthday?: boolean
     userId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
     user?: boolean | Perfil$userArgs<ExtArgs>
   }, ExtArgs["result"]["perfil"]>
 
@@ -3556,6 +3874,8 @@ export namespace Prisma {
     socialname?: boolean
     birthday?: boolean
     userId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
   }
 
   export type PerfilInclude<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
@@ -3563,32 +3883,14 @@ export namespace Prisma {
   }
 
 
-  export type $PerfilPayload<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
-    name: "Perfil"
-    objects: {
-      user: Prisma.$UserPayload<ExtArgs> | null
-    }
-    scalars: $Extensions.GetResult<{
-      id: bigint
-      photo: string | null
-      name: string | null
-      secondname: string | null
-      socialname: string | null
-      birthday: Date | null
-      userId: bigint | null
-    }, ExtArgs["result"]["perfil"]>
-    composites: {}
-  }
-
-
-  type PerfilGetPayload<S extends boolean | null | undefined | PerfilDefaultArgs> = $Result.GetResult<Prisma.$PerfilPayload, S>
+  type PerfilGetPayload<S extends boolean | null | undefined | PerfilArgs> = $Types.GetResult<PerfilPayload, S>
 
   type PerfilCountArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = 
     Omit<PerfilFindManyArgs, 'select' | 'include'> & {
       select?: PerfilCountAggregateInputType | true
     }
 
-  export interface PerfilDelegate<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> {
+  export interface PerfilDelegate<GlobalRejectSettings extends Prisma.RejectOnNotFound | Prisma.RejectPerOperation | false | undefined, ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> {
     [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Perfil'], meta: { name: 'Perfil' } }
     /**
      * Find zero or one Perfil that matches the filter.
@@ -3601,9 +3903,9 @@ export namespace Prisma {
      *   }
      * })
     **/
-    findUnique<T extends PerfilFindUniqueArgs<ExtArgs>>(
+    findUnique<T extends PerfilFindUniqueArgs<ExtArgs>, LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
       args: SelectSubset<T, PerfilFindUniqueArgs<ExtArgs>>
-    ): Prisma__PerfilClient<$Result.GetResult<Prisma.$PerfilPayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findUnique', 'Perfil'> extends True ? Prisma__PerfilClient<$Types.GetResult<PerfilPayload<ExtArgs>, T, 'findUnique', never>, never, ExtArgs> : Prisma__PerfilClient<$Types.GetResult<PerfilPayload<ExtArgs>, T, 'findUnique', never> | null, null, ExtArgs>
 
     /**
      * Find one Perfil that matches the filter or throw an error  with `error.code='P2025'` 
@@ -3619,7 +3921,7 @@ export namespace Prisma {
     **/
     findUniqueOrThrow<T extends PerfilFindUniqueOrThrowArgs<ExtArgs>>(
       args?: SelectSubset<T, PerfilFindUniqueOrThrowArgs<ExtArgs>>
-    ): Prisma__PerfilClient<$Result.GetResult<Prisma.$PerfilPayload<ExtArgs>, T, 'findUniqueOrThrow'>, never, ExtArgs>
+    ): Prisma__PerfilClient<$Types.GetResult<PerfilPayload<ExtArgs>, T, 'findUniqueOrThrow', never>, never, ExtArgs>
 
     /**
      * Find the first Perfil that matches the filter.
@@ -3634,13 +3936,13 @@ export namespace Prisma {
      *   }
      * })
     **/
-    findFirst<T extends PerfilFindFirstArgs<ExtArgs>>(
+    findFirst<T extends PerfilFindFirstArgs<ExtArgs>, LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
       args?: SelectSubset<T, PerfilFindFirstArgs<ExtArgs>>
-    ): Prisma__PerfilClient<$Result.GetResult<Prisma.$PerfilPayload<ExtArgs>, T, 'findFirst'> | null, null, ExtArgs>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findFirst', 'Perfil'> extends True ? Prisma__PerfilClient<$Types.GetResult<PerfilPayload<ExtArgs>, T, 'findFirst', never>, never, ExtArgs> : Prisma__PerfilClient<$Types.GetResult<PerfilPayload<ExtArgs>, T, 'findFirst', never> | null, null, ExtArgs>
 
     /**
      * Find the first Perfil that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * throw `NotFoundError` if no matches were found.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
      * @param {PerfilFindFirstOrThrowArgs} args - Arguments to find a Perfil
@@ -3654,7 +3956,7 @@ export namespace Prisma {
     **/
     findFirstOrThrow<T extends PerfilFindFirstOrThrowArgs<ExtArgs>>(
       args?: SelectSubset<T, PerfilFindFirstOrThrowArgs<ExtArgs>>
-    ): Prisma__PerfilClient<$Result.GetResult<Prisma.$PerfilPayload<ExtArgs>, T, 'findFirstOrThrow'>, never, ExtArgs>
+    ): Prisma__PerfilClient<$Types.GetResult<PerfilPayload<ExtArgs>, T, 'findFirstOrThrow', never>, never, ExtArgs>
 
     /**
      * Find zero or more Perfils that matches the filter.
@@ -3674,7 +3976,7 @@ export namespace Prisma {
     **/
     findMany<T extends PerfilFindManyArgs<ExtArgs>>(
       args?: SelectSubset<T, PerfilFindManyArgs<ExtArgs>>
-    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PerfilPayload<ExtArgs>, T, 'findMany'>>
+    ): Prisma.PrismaPromise<$Types.GetResult<PerfilPayload<ExtArgs>, T, 'findMany', never>>
 
     /**
      * Create a Perfil.
@@ -3690,7 +3992,7 @@ export namespace Prisma {
     **/
     create<T extends PerfilCreateArgs<ExtArgs>>(
       args: SelectSubset<T, PerfilCreateArgs<ExtArgs>>
-    ): Prisma__PerfilClient<$Result.GetResult<Prisma.$PerfilPayload<ExtArgs>, T, 'create'>, never, ExtArgs>
+    ): Prisma__PerfilClient<$Types.GetResult<PerfilPayload<ExtArgs>, T, 'create', never>, never, ExtArgs>
 
     /**
      * Create many Perfils.
@@ -3722,7 +4024,7 @@ export namespace Prisma {
     **/
     delete<T extends PerfilDeleteArgs<ExtArgs>>(
       args: SelectSubset<T, PerfilDeleteArgs<ExtArgs>>
-    ): Prisma__PerfilClient<$Result.GetResult<Prisma.$PerfilPayload<ExtArgs>, T, 'delete'>, never, ExtArgs>
+    ): Prisma__PerfilClient<$Types.GetResult<PerfilPayload<ExtArgs>, T, 'delete', never>, never, ExtArgs>
 
     /**
      * Update one Perfil.
@@ -3741,7 +4043,7 @@ export namespace Prisma {
     **/
     update<T extends PerfilUpdateArgs<ExtArgs>>(
       args: SelectSubset<T, PerfilUpdateArgs<ExtArgs>>
-    ): Prisma__PerfilClient<$Result.GetResult<Prisma.$PerfilPayload<ExtArgs>, T, 'update'>, never, ExtArgs>
+    ): Prisma__PerfilClient<$Types.GetResult<PerfilPayload<ExtArgs>, T, 'update', never>, never, ExtArgs>
 
     /**
      * Delete zero or more Perfils.
@@ -3799,7 +4101,7 @@ export namespace Prisma {
     **/
     upsert<T extends PerfilUpsertArgs<ExtArgs>>(
       args: SelectSubset<T, PerfilUpsertArgs<ExtArgs>>
-    ): Prisma__PerfilClient<$Result.GetResult<Prisma.$PerfilPayload<ExtArgs>, T, 'upsert'>, never, ExtArgs>
+    ): Prisma__PerfilClient<$Types.GetResult<PerfilPayload<ExtArgs>, T, 'upsert', never>, never, ExtArgs>
 
     /**
      * Count the number of Perfils.
@@ -3878,7 +4180,7 @@ export namespace Prisma {
         ? { orderBy: PerfilGroupByArgs['orderBy'] }
         : { orderBy?: PerfilGroupByArgs['orderBy'] },
       OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByFields extends TupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
       HavingFields extends GetHavingFields<T['having']>,
       HavingValid extends Has<ByFields, HavingFields>,
@@ -3926,10 +4228,7 @@ export namespace Prisma {
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
     >(args: SubsetIntersection<T, PerfilGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPerfilGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the Perfil model
-   */
-  readonly fields: PerfilFieldRefs;
+
   }
 
   /**
@@ -3938,55 +4237,54 @@ export namespace Prisma {
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__PerfilClient<T, Null = never, ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+  export class Prisma__PerfilClient<T, Null = never, ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> implements Prisma.PrismaPromise<T> {
+    private readonly _dmmf;
+    private readonly _queryType;
+    private readonly _rootField;
+    private readonly _clientMethod;
+    private readonly _args;
+    private readonly _dataPath;
+    private readonly _errorFormat;
+    private readonly _measurePerformance?;
+    private _isList;
+    private _callsite;
+    private _requestPromise?;
     readonly [Symbol.toStringTag]: 'PrismaPromise';
+    constructor(_dmmf: runtime.DMMFClass, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
 
-    user<T extends Perfil$userArgs<ExtArgs> = {}>(args?: Subset<T, Perfil$userArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
+    user<T extends Perfil$userArgs<ExtArgs> = {}>(args?: Subset<T, Perfil$userArgs<ExtArgs>>): Prisma__UserClient<$Types.GetResult<UserPayload<ExtArgs>, T, 'findUnique', never> | Null, never, ExtArgs>;
 
+    private get _document();
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
      * @param onrejected The callback to execute when the Promise is rejected.
      * @returns A Promise for the completion of which ever callback is executed.
      */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>;
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): Promise<TResult1 | TResult2>;
     /**
      * Attaches a callback for only the rejection of the Promise.
      * @param onrejected The callback to execute when the Promise is rejected.
      * @returns A Promise for the completion of the callback.
      */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>;
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): Promise<T | TResult>;
     /**
      * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
      * resolved value cannot be modified from the callback.
      * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
      * @returns A Promise for the completion of the callback.
      */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>;
+    finally(onfinally?: (() => void) | undefined | null): Promise<T>;
   }
 
 
-
-  /**
-   * Fields of the Perfil model
-   */ 
-  interface PerfilFieldRefs {
-    readonly id: FieldRef<"Perfil", 'BigInt'>
-    readonly photo: FieldRef<"Perfil", 'String'>
-    readonly name: FieldRef<"Perfil", 'String'>
-    readonly secondname: FieldRef<"Perfil", 'String'>
-    readonly socialname: FieldRef<"Perfil", 'String'>
-    readonly birthday: FieldRef<"Perfil", 'DateTime'>
-    readonly userId: FieldRef<"Perfil", 'BigInt'>
-  }
-    
 
   // Custom InputTypes
 
   /**
-   * Perfil findUnique
+   * Perfil base type for findUnique actions
    */
-  export type PerfilFindUniqueArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+  export type PerfilFindUniqueArgsBase<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Perfil
      */
@@ -4001,6 +4299,17 @@ export namespace Prisma {
     where: PerfilWhereUniqueInput
   }
 
+  /**
+   * Perfil findUnique
+   */
+  export interface PerfilFindUniqueArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> extends PerfilFindUniqueArgsBase<ExtArgs> {
+   /**
+    * Throw an Error if query returns no results
+    * @deprecated since 4.0.0: use `findUniqueOrThrow` method instead
+    */
+    rejectOnNotFound?: RejectOnNotFound
+  }
+      
 
   /**
    * Perfil findUniqueOrThrow
@@ -4022,9 +4331,9 @@ export namespace Prisma {
 
 
   /**
-   * Perfil findFirst
+   * Perfil base type for findFirst actions
    */
-  export type PerfilFindFirstArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+  export type PerfilFindFirstArgsBase<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Perfil
      */
@@ -4042,7 +4351,7 @@ export namespace Prisma {
      * 
      * Determine the order of Perfils to fetch.
      */
-    orderBy?: PerfilOrderByWithRelationInput | PerfilOrderByWithRelationInput[]
+    orderBy?: Enumerable<PerfilOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
@@ -4066,9 +4375,20 @@ export namespace Prisma {
      * 
      * Filter by unique combinations of Perfils.
      */
-    distinct?: PerfilScalarFieldEnum | PerfilScalarFieldEnum[]
+    distinct?: Enumerable<PerfilScalarFieldEnum>
   }
 
+  /**
+   * Perfil findFirst
+   */
+  export interface PerfilFindFirstArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> extends PerfilFindFirstArgsBase<ExtArgs> {
+   /**
+    * Throw an Error if query returns no results
+    * @deprecated since 4.0.0: use `findFirstOrThrow` method instead
+    */
+    rejectOnNotFound?: RejectOnNotFound
+  }
+      
 
   /**
    * Perfil findFirstOrThrow
@@ -4091,7 +4411,7 @@ export namespace Prisma {
      * 
      * Determine the order of Perfils to fetch.
      */
-    orderBy?: PerfilOrderByWithRelationInput | PerfilOrderByWithRelationInput[]
+    orderBy?: Enumerable<PerfilOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
@@ -4115,7 +4435,7 @@ export namespace Prisma {
      * 
      * Filter by unique combinations of Perfils.
      */
-    distinct?: PerfilScalarFieldEnum | PerfilScalarFieldEnum[]
+    distinct?: Enumerable<PerfilScalarFieldEnum>
   }
 
 
@@ -4140,7 +4460,7 @@ export namespace Prisma {
      * 
      * Determine the order of Perfils to fetch.
      */
-    orderBy?: PerfilOrderByWithRelationInput | PerfilOrderByWithRelationInput[]
+    orderBy?: Enumerable<PerfilOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
@@ -4159,7 +4479,7 @@ export namespace Prisma {
      * Skip the first `n` Perfils.
      */
     skip?: number
-    distinct?: PerfilScalarFieldEnum | PerfilScalarFieldEnum[]
+    distinct?: Enumerable<PerfilScalarFieldEnum>
   }
 
 
@@ -4189,7 +4509,7 @@ export namespace Prisma {
     /**
      * The data used to create many Perfils.
      */
-    data: PerfilCreateManyInput | PerfilCreateManyInput[]
+    data: Enumerable<PerfilCreateManyInput>
     skipDuplicates?: boolean
   }
 
@@ -4308,7 +4628,7 @@ export namespace Prisma {
   /**
    * Perfil without action
    */
-  export type PerfilDefaultArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+  export type PerfilArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Perfil
      */
@@ -4322,398 +4642,419 @@ export namespace Prisma {
 
 
   /**
-   * Model Addres
+   * Model Address
    */
 
-  export type AggregateAddres = {
-    _count: AddresCountAggregateOutputType | null
-    _avg: AddresAvgAggregateOutputType | null
-    _sum: AddresSumAggregateOutputType | null
-    _min: AddresMinAggregateOutputType | null
-    _max: AddresMaxAggregateOutputType | null
+
+  export type AggregateAddress = {
+    _count: AddressCountAggregateOutputType | null
+    _avg: AddressAvgAggregateOutputType | null
+    _sum: AddressSumAggregateOutputType | null
+    _min: AddressMinAggregateOutputType | null
+    _max: AddressMaxAggregateOutputType | null
   }
 
-  export type AddresAvgAggregateOutputType = {
+  export type AddressAvgAggregateOutputType = {
     id: number | null
     userId: number | null
   }
 
-  export type AddresSumAggregateOutputType = {
+  export type AddressSumAggregateOutputType = {
     id: bigint | null
     userId: bigint | null
   }
 
-  export type AddresMinAggregateOutputType = {
+  export type AddressMinAggregateOutputType = {
     id: bigint | null
-    address: string | null
+    street: string | null
+    number: string | null
     complement: string | null
+    city: string | null
     state: string | null
     country: string | null
     userId: bigint | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
-  export type AddresMaxAggregateOutputType = {
+  export type AddressMaxAggregateOutputType = {
     id: bigint | null
-    address: string | null
+    street: string | null
+    number: string | null
     complement: string | null
+    city: string | null
     state: string | null
     country: string | null
     userId: bigint | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
-  export type AddresCountAggregateOutputType = {
+  export type AddressCountAggregateOutputType = {
     id: number
-    address: number
+    street: number
+    number: number
     complement: number
+    city: number
     state: number
     country: number
     userId: number
+    createdAt: number
+    updatedAt: number
     _all: number
   }
 
 
-  export type AddresAvgAggregateInputType = {
+  export type AddressAvgAggregateInputType = {
     id?: true
     userId?: true
   }
 
-  export type AddresSumAggregateInputType = {
+  export type AddressSumAggregateInputType = {
     id?: true
     userId?: true
   }
 
-  export type AddresMinAggregateInputType = {
+  export type AddressMinAggregateInputType = {
     id?: true
-    address?: true
+    street?: true
+    number?: true
     complement?: true
+    city?: true
     state?: true
     country?: true
     userId?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
-  export type AddresMaxAggregateInputType = {
+  export type AddressMaxAggregateInputType = {
     id?: true
-    address?: true
+    street?: true
+    number?: true
     complement?: true
+    city?: true
     state?: true
     country?: true
     userId?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
-  export type AddresCountAggregateInputType = {
+  export type AddressCountAggregateInputType = {
     id?: true
-    address?: true
+    street?: true
+    number?: true
     complement?: true
+    city?: true
     state?: true
     country?: true
     userId?: true
+    createdAt?: true
+    updatedAt?: true
     _all?: true
   }
 
-  export type AddresAggregateArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+  export type AddressAggregateArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     /**
-     * Filter which Addres to aggregate.
+     * Filter which Address to aggregate.
      */
-    where?: AddresWhereInput
+    where?: AddressWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Addres to fetch.
+     * Determine the order of Addresses to fetch.
      */
-    orderBy?: AddresOrderByWithRelationInput | AddresOrderByWithRelationInput[]
+    orderBy?: Enumerable<AddressOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the start position
      */
-    cursor?: AddresWhereUniqueInput
+    cursor?: AddressWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Addres from the position of the cursor.
+     * Take `±n` Addresses from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Addres.
+     * Skip the first `n` Addresses.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Count returned Addres
+     * Count returned Addresses
     **/
-    _count?: true | AddresCountAggregateInputType
+    _count?: true | AddressCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to average
     **/
-    _avg?: AddresAvgAggregateInputType
+    _avg?: AddressAvgAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to sum
     **/
-    _sum?: AddresSumAggregateInputType
+    _sum?: AddressSumAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the minimum value
     **/
-    _min?: AddresMinAggregateInputType
+    _min?: AddressMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the maximum value
     **/
-    _max?: AddresMaxAggregateInputType
+    _max?: AddressMaxAggregateInputType
   }
 
-  export type GetAddresAggregateType<T extends AddresAggregateArgs> = {
-        [P in keyof T & keyof AggregateAddres]: P extends '_count' | 'count'
+  export type GetAddressAggregateType<T extends AddressAggregateArgs> = {
+        [P in keyof T & keyof AggregateAddress]: P extends '_count' | 'count'
       ? T[P] extends true
         ? number
-        : GetScalarType<T[P], AggregateAddres[P]>
-      : GetScalarType<T[P], AggregateAddres[P]>
+        : GetScalarType<T[P], AggregateAddress[P]>
+      : GetScalarType<T[P], AggregateAddress[P]>
   }
 
 
 
 
-  export type AddresGroupByArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
-    where?: AddresWhereInput
-    orderBy?: AddresOrderByWithAggregationInput | AddresOrderByWithAggregationInput[]
-    by: AddresScalarFieldEnum[] | AddresScalarFieldEnum
-    having?: AddresScalarWhereWithAggregatesInput
+  export type AddressGroupByArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+    where?: AddressWhereInput
+    orderBy?: Enumerable<AddressOrderByWithAggregationInput>
+    by: AddressScalarFieldEnum[]
+    having?: AddressScalarWhereWithAggregatesInput
     take?: number
     skip?: number
-    _count?: AddresCountAggregateInputType | true
-    _avg?: AddresAvgAggregateInputType
-    _sum?: AddresSumAggregateInputType
-    _min?: AddresMinAggregateInputType
-    _max?: AddresMaxAggregateInputType
+    _count?: AddressCountAggregateInputType | true
+    _avg?: AddressAvgAggregateInputType
+    _sum?: AddressSumAggregateInputType
+    _min?: AddressMinAggregateInputType
+    _max?: AddressMaxAggregateInputType
   }
 
-  export type AddresGroupByOutputType = {
+
+  export type AddressGroupByOutputType = {
     id: bigint
-    address: string | null
+    street: string | null
+    number: string | null
     complement: string | null
+    city: string | null
     state: string | null
     country: string | null
     userId: bigint | null
-    _count: AddresCountAggregateOutputType | null
-    _avg: AddresAvgAggregateOutputType | null
-    _sum: AddresSumAggregateOutputType | null
-    _min: AddresMinAggregateOutputType | null
-    _max: AddresMaxAggregateOutputType | null
+    createdAt: Date
+    updatedAt: Date | null
+    _count: AddressCountAggregateOutputType | null
+    _avg: AddressAvgAggregateOutputType | null
+    _sum: AddressSumAggregateOutputType | null
+    _min: AddressMinAggregateOutputType | null
+    _max: AddressMaxAggregateOutputType | null
   }
 
-  type GetAddresGroupByPayload<T extends AddresGroupByArgs> = Prisma.PrismaPromise<
+  type GetAddressGroupByPayload<T extends AddressGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<AddresGroupByOutputType, T['by']> &
+      PickArray<AddressGroupByOutputType, T['by']> &
         {
-          [P in ((keyof T) & (keyof AddresGroupByOutputType))]: P extends '_count'
+          [P in ((keyof T) & (keyof AddressGroupByOutputType))]: P extends '_count'
             ? T[P] extends boolean
               ? number
-              : GetScalarType<T[P], AddresGroupByOutputType[P]>
-            : GetScalarType<T[P], AddresGroupByOutputType[P]>
+              : GetScalarType<T[P], AddressGroupByOutputType[P]>
+            : GetScalarType<T[P], AddressGroupByOutputType[P]>
         }
       >
     >
 
 
-  export type AddresSelect<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type AddressSelect<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    address?: boolean
+    street?: boolean
+    number?: boolean
     complement?: boolean
+    city?: boolean
     state?: boolean
     country?: boolean
     userId?: boolean
-    user?: boolean | Addres$userArgs<ExtArgs>
-  }, ExtArgs["result"]["addres"]>
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | Address$userArgs<ExtArgs>
+  }, ExtArgs["result"]["address"]>
 
-  export type AddresSelectScalar = {
+  export type AddressSelectScalar = {
     id?: boolean
-    address?: boolean
+    street?: boolean
+    number?: boolean
     complement?: boolean
+    city?: boolean
     state?: boolean
     country?: boolean
     userId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
   }
 
-  export type AddresInclude<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
-    user?: boolean | Addres$userArgs<ExtArgs>
-  }
-
-
-  export type $AddresPayload<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
-    name: "Addres"
-    objects: {
-      user: Prisma.$UserPayload<ExtArgs> | null
-    }
-    scalars: $Extensions.GetResult<{
-      id: bigint
-      address: string | null
-      complement: string | null
-      state: string | null
-      country: string | null
-      userId: bigint | null
-    }, ExtArgs["result"]["addres"]>
-    composites: {}
+  export type AddressInclude<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+    user?: boolean | Address$userArgs<ExtArgs>
   }
 
 
-  type AddresGetPayload<S extends boolean | null | undefined | AddresDefaultArgs> = $Result.GetResult<Prisma.$AddresPayload, S>
+  type AddressGetPayload<S extends boolean | null | undefined | AddressArgs> = $Types.GetResult<AddressPayload, S>
 
-  type AddresCountArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = 
-    Omit<AddresFindManyArgs, 'select' | 'include'> & {
-      select?: AddresCountAggregateInputType | true
+  type AddressCountArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = 
+    Omit<AddressFindManyArgs, 'select' | 'include'> & {
+      select?: AddressCountAggregateInputType | true
     }
 
-  export interface AddresDelegate<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Addres'], meta: { name: 'Addres' } }
+  export interface AddressDelegate<GlobalRejectSettings extends Prisma.RejectOnNotFound | Prisma.RejectPerOperation | false | undefined, ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Address'], meta: { name: 'Address' } }
     /**
-     * Find zero or one Addres that matches the filter.
-     * @param {AddresFindUniqueArgs} args - Arguments to find a Addres
+     * Find zero or one Address that matches the filter.
+     * @param {AddressFindUniqueArgs} args - Arguments to find a Address
      * @example
-     * // Get one Addres
-     * const addres = await prisma.addres.findUnique({
+     * // Get one Address
+     * const address = await prisma.address.findUnique({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
     **/
-    findUnique<T extends AddresFindUniqueArgs<ExtArgs>>(
-      args: SelectSubset<T, AddresFindUniqueArgs<ExtArgs>>
-    ): Prisma__AddresClient<$Result.GetResult<Prisma.$AddresPayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
+    findUnique<T extends AddressFindUniqueArgs<ExtArgs>, LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
+      args: SelectSubset<T, AddressFindUniqueArgs<ExtArgs>>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findUnique', 'Address'> extends True ? Prisma__AddressClient<$Types.GetResult<AddressPayload<ExtArgs>, T, 'findUnique', never>, never, ExtArgs> : Prisma__AddressClient<$Types.GetResult<AddressPayload<ExtArgs>, T, 'findUnique', never> | null, null, ExtArgs>
 
     /**
-     * Find one Addres that matches the filter or throw an error  with `error.code='P2025'` 
+     * Find one Address that matches the filter or throw an error  with `error.code='P2025'` 
      *     if no matches were found.
-     * @param {AddresFindUniqueOrThrowArgs} args - Arguments to find a Addres
+     * @param {AddressFindUniqueOrThrowArgs} args - Arguments to find a Address
      * @example
-     * // Get one Addres
-     * const addres = await prisma.addres.findUniqueOrThrow({
+     * // Get one Address
+     * const address = await prisma.address.findUniqueOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
     **/
-    findUniqueOrThrow<T extends AddresFindUniqueOrThrowArgs<ExtArgs>>(
-      args?: SelectSubset<T, AddresFindUniqueOrThrowArgs<ExtArgs>>
-    ): Prisma__AddresClient<$Result.GetResult<Prisma.$AddresPayload<ExtArgs>, T, 'findUniqueOrThrow'>, never, ExtArgs>
+    findUniqueOrThrow<T extends AddressFindUniqueOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, AddressFindUniqueOrThrowArgs<ExtArgs>>
+    ): Prisma__AddressClient<$Types.GetResult<AddressPayload<ExtArgs>, T, 'findUniqueOrThrow', never>, never, ExtArgs>
 
     /**
-     * Find the first Addres that matches the filter.
+     * Find the first Address that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {AddresFindFirstArgs} args - Arguments to find a Addres
+     * @param {AddressFindFirstArgs} args - Arguments to find a Address
      * @example
-     * // Get one Addres
-     * const addres = await prisma.addres.findFirst({
+     * // Get one Address
+     * const address = await prisma.address.findFirst({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
     **/
-    findFirst<T extends AddresFindFirstArgs<ExtArgs>>(
-      args?: SelectSubset<T, AddresFindFirstArgs<ExtArgs>>
-    ): Prisma__AddresClient<$Result.GetResult<Prisma.$AddresPayload<ExtArgs>, T, 'findFirst'> | null, null, ExtArgs>
+    findFirst<T extends AddressFindFirstArgs<ExtArgs>, LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
+      args?: SelectSubset<T, AddressFindFirstArgs<ExtArgs>>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findFirst', 'Address'> extends True ? Prisma__AddressClient<$Types.GetResult<AddressPayload<ExtArgs>, T, 'findFirst', never>, never, ExtArgs> : Prisma__AddressClient<$Types.GetResult<AddressPayload<ExtArgs>, T, 'findFirst', never> | null, null, ExtArgs>
 
     /**
-     * Find the first Addres that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Find the first Address that matches the filter or
+     * throw `NotFoundError` if no matches were found.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {AddresFindFirstOrThrowArgs} args - Arguments to find a Addres
+     * @param {AddressFindFirstOrThrowArgs} args - Arguments to find a Address
      * @example
-     * // Get one Addres
-     * const addres = await prisma.addres.findFirstOrThrow({
+     * // Get one Address
+     * const address = await prisma.address.findFirstOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
     **/
-    findFirstOrThrow<T extends AddresFindFirstOrThrowArgs<ExtArgs>>(
-      args?: SelectSubset<T, AddresFindFirstOrThrowArgs<ExtArgs>>
-    ): Prisma__AddresClient<$Result.GetResult<Prisma.$AddresPayload<ExtArgs>, T, 'findFirstOrThrow'>, never, ExtArgs>
+    findFirstOrThrow<T extends AddressFindFirstOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, AddressFindFirstOrThrowArgs<ExtArgs>>
+    ): Prisma__AddressClient<$Types.GetResult<AddressPayload<ExtArgs>, T, 'findFirstOrThrow', never>, never, ExtArgs>
 
     /**
-     * Find zero or more Addres that matches the filter.
+     * Find zero or more Addresses that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {AddresFindManyArgs=} args - Arguments to filter and select certain fields only.
+     * @param {AddressFindManyArgs=} args - Arguments to filter and select certain fields only.
      * @example
-     * // Get all Addres
-     * const addres = await prisma.addres.findMany()
+     * // Get all Addresses
+     * const addresses = await prisma.address.findMany()
      * 
-     * // Get first 10 Addres
-     * const addres = await prisma.addres.findMany({ take: 10 })
+     * // Get first 10 Addresses
+     * const addresses = await prisma.address.findMany({ take: 10 })
      * 
      * // Only select the `id`
-     * const addresWithIdOnly = await prisma.addres.findMany({ select: { id: true } })
+     * const addressWithIdOnly = await prisma.address.findMany({ select: { id: true } })
      * 
     **/
-    findMany<T extends AddresFindManyArgs<ExtArgs>>(
-      args?: SelectSubset<T, AddresFindManyArgs<ExtArgs>>
-    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AddresPayload<ExtArgs>, T, 'findMany'>>
+    findMany<T extends AddressFindManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, AddressFindManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Types.GetResult<AddressPayload<ExtArgs>, T, 'findMany', never>>
 
     /**
-     * Create a Addres.
-     * @param {AddresCreateArgs} args - Arguments to create a Addres.
+     * Create a Address.
+     * @param {AddressCreateArgs} args - Arguments to create a Address.
      * @example
-     * // Create one Addres
-     * const Addres = await prisma.addres.create({
+     * // Create one Address
+     * const Address = await prisma.address.create({
      *   data: {
-     *     // ... data to create a Addres
+     *     // ... data to create a Address
      *   }
      * })
      * 
     **/
-    create<T extends AddresCreateArgs<ExtArgs>>(
-      args: SelectSubset<T, AddresCreateArgs<ExtArgs>>
-    ): Prisma__AddresClient<$Result.GetResult<Prisma.$AddresPayload<ExtArgs>, T, 'create'>, never, ExtArgs>
+    create<T extends AddressCreateArgs<ExtArgs>>(
+      args: SelectSubset<T, AddressCreateArgs<ExtArgs>>
+    ): Prisma__AddressClient<$Types.GetResult<AddressPayload<ExtArgs>, T, 'create', never>, never, ExtArgs>
 
     /**
-     * Create many Addres.
-     *     @param {AddresCreateManyArgs} args - Arguments to create many Addres.
+     * Create many Addresses.
+     *     @param {AddressCreateManyArgs} args - Arguments to create many Addresses.
      *     @example
-     *     // Create many Addres
-     *     const addres = await prisma.addres.createMany({
+     *     // Create many Addresses
+     *     const address = await prisma.address.createMany({
      *       data: {
      *         // ... provide data here
      *       }
      *     })
      *     
     **/
-    createMany<T extends AddresCreateManyArgs<ExtArgs>>(
-      args?: SelectSubset<T, AddresCreateManyArgs<ExtArgs>>
+    createMany<T extends AddressCreateManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, AddressCreateManyArgs<ExtArgs>>
     ): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Delete a Addres.
-     * @param {AddresDeleteArgs} args - Arguments to delete one Addres.
+     * Delete a Address.
+     * @param {AddressDeleteArgs} args - Arguments to delete one Address.
      * @example
-     * // Delete one Addres
-     * const Addres = await prisma.addres.delete({
+     * // Delete one Address
+     * const Address = await prisma.address.delete({
      *   where: {
-     *     // ... filter to delete one Addres
+     *     // ... filter to delete one Address
      *   }
      * })
      * 
     **/
-    delete<T extends AddresDeleteArgs<ExtArgs>>(
-      args: SelectSubset<T, AddresDeleteArgs<ExtArgs>>
-    ): Prisma__AddresClient<$Result.GetResult<Prisma.$AddresPayload<ExtArgs>, T, 'delete'>, never, ExtArgs>
+    delete<T extends AddressDeleteArgs<ExtArgs>>(
+      args: SelectSubset<T, AddressDeleteArgs<ExtArgs>>
+    ): Prisma__AddressClient<$Types.GetResult<AddressPayload<ExtArgs>, T, 'delete', never>, never, ExtArgs>
 
     /**
-     * Update one Addres.
-     * @param {AddresUpdateArgs} args - Arguments to update one Addres.
+     * Update one Address.
+     * @param {AddressUpdateArgs} args - Arguments to update one Address.
      * @example
-     * // Update one Addres
-     * const addres = await prisma.addres.update({
+     * // Update one Address
+     * const address = await prisma.address.update({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -4723,34 +5064,34 @@ export namespace Prisma {
      * })
      * 
     **/
-    update<T extends AddresUpdateArgs<ExtArgs>>(
-      args: SelectSubset<T, AddresUpdateArgs<ExtArgs>>
-    ): Prisma__AddresClient<$Result.GetResult<Prisma.$AddresPayload<ExtArgs>, T, 'update'>, never, ExtArgs>
+    update<T extends AddressUpdateArgs<ExtArgs>>(
+      args: SelectSubset<T, AddressUpdateArgs<ExtArgs>>
+    ): Prisma__AddressClient<$Types.GetResult<AddressPayload<ExtArgs>, T, 'update', never>, never, ExtArgs>
 
     /**
-     * Delete zero or more Addres.
-     * @param {AddresDeleteManyArgs} args - Arguments to filter Addres to delete.
+     * Delete zero or more Addresses.
+     * @param {AddressDeleteManyArgs} args - Arguments to filter Addresses to delete.
      * @example
-     * // Delete a few Addres
-     * const { count } = await prisma.addres.deleteMany({
+     * // Delete a few Addresses
+     * const { count } = await prisma.address.deleteMany({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      * 
     **/
-    deleteMany<T extends AddresDeleteManyArgs<ExtArgs>>(
-      args?: SelectSubset<T, AddresDeleteManyArgs<ExtArgs>>
+    deleteMany<T extends AddressDeleteManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, AddressDeleteManyArgs<ExtArgs>>
     ): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more Addres.
+     * Update zero or more Addresses.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {AddresUpdateManyArgs} args - Arguments to update one or more rows.
+     * @param {AddressUpdateManyArgs} args - Arguments to update one or more rows.
      * @example
-     * // Update many Addres
-     * const addres = await prisma.addres.updateMany({
+     * // Update many Addresses
+     * const address = await prisma.address.updateMany({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -4760,59 +5101,59 @@ export namespace Prisma {
      * })
      * 
     **/
-    updateMany<T extends AddresUpdateManyArgs<ExtArgs>>(
-      args: SelectSubset<T, AddresUpdateManyArgs<ExtArgs>>
+    updateMany<T extends AddressUpdateManyArgs<ExtArgs>>(
+      args: SelectSubset<T, AddressUpdateManyArgs<ExtArgs>>
     ): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Create or update one Addres.
-     * @param {AddresUpsertArgs} args - Arguments to update or create a Addres.
+     * Create or update one Address.
+     * @param {AddressUpsertArgs} args - Arguments to update or create a Address.
      * @example
-     * // Update or create a Addres
-     * const addres = await prisma.addres.upsert({
+     * // Update or create a Address
+     * const address = await prisma.address.upsert({
      *   create: {
-     *     // ... data to create a Addres
+     *     // ... data to create a Address
      *   },
      *   update: {
      *     // ... in case it already exists, update
      *   },
      *   where: {
-     *     // ... the filter for the Addres we want to update
+     *     // ... the filter for the Address we want to update
      *   }
      * })
     **/
-    upsert<T extends AddresUpsertArgs<ExtArgs>>(
-      args: SelectSubset<T, AddresUpsertArgs<ExtArgs>>
-    ): Prisma__AddresClient<$Result.GetResult<Prisma.$AddresPayload<ExtArgs>, T, 'upsert'>, never, ExtArgs>
+    upsert<T extends AddressUpsertArgs<ExtArgs>>(
+      args: SelectSubset<T, AddressUpsertArgs<ExtArgs>>
+    ): Prisma__AddressClient<$Types.GetResult<AddressPayload<ExtArgs>, T, 'upsert', never>, never, ExtArgs>
 
     /**
-     * Count the number of Addres.
+     * Count the number of Addresses.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {AddresCountArgs} args - Arguments to filter Addres to count.
+     * @param {AddressCountArgs} args - Arguments to filter Addresses to count.
      * @example
-     * // Count the number of Addres
-     * const count = await prisma.addres.count({
+     * // Count the number of Addresses
+     * const count = await prisma.address.count({
      *   where: {
-     *     // ... the filter for the Addres we want to count
+     *     // ... the filter for the Addresses we want to count
      *   }
      * })
     **/
-    count<T extends AddresCountArgs>(
-      args?: Subset<T, AddresCountArgs>,
+    count<T extends AddressCountArgs>(
+      args?: Subset<T, AddressCountArgs>,
     ): Prisma.PrismaPromise<
       T extends $Utils.Record<'select', any>
         ? T['select'] extends true
           ? number
-          : GetScalarType<T['select'], AddresCountAggregateOutputType>
+          : GetScalarType<T['select'], AddressCountAggregateOutputType>
         : number
     >
 
     /**
-     * Allows you to perform aggregations operations on a Addres.
+     * Allows you to perform aggregations operations on a Address.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {AddresAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @param {AddressAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
      * @example
      * // Ordered by age ascending
      * // Where email contains prisma.io
@@ -4832,13 +5173,13 @@ export namespace Prisma {
      *   take: 10,
      * })
     **/
-    aggregate<T extends AddresAggregateArgs>(args: Subset<T, AddresAggregateArgs>): Prisma.PrismaPromise<GetAddresAggregateType<T>>
+    aggregate<T extends AddressAggregateArgs>(args: Subset<T, AddressAggregateArgs>): Prisma.PrismaPromise<GetAddressAggregateType<T>>
 
     /**
-     * Group by Addres.
+     * Group by Address.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {AddresGroupByArgs} args - Group by arguments.
+     * @param {AddressGroupByArgs} args - Group by arguments.
      * @example
      * // Group by city, order by createdAt, get count
      * const result = await prisma.user.groupBy({
@@ -4853,16 +5194,16 @@ export namespace Prisma {
      * 
     **/
     groupBy<
-      T extends AddresGroupByArgs,
+      T extends AddressGroupByArgs,
       HasSelectOrTake extends Or<
         Extends<'skip', Keys<T>>,
         Extends<'take', Keys<T>>
       >,
       OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: AddresGroupByArgs['orderBy'] }
-        : { orderBy?: AddresGroupByArgs['orderBy'] },
+        ? { orderBy: AddressGroupByArgs['orderBy'] }
+        : { orderBy?: AddressGroupByArgs['orderBy'] },
       OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByFields extends TupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
       HavingFields extends GetHavingFields<T['having']>,
       HavingValid extends Has<ByFields, HavingFields>,
@@ -4909,373 +5250,392 @@ export namespace Prisma {
             ? never
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
-    >(args: SubsetIntersection<T, AddresGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetAddresGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the Addres model
-   */
-  readonly fields: AddresFieldRefs;
+    >(args: SubsetIntersection<T, AddressGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetAddressGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+
   }
 
   /**
-   * The delegate class that acts as a "Promise-like" for Addres.
+   * The delegate class that acts as a "Promise-like" for Address.
    * Why is this prefixed with `Prisma__`?
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__AddresClient<T, Null = never, ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+  export class Prisma__AddressClient<T, Null = never, ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> implements Prisma.PrismaPromise<T> {
+    private readonly _dmmf;
+    private readonly _queryType;
+    private readonly _rootField;
+    private readonly _clientMethod;
+    private readonly _args;
+    private readonly _dataPath;
+    private readonly _errorFormat;
+    private readonly _measurePerformance?;
+    private _isList;
+    private _callsite;
+    private _requestPromise?;
     readonly [Symbol.toStringTag]: 'PrismaPromise';
+    constructor(_dmmf: runtime.DMMFClass, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
 
-    user<T extends Addres$userArgs<ExtArgs> = {}>(args?: Subset<T, Addres$userArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
+    user<T extends Address$userArgs<ExtArgs> = {}>(args?: Subset<T, Address$userArgs<ExtArgs>>): Prisma__UserClient<$Types.GetResult<UserPayload<ExtArgs>, T, 'findUnique', never> | Null, never, ExtArgs>;
 
+    private get _document();
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
      * @param onrejected The callback to execute when the Promise is rejected.
      * @returns A Promise for the completion of which ever callback is executed.
      */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>;
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): Promise<TResult1 | TResult2>;
     /**
      * Attaches a callback for only the rejection of the Promise.
      * @param onrejected The callback to execute when the Promise is rejected.
      * @returns A Promise for the completion of the callback.
      */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>;
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): Promise<T | TResult>;
     /**
      * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
      * resolved value cannot be modified from the callback.
      * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
      * @returns A Promise for the completion of the callback.
      */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>;
+    finally(onfinally?: (() => void) | undefined | null): Promise<T>;
   }
 
 
-
-  /**
-   * Fields of the Addres model
-   */ 
-  interface AddresFieldRefs {
-    readonly id: FieldRef<"Addres", 'BigInt'>
-    readonly address: FieldRef<"Addres", 'String'>
-    readonly complement: FieldRef<"Addres", 'String'>
-    readonly state: FieldRef<"Addres", 'String'>
-    readonly country: FieldRef<"Addres", 'String'>
-    readonly userId: FieldRef<"Addres", 'BigInt'>
-  }
-    
 
   // Custom InputTypes
 
   /**
-   * Addres findUnique
+   * Address base type for findUnique actions
    */
-  export type AddresFindUniqueArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+  export type AddressFindUniqueArgsBase<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Addres
+     * Select specific fields to fetch from the Address
      */
-    select?: AddresSelect<ExtArgs> | null
+    select?: AddressSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well.
      */
-    include?: AddresInclude<ExtArgs> | null
+    include?: AddressInclude<ExtArgs> | null
     /**
-     * Filter, which Addres to fetch.
+     * Filter, which Address to fetch.
      */
-    where: AddresWhereUniqueInput
+    where: AddressWhereUniqueInput
+  }
+
+  /**
+   * Address findUnique
+   */
+  export interface AddressFindUniqueArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> extends AddressFindUniqueArgsBase<ExtArgs> {
+   /**
+    * Throw an Error if query returns no results
+    * @deprecated since 4.0.0: use `findUniqueOrThrow` method instead
+    */
+    rejectOnNotFound?: RejectOnNotFound
+  }
+      
+
+  /**
+   * Address findUniqueOrThrow
+   */
+  export type AddressFindUniqueOrThrowArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Address
+     */
+    select?: AddressSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: AddressInclude<ExtArgs> | null
+    /**
+     * Filter, which Address to fetch.
+     */
+    where: AddressWhereUniqueInput
   }
 
 
   /**
-   * Addres findUniqueOrThrow
+   * Address base type for findFirst actions
    */
-  export type AddresFindUniqueOrThrowArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+  export type AddressFindFirstArgsBase<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Addres
+     * Select specific fields to fetch from the Address
      */
-    select?: AddresSelect<ExtArgs> | null
+    select?: AddressSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well.
      */
-    include?: AddresInclude<ExtArgs> | null
+    include?: AddressInclude<ExtArgs> | null
     /**
-     * Filter, which Addres to fetch.
+     * Filter, which Address to fetch.
      */
-    where: AddresWhereUniqueInput
-  }
-
-
-  /**
-   * Addres findFirst
-   */
-  export type AddresFindFirstArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Addres
-     */
-    select?: AddresSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: AddresInclude<ExtArgs> | null
-    /**
-     * Filter, which Addres to fetch.
-     */
-    where?: AddresWhereInput
+    where?: AddressWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Addres to fetch.
+     * Determine the order of Addresses to fetch.
      */
-    orderBy?: AddresOrderByWithRelationInput | AddresOrderByWithRelationInput[]
+    orderBy?: Enumerable<AddressOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for Addres.
+     * Sets the position for searching for Addresses.
      */
-    cursor?: AddresWhereUniqueInput
+    cursor?: AddressWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Addres from the position of the cursor.
+     * Take `±n` Addresses from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Addres.
+     * Skip the first `n` Addresses.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of Addres.
+     * Filter by unique combinations of Addresses.
      */
-    distinct?: AddresScalarFieldEnum | AddresScalarFieldEnum[]
+    distinct?: Enumerable<AddressScalarFieldEnum>
   }
 
+  /**
+   * Address findFirst
+   */
+  export interface AddressFindFirstArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> extends AddressFindFirstArgsBase<ExtArgs> {
+   /**
+    * Throw an Error if query returns no results
+    * @deprecated since 4.0.0: use `findFirstOrThrow` method instead
+    */
+    rejectOnNotFound?: RejectOnNotFound
+  }
+      
 
   /**
-   * Addres findFirstOrThrow
+   * Address findFirstOrThrow
    */
-  export type AddresFindFirstOrThrowArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+  export type AddressFindFirstOrThrowArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Addres
+     * Select specific fields to fetch from the Address
      */
-    select?: AddresSelect<ExtArgs> | null
+    select?: AddressSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well.
      */
-    include?: AddresInclude<ExtArgs> | null
+    include?: AddressInclude<ExtArgs> | null
     /**
-     * Filter, which Addres to fetch.
+     * Filter, which Address to fetch.
      */
-    where?: AddresWhereInput
+    where?: AddressWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Addres to fetch.
+     * Determine the order of Addresses to fetch.
      */
-    orderBy?: AddresOrderByWithRelationInput | AddresOrderByWithRelationInput[]
+    orderBy?: Enumerable<AddressOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for Addres.
+     * Sets the position for searching for Addresses.
      */
-    cursor?: AddresWhereUniqueInput
+    cursor?: AddressWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Addres from the position of the cursor.
+     * Take `±n` Addresses from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Addres.
+     * Skip the first `n` Addresses.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of Addres.
+     * Filter by unique combinations of Addresses.
      */
-    distinct?: AddresScalarFieldEnum | AddresScalarFieldEnum[]
+    distinct?: Enumerable<AddressScalarFieldEnum>
   }
 
 
   /**
-   * Addres findMany
+   * Address findMany
    */
-  export type AddresFindManyArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+  export type AddressFindManyArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Addres
+     * Select specific fields to fetch from the Address
      */
-    select?: AddresSelect<ExtArgs> | null
+    select?: AddressSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well.
      */
-    include?: AddresInclude<ExtArgs> | null
+    include?: AddressInclude<ExtArgs> | null
     /**
-     * Filter, which Addres to fetch.
+     * Filter, which Addresses to fetch.
      */
-    where?: AddresWhereInput
+    where?: AddressWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Addres to fetch.
+     * Determine the order of Addresses to fetch.
      */
-    orderBy?: AddresOrderByWithRelationInput | AddresOrderByWithRelationInput[]
+    orderBy?: Enumerable<AddressOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for listing Addres.
+     * Sets the position for listing Addresses.
      */
-    cursor?: AddresWhereUniqueInput
+    cursor?: AddressWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Addres from the position of the cursor.
+     * Take `±n` Addresses from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Addres.
+     * Skip the first `n` Addresses.
      */
     skip?: number
-    distinct?: AddresScalarFieldEnum | AddresScalarFieldEnum[]
+    distinct?: Enumerable<AddressScalarFieldEnum>
   }
 
 
   /**
-   * Addres create
+   * Address create
    */
-  export type AddresCreateArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+  export type AddressCreateArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Addres
+     * Select specific fields to fetch from the Address
      */
-    select?: AddresSelect<ExtArgs> | null
+    select?: AddressSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well.
      */
-    include?: AddresInclude<ExtArgs> | null
+    include?: AddressInclude<ExtArgs> | null
     /**
-     * The data needed to create a Addres.
+     * The data needed to create a Address.
      */
-    data?: XOR<AddresCreateInput, AddresUncheckedCreateInput>
+    data?: XOR<AddressCreateInput, AddressUncheckedCreateInput>
   }
 
 
   /**
-   * Addres createMany
+   * Address createMany
    */
-  export type AddresCreateManyArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+  export type AddressCreateManyArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     /**
-     * The data used to create many Addres.
+     * The data used to create many Addresses.
      */
-    data: AddresCreateManyInput | AddresCreateManyInput[]
+    data: Enumerable<AddressCreateManyInput>
     skipDuplicates?: boolean
   }
 
 
   /**
-   * Addres update
+   * Address update
    */
-  export type AddresUpdateArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+  export type AddressUpdateArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Addres
+     * Select specific fields to fetch from the Address
      */
-    select?: AddresSelect<ExtArgs> | null
+    select?: AddressSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well.
      */
-    include?: AddresInclude<ExtArgs> | null
+    include?: AddressInclude<ExtArgs> | null
     /**
-     * The data needed to update a Addres.
+     * The data needed to update a Address.
      */
-    data: XOR<AddresUpdateInput, AddresUncheckedUpdateInput>
+    data: XOR<AddressUpdateInput, AddressUncheckedUpdateInput>
     /**
-     * Choose, which Addres to update.
+     * Choose, which Address to update.
      */
-    where: AddresWhereUniqueInput
+    where: AddressWhereUniqueInput
   }
 
 
   /**
-   * Addres updateMany
+   * Address updateMany
    */
-  export type AddresUpdateManyArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+  export type AddressUpdateManyArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     /**
-     * The data used to update Addres.
+     * The data used to update Addresses.
      */
-    data: XOR<AddresUpdateManyMutationInput, AddresUncheckedUpdateManyInput>
+    data: XOR<AddressUpdateManyMutationInput, AddressUncheckedUpdateManyInput>
     /**
-     * Filter which Addres to update
+     * Filter which Addresses to update
      */
-    where?: AddresWhereInput
+    where?: AddressWhereInput
   }
 
 
   /**
-   * Addres upsert
+   * Address upsert
    */
-  export type AddresUpsertArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+  export type AddressUpsertArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Addres
+     * Select specific fields to fetch from the Address
      */
-    select?: AddresSelect<ExtArgs> | null
+    select?: AddressSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well.
      */
-    include?: AddresInclude<ExtArgs> | null
+    include?: AddressInclude<ExtArgs> | null
     /**
-     * The filter to search for the Addres to update in case it exists.
+     * The filter to search for the Address to update in case it exists.
      */
-    where: AddresWhereUniqueInput
+    where: AddressWhereUniqueInput
     /**
-     * In case the Addres found by the `where` argument doesn't exist, create a new Addres with this data.
+     * In case the Address found by the `where` argument doesn't exist, create a new Address with this data.
      */
-    create: XOR<AddresCreateInput, AddresUncheckedCreateInput>
+    create: XOR<AddressCreateInput, AddressUncheckedCreateInput>
     /**
-     * In case the Addres was found with the provided `where` argument, update it with this data.
+     * In case the Address was found with the provided `where` argument, update it with this data.
      */
-    update: XOR<AddresUpdateInput, AddresUncheckedUpdateInput>
+    update: XOR<AddressUpdateInput, AddressUncheckedUpdateInput>
   }
 
 
   /**
-   * Addres delete
+   * Address delete
    */
-  export type AddresDeleteArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+  export type AddressDeleteArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Addres
+     * Select specific fields to fetch from the Address
      */
-    select?: AddresSelect<ExtArgs> | null
+    select?: AddressSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well.
      */
-    include?: AddresInclude<ExtArgs> | null
+    include?: AddressInclude<ExtArgs> | null
     /**
-     * Filter which Addres to delete.
+     * Filter which Address to delete.
      */
-    where: AddresWhereUniqueInput
+    where: AddressWhereUniqueInput
   }
 
 
   /**
-   * Addres deleteMany
+   * Address deleteMany
    */
-  export type AddresDeleteManyArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+  export type AddressDeleteManyArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     /**
-     * Filter which Addres to delete
+     * Filter which Addresses to delete
      */
-    where?: AddresWhereInput
+    where?: AddressWhereInput
   }
 
 
   /**
-   * Addres.user
+   * Address.user
    */
-  export type Addres$userArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+  export type Address$userArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the User
      */
@@ -5289,17 +5649,17 @@ export namespace Prisma {
 
 
   /**
-   * Addres without action
+   * Address without action
    */
-  export type AddresDefaultArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+  export type AddressArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Addres
+     * Select specific fields to fetch from the Address
      */
-    select?: AddresSelect<ExtArgs> | null
+    select?: AddressSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well.
      */
-    include?: AddresInclude<ExtArgs> | null
+    include?: AddressInclude<ExtArgs> | null
   }
 
 
@@ -5307,6 +5667,7 @@ export namespace Prisma {
   /**
    * Model Contact
    */
+
 
   export type AggregateContact = {
     _count: ContactCountAggregateOutputType | null
@@ -5332,6 +5693,8 @@ export namespace Prisma {
     phone: string | null
     another: string | null
     userId: bigint | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type ContactMaxAggregateOutputType = {
@@ -5340,6 +5703,8 @@ export namespace Prisma {
     phone: string | null
     another: string | null
     userId: bigint | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type ContactCountAggregateOutputType = {
@@ -5348,6 +5713,8 @@ export namespace Prisma {
     phone: number
     another: number
     userId: number
+    createdAt: number
+    updatedAt: number
     _all: number
   }
 
@@ -5368,6 +5735,8 @@ export namespace Prisma {
     phone?: true
     another?: true
     userId?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type ContactMaxAggregateInputType = {
@@ -5376,6 +5745,8 @@ export namespace Prisma {
     phone?: true
     another?: true
     userId?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type ContactCountAggregateInputType = {
@@ -5384,6 +5755,8 @@ export namespace Prisma {
     phone?: true
     another?: true
     userId?: true
+    createdAt?: true
+    updatedAt?: true
     _all?: true
   }
 
@@ -5397,7 +5770,7 @@ export namespace Prisma {
      * 
      * Determine the order of Contacts to fetch.
      */
-    orderBy?: ContactOrderByWithRelationInput | ContactOrderByWithRelationInput[]
+    orderBy?: Enumerable<ContactOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
@@ -5461,8 +5834,8 @@ export namespace Prisma {
 
   export type ContactGroupByArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     where?: ContactWhereInput
-    orderBy?: ContactOrderByWithAggregationInput | ContactOrderByWithAggregationInput[]
-    by: ContactScalarFieldEnum[] | ContactScalarFieldEnum
+    orderBy?: Enumerable<ContactOrderByWithAggregationInput>
+    by: ContactScalarFieldEnum[]
     having?: ContactScalarWhereWithAggregatesInput
     take?: number
     skip?: number
@@ -5473,12 +5846,15 @@ export namespace Prisma {
     _max?: ContactMaxAggregateInputType
   }
 
+
   export type ContactGroupByOutputType = {
     id: bigint
     email: string | null
     phone: string | null
     another: string | null
     userId: bigint | null
+    createdAt: Date
+    updatedAt: Date | null
     _count: ContactCountAggregateOutputType | null
     _avg: ContactAvgAggregateOutputType | null
     _sum: ContactSumAggregateOutputType | null
@@ -5488,7 +5864,7 @@ export namespace Prisma {
 
   type GetContactGroupByPayload<T extends ContactGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<ContactGroupByOutputType, T['by']> &
+      PickArray<ContactGroupByOutputType, T['by']> &
         {
           [P in ((keyof T) & (keyof ContactGroupByOutputType))]: P extends '_count'
             ? T[P] extends boolean
@@ -5506,6 +5882,8 @@ export namespace Prisma {
     phone?: boolean
     another?: boolean
     userId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
     user?: boolean | Contact$userArgs<ExtArgs>
   }, ExtArgs["result"]["contact"]>
 
@@ -5515,6 +5893,8 @@ export namespace Prisma {
     phone?: boolean
     another?: boolean
     userId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
   }
 
   export type ContactInclude<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
@@ -5522,30 +5902,14 @@ export namespace Prisma {
   }
 
 
-  export type $ContactPayload<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
-    name: "Contact"
-    objects: {
-      user: Prisma.$UserPayload<ExtArgs> | null
-    }
-    scalars: $Extensions.GetResult<{
-      id: bigint
-      email: string | null
-      phone: string | null
-      another: string | null
-      userId: bigint | null
-    }, ExtArgs["result"]["contact"]>
-    composites: {}
-  }
-
-
-  type ContactGetPayload<S extends boolean | null | undefined | ContactDefaultArgs> = $Result.GetResult<Prisma.$ContactPayload, S>
+  type ContactGetPayload<S extends boolean | null | undefined | ContactArgs> = $Types.GetResult<ContactPayload, S>
 
   type ContactCountArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = 
     Omit<ContactFindManyArgs, 'select' | 'include'> & {
       select?: ContactCountAggregateInputType | true
     }
 
-  export interface ContactDelegate<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> {
+  export interface ContactDelegate<GlobalRejectSettings extends Prisma.RejectOnNotFound | Prisma.RejectPerOperation | false | undefined, ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> {
     [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Contact'], meta: { name: 'Contact' } }
     /**
      * Find zero or one Contact that matches the filter.
@@ -5558,9 +5922,9 @@ export namespace Prisma {
      *   }
      * })
     **/
-    findUnique<T extends ContactFindUniqueArgs<ExtArgs>>(
+    findUnique<T extends ContactFindUniqueArgs<ExtArgs>, LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
       args: SelectSubset<T, ContactFindUniqueArgs<ExtArgs>>
-    ): Prisma__ContactClient<$Result.GetResult<Prisma.$ContactPayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findUnique', 'Contact'> extends True ? Prisma__ContactClient<$Types.GetResult<ContactPayload<ExtArgs>, T, 'findUnique', never>, never, ExtArgs> : Prisma__ContactClient<$Types.GetResult<ContactPayload<ExtArgs>, T, 'findUnique', never> | null, null, ExtArgs>
 
     /**
      * Find one Contact that matches the filter or throw an error  with `error.code='P2025'` 
@@ -5576,7 +5940,7 @@ export namespace Prisma {
     **/
     findUniqueOrThrow<T extends ContactFindUniqueOrThrowArgs<ExtArgs>>(
       args?: SelectSubset<T, ContactFindUniqueOrThrowArgs<ExtArgs>>
-    ): Prisma__ContactClient<$Result.GetResult<Prisma.$ContactPayload<ExtArgs>, T, 'findUniqueOrThrow'>, never, ExtArgs>
+    ): Prisma__ContactClient<$Types.GetResult<ContactPayload<ExtArgs>, T, 'findUniqueOrThrow', never>, never, ExtArgs>
 
     /**
      * Find the first Contact that matches the filter.
@@ -5591,13 +5955,13 @@ export namespace Prisma {
      *   }
      * })
     **/
-    findFirst<T extends ContactFindFirstArgs<ExtArgs>>(
+    findFirst<T extends ContactFindFirstArgs<ExtArgs>, LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
       args?: SelectSubset<T, ContactFindFirstArgs<ExtArgs>>
-    ): Prisma__ContactClient<$Result.GetResult<Prisma.$ContactPayload<ExtArgs>, T, 'findFirst'> | null, null, ExtArgs>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findFirst', 'Contact'> extends True ? Prisma__ContactClient<$Types.GetResult<ContactPayload<ExtArgs>, T, 'findFirst', never>, never, ExtArgs> : Prisma__ContactClient<$Types.GetResult<ContactPayload<ExtArgs>, T, 'findFirst', never> | null, null, ExtArgs>
 
     /**
      * Find the first Contact that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * throw `NotFoundError` if no matches were found.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
      * @param {ContactFindFirstOrThrowArgs} args - Arguments to find a Contact
@@ -5611,7 +5975,7 @@ export namespace Prisma {
     **/
     findFirstOrThrow<T extends ContactFindFirstOrThrowArgs<ExtArgs>>(
       args?: SelectSubset<T, ContactFindFirstOrThrowArgs<ExtArgs>>
-    ): Prisma__ContactClient<$Result.GetResult<Prisma.$ContactPayload<ExtArgs>, T, 'findFirstOrThrow'>, never, ExtArgs>
+    ): Prisma__ContactClient<$Types.GetResult<ContactPayload<ExtArgs>, T, 'findFirstOrThrow', never>, never, ExtArgs>
 
     /**
      * Find zero or more Contacts that matches the filter.
@@ -5631,7 +5995,7 @@ export namespace Prisma {
     **/
     findMany<T extends ContactFindManyArgs<ExtArgs>>(
       args?: SelectSubset<T, ContactFindManyArgs<ExtArgs>>
-    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ContactPayload<ExtArgs>, T, 'findMany'>>
+    ): Prisma.PrismaPromise<$Types.GetResult<ContactPayload<ExtArgs>, T, 'findMany', never>>
 
     /**
      * Create a Contact.
@@ -5647,7 +6011,7 @@ export namespace Prisma {
     **/
     create<T extends ContactCreateArgs<ExtArgs>>(
       args: SelectSubset<T, ContactCreateArgs<ExtArgs>>
-    ): Prisma__ContactClient<$Result.GetResult<Prisma.$ContactPayload<ExtArgs>, T, 'create'>, never, ExtArgs>
+    ): Prisma__ContactClient<$Types.GetResult<ContactPayload<ExtArgs>, T, 'create', never>, never, ExtArgs>
 
     /**
      * Create many Contacts.
@@ -5679,7 +6043,7 @@ export namespace Prisma {
     **/
     delete<T extends ContactDeleteArgs<ExtArgs>>(
       args: SelectSubset<T, ContactDeleteArgs<ExtArgs>>
-    ): Prisma__ContactClient<$Result.GetResult<Prisma.$ContactPayload<ExtArgs>, T, 'delete'>, never, ExtArgs>
+    ): Prisma__ContactClient<$Types.GetResult<ContactPayload<ExtArgs>, T, 'delete', never>, never, ExtArgs>
 
     /**
      * Update one Contact.
@@ -5698,7 +6062,7 @@ export namespace Prisma {
     **/
     update<T extends ContactUpdateArgs<ExtArgs>>(
       args: SelectSubset<T, ContactUpdateArgs<ExtArgs>>
-    ): Prisma__ContactClient<$Result.GetResult<Prisma.$ContactPayload<ExtArgs>, T, 'update'>, never, ExtArgs>
+    ): Prisma__ContactClient<$Types.GetResult<ContactPayload<ExtArgs>, T, 'update', never>, never, ExtArgs>
 
     /**
      * Delete zero or more Contacts.
@@ -5756,7 +6120,7 @@ export namespace Prisma {
     **/
     upsert<T extends ContactUpsertArgs<ExtArgs>>(
       args: SelectSubset<T, ContactUpsertArgs<ExtArgs>>
-    ): Prisma__ContactClient<$Result.GetResult<Prisma.$ContactPayload<ExtArgs>, T, 'upsert'>, never, ExtArgs>
+    ): Prisma__ContactClient<$Types.GetResult<ContactPayload<ExtArgs>, T, 'upsert', never>, never, ExtArgs>
 
     /**
      * Count the number of Contacts.
@@ -5835,7 +6199,7 @@ export namespace Prisma {
         ? { orderBy: ContactGroupByArgs['orderBy'] }
         : { orderBy?: ContactGroupByArgs['orderBy'] },
       OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByFields extends TupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
       HavingFields extends GetHavingFields<T['having']>,
       HavingValid extends Has<ByFields, HavingFields>,
@@ -5883,10 +6247,7 @@ export namespace Prisma {
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
     >(args: SubsetIntersection<T, ContactGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetContactGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the Contact model
-   */
-  readonly fields: ContactFieldRefs;
+
   }
 
   /**
@@ -5895,53 +6256,54 @@ export namespace Prisma {
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__ContactClient<T, Null = never, ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+  export class Prisma__ContactClient<T, Null = never, ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> implements Prisma.PrismaPromise<T> {
+    private readonly _dmmf;
+    private readonly _queryType;
+    private readonly _rootField;
+    private readonly _clientMethod;
+    private readonly _args;
+    private readonly _dataPath;
+    private readonly _errorFormat;
+    private readonly _measurePerformance?;
+    private _isList;
+    private _callsite;
+    private _requestPromise?;
     readonly [Symbol.toStringTag]: 'PrismaPromise';
+    constructor(_dmmf: runtime.DMMFClass, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
 
-    user<T extends Contact$userArgs<ExtArgs> = {}>(args?: Subset<T, Contact$userArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
+    user<T extends Contact$userArgs<ExtArgs> = {}>(args?: Subset<T, Contact$userArgs<ExtArgs>>): Prisma__UserClient<$Types.GetResult<UserPayload<ExtArgs>, T, 'findUnique', never> | Null, never, ExtArgs>;
 
+    private get _document();
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
      * @param onrejected The callback to execute when the Promise is rejected.
      * @returns A Promise for the completion of which ever callback is executed.
      */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>;
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): Promise<TResult1 | TResult2>;
     /**
      * Attaches a callback for only the rejection of the Promise.
      * @param onrejected The callback to execute when the Promise is rejected.
      * @returns A Promise for the completion of the callback.
      */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>;
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): Promise<T | TResult>;
     /**
      * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
      * resolved value cannot be modified from the callback.
      * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
      * @returns A Promise for the completion of the callback.
      */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>;
+    finally(onfinally?: (() => void) | undefined | null): Promise<T>;
   }
 
 
-
-  /**
-   * Fields of the Contact model
-   */ 
-  interface ContactFieldRefs {
-    readonly id: FieldRef<"Contact", 'BigInt'>
-    readonly email: FieldRef<"Contact", 'String'>
-    readonly phone: FieldRef<"Contact", 'String'>
-    readonly another: FieldRef<"Contact", 'String'>
-    readonly userId: FieldRef<"Contact", 'BigInt'>
-  }
-    
 
   // Custom InputTypes
 
   /**
-   * Contact findUnique
+   * Contact base type for findUnique actions
    */
-  export type ContactFindUniqueArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+  export type ContactFindUniqueArgsBase<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Contact
      */
@@ -5956,6 +6318,17 @@ export namespace Prisma {
     where: ContactWhereUniqueInput
   }
 
+  /**
+   * Contact findUnique
+   */
+  export interface ContactFindUniqueArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> extends ContactFindUniqueArgsBase<ExtArgs> {
+   /**
+    * Throw an Error if query returns no results
+    * @deprecated since 4.0.0: use `findUniqueOrThrow` method instead
+    */
+    rejectOnNotFound?: RejectOnNotFound
+  }
+      
 
   /**
    * Contact findUniqueOrThrow
@@ -5977,9 +6350,9 @@ export namespace Prisma {
 
 
   /**
-   * Contact findFirst
+   * Contact base type for findFirst actions
    */
-  export type ContactFindFirstArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+  export type ContactFindFirstArgsBase<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Contact
      */
@@ -5997,7 +6370,7 @@ export namespace Prisma {
      * 
      * Determine the order of Contacts to fetch.
      */
-    orderBy?: ContactOrderByWithRelationInput | ContactOrderByWithRelationInput[]
+    orderBy?: Enumerable<ContactOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
@@ -6021,9 +6394,20 @@ export namespace Prisma {
      * 
      * Filter by unique combinations of Contacts.
      */
-    distinct?: ContactScalarFieldEnum | ContactScalarFieldEnum[]
+    distinct?: Enumerable<ContactScalarFieldEnum>
   }
 
+  /**
+   * Contact findFirst
+   */
+  export interface ContactFindFirstArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> extends ContactFindFirstArgsBase<ExtArgs> {
+   /**
+    * Throw an Error if query returns no results
+    * @deprecated since 4.0.0: use `findFirstOrThrow` method instead
+    */
+    rejectOnNotFound?: RejectOnNotFound
+  }
+      
 
   /**
    * Contact findFirstOrThrow
@@ -6046,7 +6430,7 @@ export namespace Prisma {
      * 
      * Determine the order of Contacts to fetch.
      */
-    orderBy?: ContactOrderByWithRelationInput | ContactOrderByWithRelationInput[]
+    orderBy?: Enumerable<ContactOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
@@ -6070,7 +6454,7 @@ export namespace Prisma {
      * 
      * Filter by unique combinations of Contacts.
      */
-    distinct?: ContactScalarFieldEnum | ContactScalarFieldEnum[]
+    distinct?: Enumerable<ContactScalarFieldEnum>
   }
 
 
@@ -6095,7 +6479,7 @@ export namespace Prisma {
      * 
      * Determine the order of Contacts to fetch.
      */
-    orderBy?: ContactOrderByWithRelationInput | ContactOrderByWithRelationInput[]
+    orderBy?: Enumerable<ContactOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
@@ -6114,7 +6498,7 @@ export namespace Prisma {
      * Skip the first `n` Contacts.
      */
     skip?: number
-    distinct?: ContactScalarFieldEnum | ContactScalarFieldEnum[]
+    distinct?: Enumerable<ContactScalarFieldEnum>
   }
 
 
@@ -6144,7 +6528,7 @@ export namespace Prisma {
     /**
      * The data used to create many Contacts.
      */
-    data: ContactCreateManyInput | ContactCreateManyInput[]
+    data: Enumerable<ContactCreateManyInput>
     skipDuplicates?: boolean
   }
 
@@ -6263,7 +6647,7 @@ export namespace Prisma {
   /**
    * Contact without action
    */
-  export type ContactDefaultArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+  export type ContactArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Contact
      */
@@ -6279,6 +6663,7 @@ export namespace Prisma {
   /**
    * Model Knowledgespace
    */
+
 
   export type AggregateKnowledgespace = {
     _count: KnowledgespaceCountAggregateOutputType | null
@@ -6300,18 +6685,24 @@ export namespace Prisma {
     id: bigint | null
     code: string | null
     description: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type KnowledgespaceMaxAggregateOutputType = {
     id: bigint | null
     code: string | null
     description: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type KnowledgespaceCountAggregateOutputType = {
     id: number
     code: number
     description: number
+    createdAt: number
+    updatedAt: number
     _all: number
   }
 
@@ -6328,18 +6719,24 @@ export namespace Prisma {
     id?: true
     code?: true
     description?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type KnowledgespaceMaxAggregateInputType = {
     id?: true
     code?: true
     description?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type KnowledgespaceCountAggregateInputType = {
     id?: true
     code?: true
     description?: true
+    createdAt?: true
+    updatedAt?: true
     _all?: true
   }
 
@@ -6353,7 +6750,7 @@ export namespace Prisma {
      * 
      * Determine the order of Knowledgespaces to fetch.
      */
-    orderBy?: KnowledgespaceOrderByWithRelationInput | KnowledgespaceOrderByWithRelationInput[]
+    orderBy?: Enumerable<KnowledgespaceOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
@@ -6417,8 +6814,8 @@ export namespace Prisma {
 
   export type KnowledgespaceGroupByArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     where?: KnowledgespaceWhereInput
-    orderBy?: KnowledgespaceOrderByWithAggregationInput | KnowledgespaceOrderByWithAggregationInput[]
-    by: KnowledgespaceScalarFieldEnum[] | KnowledgespaceScalarFieldEnum
+    orderBy?: Enumerable<KnowledgespaceOrderByWithAggregationInput>
+    by: KnowledgespaceScalarFieldEnum[]
     having?: KnowledgespaceScalarWhereWithAggregatesInput
     take?: number
     skip?: number
@@ -6429,10 +6826,13 @@ export namespace Prisma {
     _max?: KnowledgespaceMaxAggregateInputType
   }
 
+
   export type KnowledgespaceGroupByOutputType = {
     id: bigint
     code: string | null
     description: string | null
+    createdAt: Date
+    updatedAt: Date | null
     _count: KnowledgespaceCountAggregateOutputType | null
     _avg: KnowledgespaceAvgAggregateOutputType | null
     _sum: KnowledgespaceSumAggregateOutputType | null
@@ -6442,7 +6842,7 @@ export namespace Prisma {
 
   type GetKnowledgespaceGroupByPayload<T extends KnowledgespaceGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<KnowledgespaceGroupByOutputType, T['by']> &
+      PickArray<KnowledgespaceGroupByOutputType, T['by']> &
         {
           [P in ((keyof T) & (keyof KnowledgespaceGroupByOutputType))]: P extends '_count'
             ? T[P] extends boolean
@@ -6458,44 +6858,34 @@ export namespace Prisma {
     id?: boolean
     code?: boolean
     description?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
     degree?: boolean | Knowledgespace$degreeArgs<ExtArgs>
-    _count?: boolean | KnowledgespaceCountOutputTypeDefaultArgs<ExtArgs>
+    _count?: boolean | KnowledgespaceCountOutputTypeArgs<ExtArgs>
   }, ExtArgs["result"]["knowledgespace"]>
 
   export type KnowledgespaceSelectScalar = {
     id?: boolean
     code?: boolean
     description?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
   }
 
   export type KnowledgespaceInclude<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     degree?: boolean | Knowledgespace$degreeArgs<ExtArgs>
-    _count?: boolean | KnowledgespaceCountOutputTypeDefaultArgs<ExtArgs>
+    _count?: boolean | KnowledgespaceCountOutputTypeArgs<ExtArgs>
   }
 
 
-  export type $KnowledgespacePayload<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
-    name: "Knowledgespace"
-    objects: {
-      degree: Prisma.$DegreePayload<ExtArgs>[]
-    }
-    scalars: $Extensions.GetResult<{
-      id: bigint
-      code: string | null
-      description: string | null
-    }, ExtArgs["result"]["knowledgespace"]>
-    composites: {}
-  }
-
-
-  type KnowledgespaceGetPayload<S extends boolean | null | undefined | KnowledgespaceDefaultArgs> = $Result.GetResult<Prisma.$KnowledgespacePayload, S>
+  type KnowledgespaceGetPayload<S extends boolean | null | undefined | KnowledgespaceArgs> = $Types.GetResult<KnowledgespacePayload, S>
 
   type KnowledgespaceCountArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = 
     Omit<KnowledgespaceFindManyArgs, 'select' | 'include'> & {
       select?: KnowledgespaceCountAggregateInputType | true
     }
 
-  export interface KnowledgespaceDelegate<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> {
+  export interface KnowledgespaceDelegate<GlobalRejectSettings extends Prisma.RejectOnNotFound | Prisma.RejectPerOperation | false | undefined, ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> {
     [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Knowledgespace'], meta: { name: 'Knowledgespace' } }
     /**
      * Find zero or one Knowledgespace that matches the filter.
@@ -6508,9 +6898,9 @@ export namespace Prisma {
      *   }
      * })
     **/
-    findUnique<T extends KnowledgespaceFindUniqueArgs<ExtArgs>>(
+    findUnique<T extends KnowledgespaceFindUniqueArgs<ExtArgs>, LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
       args: SelectSubset<T, KnowledgespaceFindUniqueArgs<ExtArgs>>
-    ): Prisma__KnowledgespaceClient<$Result.GetResult<Prisma.$KnowledgespacePayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findUnique', 'Knowledgespace'> extends True ? Prisma__KnowledgespaceClient<$Types.GetResult<KnowledgespacePayload<ExtArgs>, T, 'findUnique', never>, never, ExtArgs> : Prisma__KnowledgespaceClient<$Types.GetResult<KnowledgespacePayload<ExtArgs>, T, 'findUnique', never> | null, null, ExtArgs>
 
     /**
      * Find one Knowledgespace that matches the filter or throw an error  with `error.code='P2025'` 
@@ -6526,7 +6916,7 @@ export namespace Prisma {
     **/
     findUniqueOrThrow<T extends KnowledgespaceFindUniqueOrThrowArgs<ExtArgs>>(
       args?: SelectSubset<T, KnowledgespaceFindUniqueOrThrowArgs<ExtArgs>>
-    ): Prisma__KnowledgespaceClient<$Result.GetResult<Prisma.$KnowledgespacePayload<ExtArgs>, T, 'findUniqueOrThrow'>, never, ExtArgs>
+    ): Prisma__KnowledgespaceClient<$Types.GetResult<KnowledgespacePayload<ExtArgs>, T, 'findUniqueOrThrow', never>, never, ExtArgs>
 
     /**
      * Find the first Knowledgespace that matches the filter.
@@ -6541,13 +6931,13 @@ export namespace Prisma {
      *   }
      * })
     **/
-    findFirst<T extends KnowledgespaceFindFirstArgs<ExtArgs>>(
+    findFirst<T extends KnowledgespaceFindFirstArgs<ExtArgs>, LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
       args?: SelectSubset<T, KnowledgespaceFindFirstArgs<ExtArgs>>
-    ): Prisma__KnowledgespaceClient<$Result.GetResult<Prisma.$KnowledgespacePayload<ExtArgs>, T, 'findFirst'> | null, null, ExtArgs>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findFirst', 'Knowledgespace'> extends True ? Prisma__KnowledgespaceClient<$Types.GetResult<KnowledgespacePayload<ExtArgs>, T, 'findFirst', never>, never, ExtArgs> : Prisma__KnowledgespaceClient<$Types.GetResult<KnowledgespacePayload<ExtArgs>, T, 'findFirst', never> | null, null, ExtArgs>
 
     /**
      * Find the first Knowledgespace that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * throw `NotFoundError` if no matches were found.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
      * @param {KnowledgespaceFindFirstOrThrowArgs} args - Arguments to find a Knowledgespace
@@ -6561,7 +6951,7 @@ export namespace Prisma {
     **/
     findFirstOrThrow<T extends KnowledgespaceFindFirstOrThrowArgs<ExtArgs>>(
       args?: SelectSubset<T, KnowledgespaceFindFirstOrThrowArgs<ExtArgs>>
-    ): Prisma__KnowledgespaceClient<$Result.GetResult<Prisma.$KnowledgespacePayload<ExtArgs>, T, 'findFirstOrThrow'>, never, ExtArgs>
+    ): Prisma__KnowledgespaceClient<$Types.GetResult<KnowledgespacePayload<ExtArgs>, T, 'findFirstOrThrow', never>, never, ExtArgs>
 
     /**
      * Find zero or more Knowledgespaces that matches the filter.
@@ -6581,7 +6971,7 @@ export namespace Prisma {
     **/
     findMany<T extends KnowledgespaceFindManyArgs<ExtArgs>>(
       args?: SelectSubset<T, KnowledgespaceFindManyArgs<ExtArgs>>
-    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$KnowledgespacePayload<ExtArgs>, T, 'findMany'>>
+    ): Prisma.PrismaPromise<$Types.GetResult<KnowledgespacePayload<ExtArgs>, T, 'findMany', never>>
 
     /**
      * Create a Knowledgespace.
@@ -6597,7 +6987,7 @@ export namespace Prisma {
     **/
     create<T extends KnowledgespaceCreateArgs<ExtArgs>>(
       args: SelectSubset<T, KnowledgespaceCreateArgs<ExtArgs>>
-    ): Prisma__KnowledgespaceClient<$Result.GetResult<Prisma.$KnowledgespacePayload<ExtArgs>, T, 'create'>, never, ExtArgs>
+    ): Prisma__KnowledgespaceClient<$Types.GetResult<KnowledgespacePayload<ExtArgs>, T, 'create', never>, never, ExtArgs>
 
     /**
      * Create many Knowledgespaces.
@@ -6629,7 +7019,7 @@ export namespace Prisma {
     **/
     delete<T extends KnowledgespaceDeleteArgs<ExtArgs>>(
       args: SelectSubset<T, KnowledgespaceDeleteArgs<ExtArgs>>
-    ): Prisma__KnowledgespaceClient<$Result.GetResult<Prisma.$KnowledgespacePayload<ExtArgs>, T, 'delete'>, never, ExtArgs>
+    ): Prisma__KnowledgespaceClient<$Types.GetResult<KnowledgespacePayload<ExtArgs>, T, 'delete', never>, never, ExtArgs>
 
     /**
      * Update one Knowledgespace.
@@ -6648,7 +7038,7 @@ export namespace Prisma {
     **/
     update<T extends KnowledgespaceUpdateArgs<ExtArgs>>(
       args: SelectSubset<T, KnowledgespaceUpdateArgs<ExtArgs>>
-    ): Prisma__KnowledgespaceClient<$Result.GetResult<Prisma.$KnowledgespacePayload<ExtArgs>, T, 'update'>, never, ExtArgs>
+    ): Prisma__KnowledgespaceClient<$Types.GetResult<KnowledgespacePayload<ExtArgs>, T, 'update', never>, never, ExtArgs>
 
     /**
      * Delete zero or more Knowledgespaces.
@@ -6706,7 +7096,7 @@ export namespace Prisma {
     **/
     upsert<T extends KnowledgespaceUpsertArgs<ExtArgs>>(
       args: SelectSubset<T, KnowledgespaceUpsertArgs<ExtArgs>>
-    ): Prisma__KnowledgespaceClient<$Result.GetResult<Prisma.$KnowledgespacePayload<ExtArgs>, T, 'upsert'>, never, ExtArgs>
+    ): Prisma__KnowledgespaceClient<$Types.GetResult<KnowledgespacePayload<ExtArgs>, T, 'upsert', never>, never, ExtArgs>
 
     /**
      * Count the number of Knowledgespaces.
@@ -6785,7 +7175,7 @@ export namespace Prisma {
         ? { orderBy: KnowledgespaceGroupByArgs['orderBy'] }
         : { orderBy?: KnowledgespaceGroupByArgs['orderBy'] },
       OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByFields extends TupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
       HavingFields extends GetHavingFields<T['having']>,
       HavingValid extends Has<ByFields, HavingFields>,
@@ -6833,10 +7223,7 @@ export namespace Prisma {
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
     >(args: SubsetIntersection<T, KnowledgespaceGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetKnowledgespaceGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the Knowledgespace model
-   */
-  readonly fields: KnowledgespaceFieldRefs;
+
   }
 
   /**
@@ -6845,51 +7232,54 @@ export namespace Prisma {
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__KnowledgespaceClient<T, Null = never, ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+  export class Prisma__KnowledgespaceClient<T, Null = never, ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> implements Prisma.PrismaPromise<T> {
+    private readonly _dmmf;
+    private readonly _queryType;
+    private readonly _rootField;
+    private readonly _clientMethod;
+    private readonly _args;
+    private readonly _dataPath;
+    private readonly _errorFormat;
+    private readonly _measurePerformance?;
+    private _isList;
+    private _callsite;
+    private _requestPromise?;
     readonly [Symbol.toStringTag]: 'PrismaPromise';
+    constructor(_dmmf: runtime.DMMFClass, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
 
-    degree<T extends Knowledgespace$degreeArgs<ExtArgs> = {}>(args?: Subset<T, Knowledgespace$degreeArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DegreePayload<ExtArgs>, T, 'findMany'> | Null>;
+    degree<T extends Knowledgespace$degreeArgs<ExtArgs> = {}>(args?: Subset<T, Knowledgespace$degreeArgs<ExtArgs>>): Prisma.PrismaPromise<$Types.GetResult<DegreePayload<ExtArgs>, T, 'findMany', never>| Null>;
 
+    private get _document();
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
      * @param onrejected The callback to execute when the Promise is rejected.
      * @returns A Promise for the completion of which ever callback is executed.
      */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>;
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): Promise<TResult1 | TResult2>;
     /**
      * Attaches a callback for only the rejection of the Promise.
      * @param onrejected The callback to execute when the Promise is rejected.
      * @returns A Promise for the completion of the callback.
      */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>;
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): Promise<T | TResult>;
     /**
      * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
      * resolved value cannot be modified from the callback.
      * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
      * @returns A Promise for the completion of the callback.
      */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>;
+    finally(onfinally?: (() => void) | undefined | null): Promise<T>;
   }
 
 
-
-  /**
-   * Fields of the Knowledgespace model
-   */ 
-  interface KnowledgespaceFieldRefs {
-    readonly id: FieldRef<"Knowledgespace", 'BigInt'>
-    readonly code: FieldRef<"Knowledgespace", 'String'>
-    readonly description: FieldRef<"Knowledgespace", 'String'>
-  }
-    
 
   // Custom InputTypes
 
   /**
-   * Knowledgespace findUnique
+   * Knowledgespace base type for findUnique actions
    */
-  export type KnowledgespaceFindUniqueArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+  export type KnowledgespaceFindUniqueArgsBase<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Knowledgespace
      */
@@ -6904,6 +7294,17 @@ export namespace Prisma {
     where: KnowledgespaceWhereUniqueInput
   }
 
+  /**
+   * Knowledgespace findUnique
+   */
+  export interface KnowledgespaceFindUniqueArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> extends KnowledgespaceFindUniqueArgsBase<ExtArgs> {
+   /**
+    * Throw an Error if query returns no results
+    * @deprecated since 4.0.0: use `findUniqueOrThrow` method instead
+    */
+    rejectOnNotFound?: RejectOnNotFound
+  }
+      
 
   /**
    * Knowledgespace findUniqueOrThrow
@@ -6925,9 +7326,9 @@ export namespace Prisma {
 
 
   /**
-   * Knowledgespace findFirst
+   * Knowledgespace base type for findFirst actions
    */
-  export type KnowledgespaceFindFirstArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+  export type KnowledgespaceFindFirstArgsBase<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Knowledgespace
      */
@@ -6945,7 +7346,7 @@ export namespace Prisma {
      * 
      * Determine the order of Knowledgespaces to fetch.
      */
-    orderBy?: KnowledgespaceOrderByWithRelationInput | KnowledgespaceOrderByWithRelationInput[]
+    orderBy?: Enumerable<KnowledgespaceOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
@@ -6969,9 +7370,20 @@ export namespace Prisma {
      * 
      * Filter by unique combinations of Knowledgespaces.
      */
-    distinct?: KnowledgespaceScalarFieldEnum | KnowledgespaceScalarFieldEnum[]
+    distinct?: Enumerable<KnowledgespaceScalarFieldEnum>
   }
 
+  /**
+   * Knowledgespace findFirst
+   */
+  export interface KnowledgespaceFindFirstArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> extends KnowledgespaceFindFirstArgsBase<ExtArgs> {
+   /**
+    * Throw an Error if query returns no results
+    * @deprecated since 4.0.0: use `findFirstOrThrow` method instead
+    */
+    rejectOnNotFound?: RejectOnNotFound
+  }
+      
 
   /**
    * Knowledgespace findFirstOrThrow
@@ -6994,7 +7406,7 @@ export namespace Prisma {
      * 
      * Determine the order of Knowledgespaces to fetch.
      */
-    orderBy?: KnowledgespaceOrderByWithRelationInput | KnowledgespaceOrderByWithRelationInput[]
+    orderBy?: Enumerable<KnowledgespaceOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
@@ -7018,7 +7430,7 @@ export namespace Prisma {
      * 
      * Filter by unique combinations of Knowledgespaces.
      */
-    distinct?: KnowledgespaceScalarFieldEnum | KnowledgespaceScalarFieldEnum[]
+    distinct?: Enumerable<KnowledgespaceScalarFieldEnum>
   }
 
 
@@ -7043,7 +7455,7 @@ export namespace Prisma {
      * 
      * Determine the order of Knowledgespaces to fetch.
      */
-    orderBy?: KnowledgespaceOrderByWithRelationInput | KnowledgespaceOrderByWithRelationInput[]
+    orderBy?: Enumerable<KnowledgespaceOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
@@ -7062,7 +7474,7 @@ export namespace Prisma {
      * Skip the first `n` Knowledgespaces.
      */
     skip?: number
-    distinct?: KnowledgespaceScalarFieldEnum | KnowledgespaceScalarFieldEnum[]
+    distinct?: Enumerable<KnowledgespaceScalarFieldEnum>
   }
 
 
@@ -7092,7 +7504,7 @@ export namespace Prisma {
     /**
      * The data used to create many Knowledgespaces.
      */
-    data: KnowledgespaceCreateManyInput | KnowledgespaceCreateManyInput[]
+    data: Enumerable<KnowledgespaceCreateManyInput>
     skipDuplicates?: boolean
   }
 
@@ -7205,18 +7617,18 @@ export namespace Prisma {
      */
     include?: DegreeInclude<ExtArgs> | null
     where?: DegreeWhereInput
-    orderBy?: DegreeOrderByWithRelationInput | DegreeOrderByWithRelationInput[]
+    orderBy?: Enumerable<DegreeOrderByWithRelationInput>
     cursor?: DegreeWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: DegreeScalarFieldEnum | DegreeScalarFieldEnum[]
+    distinct?: Enumerable<DegreeScalarFieldEnum>
   }
 
 
   /**
    * Knowledgespace without action
    */
-  export type KnowledgespaceDefaultArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+  export type KnowledgespaceArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Knowledgespace
      */
@@ -7232,6 +7644,7 @@ export namespace Prisma {
   /**
    * Model Degree
    */
+
 
   export type AggregateDegree = {
     _count: DegreeCountAggregateOutputType | null
@@ -7259,6 +7672,8 @@ export namespace Prisma {
     description: string | null
     KnowledgespaceId: bigint | null
     userId: bigint | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type DegreeMaxAggregateOutputType = {
@@ -7267,6 +7682,8 @@ export namespace Prisma {
     description: string | null
     KnowledgespaceId: bigint | null
     userId: bigint | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type DegreeCountAggregateOutputType = {
@@ -7275,6 +7692,8 @@ export namespace Prisma {
     description: number
     KnowledgespaceId: number
     userId: number
+    createdAt: number
+    updatedAt: number
     _all: number
   }
 
@@ -7297,6 +7716,8 @@ export namespace Prisma {
     description?: true
     KnowledgespaceId?: true
     userId?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type DegreeMaxAggregateInputType = {
@@ -7305,6 +7726,8 @@ export namespace Prisma {
     description?: true
     KnowledgespaceId?: true
     userId?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type DegreeCountAggregateInputType = {
@@ -7313,6 +7736,8 @@ export namespace Prisma {
     description?: true
     KnowledgespaceId?: true
     userId?: true
+    createdAt?: true
+    updatedAt?: true
     _all?: true
   }
 
@@ -7326,7 +7751,7 @@ export namespace Prisma {
      * 
      * Determine the order of Degrees to fetch.
      */
-    orderBy?: DegreeOrderByWithRelationInput | DegreeOrderByWithRelationInput[]
+    orderBy?: Enumerable<DegreeOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
@@ -7390,8 +7815,8 @@ export namespace Prisma {
 
   export type DegreeGroupByArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     where?: DegreeWhereInput
-    orderBy?: DegreeOrderByWithAggregationInput | DegreeOrderByWithAggregationInput[]
-    by: DegreeScalarFieldEnum[] | DegreeScalarFieldEnum
+    orderBy?: Enumerable<DegreeOrderByWithAggregationInput>
+    by: DegreeScalarFieldEnum[]
     having?: DegreeScalarWhereWithAggregatesInput
     take?: number
     skip?: number
@@ -7402,12 +7827,15 @@ export namespace Prisma {
     _max?: DegreeMaxAggregateInputType
   }
 
+
   export type DegreeGroupByOutputType = {
     id: bigint
     code: string | null
     description: string | null
     KnowledgespaceId: bigint | null
     userId: bigint | null
+    createdAt: Date
+    updatedAt: Date | null
     _count: DegreeCountAggregateOutputType | null
     _avg: DegreeAvgAggregateOutputType | null
     _sum: DegreeSumAggregateOutputType | null
@@ -7417,7 +7845,7 @@ export namespace Prisma {
 
   type GetDegreeGroupByPayload<T extends DegreeGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<DegreeGroupByOutputType, T['by']> &
+      PickArray<DegreeGroupByOutputType, T['by']> &
         {
           [P in ((keyof T) & (keyof DegreeGroupByOutputType))]: P extends '_count'
             ? T[P] extends boolean
@@ -7435,6 +7863,8 @@ export namespace Prisma {
     description?: boolean
     KnowledgespaceId?: boolean
     userId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
     Knowledgespace?: boolean | Degree$KnowledgespaceArgs<ExtArgs>
     user?: boolean | Degree$userArgs<ExtArgs>
   }, ExtArgs["result"]["degree"]>
@@ -7445,6 +7875,8 @@ export namespace Prisma {
     description?: boolean
     KnowledgespaceId?: boolean
     userId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
   }
 
   export type DegreeInclude<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
@@ -7453,31 +7885,14 @@ export namespace Prisma {
   }
 
 
-  export type $DegreePayload<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
-    name: "Degree"
-    objects: {
-      Knowledgespace: Prisma.$KnowledgespacePayload<ExtArgs> | null
-      user: Prisma.$UserPayload<ExtArgs> | null
-    }
-    scalars: $Extensions.GetResult<{
-      id: bigint
-      code: string | null
-      description: string | null
-      KnowledgespaceId: bigint | null
-      userId: bigint | null
-    }, ExtArgs["result"]["degree"]>
-    composites: {}
-  }
-
-
-  type DegreeGetPayload<S extends boolean | null | undefined | DegreeDefaultArgs> = $Result.GetResult<Prisma.$DegreePayload, S>
+  type DegreeGetPayload<S extends boolean | null | undefined | DegreeArgs> = $Types.GetResult<DegreePayload, S>
 
   type DegreeCountArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = 
     Omit<DegreeFindManyArgs, 'select' | 'include'> & {
       select?: DegreeCountAggregateInputType | true
     }
 
-  export interface DegreeDelegate<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> {
+  export interface DegreeDelegate<GlobalRejectSettings extends Prisma.RejectOnNotFound | Prisma.RejectPerOperation | false | undefined, ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> {
     [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Degree'], meta: { name: 'Degree' } }
     /**
      * Find zero or one Degree that matches the filter.
@@ -7490,9 +7905,9 @@ export namespace Prisma {
      *   }
      * })
     **/
-    findUnique<T extends DegreeFindUniqueArgs<ExtArgs>>(
+    findUnique<T extends DegreeFindUniqueArgs<ExtArgs>, LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
       args: SelectSubset<T, DegreeFindUniqueArgs<ExtArgs>>
-    ): Prisma__DegreeClient<$Result.GetResult<Prisma.$DegreePayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findUnique', 'Degree'> extends True ? Prisma__DegreeClient<$Types.GetResult<DegreePayload<ExtArgs>, T, 'findUnique', never>, never, ExtArgs> : Prisma__DegreeClient<$Types.GetResult<DegreePayload<ExtArgs>, T, 'findUnique', never> | null, null, ExtArgs>
 
     /**
      * Find one Degree that matches the filter or throw an error  with `error.code='P2025'` 
@@ -7508,7 +7923,7 @@ export namespace Prisma {
     **/
     findUniqueOrThrow<T extends DegreeFindUniqueOrThrowArgs<ExtArgs>>(
       args?: SelectSubset<T, DegreeFindUniqueOrThrowArgs<ExtArgs>>
-    ): Prisma__DegreeClient<$Result.GetResult<Prisma.$DegreePayload<ExtArgs>, T, 'findUniqueOrThrow'>, never, ExtArgs>
+    ): Prisma__DegreeClient<$Types.GetResult<DegreePayload<ExtArgs>, T, 'findUniqueOrThrow', never>, never, ExtArgs>
 
     /**
      * Find the first Degree that matches the filter.
@@ -7523,13 +7938,13 @@ export namespace Prisma {
      *   }
      * })
     **/
-    findFirst<T extends DegreeFindFirstArgs<ExtArgs>>(
+    findFirst<T extends DegreeFindFirstArgs<ExtArgs>, LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
       args?: SelectSubset<T, DegreeFindFirstArgs<ExtArgs>>
-    ): Prisma__DegreeClient<$Result.GetResult<Prisma.$DegreePayload<ExtArgs>, T, 'findFirst'> | null, null, ExtArgs>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findFirst', 'Degree'> extends True ? Prisma__DegreeClient<$Types.GetResult<DegreePayload<ExtArgs>, T, 'findFirst', never>, never, ExtArgs> : Prisma__DegreeClient<$Types.GetResult<DegreePayload<ExtArgs>, T, 'findFirst', never> | null, null, ExtArgs>
 
     /**
      * Find the first Degree that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * throw `NotFoundError` if no matches were found.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
      * @param {DegreeFindFirstOrThrowArgs} args - Arguments to find a Degree
@@ -7543,7 +7958,7 @@ export namespace Prisma {
     **/
     findFirstOrThrow<T extends DegreeFindFirstOrThrowArgs<ExtArgs>>(
       args?: SelectSubset<T, DegreeFindFirstOrThrowArgs<ExtArgs>>
-    ): Prisma__DegreeClient<$Result.GetResult<Prisma.$DegreePayload<ExtArgs>, T, 'findFirstOrThrow'>, never, ExtArgs>
+    ): Prisma__DegreeClient<$Types.GetResult<DegreePayload<ExtArgs>, T, 'findFirstOrThrow', never>, never, ExtArgs>
 
     /**
      * Find zero or more Degrees that matches the filter.
@@ -7563,7 +7978,7 @@ export namespace Prisma {
     **/
     findMany<T extends DegreeFindManyArgs<ExtArgs>>(
       args?: SelectSubset<T, DegreeFindManyArgs<ExtArgs>>
-    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DegreePayload<ExtArgs>, T, 'findMany'>>
+    ): Prisma.PrismaPromise<$Types.GetResult<DegreePayload<ExtArgs>, T, 'findMany', never>>
 
     /**
      * Create a Degree.
@@ -7579,7 +7994,7 @@ export namespace Prisma {
     **/
     create<T extends DegreeCreateArgs<ExtArgs>>(
       args: SelectSubset<T, DegreeCreateArgs<ExtArgs>>
-    ): Prisma__DegreeClient<$Result.GetResult<Prisma.$DegreePayload<ExtArgs>, T, 'create'>, never, ExtArgs>
+    ): Prisma__DegreeClient<$Types.GetResult<DegreePayload<ExtArgs>, T, 'create', never>, never, ExtArgs>
 
     /**
      * Create many Degrees.
@@ -7611,7 +8026,7 @@ export namespace Prisma {
     **/
     delete<T extends DegreeDeleteArgs<ExtArgs>>(
       args: SelectSubset<T, DegreeDeleteArgs<ExtArgs>>
-    ): Prisma__DegreeClient<$Result.GetResult<Prisma.$DegreePayload<ExtArgs>, T, 'delete'>, never, ExtArgs>
+    ): Prisma__DegreeClient<$Types.GetResult<DegreePayload<ExtArgs>, T, 'delete', never>, never, ExtArgs>
 
     /**
      * Update one Degree.
@@ -7630,7 +8045,7 @@ export namespace Prisma {
     **/
     update<T extends DegreeUpdateArgs<ExtArgs>>(
       args: SelectSubset<T, DegreeUpdateArgs<ExtArgs>>
-    ): Prisma__DegreeClient<$Result.GetResult<Prisma.$DegreePayload<ExtArgs>, T, 'update'>, never, ExtArgs>
+    ): Prisma__DegreeClient<$Types.GetResult<DegreePayload<ExtArgs>, T, 'update', never>, never, ExtArgs>
 
     /**
      * Delete zero or more Degrees.
@@ -7688,7 +8103,7 @@ export namespace Prisma {
     **/
     upsert<T extends DegreeUpsertArgs<ExtArgs>>(
       args: SelectSubset<T, DegreeUpsertArgs<ExtArgs>>
-    ): Prisma__DegreeClient<$Result.GetResult<Prisma.$DegreePayload<ExtArgs>, T, 'upsert'>, never, ExtArgs>
+    ): Prisma__DegreeClient<$Types.GetResult<DegreePayload<ExtArgs>, T, 'upsert', never>, never, ExtArgs>
 
     /**
      * Count the number of Degrees.
@@ -7767,7 +8182,7 @@ export namespace Prisma {
         ? { orderBy: DegreeGroupByArgs['orderBy'] }
         : { orderBy?: DegreeGroupByArgs['orderBy'] },
       OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByFields extends TupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
       HavingFields extends GetHavingFields<T['having']>,
       HavingValid extends Has<ByFields, HavingFields>,
@@ -7815,10 +8230,7 @@ export namespace Prisma {
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
     >(args: SubsetIntersection<T, DegreeGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetDegreeGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the Degree model
-   */
-  readonly fields: DegreeFieldRefs;
+
   }
 
   /**
@@ -7827,55 +8239,56 @@ export namespace Prisma {
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__DegreeClient<T, Null = never, ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+  export class Prisma__DegreeClient<T, Null = never, ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> implements Prisma.PrismaPromise<T> {
+    private readonly _dmmf;
+    private readonly _queryType;
+    private readonly _rootField;
+    private readonly _clientMethod;
+    private readonly _args;
+    private readonly _dataPath;
+    private readonly _errorFormat;
+    private readonly _measurePerformance?;
+    private _isList;
+    private _callsite;
+    private _requestPromise?;
     readonly [Symbol.toStringTag]: 'PrismaPromise';
+    constructor(_dmmf: runtime.DMMFClass, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
 
-    Knowledgespace<T extends Degree$KnowledgespaceArgs<ExtArgs> = {}>(args?: Subset<T, Degree$KnowledgespaceArgs<ExtArgs>>): Prisma__KnowledgespaceClient<$Result.GetResult<Prisma.$KnowledgespacePayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
+    Knowledgespace<T extends Degree$KnowledgespaceArgs<ExtArgs> = {}>(args?: Subset<T, Degree$KnowledgespaceArgs<ExtArgs>>): Prisma__KnowledgespaceClient<$Types.GetResult<KnowledgespacePayload<ExtArgs>, T, 'findUnique', never> | Null, never, ExtArgs>;
 
-    user<T extends Degree$userArgs<ExtArgs> = {}>(args?: Subset<T, Degree$userArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
+    user<T extends Degree$userArgs<ExtArgs> = {}>(args?: Subset<T, Degree$userArgs<ExtArgs>>): Prisma__UserClient<$Types.GetResult<UserPayload<ExtArgs>, T, 'findUnique', never> | Null, never, ExtArgs>;
 
+    private get _document();
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
      * @param onrejected The callback to execute when the Promise is rejected.
      * @returns A Promise for the completion of which ever callback is executed.
      */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>;
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): Promise<TResult1 | TResult2>;
     /**
      * Attaches a callback for only the rejection of the Promise.
      * @param onrejected The callback to execute when the Promise is rejected.
      * @returns A Promise for the completion of the callback.
      */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>;
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): Promise<T | TResult>;
     /**
      * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
      * resolved value cannot be modified from the callback.
      * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
      * @returns A Promise for the completion of the callback.
      */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>;
+    finally(onfinally?: (() => void) | undefined | null): Promise<T>;
   }
 
 
-
-  /**
-   * Fields of the Degree model
-   */ 
-  interface DegreeFieldRefs {
-    readonly id: FieldRef<"Degree", 'BigInt'>
-    readonly code: FieldRef<"Degree", 'String'>
-    readonly description: FieldRef<"Degree", 'String'>
-    readonly KnowledgespaceId: FieldRef<"Degree", 'BigInt'>
-    readonly userId: FieldRef<"Degree", 'BigInt'>
-  }
-    
 
   // Custom InputTypes
 
   /**
-   * Degree findUnique
+   * Degree base type for findUnique actions
    */
-  export type DegreeFindUniqueArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+  export type DegreeFindUniqueArgsBase<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Degree
      */
@@ -7890,6 +8303,17 @@ export namespace Prisma {
     where: DegreeWhereUniqueInput
   }
 
+  /**
+   * Degree findUnique
+   */
+  export interface DegreeFindUniqueArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> extends DegreeFindUniqueArgsBase<ExtArgs> {
+   /**
+    * Throw an Error if query returns no results
+    * @deprecated since 4.0.0: use `findUniqueOrThrow` method instead
+    */
+    rejectOnNotFound?: RejectOnNotFound
+  }
+      
 
   /**
    * Degree findUniqueOrThrow
@@ -7911,9 +8335,9 @@ export namespace Prisma {
 
 
   /**
-   * Degree findFirst
+   * Degree base type for findFirst actions
    */
-  export type DegreeFindFirstArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+  export type DegreeFindFirstArgsBase<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Degree
      */
@@ -7931,7 +8355,7 @@ export namespace Prisma {
      * 
      * Determine the order of Degrees to fetch.
      */
-    orderBy?: DegreeOrderByWithRelationInput | DegreeOrderByWithRelationInput[]
+    orderBy?: Enumerable<DegreeOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
@@ -7955,9 +8379,20 @@ export namespace Prisma {
      * 
      * Filter by unique combinations of Degrees.
      */
-    distinct?: DegreeScalarFieldEnum | DegreeScalarFieldEnum[]
+    distinct?: Enumerable<DegreeScalarFieldEnum>
   }
 
+  /**
+   * Degree findFirst
+   */
+  export interface DegreeFindFirstArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> extends DegreeFindFirstArgsBase<ExtArgs> {
+   /**
+    * Throw an Error if query returns no results
+    * @deprecated since 4.0.0: use `findFirstOrThrow` method instead
+    */
+    rejectOnNotFound?: RejectOnNotFound
+  }
+      
 
   /**
    * Degree findFirstOrThrow
@@ -7980,7 +8415,7 @@ export namespace Prisma {
      * 
      * Determine the order of Degrees to fetch.
      */
-    orderBy?: DegreeOrderByWithRelationInput | DegreeOrderByWithRelationInput[]
+    orderBy?: Enumerable<DegreeOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
@@ -8004,7 +8439,7 @@ export namespace Prisma {
      * 
      * Filter by unique combinations of Degrees.
      */
-    distinct?: DegreeScalarFieldEnum | DegreeScalarFieldEnum[]
+    distinct?: Enumerable<DegreeScalarFieldEnum>
   }
 
 
@@ -8029,7 +8464,7 @@ export namespace Prisma {
      * 
      * Determine the order of Degrees to fetch.
      */
-    orderBy?: DegreeOrderByWithRelationInput | DegreeOrderByWithRelationInput[]
+    orderBy?: Enumerable<DegreeOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
@@ -8048,7 +8483,7 @@ export namespace Prisma {
      * Skip the first `n` Degrees.
      */
     skip?: number
-    distinct?: DegreeScalarFieldEnum | DegreeScalarFieldEnum[]
+    distinct?: Enumerable<DegreeScalarFieldEnum>
   }
 
 
@@ -8078,7 +8513,7 @@ export namespace Prisma {
     /**
      * The data used to create many Degrees.
      */
-    data: DegreeCreateManyInput | DegreeCreateManyInput[]
+    data: Enumerable<DegreeCreateManyInput>
     skipDuplicates?: boolean
   }
 
@@ -8213,7 +8648,7 @@ export namespace Prisma {
   /**
    * Degree without action
    */
-  export type DegreeDefaultArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+  export type DegreeArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Degree
      */
@@ -8229,6 +8664,7 @@ export namespace Prisma {
   /**
    * Model Skills
    */
+
 
   export type AggregateSkills = {
     _count: SkillsCountAggregateOutputType | null
@@ -8253,6 +8689,8 @@ export namespace Prisma {
     code: string | null
     description: string | null
     userId: bigint | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type SkillsMaxAggregateOutputType = {
@@ -8260,6 +8698,8 @@ export namespace Prisma {
     code: string | null
     description: string | null
     userId: bigint | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type SkillsCountAggregateOutputType = {
@@ -8267,6 +8707,8 @@ export namespace Prisma {
     code: number
     description: number
     userId: number
+    createdAt: number
+    updatedAt: number
     _all: number
   }
 
@@ -8286,6 +8728,8 @@ export namespace Prisma {
     code?: true
     description?: true
     userId?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type SkillsMaxAggregateInputType = {
@@ -8293,6 +8737,8 @@ export namespace Prisma {
     code?: true
     description?: true
     userId?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type SkillsCountAggregateInputType = {
@@ -8300,6 +8746,8 @@ export namespace Prisma {
     code?: true
     description?: true
     userId?: true
+    createdAt?: true
+    updatedAt?: true
     _all?: true
   }
 
@@ -8313,7 +8761,7 @@ export namespace Prisma {
      * 
      * Determine the order of Skills to fetch.
      */
-    orderBy?: SkillsOrderByWithRelationInput | SkillsOrderByWithRelationInput[]
+    orderBy?: Enumerable<SkillsOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
@@ -8377,8 +8825,8 @@ export namespace Prisma {
 
   export type SkillsGroupByArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     where?: SkillsWhereInput
-    orderBy?: SkillsOrderByWithAggregationInput | SkillsOrderByWithAggregationInput[]
-    by: SkillsScalarFieldEnum[] | SkillsScalarFieldEnum
+    orderBy?: Enumerable<SkillsOrderByWithAggregationInput>
+    by: SkillsScalarFieldEnum[]
     having?: SkillsScalarWhereWithAggregatesInput
     take?: number
     skip?: number
@@ -8389,11 +8837,14 @@ export namespace Prisma {
     _max?: SkillsMaxAggregateInputType
   }
 
+
   export type SkillsGroupByOutputType = {
     id: bigint
     code: string | null
     description: string | null
     userId: bigint | null
+    createdAt: Date
+    updatedAt: Date | null
     _count: SkillsCountAggregateOutputType | null
     _avg: SkillsAvgAggregateOutputType | null
     _sum: SkillsSumAggregateOutputType | null
@@ -8403,7 +8854,7 @@ export namespace Prisma {
 
   type GetSkillsGroupByPayload<T extends SkillsGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<SkillsGroupByOutputType, T['by']> &
+      PickArray<SkillsGroupByOutputType, T['by']> &
         {
           [P in ((keyof T) & (keyof SkillsGroupByOutputType))]: P extends '_count'
             ? T[P] extends boolean
@@ -8420,6 +8871,8 @@ export namespace Prisma {
     code?: boolean
     description?: boolean
     userId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
     user?: boolean | Skills$userArgs<ExtArgs>
   }, ExtArgs["result"]["skills"]>
 
@@ -8428,6 +8881,8 @@ export namespace Prisma {
     code?: boolean
     description?: boolean
     userId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
   }
 
   export type SkillsInclude<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
@@ -8435,29 +8890,14 @@ export namespace Prisma {
   }
 
 
-  export type $SkillsPayload<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
-    name: "Skills"
-    objects: {
-      user: Prisma.$UserPayload<ExtArgs> | null
-    }
-    scalars: $Extensions.GetResult<{
-      id: bigint
-      code: string | null
-      description: string | null
-      userId: bigint | null
-    }, ExtArgs["result"]["skills"]>
-    composites: {}
-  }
-
-
-  type SkillsGetPayload<S extends boolean | null | undefined | SkillsDefaultArgs> = $Result.GetResult<Prisma.$SkillsPayload, S>
+  type SkillsGetPayload<S extends boolean | null | undefined | SkillsArgs> = $Types.GetResult<SkillsPayload, S>
 
   type SkillsCountArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = 
     Omit<SkillsFindManyArgs, 'select' | 'include'> & {
       select?: SkillsCountAggregateInputType | true
     }
 
-  export interface SkillsDelegate<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> {
+  export interface SkillsDelegate<GlobalRejectSettings extends Prisma.RejectOnNotFound | Prisma.RejectPerOperation | false | undefined, ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> {
     [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Skills'], meta: { name: 'Skills' } }
     /**
      * Find zero or one Skills that matches the filter.
@@ -8470,9 +8910,9 @@ export namespace Prisma {
      *   }
      * })
     **/
-    findUnique<T extends SkillsFindUniqueArgs<ExtArgs>>(
+    findUnique<T extends SkillsFindUniqueArgs<ExtArgs>, LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
       args: SelectSubset<T, SkillsFindUniqueArgs<ExtArgs>>
-    ): Prisma__SkillsClient<$Result.GetResult<Prisma.$SkillsPayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findUnique', 'Skills'> extends True ? Prisma__SkillsClient<$Types.GetResult<SkillsPayload<ExtArgs>, T, 'findUnique', never>, never, ExtArgs> : Prisma__SkillsClient<$Types.GetResult<SkillsPayload<ExtArgs>, T, 'findUnique', never> | null, null, ExtArgs>
 
     /**
      * Find one Skills that matches the filter or throw an error  with `error.code='P2025'` 
@@ -8488,7 +8928,7 @@ export namespace Prisma {
     **/
     findUniqueOrThrow<T extends SkillsFindUniqueOrThrowArgs<ExtArgs>>(
       args?: SelectSubset<T, SkillsFindUniqueOrThrowArgs<ExtArgs>>
-    ): Prisma__SkillsClient<$Result.GetResult<Prisma.$SkillsPayload<ExtArgs>, T, 'findUniqueOrThrow'>, never, ExtArgs>
+    ): Prisma__SkillsClient<$Types.GetResult<SkillsPayload<ExtArgs>, T, 'findUniqueOrThrow', never>, never, ExtArgs>
 
     /**
      * Find the first Skills that matches the filter.
@@ -8503,13 +8943,13 @@ export namespace Prisma {
      *   }
      * })
     **/
-    findFirst<T extends SkillsFindFirstArgs<ExtArgs>>(
+    findFirst<T extends SkillsFindFirstArgs<ExtArgs>, LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
       args?: SelectSubset<T, SkillsFindFirstArgs<ExtArgs>>
-    ): Prisma__SkillsClient<$Result.GetResult<Prisma.$SkillsPayload<ExtArgs>, T, 'findFirst'> | null, null, ExtArgs>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findFirst', 'Skills'> extends True ? Prisma__SkillsClient<$Types.GetResult<SkillsPayload<ExtArgs>, T, 'findFirst', never>, never, ExtArgs> : Prisma__SkillsClient<$Types.GetResult<SkillsPayload<ExtArgs>, T, 'findFirst', never> | null, null, ExtArgs>
 
     /**
      * Find the first Skills that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * throw `NotFoundError` if no matches were found.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
      * @param {SkillsFindFirstOrThrowArgs} args - Arguments to find a Skills
@@ -8523,7 +8963,7 @@ export namespace Prisma {
     **/
     findFirstOrThrow<T extends SkillsFindFirstOrThrowArgs<ExtArgs>>(
       args?: SelectSubset<T, SkillsFindFirstOrThrowArgs<ExtArgs>>
-    ): Prisma__SkillsClient<$Result.GetResult<Prisma.$SkillsPayload<ExtArgs>, T, 'findFirstOrThrow'>, never, ExtArgs>
+    ): Prisma__SkillsClient<$Types.GetResult<SkillsPayload<ExtArgs>, T, 'findFirstOrThrow', never>, never, ExtArgs>
 
     /**
      * Find zero or more Skills that matches the filter.
@@ -8543,7 +8983,7 @@ export namespace Prisma {
     **/
     findMany<T extends SkillsFindManyArgs<ExtArgs>>(
       args?: SelectSubset<T, SkillsFindManyArgs<ExtArgs>>
-    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SkillsPayload<ExtArgs>, T, 'findMany'>>
+    ): Prisma.PrismaPromise<$Types.GetResult<SkillsPayload<ExtArgs>, T, 'findMany', never>>
 
     /**
      * Create a Skills.
@@ -8559,7 +8999,7 @@ export namespace Prisma {
     **/
     create<T extends SkillsCreateArgs<ExtArgs>>(
       args: SelectSubset<T, SkillsCreateArgs<ExtArgs>>
-    ): Prisma__SkillsClient<$Result.GetResult<Prisma.$SkillsPayload<ExtArgs>, T, 'create'>, never, ExtArgs>
+    ): Prisma__SkillsClient<$Types.GetResult<SkillsPayload<ExtArgs>, T, 'create', never>, never, ExtArgs>
 
     /**
      * Create many Skills.
@@ -8591,7 +9031,7 @@ export namespace Prisma {
     **/
     delete<T extends SkillsDeleteArgs<ExtArgs>>(
       args: SelectSubset<T, SkillsDeleteArgs<ExtArgs>>
-    ): Prisma__SkillsClient<$Result.GetResult<Prisma.$SkillsPayload<ExtArgs>, T, 'delete'>, never, ExtArgs>
+    ): Prisma__SkillsClient<$Types.GetResult<SkillsPayload<ExtArgs>, T, 'delete', never>, never, ExtArgs>
 
     /**
      * Update one Skills.
@@ -8610,7 +9050,7 @@ export namespace Prisma {
     **/
     update<T extends SkillsUpdateArgs<ExtArgs>>(
       args: SelectSubset<T, SkillsUpdateArgs<ExtArgs>>
-    ): Prisma__SkillsClient<$Result.GetResult<Prisma.$SkillsPayload<ExtArgs>, T, 'update'>, never, ExtArgs>
+    ): Prisma__SkillsClient<$Types.GetResult<SkillsPayload<ExtArgs>, T, 'update', never>, never, ExtArgs>
 
     /**
      * Delete zero or more Skills.
@@ -8668,7 +9108,7 @@ export namespace Prisma {
     **/
     upsert<T extends SkillsUpsertArgs<ExtArgs>>(
       args: SelectSubset<T, SkillsUpsertArgs<ExtArgs>>
-    ): Prisma__SkillsClient<$Result.GetResult<Prisma.$SkillsPayload<ExtArgs>, T, 'upsert'>, never, ExtArgs>
+    ): Prisma__SkillsClient<$Types.GetResult<SkillsPayload<ExtArgs>, T, 'upsert', never>, never, ExtArgs>
 
     /**
      * Count the number of Skills.
@@ -8747,7 +9187,7 @@ export namespace Prisma {
         ? { orderBy: SkillsGroupByArgs['orderBy'] }
         : { orderBy?: SkillsGroupByArgs['orderBy'] },
       OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByFields extends TupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
       HavingFields extends GetHavingFields<T['having']>,
       HavingValid extends Has<ByFields, HavingFields>,
@@ -8795,10 +9235,7 @@ export namespace Prisma {
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
     >(args: SubsetIntersection<T, SkillsGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetSkillsGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the Skills model
-   */
-  readonly fields: SkillsFieldRefs;
+
   }
 
   /**
@@ -8807,52 +9244,54 @@ export namespace Prisma {
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__SkillsClient<T, Null = never, ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+  export class Prisma__SkillsClient<T, Null = never, ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> implements Prisma.PrismaPromise<T> {
+    private readonly _dmmf;
+    private readonly _queryType;
+    private readonly _rootField;
+    private readonly _clientMethod;
+    private readonly _args;
+    private readonly _dataPath;
+    private readonly _errorFormat;
+    private readonly _measurePerformance?;
+    private _isList;
+    private _callsite;
+    private _requestPromise?;
     readonly [Symbol.toStringTag]: 'PrismaPromise';
+    constructor(_dmmf: runtime.DMMFClass, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
 
-    user<T extends Skills$userArgs<ExtArgs> = {}>(args?: Subset<T, Skills$userArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
+    user<T extends Skills$userArgs<ExtArgs> = {}>(args?: Subset<T, Skills$userArgs<ExtArgs>>): Prisma__UserClient<$Types.GetResult<UserPayload<ExtArgs>, T, 'findUnique', never> | Null, never, ExtArgs>;
 
+    private get _document();
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
      * @param onrejected The callback to execute when the Promise is rejected.
      * @returns A Promise for the completion of which ever callback is executed.
      */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>;
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): Promise<TResult1 | TResult2>;
     /**
      * Attaches a callback for only the rejection of the Promise.
      * @param onrejected The callback to execute when the Promise is rejected.
      * @returns A Promise for the completion of the callback.
      */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>;
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): Promise<T | TResult>;
     /**
      * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
      * resolved value cannot be modified from the callback.
      * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
      * @returns A Promise for the completion of the callback.
      */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>;
+    finally(onfinally?: (() => void) | undefined | null): Promise<T>;
   }
 
 
-
-  /**
-   * Fields of the Skills model
-   */ 
-  interface SkillsFieldRefs {
-    readonly id: FieldRef<"Skills", 'BigInt'>
-    readonly code: FieldRef<"Skills", 'String'>
-    readonly description: FieldRef<"Skills", 'String'>
-    readonly userId: FieldRef<"Skills", 'BigInt'>
-  }
-    
 
   // Custom InputTypes
 
   /**
-   * Skills findUnique
+   * Skills base type for findUnique actions
    */
-  export type SkillsFindUniqueArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+  export type SkillsFindUniqueArgsBase<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Skills
      */
@@ -8867,6 +9306,17 @@ export namespace Prisma {
     where: SkillsWhereUniqueInput
   }
 
+  /**
+   * Skills findUnique
+   */
+  export interface SkillsFindUniqueArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> extends SkillsFindUniqueArgsBase<ExtArgs> {
+   /**
+    * Throw an Error if query returns no results
+    * @deprecated since 4.0.0: use `findUniqueOrThrow` method instead
+    */
+    rejectOnNotFound?: RejectOnNotFound
+  }
+      
 
   /**
    * Skills findUniqueOrThrow
@@ -8888,9 +9338,9 @@ export namespace Prisma {
 
 
   /**
-   * Skills findFirst
+   * Skills base type for findFirst actions
    */
-  export type SkillsFindFirstArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+  export type SkillsFindFirstArgsBase<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Skills
      */
@@ -8908,7 +9358,7 @@ export namespace Prisma {
      * 
      * Determine the order of Skills to fetch.
      */
-    orderBy?: SkillsOrderByWithRelationInput | SkillsOrderByWithRelationInput[]
+    orderBy?: Enumerable<SkillsOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
@@ -8932,9 +9382,20 @@ export namespace Prisma {
      * 
      * Filter by unique combinations of Skills.
      */
-    distinct?: SkillsScalarFieldEnum | SkillsScalarFieldEnum[]
+    distinct?: Enumerable<SkillsScalarFieldEnum>
   }
 
+  /**
+   * Skills findFirst
+   */
+  export interface SkillsFindFirstArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> extends SkillsFindFirstArgsBase<ExtArgs> {
+   /**
+    * Throw an Error if query returns no results
+    * @deprecated since 4.0.0: use `findFirstOrThrow` method instead
+    */
+    rejectOnNotFound?: RejectOnNotFound
+  }
+      
 
   /**
    * Skills findFirstOrThrow
@@ -8957,7 +9418,7 @@ export namespace Prisma {
      * 
      * Determine the order of Skills to fetch.
      */
-    orderBy?: SkillsOrderByWithRelationInput | SkillsOrderByWithRelationInput[]
+    orderBy?: Enumerable<SkillsOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
@@ -8981,7 +9442,7 @@ export namespace Prisma {
      * 
      * Filter by unique combinations of Skills.
      */
-    distinct?: SkillsScalarFieldEnum | SkillsScalarFieldEnum[]
+    distinct?: Enumerable<SkillsScalarFieldEnum>
   }
 
 
@@ -9006,7 +9467,7 @@ export namespace Prisma {
      * 
      * Determine the order of Skills to fetch.
      */
-    orderBy?: SkillsOrderByWithRelationInput | SkillsOrderByWithRelationInput[]
+    orderBy?: Enumerable<SkillsOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
@@ -9025,7 +9486,7 @@ export namespace Prisma {
      * Skip the first `n` Skills.
      */
     skip?: number
-    distinct?: SkillsScalarFieldEnum | SkillsScalarFieldEnum[]
+    distinct?: Enumerable<SkillsScalarFieldEnum>
   }
 
 
@@ -9055,7 +9516,7 @@ export namespace Prisma {
     /**
      * The data used to create many Skills.
      */
-    data: SkillsCreateManyInput | SkillsCreateManyInput[]
+    data: Enumerable<SkillsCreateManyInput>
     skipDuplicates?: boolean
   }
 
@@ -9174,7 +9635,7 @@ export namespace Prisma {
   /**
    * Skills without action
    */
-  export type SkillsDefaultArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+  export type SkillsArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Skills
      */
@@ -9190,6 +9651,7 @@ export namespace Prisma {
   /**
    * Model Experiences
    */
+
 
   export type AggregateExperiences = {
     _count: ExperiencesCountAggregateOutputType | null
@@ -9216,6 +9678,8 @@ export namespace Prisma {
     end: Date | null
     iscurrent: boolean | null
     userId: bigint | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type ExperiencesMaxAggregateOutputType = {
@@ -9225,6 +9689,8 @@ export namespace Prisma {
     end: Date | null
     iscurrent: boolean | null
     userId: bigint | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type ExperiencesCountAggregateOutputType = {
@@ -9234,6 +9700,8 @@ export namespace Prisma {
     end: number
     iscurrent: number
     userId: number
+    createdAt: number
+    updatedAt: number
     _all: number
   }
 
@@ -9255,6 +9723,8 @@ export namespace Prisma {
     end?: true
     iscurrent?: true
     userId?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type ExperiencesMaxAggregateInputType = {
@@ -9264,6 +9734,8 @@ export namespace Prisma {
     end?: true
     iscurrent?: true
     userId?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type ExperiencesCountAggregateInputType = {
@@ -9273,6 +9745,8 @@ export namespace Prisma {
     end?: true
     iscurrent?: true
     userId?: true
+    createdAt?: true
+    updatedAt?: true
     _all?: true
   }
 
@@ -9286,7 +9760,7 @@ export namespace Prisma {
      * 
      * Determine the order of Experiences to fetch.
      */
-    orderBy?: ExperiencesOrderByWithRelationInput | ExperiencesOrderByWithRelationInput[]
+    orderBy?: Enumerable<ExperiencesOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
@@ -9350,8 +9824,8 @@ export namespace Prisma {
 
   export type ExperiencesGroupByArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     where?: ExperiencesWhereInput
-    orderBy?: ExperiencesOrderByWithAggregationInput | ExperiencesOrderByWithAggregationInput[]
-    by: ExperiencesScalarFieldEnum[] | ExperiencesScalarFieldEnum
+    orderBy?: Enumerable<ExperiencesOrderByWithAggregationInput>
+    by: ExperiencesScalarFieldEnum[]
     having?: ExperiencesScalarWhereWithAggregatesInput
     take?: number
     skip?: number
@@ -9362,6 +9836,7 @@ export namespace Prisma {
     _max?: ExperiencesMaxAggregateInputType
   }
 
+
   export type ExperiencesGroupByOutputType = {
     id: bigint
     company: string
@@ -9369,6 +9844,8 @@ export namespace Prisma {
     end: Date | null
     iscurrent: boolean | null
     userId: bigint | null
+    createdAt: Date
+    updatedAt: Date | null
     _count: ExperiencesCountAggregateOutputType | null
     _avg: ExperiencesAvgAggregateOutputType | null
     _sum: ExperiencesSumAggregateOutputType | null
@@ -9378,7 +9855,7 @@ export namespace Prisma {
 
   type GetExperiencesGroupByPayload<T extends ExperiencesGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<ExperiencesGroupByOutputType, T['by']> &
+      PickArray<ExperiencesGroupByOutputType, T['by']> &
         {
           [P in ((keyof T) & (keyof ExperiencesGroupByOutputType))]: P extends '_count'
             ? T[P] extends boolean
@@ -9397,6 +9874,8 @@ export namespace Prisma {
     end?: boolean
     iscurrent?: boolean
     userId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
     user?: boolean | Experiences$userArgs<ExtArgs>
   }, ExtArgs["result"]["experiences"]>
 
@@ -9407,6 +9886,8 @@ export namespace Prisma {
     end?: boolean
     iscurrent?: boolean
     userId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
   }
 
   export type ExperiencesInclude<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
@@ -9414,31 +9895,14 @@ export namespace Prisma {
   }
 
 
-  export type $ExperiencesPayload<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
-    name: "Experiences"
-    objects: {
-      user: Prisma.$UserPayload<ExtArgs> | null
-    }
-    scalars: $Extensions.GetResult<{
-      id: bigint
-      company: string
-      start: Date
-      end: Date | null
-      iscurrent: boolean | null
-      userId: bigint | null
-    }, ExtArgs["result"]["experiences"]>
-    composites: {}
-  }
-
-
-  type ExperiencesGetPayload<S extends boolean | null | undefined | ExperiencesDefaultArgs> = $Result.GetResult<Prisma.$ExperiencesPayload, S>
+  type ExperiencesGetPayload<S extends boolean | null | undefined | ExperiencesArgs> = $Types.GetResult<ExperiencesPayload, S>
 
   type ExperiencesCountArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = 
     Omit<ExperiencesFindManyArgs, 'select' | 'include'> & {
       select?: ExperiencesCountAggregateInputType | true
     }
 
-  export interface ExperiencesDelegate<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> {
+  export interface ExperiencesDelegate<GlobalRejectSettings extends Prisma.RejectOnNotFound | Prisma.RejectPerOperation | false | undefined, ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> {
     [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Experiences'], meta: { name: 'Experiences' } }
     /**
      * Find zero or one Experiences that matches the filter.
@@ -9451,9 +9915,9 @@ export namespace Prisma {
      *   }
      * })
     **/
-    findUnique<T extends ExperiencesFindUniqueArgs<ExtArgs>>(
+    findUnique<T extends ExperiencesFindUniqueArgs<ExtArgs>, LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
       args: SelectSubset<T, ExperiencesFindUniqueArgs<ExtArgs>>
-    ): Prisma__ExperiencesClient<$Result.GetResult<Prisma.$ExperiencesPayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findUnique', 'Experiences'> extends True ? Prisma__ExperiencesClient<$Types.GetResult<ExperiencesPayload<ExtArgs>, T, 'findUnique', never>, never, ExtArgs> : Prisma__ExperiencesClient<$Types.GetResult<ExperiencesPayload<ExtArgs>, T, 'findUnique', never> | null, null, ExtArgs>
 
     /**
      * Find one Experiences that matches the filter or throw an error  with `error.code='P2025'` 
@@ -9469,7 +9933,7 @@ export namespace Prisma {
     **/
     findUniqueOrThrow<T extends ExperiencesFindUniqueOrThrowArgs<ExtArgs>>(
       args?: SelectSubset<T, ExperiencesFindUniqueOrThrowArgs<ExtArgs>>
-    ): Prisma__ExperiencesClient<$Result.GetResult<Prisma.$ExperiencesPayload<ExtArgs>, T, 'findUniqueOrThrow'>, never, ExtArgs>
+    ): Prisma__ExperiencesClient<$Types.GetResult<ExperiencesPayload<ExtArgs>, T, 'findUniqueOrThrow', never>, never, ExtArgs>
 
     /**
      * Find the first Experiences that matches the filter.
@@ -9484,13 +9948,13 @@ export namespace Prisma {
      *   }
      * })
     **/
-    findFirst<T extends ExperiencesFindFirstArgs<ExtArgs>>(
+    findFirst<T extends ExperiencesFindFirstArgs<ExtArgs>, LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
       args?: SelectSubset<T, ExperiencesFindFirstArgs<ExtArgs>>
-    ): Prisma__ExperiencesClient<$Result.GetResult<Prisma.$ExperiencesPayload<ExtArgs>, T, 'findFirst'> | null, null, ExtArgs>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findFirst', 'Experiences'> extends True ? Prisma__ExperiencesClient<$Types.GetResult<ExperiencesPayload<ExtArgs>, T, 'findFirst', never>, never, ExtArgs> : Prisma__ExperiencesClient<$Types.GetResult<ExperiencesPayload<ExtArgs>, T, 'findFirst', never> | null, null, ExtArgs>
 
     /**
      * Find the first Experiences that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * throw `NotFoundError` if no matches were found.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
      * @param {ExperiencesFindFirstOrThrowArgs} args - Arguments to find a Experiences
@@ -9504,7 +9968,7 @@ export namespace Prisma {
     **/
     findFirstOrThrow<T extends ExperiencesFindFirstOrThrowArgs<ExtArgs>>(
       args?: SelectSubset<T, ExperiencesFindFirstOrThrowArgs<ExtArgs>>
-    ): Prisma__ExperiencesClient<$Result.GetResult<Prisma.$ExperiencesPayload<ExtArgs>, T, 'findFirstOrThrow'>, never, ExtArgs>
+    ): Prisma__ExperiencesClient<$Types.GetResult<ExperiencesPayload<ExtArgs>, T, 'findFirstOrThrow', never>, never, ExtArgs>
 
     /**
      * Find zero or more Experiences that matches the filter.
@@ -9524,7 +9988,7 @@ export namespace Prisma {
     **/
     findMany<T extends ExperiencesFindManyArgs<ExtArgs>>(
       args?: SelectSubset<T, ExperiencesFindManyArgs<ExtArgs>>
-    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExperiencesPayload<ExtArgs>, T, 'findMany'>>
+    ): Prisma.PrismaPromise<$Types.GetResult<ExperiencesPayload<ExtArgs>, T, 'findMany', never>>
 
     /**
      * Create a Experiences.
@@ -9540,7 +10004,7 @@ export namespace Prisma {
     **/
     create<T extends ExperiencesCreateArgs<ExtArgs>>(
       args: SelectSubset<T, ExperiencesCreateArgs<ExtArgs>>
-    ): Prisma__ExperiencesClient<$Result.GetResult<Prisma.$ExperiencesPayload<ExtArgs>, T, 'create'>, never, ExtArgs>
+    ): Prisma__ExperiencesClient<$Types.GetResult<ExperiencesPayload<ExtArgs>, T, 'create', never>, never, ExtArgs>
 
     /**
      * Create many Experiences.
@@ -9572,7 +10036,7 @@ export namespace Prisma {
     **/
     delete<T extends ExperiencesDeleteArgs<ExtArgs>>(
       args: SelectSubset<T, ExperiencesDeleteArgs<ExtArgs>>
-    ): Prisma__ExperiencesClient<$Result.GetResult<Prisma.$ExperiencesPayload<ExtArgs>, T, 'delete'>, never, ExtArgs>
+    ): Prisma__ExperiencesClient<$Types.GetResult<ExperiencesPayload<ExtArgs>, T, 'delete', never>, never, ExtArgs>
 
     /**
      * Update one Experiences.
@@ -9591,7 +10055,7 @@ export namespace Prisma {
     **/
     update<T extends ExperiencesUpdateArgs<ExtArgs>>(
       args: SelectSubset<T, ExperiencesUpdateArgs<ExtArgs>>
-    ): Prisma__ExperiencesClient<$Result.GetResult<Prisma.$ExperiencesPayload<ExtArgs>, T, 'update'>, never, ExtArgs>
+    ): Prisma__ExperiencesClient<$Types.GetResult<ExperiencesPayload<ExtArgs>, T, 'update', never>, never, ExtArgs>
 
     /**
      * Delete zero or more Experiences.
@@ -9649,7 +10113,7 @@ export namespace Prisma {
     **/
     upsert<T extends ExperiencesUpsertArgs<ExtArgs>>(
       args: SelectSubset<T, ExperiencesUpsertArgs<ExtArgs>>
-    ): Prisma__ExperiencesClient<$Result.GetResult<Prisma.$ExperiencesPayload<ExtArgs>, T, 'upsert'>, never, ExtArgs>
+    ): Prisma__ExperiencesClient<$Types.GetResult<ExperiencesPayload<ExtArgs>, T, 'upsert', never>, never, ExtArgs>
 
     /**
      * Count the number of Experiences.
@@ -9728,7 +10192,7 @@ export namespace Prisma {
         ? { orderBy: ExperiencesGroupByArgs['orderBy'] }
         : { orderBy?: ExperiencesGroupByArgs['orderBy'] },
       OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByFields extends TupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
       HavingFields extends GetHavingFields<T['having']>,
       HavingValid extends Has<ByFields, HavingFields>,
@@ -9776,10 +10240,7 @@ export namespace Prisma {
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
     >(args: SubsetIntersection<T, ExperiencesGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetExperiencesGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the Experiences model
-   */
-  readonly fields: ExperiencesFieldRefs;
+
   }
 
   /**
@@ -9788,54 +10249,54 @@ export namespace Prisma {
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__ExperiencesClient<T, Null = never, ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+  export class Prisma__ExperiencesClient<T, Null = never, ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> implements Prisma.PrismaPromise<T> {
+    private readonly _dmmf;
+    private readonly _queryType;
+    private readonly _rootField;
+    private readonly _clientMethod;
+    private readonly _args;
+    private readonly _dataPath;
+    private readonly _errorFormat;
+    private readonly _measurePerformance?;
+    private _isList;
+    private _callsite;
+    private _requestPromise?;
     readonly [Symbol.toStringTag]: 'PrismaPromise';
+    constructor(_dmmf: runtime.DMMFClass, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
 
-    user<T extends Experiences$userArgs<ExtArgs> = {}>(args?: Subset<T, Experiences$userArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
+    user<T extends Experiences$userArgs<ExtArgs> = {}>(args?: Subset<T, Experiences$userArgs<ExtArgs>>): Prisma__UserClient<$Types.GetResult<UserPayload<ExtArgs>, T, 'findUnique', never> | Null, never, ExtArgs>;
 
+    private get _document();
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
      * @param onrejected The callback to execute when the Promise is rejected.
      * @returns A Promise for the completion of which ever callback is executed.
      */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>;
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): Promise<TResult1 | TResult2>;
     /**
      * Attaches a callback for only the rejection of the Promise.
      * @param onrejected The callback to execute when the Promise is rejected.
      * @returns A Promise for the completion of the callback.
      */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>;
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): Promise<T | TResult>;
     /**
      * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
      * resolved value cannot be modified from the callback.
      * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
      * @returns A Promise for the completion of the callback.
      */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>;
+    finally(onfinally?: (() => void) | undefined | null): Promise<T>;
   }
 
 
-
-  /**
-   * Fields of the Experiences model
-   */ 
-  interface ExperiencesFieldRefs {
-    readonly id: FieldRef<"Experiences", 'BigInt'>
-    readonly company: FieldRef<"Experiences", 'String'>
-    readonly start: FieldRef<"Experiences", 'DateTime'>
-    readonly end: FieldRef<"Experiences", 'DateTime'>
-    readonly iscurrent: FieldRef<"Experiences", 'Boolean'>
-    readonly userId: FieldRef<"Experiences", 'BigInt'>
-  }
-    
 
   // Custom InputTypes
 
   /**
-   * Experiences findUnique
+   * Experiences base type for findUnique actions
    */
-  export type ExperiencesFindUniqueArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+  export type ExperiencesFindUniqueArgsBase<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Experiences
      */
@@ -9850,6 +10311,17 @@ export namespace Prisma {
     where: ExperiencesWhereUniqueInput
   }
 
+  /**
+   * Experiences findUnique
+   */
+  export interface ExperiencesFindUniqueArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> extends ExperiencesFindUniqueArgsBase<ExtArgs> {
+   /**
+    * Throw an Error if query returns no results
+    * @deprecated since 4.0.0: use `findUniqueOrThrow` method instead
+    */
+    rejectOnNotFound?: RejectOnNotFound
+  }
+      
 
   /**
    * Experiences findUniqueOrThrow
@@ -9871,9 +10343,9 @@ export namespace Prisma {
 
 
   /**
-   * Experiences findFirst
+   * Experiences base type for findFirst actions
    */
-  export type ExperiencesFindFirstArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+  export type ExperiencesFindFirstArgsBase<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Experiences
      */
@@ -9891,7 +10363,7 @@ export namespace Prisma {
      * 
      * Determine the order of Experiences to fetch.
      */
-    orderBy?: ExperiencesOrderByWithRelationInput | ExperiencesOrderByWithRelationInput[]
+    orderBy?: Enumerable<ExperiencesOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
@@ -9915,9 +10387,20 @@ export namespace Prisma {
      * 
      * Filter by unique combinations of Experiences.
      */
-    distinct?: ExperiencesScalarFieldEnum | ExperiencesScalarFieldEnum[]
+    distinct?: Enumerable<ExperiencesScalarFieldEnum>
   }
 
+  /**
+   * Experiences findFirst
+   */
+  export interface ExperiencesFindFirstArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> extends ExperiencesFindFirstArgsBase<ExtArgs> {
+   /**
+    * Throw an Error if query returns no results
+    * @deprecated since 4.0.0: use `findFirstOrThrow` method instead
+    */
+    rejectOnNotFound?: RejectOnNotFound
+  }
+      
 
   /**
    * Experiences findFirstOrThrow
@@ -9940,7 +10423,7 @@ export namespace Prisma {
      * 
      * Determine the order of Experiences to fetch.
      */
-    orderBy?: ExperiencesOrderByWithRelationInput | ExperiencesOrderByWithRelationInput[]
+    orderBy?: Enumerable<ExperiencesOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
@@ -9964,7 +10447,7 @@ export namespace Prisma {
      * 
      * Filter by unique combinations of Experiences.
      */
-    distinct?: ExperiencesScalarFieldEnum | ExperiencesScalarFieldEnum[]
+    distinct?: Enumerable<ExperiencesScalarFieldEnum>
   }
 
 
@@ -9989,7 +10472,7 @@ export namespace Prisma {
      * 
      * Determine the order of Experiences to fetch.
      */
-    orderBy?: ExperiencesOrderByWithRelationInput | ExperiencesOrderByWithRelationInput[]
+    orderBy?: Enumerable<ExperiencesOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
@@ -10008,7 +10491,7 @@ export namespace Prisma {
      * Skip the first `n` Experiences.
      */
     skip?: number
-    distinct?: ExperiencesScalarFieldEnum | ExperiencesScalarFieldEnum[]
+    distinct?: Enumerable<ExperiencesScalarFieldEnum>
   }
 
 
@@ -10038,7 +10521,7 @@ export namespace Prisma {
     /**
      * The data used to create many Experiences.
      */
-    data: ExperiencesCreateManyInput | ExperiencesCreateManyInput[]
+    data: Enumerable<ExperiencesCreateManyInput>
     skipDuplicates?: boolean
   }
 
@@ -10157,7 +10640,7 @@ export namespace Prisma {
   /**
    * Experiences without action
    */
-  export type ExperiencesDefaultArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+  export type ExperiencesArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Experiences
      */
@@ -10173,6 +10656,7 @@ export namespace Prisma {
   /**
    * Model Projects
    */
+
 
   export type AggregateProjects = {
     _count: ProjectsCountAggregateOutputType | null
@@ -10200,6 +10684,8 @@ export namespace Prisma {
     end: Date | null
     iscurrent: boolean | null
     userId: bigint | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type ProjectsMaxAggregateOutputType = {
@@ -10210,6 +10696,8 @@ export namespace Prisma {
     end: Date | null
     iscurrent: boolean | null
     userId: bigint | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type ProjectsCountAggregateOutputType = {
@@ -10220,6 +10708,8 @@ export namespace Prisma {
     end: number
     iscurrent: number
     userId: number
+    createdAt: number
+    updatedAt: number
     _all: number
   }
 
@@ -10242,6 +10732,8 @@ export namespace Prisma {
     end?: true
     iscurrent?: true
     userId?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type ProjectsMaxAggregateInputType = {
@@ -10252,6 +10744,8 @@ export namespace Prisma {
     end?: true
     iscurrent?: true
     userId?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type ProjectsCountAggregateInputType = {
@@ -10262,6 +10756,8 @@ export namespace Prisma {
     end?: true
     iscurrent?: true
     userId?: true
+    createdAt?: true
+    updatedAt?: true
     _all?: true
   }
 
@@ -10275,7 +10771,7 @@ export namespace Prisma {
      * 
      * Determine the order of Projects to fetch.
      */
-    orderBy?: ProjectsOrderByWithRelationInput | ProjectsOrderByWithRelationInput[]
+    orderBy?: Enumerable<ProjectsOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
@@ -10339,8 +10835,8 @@ export namespace Prisma {
 
   export type ProjectsGroupByArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     where?: ProjectsWhereInput
-    orderBy?: ProjectsOrderByWithAggregationInput | ProjectsOrderByWithAggregationInput[]
-    by: ProjectsScalarFieldEnum[] | ProjectsScalarFieldEnum
+    orderBy?: Enumerable<ProjectsOrderByWithAggregationInput>
+    by: ProjectsScalarFieldEnum[]
     having?: ProjectsScalarWhereWithAggregatesInput
     take?: number
     skip?: number
@@ -10351,6 +10847,7 @@ export namespace Prisma {
     _max?: ProjectsMaxAggregateInputType
   }
 
+
   export type ProjectsGroupByOutputType = {
     id: bigint
     name: string
@@ -10359,6 +10856,8 @@ export namespace Prisma {
     end: Date | null
     iscurrent: boolean | null
     userId: bigint | null
+    createdAt: Date
+    updatedAt: Date | null
     _count: ProjectsCountAggregateOutputType | null
     _avg: ProjectsAvgAggregateOutputType | null
     _sum: ProjectsSumAggregateOutputType | null
@@ -10368,7 +10867,7 @@ export namespace Prisma {
 
   type GetProjectsGroupByPayload<T extends ProjectsGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<ProjectsGroupByOutputType, T['by']> &
+      PickArray<ProjectsGroupByOutputType, T['by']> &
         {
           [P in ((keyof T) & (keyof ProjectsGroupByOutputType))]: P extends '_count'
             ? T[P] extends boolean
@@ -10388,6 +10887,8 @@ export namespace Prisma {
     end?: boolean
     iscurrent?: boolean
     userId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
     user?: boolean | Projects$userArgs<ExtArgs>
   }, ExtArgs["result"]["projects"]>
 
@@ -10399,6 +10900,8 @@ export namespace Prisma {
     end?: boolean
     iscurrent?: boolean
     userId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
   }
 
   export type ProjectsInclude<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
@@ -10406,32 +10909,14 @@ export namespace Prisma {
   }
 
 
-  export type $ProjectsPayload<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
-    name: "Projects"
-    objects: {
-      user: Prisma.$UserPayload<ExtArgs> | null
-    }
-    scalars: $Extensions.GetResult<{
-      id: bigint
-      name: string
-      description: string | null
-      start: Date
-      end: Date | null
-      iscurrent: boolean | null
-      userId: bigint | null
-    }, ExtArgs["result"]["projects"]>
-    composites: {}
-  }
-
-
-  type ProjectsGetPayload<S extends boolean | null | undefined | ProjectsDefaultArgs> = $Result.GetResult<Prisma.$ProjectsPayload, S>
+  type ProjectsGetPayload<S extends boolean | null | undefined | ProjectsArgs> = $Types.GetResult<ProjectsPayload, S>
 
   type ProjectsCountArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = 
     Omit<ProjectsFindManyArgs, 'select' | 'include'> & {
       select?: ProjectsCountAggregateInputType | true
     }
 
-  export interface ProjectsDelegate<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> {
+  export interface ProjectsDelegate<GlobalRejectSettings extends Prisma.RejectOnNotFound | Prisma.RejectPerOperation | false | undefined, ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> {
     [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Projects'], meta: { name: 'Projects' } }
     /**
      * Find zero or one Projects that matches the filter.
@@ -10444,9 +10929,9 @@ export namespace Prisma {
      *   }
      * })
     **/
-    findUnique<T extends ProjectsFindUniqueArgs<ExtArgs>>(
+    findUnique<T extends ProjectsFindUniqueArgs<ExtArgs>, LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
       args: SelectSubset<T, ProjectsFindUniqueArgs<ExtArgs>>
-    ): Prisma__ProjectsClient<$Result.GetResult<Prisma.$ProjectsPayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findUnique', 'Projects'> extends True ? Prisma__ProjectsClient<$Types.GetResult<ProjectsPayload<ExtArgs>, T, 'findUnique', never>, never, ExtArgs> : Prisma__ProjectsClient<$Types.GetResult<ProjectsPayload<ExtArgs>, T, 'findUnique', never> | null, null, ExtArgs>
 
     /**
      * Find one Projects that matches the filter or throw an error  with `error.code='P2025'` 
@@ -10462,7 +10947,7 @@ export namespace Prisma {
     **/
     findUniqueOrThrow<T extends ProjectsFindUniqueOrThrowArgs<ExtArgs>>(
       args?: SelectSubset<T, ProjectsFindUniqueOrThrowArgs<ExtArgs>>
-    ): Prisma__ProjectsClient<$Result.GetResult<Prisma.$ProjectsPayload<ExtArgs>, T, 'findUniqueOrThrow'>, never, ExtArgs>
+    ): Prisma__ProjectsClient<$Types.GetResult<ProjectsPayload<ExtArgs>, T, 'findUniqueOrThrow', never>, never, ExtArgs>
 
     /**
      * Find the first Projects that matches the filter.
@@ -10477,13 +10962,13 @@ export namespace Prisma {
      *   }
      * })
     **/
-    findFirst<T extends ProjectsFindFirstArgs<ExtArgs>>(
+    findFirst<T extends ProjectsFindFirstArgs<ExtArgs>, LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
       args?: SelectSubset<T, ProjectsFindFirstArgs<ExtArgs>>
-    ): Prisma__ProjectsClient<$Result.GetResult<Prisma.$ProjectsPayload<ExtArgs>, T, 'findFirst'> | null, null, ExtArgs>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findFirst', 'Projects'> extends True ? Prisma__ProjectsClient<$Types.GetResult<ProjectsPayload<ExtArgs>, T, 'findFirst', never>, never, ExtArgs> : Prisma__ProjectsClient<$Types.GetResult<ProjectsPayload<ExtArgs>, T, 'findFirst', never> | null, null, ExtArgs>
 
     /**
      * Find the first Projects that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * throw `NotFoundError` if no matches were found.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
      * @param {ProjectsFindFirstOrThrowArgs} args - Arguments to find a Projects
@@ -10497,7 +10982,7 @@ export namespace Prisma {
     **/
     findFirstOrThrow<T extends ProjectsFindFirstOrThrowArgs<ExtArgs>>(
       args?: SelectSubset<T, ProjectsFindFirstOrThrowArgs<ExtArgs>>
-    ): Prisma__ProjectsClient<$Result.GetResult<Prisma.$ProjectsPayload<ExtArgs>, T, 'findFirstOrThrow'>, never, ExtArgs>
+    ): Prisma__ProjectsClient<$Types.GetResult<ProjectsPayload<ExtArgs>, T, 'findFirstOrThrow', never>, never, ExtArgs>
 
     /**
      * Find zero or more Projects that matches the filter.
@@ -10517,7 +11002,7 @@ export namespace Prisma {
     **/
     findMany<T extends ProjectsFindManyArgs<ExtArgs>>(
       args?: SelectSubset<T, ProjectsFindManyArgs<ExtArgs>>
-    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProjectsPayload<ExtArgs>, T, 'findMany'>>
+    ): Prisma.PrismaPromise<$Types.GetResult<ProjectsPayload<ExtArgs>, T, 'findMany', never>>
 
     /**
      * Create a Projects.
@@ -10533,7 +11018,7 @@ export namespace Prisma {
     **/
     create<T extends ProjectsCreateArgs<ExtArgs>>(
       args: SelectSubset<T, ProjectsCreateArgs<ExtArgs>>
-    ): Prisma__ProjectsClient<$Result.GetResult<Prisma.$ProjectsPayload<ExtArgs>, T, 'create'>, never, ExtArgs>
+    ): Prisma__ProjectsClient<$Types.GetResult<ProjectsPayload<ExtArgs>, T, 'create', never>, never, ExtArgs>
 
     /**
      * Create many Projects.
@@ -10565,7 +11050,7 @@ export namespace Prisma {
     **/
     delete<T extends ProjectsDeleteArgs<ExtArgs>>(
       args: SelectSubset<T, ProjectsDeleteArgs<ExtArgs>>
-    ): Prisma__ProjectsClient<$Result.GetResult<Prisma.$ProjectsPayload<ExtArgs>, T, 'delete'>, never, ExtArgs>
+    ): Prisma__ProjectsClient<$Types.GetResult<ProjectsPayload<ExtArgs>, T, 'delete', never>, never, ExtArgs>
 
     /**
      * Update one Projects.
@@ -10584,7 +11069,7 @@ export namespace Prisma {
     **/
     update<T extends ProjectsUpdateArgs<ExtArgs>>(
       args: SelectSubset<T, ProjectsUpdateArgs<ExtArgs>>
-    ): Prisma__ProjectsClient<$Result.GetResult<Prisma.$ProjectsPayload<ExtArgs>, T, 'update'>, never, ExtArgs>
+    ): Prisma__ProjectsClient<$Types.GetResult<ProjectsPayload<ExtArgs>, T, 'update', never>, never, ExtArgs>
 
     /**
      * Delete zero or more Projects.
@@ -10642,7 +11127,7 @@ export namespace Prisma {
     **/
     upsert<T extends ProjectsUpsertArgs<ExtArgs>>(
       args: SelectSubset<T, ProjectsUpsertArgs<ExtArgs>>
-    ): Prisma__ProjectsClient<$Result.GetResult<Prisma.$ProjectsPayload<ExtArgs>, T, 'upsert'>, never, ExtArgs>
+    ): Prisma__ProjectsClient<$Types.GetResult<ProjectsPayload<ExtArgs>, T, 'upsert', never>, never, ExtArgs>
 
     /**
      * Count the number of Projects.
@@ -10721,7 +11206,7 @@ export namespace Prisma {
         ? { orderBy: ProjectsGroupByArgs['orderBy'] }
         : { orderBy?: ProjectsGroupByArgs['orderBy'] },
       OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByFields extends TupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
       HavingFields extends GetHavingFields<T['having']>,
       HavingValid extends Has<ByFields, HavingFields>,
@@ -10769,10 +11254,7 @@ export namespace Prisma {
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
     >(args: SubsetIntersection<T, ProjectsGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetProjectsGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the Projects model
-   */
-  readonly fields: ProjectsFieldRefs;
+
   }
 
   /**
@@ -10781,55 +11263,54 @@ export namespace Prisma {
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__ProjectsClient<T, Null = never, ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+  export class Prisma__ProjectsClient<T, Null = never, ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> implements Prisma.PrismaPromise<T> {
+    private readonly _dmmf;
+    private readonly _queryType;
+    private readonly _rootField;
+    private readonly _clientMethod;
+    private readonly _args;
+    private readonly _dataPath;
+    private readonly _errorFormat;
+    private readonly _measurePerformance?;
+    private _isList;
+    private _callsite;
+    private _requestPromise?;
     readonly [Symbol.toStringTag]: 'PrismaPromise';
+    constructor(_dmmf: runtime.DMMFClass, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
 
-    user<T extends Projects$userArgs<ExtArgs> = {}>(args?: Subset<T, Projects$userArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
+    user<T extends Projects$userArgs<ExtArgs> = {}>(args?: Subset<T, Projects$userArgs<ExtArgs>>): Prisma__UserClient<$Types.GetResult<UserPayload<ExtArgs>, T, 'findUnique', never> | Null, never, ExtArgs>;
 
+    private get _document();
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
      * @param onrejected The callback to execute when the Promise is rejected.
      * @returns A Promise for the completion of which ever callback is executed.
      */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>;
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): Promise<TResult1 | TResult2>;
     /**
      * Attaches a callback for only the rejection of the Promise.
      * @param onrejected The callback to execute when the Promise is rejected.
      * @returns A Promise for the completion of the callback.
      */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>;
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): Promise<T | TResult>;
     /**
      * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
      * resolved value cannot be modified from the callback.
      * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
      * @returns A Promise for the completion of the callback.
      */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>;
+    finally(onfinally?: (() => void) | undefined | null): Promise<T>;
   }
 
 
-
-  /**
-   * Fields of the Projects model
-   */ 
-  interface ProjectsFieldRefs {
-    readonly id: FieldRef<"Projects", 'BigInt'>
-    readonly name: FieldRef<"Projects", 'String'>
-    readonly description: FieldRef<"Projects", 'String'>
-    readonly start: FieldRef<"Projects", 'DateTime'>
-    readonly end: FieldRef<"Projects", 'DateTime'>
-    readonly iscurrent: FieldRef<"Projects", 'Boolean'>
-    readonly userId: FieldRef<"Projects", 'BigInt'>
-  }
-    
 
   // Custom InputTypes
 
   /**
-   * Projects findUnique
+   * Projects base type for findUnique actions
    */
-  export type ProjectsFindUniqueArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+  export type ProjectsFindUniqueArgsBase<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Projects
      */
@@ -10844,6 +11325,17 @@ export namespace Prisma {
     where: ProjectsWhereUniqueInput
   }
 
+  /**
+   * Projects findUnique
+   */
+  export interface ProjectsFindUniqueArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> extends ProjectsFindUniqueArgsBase<ExtArgs> {
+   /**
+    * Throw an Error if query returns no results
+    * @deprecated since 4.0.0: use `findUniqueOrThrow` method instead
+    */
+    rejectOnNotFound?: RejectOnNotFound
+  }
+      
 
   /**
    * Projects findUniqueOrThrow
@@ -10865,9 +11357,9 @@ export namespace Prisma {
 
 
   /**
-   * Projects findFirst
+   * Projects base type for findFirst actions
    */
-  export type ProjectsFindFirstArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+  export type ProjectsFindFirstArgsBase<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Projects
      */
@@ -10885,7 +11377,7 @@ export namespace Prisma {
      * 
      * Determine the order of Projects to fetch.
      */
-    orderBy?: ProjectsOrderByWithRelationInput | ProjectsOrderByWithRelationInput[]
+    orderBy?: Enumerable<ProjectsOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
@@ -10909,9 +11401,20 @@ export namespace Prisma {
      * 
      * Filter by unique combinations of Projects.
      */
-    distinct?: ProjectsScalarFieldEnum | ProjectsScalarFieldEnum[]
+    distinct?: Enumerable<ProjectsScalarFieldEnum>
   }
 
+  /**
+   * Projects findFirst
+   */
+  export interface ProjectsFindFirstArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> extends ProjectsFindFirstArgsBase<ExtArgs> {
+   /**
+    * Throw an Error if query returns no results
+    * @deprecated since 4.0.0: use `findFirstOrThrow` method instead
+    */
+    rejectOnNotFound?: RejectOnNotFound
+  }
+      
 
   /**
    * Projects findFirstOrThrow
@@ -10934,7 +11437,7 @@ export namespace Prisma {
      * 
      * Determine the order of Projects to fetch.
      */
-    orderBy?: ProjectsOrderByWithRelationInput | ProjectsOrderByWithRelationInput[]
+    orderBy?: Enumerable<ProjectsOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
@@ -10958,7 +11461,7 @@ export namespace Prisma {
      * 
      * Filter by unique combinations of Projects.
      */
-    distinct?: ProjectsScalarFieldEnum | ProjectsScalarFieldEnum[]
+    distinct?: Enumerable<ProjectsScalarFieldEnum>
   }
 
 
@@ -10983,7 +11486,7 @@ export namespace Prisma {
      * 
      * Determine the order of Projects to fetch.
      */
-    orderBy?: ProjectsOrderByWithRelationInput | ProjectsOrderByWithRelationInput[]
+    orderBy?: Enumerable<ProjectsOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
@@ -11002,7 +11505,7 @@ export namespace Prisma {
      * Skip the first `n` Projects.
      */
     skip?: number
-    distinct?: ProjectsScalarFieldEnum | ProjectsScalarFieldEnum[]
+    distinct?: Enumerable<ProjectsScalarFieldEnum>
   }
 
 
@@ -11032,7 +11535,7 @@ export namespace Prisma {
     /**
      * The data used to create many Projects.
      */
-    data: ProjectsCreateManyInput | ProjectsCreateManyInput[]
+    data: Enumerable<ProjectsCreateManyInput>
     skipDuplicates?: boolean
   }
 
@@ -11151,7 +11654,7 @@ export namespace Prisma {
   /**
    * Projects without action
    */
-  export type ProjectsDefaultArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+  export type ProjectsArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Projects
      */
@@ -11167,6 +11670,7 @@ export namespace Prisma {
   /**
    * Model Refereces
    */
+
 
   export type AggregateRefereces = {
     _count: ReferecesCountAggregateOutputType | null
@@ -11193,6 +11697,8 @@ export namespace Prisma {
     description: string | null
     value: number | null
     userId: bigint | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type ReferecesMaxAggregateOutputType = {
@@ -11200,6 +11706,8 @@ export namespace Prisma {
     description: string | null
     value: number | null
     userId: bigint | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type ReferecesCountAggregateOutputType = {
@@ -11207,6 +11715,8 @@ export namespace Prisma {
     description: number
     value: number
     userId: number
+    createdAt: number
+    updatedAt: number
     _all: number
   }
 
@@ -11228,6 +11738,8 @@ export namespace Prisma {
     description?: true
     value?: true
     userId?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type ReferecesMaxAggregateInputType = {
@@ -11235,6 +11747,8 @@ export namespace Prisma {
     description?: true
     value?: true
     userId?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type ReferecesCountAggregateInputType = {
@@ -11242,6 +11756,8 @@ export namespace Prisma {
     description?: true
     value?: true
     userId?: true
+    createdAt?: true
+    updatedAt?: true
     _all?: true
   }
 
@@ -11255,7 +11771,7 @@ export namespace Prisma {
      * 
      * Determine the order of Refereces to fetch.
      */
-    orderBy?: ReferecesOrderByWithRelationInput | ReferecesOrderByWithRelationInput[]
+    orderBy?: Enumerable<ReferecesOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
@@ -11319,8 +11835,8 @@ export namespace Prisma {
 
   export type ReferecesGroupByArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     where?: ReferecesWhereInput
-    orderBy?: ReferecesOrderByWithAggregationInput | ReferecesOrderByWithAggregationInput[]
-    by: ReferecesScalarFieldEnum[] | ReferecesScalarFieldEnum
+    orderBy?: Enumerable<ReferecesOrderByWithAggregationInput>
+    by: ReferecesScalarFieldEnum[]
     having?: ReferecesScalarWhereWithAggregatesInput
     take?: number
     skip?: number
@@ -11331,11 +11847,14 @@ export namespace Prisma {
     _max?: ReferecesMaxAggregateInputType
   }
 
+
   export type ReferecesGroupByOutputType = {
     id: bigint
     description: string
     value: number
     userId: bigint | null
+    createdAt: Date
+    updatedAt: Date | null
     _count: ReferecesCountAggregateOutputType | null
     _avg: ReferecesAvgAggregateOutputType | null
     _sum: ReferecesSumAggregateOutputType | null
@@ -11345,7 +11864,7 @@ export namespace Prisma {
 
   type GetReferecesGroupByPayload<T extends ReferecesGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<ReferecesGroupByOutputType, T['by']> &
+      PickArray<ReferecesGroupByOutputType, T['by']> &
         {
           [P in ((keyof T) & (keyof ReferecesGroupByOutputType))]: P extends '_count'
             ? T[P] extends boolean
@@ -11362,6 +11881,8 @@ export namespace Prisma {
     description?: boolean
     value?: boolean
     userId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
     user?: boolean | Refereces$userArgs<ExtArgs>
   }, ExtArgs["result"]["refereces"]>
 
@@ -11370,6 +11891,8 @@ export namespace Prisma {
     description?: boolean
     value?: boolean
     userId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
   }
 
   export type ReferecesInclude<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
@@ -11377,29 +11900,14 @@ export namespace Prisma {
   }
 
 
-  export type $ReferecesPayload<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
-    name: "Refereces"
-    objects: {
-      user: Prisma.$UserPayload<ExtArgs> | null
-    }
-    scalars: $Extensions.GetResult<{
-      id: bigint
-      description: string
-      value: number
-      userId: bigint | null
-    }, ExtArgs["result"]["refereces"]>
-    composites: {}
-  }
-
-
-  type ReferecesGetPayload<S extends boolean | null | undefined | ReferecesDefaultArgs> = $Result.GetResult<Prisma.$ReferecesPayload, S>
+  type ReferecesGetPayload<S extends boolean | null | undefined | ReferecesArgs> = $Types.GetResult<ReferecesPayload, S>
 
   type ReferecesCountArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = 
     Omit<ReferecesFindManyArgs, 'select' | 'include'> & {
       select?: ReferecesCountAggregateInputType | true
     }
 
-  export interface ReferecesDelegate<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> {
+  export interface ReferecesDelegate<GlobalRejectSettings extends Prisma.RejectOnNotFound | Prisma.RejectPerOperation | false | undefined, ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> {
     [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Refereces'], meta: { name: 'Refereces' } }
     /**
      * Find zero or one Refereces that matches the filter.
@@ -11412,9 +11920,9 @@ export namespace Prisma {
      *   }
      * })
     **/
-    findUnique<T extends ReferecesFindUniqueArgs<ExtArgs>>(
+    findUnique<T extends ReferecesFindUniqueArgs<ExtArgs>, LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
       args: SelectSubset<T, ReferecesFindUniqueArgs<ExtArgs>>
-    ): Prisma__ReferecesClient<$Result.GetResult<Prisma.$ReferecesPayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findUnique', 'Refereces'> extends True ? Prisma__ReferecesClient<$Types.GetResult<ReferecesPayload<ExtArgs>, T, 'findUnique', never>, never, ExtArgs> : Prisma__ReferecesClient<$Types.GetResult<ReferecesPayload<ExtArgs>, T, 'findUnique', never> | null, null, ExtArgs>
 
     /**
      * Find one Refereces that matches the filter or throw an error  with `error.code='P2025'` 
@@ -11430,7 +11938,7 @@ export namespace Prisma {
     **/
     findUniqueOrThrow<T extends ReferecesFindUniqueOrThrowArgs<ExtArgs>>(
       args?: SelectSubset<T, ReferecesFindUniqueOrThrowArgs<ExtArgs>>
-    ): Prisma__ReferecesClient<$Result.GetResult<Prisma.$ReferecesPayload<ExtArgs>, T, 'findUniqueOrThrow'>, never, ExtArgs>
+    ): Prisma__ReferecesClient<$Types.GetResult<ReferecesPayload<ExtArgs>, T, 'findUniqueOrThrow', never>, never, ExtArgs>
 
     /**
      * Find the first Refereces that matches the filter.
@@ -11445,13 +11953,13 @@ export namespace Prisma {
      *   }
      * })
     **/
-    findFirst<T extends ReferecesFindFirstArgs<ExtArgs>>(
+    findFirst<T extends ReferecesFindFirstArgs<ExtArgs>, LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
       args?: SelectSubset<T, ReferecesFindFirstArgs<ExtArgs>>
-    ): Prisma__ReferecesClient<$Result.GetResult<Prisma.$ReferecesPayload<ExtArgs>, T, 'findFirst'> | null, null, ExtArgs>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findFirst', 'Refereces'> extends True ? Prisma__ReferecesClient<$Types.GetResult<ReferecesPayload<ExtArgs>, T, 'findFirst', never>, never, ExtArgs> : Prisma__ReferecesClient<$Types.GetResult<ReferecesPayload<ExtArgs>, T, 'findFirst', never> | null, null, ExtArgs>
 
     /**
      * Find the first Refereces that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * throw `NotFoundError` if no matches were found.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
      * @param {ReferecesFindFirstOrThrowArgs} args - Arguments to find a Refereces
@@ -11465,7 +11973,7 @@ export namespace Prisma {
     **/
     findFirstOrThrow<T extends ReferecesFindFirstOrThrowArgs<ExtArgs>>(
       args?: SelectSubset<T, ReferecesFindFirstOrThrowArgs<ExtArgs>>
-    ): Prisma__ReferecesClient<$Result.GetResult<Prisma.$ReferecesPayload<ExtArgs>, T, 'findFirstOrThrow'>, never, ExtArgs>
+    ): Prisma__ReferecesClient<$Types.GetResult<ReferecesPayload<ExtArgs>, T, 'findFirstOrThrow', never>, never, ExtArgs>
 
     /**
      * Find zero or more Refereces that matches the filter.
@@ -11485,7 +11993,7 @@ export namespace Prisma {
     **/
     findMany<T extends ReferecesFindManyArgs<ExtArgs>>(
       args?: SelectSubset<T, ReferecesFindManyArgs<ExtArgs>>
-    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReferecesPayload<ExtArgs>, T, 'findMany'>>
+    ): Prisma.PrismaPromise<$Types.GetResult<ReferecesPayload<ExtArgs>, T, 'findMany', never>>
 
     /**
      * Create a Refereces.
@@ -11501,7 +12009,7 @@ export namespace Prisma {
     **/
     create<T extends ReferecesCreateArgs<ExtArgs>>(
       args: SelectSubset<T, ReferecesCreateArgs<ExtArgs>>
-    ): Prisma__ReferecesClient<$Result.GetResult<Prisma.$ReferecesPayload<ExtArgs>, T, 'create'>, never, ExtArgs>
+    ): Prisma__ReferecesClient<$Types.GetResult<ReferecesPayload<ExtArgs>, T, 'create', never>, never, ExtArgs>
 
     /**
      * Create many Refereces.
@@ -11533,7 +12041,7 @@ export namespace Prisma {
     **/
     delete<T extends ReferecesDeleteArgs<ExtArgs>>(
       args: SelectSubset<T, ReferecesDeleteArgs<ExtArgs>>
-    ): Prisma__ReferecesClient<$Result.GetResult<Prisma.$ReferecesPayload<ExtArgs>, T, 'delete'>, never, ExtArgs>
+    ): Prisma__ReferecesClient<$Types.GetResult<ReferecesPayload<ExtArgs>, T, 'delete', never>, never, ExtArgs>
 
     /**
      * Update one Refereces.
@@ -11552,7 +12060,7 @@ export namespace Prisma {
     **/
     update<T extends ReferecesUpdateArgs<ExtArgs>>(
       args: SelectSubset<T, ReferecesUpdateArgs<ExtArgs>>
-    ): Prisma__ReferecesClient<$Result.GetResult<Prisma.$ReferecesPayload<ExtArgs>, T, 'update'>, never, ExtArgs>
+    ): Prisma__ReferecesClient<$Types.GetResult<ReferecesPayload<ExtArgs>, T, 'update', never>, never, ExtArgs>
 
     /**
      * Delete zero or more Refereces.
@@ -11610,7 +12118,7 @@ export namespace Prisma {
     **/
     upsert<T extends ReferecesUpsertArgs<ExtArgs>>(
       args: SelectSubset<T, ReferecesUpsertArgs<ExtArgs>>
-    ): Prisma__ReferecesClient<$Result.GetResult<Prisma.$ReferecesPayload<ExtArgs>, T, 'upsert'>, never, ExtArgs>
+    ): Prisma__ReferecesClient<$Types.GetResult<ReferecesPayload<ExtArgs>, T, 'upsert', never>, never, ExtArgs>
 
     /**
      * Count the number of Refereces.
@@ -11689,7 +12197,7 @@ export namespace Prisma {
         ? { orderBy: ReferecesGroupByArgs['orderBy'] }
         : { orderBy?: ReferecesGroupByArgs['orderBy'] },
       OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByFields extends TupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
       HavingFields extends GetHavingFields<T['having']>,
       HavingValid extends Has<ByFields, HavingFields>,
@@ -11737,10 +12245,7 @@ export namespace Prisma {
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
     >(args: SubsetIntersection<T, ReferecesGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetReferecesGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the Refereces model
-   */
-  readonly fields: ReferecesFieldRefs;
+
   }
 
   /**
@@ -11749,52 +12254,54 @@ export namespace Prisma {
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__ReferecesClient<T, Null = never, ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+  export class Prisma__ReferecesClient<T, Null = never, ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> implements Prisma.PrismaPromise<T> {
+    private readonly _dmmf;
+    private readonly _queryType;
+    private readonly _rootField;
+    private readonly _clientMethod;
+    private readonly _args;
+    private readonly _dataPath;
+    private readonly _errorFormat;
+    private readonly _measurePerformance?;
+    private _isList;
+    private _callsite;
+    private _requestPromise?;
     readonly [Symbol.toStringTag]: 'PrismaPromise';
+    constructor(_dmmf: runtime.DMMFClass, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
 
-    user<T extends Refereces$userArgs<ExtArgs> = {}>(args?: Subset<T, Refereces$userArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
+    user<T extends Refereces$userArgs<ExtArgs> = {}>(args?: Subset<T, Refereces$userArgs<ExtArgs>>): Prisma__UserClient<$Types.GetResult<UserPayload<ExtArgs>, T, 'findUnique', never> | Null, never, ExtArgs>;
 
+    private get _document();
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
      * @param onrejected The callback to execute when the Promise is rejected.
      * @returns A Promise for the completion of which ever callback is executed.
      */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>;
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): Promise<TResult1 | TResult2>;
     /**
      * Attaches a callback for only the rejection of the Promise.
      * @param onrejected The callback to execute when the Promise is rejected.
      * @returns A Promise for the completion of the callback.
      */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>;
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): Promise<T | TResult>;
     /**
      * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
      * resolved value cannot be modified from the callback.
      * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
      * @returns A Promise for the completion of the callback.
      */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>;
+    finally(onfinally?: (() => void) | undefined | null): Promise<T>;
   }
 
 
-
-  /**
-   * Fields of the Refereces model
-   */ 
-  interface ReferecesFieldRefs {
-    readonly id: FieldRef<"Refereces", 'BigInt'>
-    readonly description: FieldRef<"Refereces", 'String'>
-    readonly value: FieldRef<"Refereces", 'Float'>
-    readonly userId: FieldRef<"Refereces", 'BigInt'>
-  }
-    
 
   // Custom InputTypes
 
   /**
-   * Refereces findUnique
+   * Refereces base type for findUnique actions
    */
-  export type ReferecesFindUniqueArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+  export type ReferecesFindUniqueArgsBase<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Refereces
      */
@@ -11809,6 +12316,17 @@ export namespace Prisma {
     where: ReferecesWhereUniqueInput
   }
 
+  /**
+   * Refereces findUnique
+   */
+  export interface ReferecesFindUniqueArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> extends ReferecesFindUniqueArgsBase<ExtArgs> {
+   /**
+    * Throw an Error if query returns no results
+    * @deprecated since 4.0.0: use `findUniqueOrThrow` method instead
+    */
+    rejectOnNotFound?: RejectOnNotFound
+  }
+      
 
   /**
    * Refereces findUniqueOrThrow
@@ -11830,9 +12348,9 @@ export namespace Prisma {
 
 
   /**
-   * Refereces findFirst
+   * Refereces base type for findFirst actions
    */
-  export type ReferecesFindFirstArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+  export type ReferecesFindFirstArgsBase<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Refereces
      */
@@ -11850,7 +12368,7 @@ export namespace Prisma {
      * 
      * Determine the order of Refereces to fetch.
      */
-    orderBy?: ReferecesOrderByWithRelationInput | ReferecesOrderByWithRelationInput[]
+    orderBy?: Enumerable<ReferecesOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
@@ -11874,9 +12392,20 @@ export namespace Prisma {
      * 
      * Filter by unique combinations of Refereces.
      */
-    distinct?: ReferecesScalarFieldEnum | ReferecesScalarFieldEnum[]
+    distinct?: Enumerable<ReferecesScalarFieldEnum>
   }
 
+  /**
+   * Refereces findFirst
+   */
+  export interface ReferecesFindFirstArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> extends ReferecesFindFirstArgsBase<ExtArgs> {
+   /**
+    * Throw an Error if query returns no results
+    * @deprecated since 4.0.0: use `findFirstOrThrow` method instead
+    */
+    rejectOnNotFound?: RejectOnNotFound
+  }
+      
 
   /**
    * Refereces findFirstOrThrow
@@ -11899,7 +12428,7 @@ export namespace Prisma {
      * 
      * Determine the order of Refereces to fetch.
      */
-    orderBy?: ReferecesOrderByWithRelationInput | ReferecesOrderByWithRelationInput[]
+    orderBy?: Enumerable<ReferecesOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
@@ -11923,7 +12452,7 @@ export namespace Prisma {
      * 
      * Filter by unique combinations of Refereces.
      */
-    distinct?: ReferecesScalarFieldEnum | ReferecesScalarFieldEnum[]
+    distinct?: Enumerable<ReferecesScalarFieldEnum>
   }
 
 
@@ -11948,7 +12477,7 @@ export namespace Prisma {
      * 
      * Determine the order of Refereces to fetch.
      */
-    orderBy?: ReferecesOrderByWithRelationInput | ReferecesOrderByWithRelationInput[]
+    orderBy?: Enumerable<ReferecesOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
@@ -11967,7 +12496,7 @@ export namespace Prisma {
      * Skip the first `n` Refereces.
      */
     skip?: number
-    distinct?: ReferecesScalarFieldEnum | ReferecesScalarFieldEnum[]
+    distinct?: Enumerable<ReferecesScalarFieldEnum>
   }
 
 
@@ -11997,7 +12526,7 @@ export namespace Prisma {
     /**
      * The data used to create many Refereces.
      */
-    data: ReferecesCreateManyInput | ReferecesCreateManyInput[]
+    data: Enumerable<ReferecesCreateManyInput>
     skipDuplicates?: boolean
   }
 
@@ -12116,7 +12645,7 @@ export namespace Prisma {
   /**
    * Refereces without action
    */
-  export type ReferecesDefaultArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+  export type ReferecesArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Refereces
      */
@@ -12132,6 +12661,7 @@ export namespace Prisma {
   /**
    * Model ReferecePrices
    */
+
 
   export type AggregateReferecePrices = {
     _count: ReferecePricesCountAggregateOutputType | null
@@ -12157,6 +12687,8 @@ export namespace Prisma {
     description: string | null
     contacts: string | null
     userId: bigint | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type ReferecePricesMaxAggregateOutputType = {
@@ -12165,6 +12697,8 @@ export namespace Prisma {
     description: string | null
     contacts: string | null
     userId: bigint | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type ReferecePricesCountAggregateOutputType = {
@@ -12173,6 +12707,8 @@ export namespace Prisma {
     description: number
     contacts: number
     userId: number
+    createdAt: number
+    updatedAt: number
     _all: number
   }
 
@@ -12193,6 +12729,8 @@ export namespace Prisma {
     description?: true
     contacts?: true
     userId?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type ReferecePricesMaxAggregateInputType = {
@@ -12201,6 +12739,8 @@ export namespace Prisma {
     description?: true
     contacts?: true
     userId?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type ReferecePricesCountAggregateInputType = {
@@ -12209,6 +12749,8 @@ export namespace Prisma {
     description?: true
     contacts?: true
     userId?: true
+    createdAt?: true
+    updatedAt?: true
     _all?: true
   }
 
@@ -12222,7 +12764,7 @@ export namespace Prisma {
      * 
      * Determine the order of ReferecePrices to fetch.
      */
-    orderBy?: ReferecePricesOrderByWithRelationInput | ReferecePricesOrderByWithRelationInput[]
+    orderBy?: Enumerable<ReferecePricesOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
@@ -12286,8 +12828,8 @@ export namespace Prisma {
 
   export type ReferecePricesGroupByArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     where?: ReferecePricesWhereInput
-    orderBy?: ReferecePricesOrderByWithAggregationInput | ReferecePricesOrderByWithAggregationInput[]
-    by: ReferecePricesScalarFieldEnum[] | ReferecePricesScalarFieldEnum
+    orderBy?: Enumerable<ReferecePricesOrderByWithAggregationInput>
+    by: ReferecePricesScalarFieldEnum[]
     having?: ReferecePricesScalarWhereWithAggregatesInput
     take?: number
     skip?: number
@@ -12298,12 +12840,15 @@ export namespace Prisma {
     _max?: ReferecePricesMaxAggregateInputType
   }
 
+
   export type ReferecePricesGroupByOutputType = {
     id: bigint
     name: string
     description: string
     contacts: string
     userId: bigint | null
+    createdAt: Date
+    updatedAt: Date | null
     _count: ReferecePricesCountAggregateOutputType | null
     _avg: ReferecePricesAvgAggregateOutputType | null
     _sum: ReferecePricesSumAggregateOutputType | null
@@ -12313,7 +12858,7 @@ export namespace Prisma {
 
   type GetReferecePricesGroupByPayload<T extends ReferecePricesGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<ReferecePricesGroupByOutputType, T['by']> &
+      PickArray<ReferecePricesGroupByOutputType, T['by']> &
         {
           [P in ((keyof T) & (keyof ReferecePricesGroupByOutputType))]: P extends '_count'
             ? T[P] extends boolean
@@ -12331,6 +12876,8 @@ export namespace Prisma {
     description?: boolean
     contacts?: boolean
     userId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
     user?: boolean | ReferecePrices$userArgs<ExtArgs>
   }, ExtArgs["result"]["referecePrices"]>
 
@@ -12340,6 +12887,8 @@ export namespace Prisma {
     description?: boolean
     contacts?: boolean
     userId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
   }
 
   export type ReferecePricesInclude<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
@@ -12347,30 +12896,14 @@ export namespace Prisma {
   }
 
 
-  export type $ReferecePricesPayload<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
-    name: "ReferecePrices"
-    objects: {
-      user: Prisma.$UserPayload<ExtArgs> | null
-    }
-    scalars: $Extensions.GetResult<{
-      id: bigint
-      name: string
-      description: string
-      contacts: string
-      userId: bigint | null
-    }, ExtArgs["result"]["referecePrices"]>
-    composites: {}
-  }
-
-
-  type ReferecePricesGetPayload<S extends boolean | null | undefined | ReferecePricesDefaultArgs> = $Result.GetResult<Prisma.$ReferecePricesPayload, S>
+  type ReferecePricesGetPayload<S extends boolean | null | undefined | ReferecePricesArgs> = $Types.GetResult<ReferecePricesPayload, S>
 
   type ReferecePricesCountArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = 
     Omit<ReferecePricesFindManyArgs, 'select' | 'include'> & {
       select?: ReferecePricesCountAggregateInputType | true
     }
 
-  export interface ReferecePricesDelegate<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> {
+  export interface ReferecePricesDelegate<GlobalRejectSettings extends Prisma.RejectOnNotFound | Prisma.RejectPerOperation | false | undefined, ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> {
     [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ReferecePrices'], meta: { name: 'ReferecePrices' } }
     /**
      * Find zero or one ReferecePrices that matches the filter.
@@ -12383,9 +12916,9 @@ export namespace Prisma {
      *   }
      * })
     **/
-    findUnique<T extends ReferecePricesFindUniqueArgs<ExtArgs>>(
+    findUnique<T extends ReferecePricesFindUniqueArgs<ExtArgs>, LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
       args: SelectSubset<T, ReferecePricesFindUniqueArgs<ExtArgs>>
-    ): Prisma__ReferecePricesClient<$Result.GetResult<Prisma.$ReferecePricesPayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findUnique', 'ReferecePrices'> extends True ? Prisma__ReferecePricesClient<$Types.GetResult<ReferecePricesPayload<ExtArgs>, T, 'findUnique', never>, never, ExtArgs> : Prisma__ReferecePricesClient<$Types.GetResult<ReferecePricesPayload<ExtArgs>, T, 'findUnique', never> | null, null, ExtArgs>
 
     /**
      * Find one ReferecePrices that matches the filter or throw an error  with `error.code='P2025'` 
@@ -12401,7 +12934,7 @@ export namespace Prisma {
     **/
     findUniqueOrThrow<T extends ReferecePricesFindUniqueOrThrowArgs<ExtArgs>>(
       args?: SelectSubset<T, ReferecePricesFindUniqueOrThrowArgs<ExtArgs>>
-    ): Prisma__ReferecePricesClient<$Result.GetResult<Prisma.$ReferecePricesPayload<ExtArgs>, T, 'findUniqueOrThrow'>, never, ExtArgs>
+    ): Prisma__ReferecePricesClient<$Types.GetResult<ReferecePricesPayload<ExtArgs>, T, 'findUniqueOrThrow', never>, never, ExtArgs>
 
     /**
      * Find the first ReferecePrices that matches the filter.
@@ -12416,13 +12949,13 @@ export namespace Prisma {
      *   }
      * })
     **/
-    findFirst<T extends ReferecePricesFindFirstArgs<ExtArgs>>(
+    findFirst<T extends ReferecePricesFindFirstArgs<ExtArgs>, LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
       args?: SelectSubset<T, ReferecePricesFindFirstArgs<ExtArgs>>
-    ): Prisma__ReferecePricesClient<$Result.GetResult<Prisma.$ReferecePricesPayload<ExtArgs>, T, 'findFirst'> | null, null, ExtArgs>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findFirst', 'ReferecePrices'> extends True ? Prisma__ReferecePricesClient<$Types.GetResult<ReferecePricesPayload<ExtArgs>, T, 'findFirst', never>, never, ExtArgs> : Prisma__ReferecePricesClient<$Types.GetResult<ReferecePricesPayload<ExtArgs>, T, 'findFirst', never> | null, null, ExtArgs>
 
     /**
      * Find the first ReferecePrices that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * throw `NotFoundError` if no matches were found.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
      * @param {ReferecePricesFindFirstOrThrowArgs} args - Arguments to find a ReferecePrices
@@ -12436,7 +12969,7 @@ export namespace Prisma {
     **/
     findFirstOrThrow<T extends ReferecePricesFindFirstOrThrowArgs<ExtArgs>>(
       args?: SelectSubset<T, ReferecePricesFindFirstOrThrowArgs<ExtArgs>>
-    ): Prisma__ReferecePricesClient<$Result.GetResult<Prisma.$ReferecePricesPayload<ExtArgs>, T, 'findFirstOrThrow'>, never, ExtArgs>
+    ): Prisma__ReferecePricesClient<$Types.GetResult<ReferecePricesPayload<ExtArgs>, T, 'findFirstOrThrow', never>, never, ExtArgs>
 
     /**
      * Find zero or more ReferecePrices that matches the filter.
@@ -12456,7 +12989,7 @@ export namespace Prisma {
     **/
     findMany<T extends ReferecePricesFindManyArgs<ExtArgs>>(
       args?: SelectSubset<T, ReferecePricesFindManyArgs<ExtArgs>>
-    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReferecePricesPayload<ExtArgs>, T, 'findMany'>>
+    ): Prisma.PrismaPromise<$Types.GetResult<ReferecePricesPayload<ExtArgs>, T, 'findMany', never>>
 
     /**
      * Create a ReferecePrices.
@@ -12472,7 +13005,7 @@ export namespace Prisma {
     **/
     create<T extends ReferecePricesCreateArgs<ExtArgs>>(
       args: SelectSubset<T, ReferecePricesCreateArgs<ExtArgs>>
-    ): Prisma__ReferecePricesClient<$Result.GetResult<Prisma.$ReferecePricesPayload<ExtArgs>, T, 'create'>, never, ExtArgs>
+    ): Prisma__ReferecePricesClient<$Types.GetResult<ReferecePricesPayload<ExtArgs>, T, 'create', never>, never, ExtArgs>
 
     /**
      * Create many ReferecePrices.
@@ -12504,7 +13037,7 @@ export namespace Prisma {
     **/
     delete<T extends ReferecePricesDeleteArgs<ExtArgs>>(
       args: SelectSubset<T, ReferecePricesDeleteArgs<ExtArgs>>
-    ): Prisma__ReferecePricesClient<$Result.GetResult<Prisma.$ReferecePricesPayload<ExtArgs>, T, 'delete'>, never, ExtArgs>
+    ): Prisma__ReferecePricesClient<$Types.GetResult<ReferecePricesPayload<ExtArgs>, T, 'delete', never>, never, ExtArgs>
 
     /**
      * Update one ReferecePrices.
@@ -12523,7 +13056,7 @@ export namespace Prisma {
     **/
     update<T extends ReferecePricesUpdateArgs<ExtArgs>>(
       args: SelectSubset<T, ReferecePricesUpdateArgs<ExtArgs>>
-    ): Prisma__ReferecePricesClient<$Result.GetResult<Prisma.$ReferecePricesPayload<ExtArgs>, T, 'update'>, never, ExtArgs>
+    ): Prisma__ReferecePricesClient<$Types.GetResult<ReferecePricesPayload<ExtArgs>, T, 'update', never>, never, ExtArgs>
 
     /**
      * Delete zero or more ReferecePrices.
@@ -12581,7 +13114,7 @@ export namespace Prisma {
     **/
     upsert<T extends ReferecePricesUpsertArgs<ExtArgs>>(
       args: SelectSubset<T, ReferecePricesUpsertArgs<ExtArgs>>
-    ): Prisma__ReferecePricesClient<$Result.GetResult<Prisma.$ReferecePricesPayload<ExtArgs>, T, 'upsert'>, never, ExtArgs>
+    ): Prisma__ReferecePricesClient<$Types.GetResult<ReferecePricesPayload<ExtArgs>, T, 'upsert', never>, never, ExtArgs>
 
     /**
      * Count the number of ReferecePrices.
@@ -12660,7 +13193,7 @@ export namespace Prisma {
         ? { orderBy: ReferecePricesGroupByArgs['orderBy'] }
         : { orderBy?: ReferecePricesGroupByArgs['orderBy'] },
       OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByFields extends TupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
       HavingFields extends GetHavingFields<T['having']>,
       HavingValid extends Has<ByFields, HavingFields>,
@@ -12708,10 +13241,7 @@ export namespace Prisma {
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
     >(args: SubsetIntersection<T, ReferecePricesGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetReferecePricesGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the ReferecePrices model
-   */
-  readonly fields: ReferecePricesFieldRefs;
+
   }
 
   /**
@@ -12720,53 +13250,54 @@ export namespace Prisma {
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__ReferecePricesClient<T, Null = never, ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+  export class Prisma__ReferecePricesClient<T, Null = never, ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> implements Prisma.PrismaPromise<T> {
+    private readonly _dmmf;
+    private readonly _queryType;
+    private readonly _rootField;
+    private readonly _clientMethod;
+    private readonly _args;
+    private readonly _dataPath;
+    private readonly _errorFormat;
+    private readonly _measurePerformance?;
+    private _isList;
+    private _callsite;
+    private _requestPromise?;
     readonly [Symbol.toStringTag]: 'PrismaPromise';
+    constructor(_dmmf: runtime.DMMFClass, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
 
-    user<T extends ReferecePrices$userArgs<ExtArgs> = {}>(args?: Subset<T, ReferecePrices$userArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
+    user<T extends ReferecePrices$userArgs<ExtArgs> = {}>(args?: Subset<T, ReferecePrices$userArgs<ExtArgs>>): Prisma__UserClient<$Types.GetResult<UserPayload<ExtArgs>, T, 'findUnique', never> | Null, never, ExtArgs>;
 
+    private get _document();
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
      * @param onrejected The callback to execute when the Promise is rejected.
      * @returns A Promise for the completion of which ever callback is executed.
      */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>;
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): Promise<TResult1 | TResult2>;
     /**
      * Attaches a callback for only the rejection of the Promise.
      * @param onrejected The callback to execute when the Promise is rejected.
      * @returns A Promise for the completion of the callback.
      */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>;
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): Promise<T | TResult>;
     /**
      * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
      * resolved value cannot be modified from the callback.
      * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
      * @returns A Promise for the completion of the callback.
      */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>;
+    finally(onfinally?: (() => void) | undefined | null): Promise<T>;
   }
 
 
-
-  /**
-   * Fields of the ReferecePrices model
-   */ 
-  interface ReferecePricesFieldRefs {
-    readonly id: FieldRef<"ReferecePrices", 'BigInt'>
-    readonly name: FieldRef<"ReferecePrices", 'String'>
-    readonly description: FieldRef<"ReferecePrices", 'String'>
-    readonly contacts: FieldRef<"ReferecePrices", 'String'>
-    readonly userId: FieldRef<"ReferecePrices", 'BigInt'>
-  }
-    
 
   // Custom InputTypes
 
   /**
-   * ReferecePrices findUnique
+   * ReferecePrices base type for findUnique actions
    */
-  export type ReferecePricesFindUniqueArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+  export type ReferecePricesFindUniqueArgsBase<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the ReferecePrices
      */
@@ -12781,6 +13312,17 @@ export namespace Prisma {
     where: ReferecePricesWhereUniqueInput
   }
 
+  /**
+   * ReferecePrices findUnique
+   */
+  export interface ReferecePricesFindUniqueArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> extends ReferecePricesFindUniqueArgsBase<ExtArgs> {
+   /**
+    * Throw an Error if query returns no results
+    * @deprecated since 4.0.0: use `findUniqueOrThrow` method instead
+    */
+    rejectOnNotFound?: RejectOnNotFound
+  }
+      
 
   /**
    * ReferecePrices findUniqueOrThrow
@@ -12802,9 +13344,9 @@ export namespace Prisma {
 
 
   /**
-   * ReferecePrices findFirst
+   * ReferecePrices base type for findFirst actions
    */
-  export type ReferecePricesFindFirstArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+  export type ReferecePricesFindFirstArgsBase<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the ReferecePrices
      */
@@ -12822,7 +13364,7 @@ export namespace Prisma {
      * 
      * Determine the order of ReferecePrices to fetch.
      */
-    orderBy?: ReferecePricesOrderByWithRelationInput | ReferecePricesOrderByWithRelationInput[]
+    orderBy?: Enumerable<ReferecePricesOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
@@ -12846,9 +13388,20 @@ export namespace Prisma {
      * 
      * Filter by unique combinations of ReferecePrices.
      */
-    distinct?: ReferecePricesScalarFieldEnum | ReferecePricesScalarFieldEnum[]
+    distinct?: Enumerable<ReferecePricesScalarFieldEnum>
   }
 
+  /**
+   * ReferecePrices findFirst
+   */
+  export interface ReferecePricesFindFirstArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> extends ReferecePricesFindFirstArgsBase<ExtArgs> {
+   /**
+    * Throw an Error if query returns no results
+    * @deprecated since 4.0.0: use `findFirstOrThrow` method instead
+    */
+    rejectOnNotFound?: RejectOnNotFound
+  }
+      
 
   /**
    * ReferecePrices findFirstOrThrow
@@ -12871,7 +13424,7 @@ export namespace Prisma {
      * 
      * Determine the order of ReferecePrices to fetch.
      */
-    orderBy?: ReferecePricesOrderByWithRelationInput | ReferecePricesOrderByWithRelationInput[]
+    orderBy?: Enumerable<ReferecePricesOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
@@ -12895,7 +13448,7 @@ export namespace Prisma {
      * 
      * Filter by unique combinations of ReferecePrices.
      */
-    distinct?: ReferecePricesScalarFieldEnum | ReferecePricesScalarFieldEnum[]
+    distinct?: Enumerable<ReferecePricesScalarFieldEnum>
   }
 
 
@@ -12920,7 +13473,7 @@ export namespace Prisma {
      * 
      * Determine the order of ReferecePrices to fetch.
      */
-    orderBy?: ReferecePricesOrderByWithRelationInput | ReferecePricesOrderByWithRelationInput[]
+    orderBy?: Enumerable<ReferecePricesOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
@@ -12939,7 +13492,7 @@ export namespace Prisma {
      * Skip the first `n` ReferecePrices.
      */
     skip?: number
-    distinct?: ReferecePricesScalarFieldEnum | ReferecePricesScalarFieldEnum[]
+    distinct?: Enumerable<ReferecePricesScalarFieldEnum>
   }
 
 
@@ -12969,7 +13522,7 @@ export namespace Prisma {
     /**
      * The data used to create many ReferecePrices.
      */
-    data: ReferecePricesCreateManyInput | ReferecePricesCreateManyInput[]
+    data: Enumerable<ReferecePricesCreateManyInput>
     skipDuplicates?: boolean
   }
 
@@ -13088,7 +13641,7 @@ export namespace Prisma {
   /**
    * ReferecePrices without action
    */
-  export type ReferecePricesDefaultArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+  export type ReferecePricesArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the ReferecePrices
      */
@@ -13104,6 +13657,7 @@ export namespace Prisma {
   /**
    * Model UserPoints
    */
+
 
   export type AggregateUserPoints = {
     _count: UserPointsCountAggregateOutputType | null
@@ -13129,18 +13683,24 @@ export namespace Prisma {
     id: bigint | null
     value: bigint | null
     userId: bigint | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type UserPointsMaxAggregateOutputType = {
     id: bigint | null
     value: bigint | null
     userId: bigint | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type UserPointsCountAggregateOutputType = {
     id: number
     value: number
     userId: number
+    createdAt: number
+    updatedAt: number
     _all: number
   }
 
@@ -13161,18 +13721,24 @@ export namespace Prisma {
     id?: true
     value?: true
     userId?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type UserPointsMaxAggregateInputType = {
     id?: true
     value?: true
     userId?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type UserPointsCountAggregateInputType = {
     id?: true
     value?: true
     userId?: true
+    createdAt?: true
+    updatedAt?: true
     _all?: true
   }
 
@@ -13186,7 +13752,7 @@ export namespace Prisma {
      * 
      * Determine the order of UserPoints to fetch.
      */
-    orderBy?: UserPointsOrderByWithRelationInput | UserPointsOrderByWithRelationInput[]
+    orderBy?: Enumerable<UserPointsOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
@@ -13250,8 +13816,8 @@ export namespace Prisma {
 
   export type UserPointsGroupByArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     where?: UserPointsWhereInput
-    orderBy?: UserPointsOrderByWithAggregationInput | UserPointsOrderByWithAggregationInput[]
-    by: UserPointsScalarFieldEnum[] | UserPointsScalarFieldEnum
+    orderBy?: Enumerable<UserPointsOrderByWithAggregationInput>
+    by: UserPointsScalarFieldEnum[]
     having?: UserPointsScalarWhereWithAggregatesInput
     take?: number
     skip?: number
@@ -13262,10 +13828,13 @@ export namespace Prisma {
     _max?: UserPointsMaxAggregateInputType
   }
 
+
   export type UserPointsGroupByOutputType = {
     id: bigint
     value: bigint
     userId: bigint | null
+    createdAt: Date
+    updatedAt: Date | null
     _count: UserPointsCountAggregateOutputType | null
     _avg: UserPointsAvgAggregateOutputType | null
     _sum: UserPointsSumAggregateOutputType | null
@@ -13275,7 +13844,7 @@ export namespace Prisma {
 
   type GetUserPointsGroupByPayload<T extends UserPointsGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<UserPointsGroupByOutputType, T['by']> &
+      PickArray<UserPointsGroupByOutputType, T['by']> &
         {
           [P in ((keyof T) & (keyof UserPointsGroupByOutputType))]: P extends '_count'
             ? T[P] extends boolean
@@ -13291,6 +13860,8 @@ export namespace Prisma {
     id?: boolean
     value?: boolean
     userId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
     user?: boolean | UserPoints$userArgs<ExtArgs>
   }, ExtArgs["result"]["userPoints"]>
 
@@ -13298,6 +13869,8 @@ export namespace Prisma {
     id?: boolean
     value?: boolean
     userId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
   }
 
   export type UserPointsInclude<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
@@ -13305,28 +13878,14 @@ export namespace Prisma {
   }
 
 
-  export type $UserPointsPayload<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
-    name: "UserPoints"
-    objects: {
-      user: Prisma.$UserPayload<ExtArgs> | null
-    }
-    scalars: $Extensions.GetResult<{
-      id: bigint
-      value: bigint
-      userId: bigint | null
-    }, ExtArgs["result"]["userPoints"]>
-    composites: {}
-  }
-
-
-  type UserPointsGetPayload<S extends boolean | null | undefined | UserPointsDefaultArgs> = $Result.GetResult<Prisma.$UserPointsPayload, S>
+  type UserPointsGetPayload<S extends boolean | null | undefined | UserPointsArgs> = $Types.GetResult<UserPointsPayload, S>
 
   type UserPointsCountArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = 
     Omit<UserPointsFindManyArgs, 'select' | 'include'> & {
       select?: UserPointsCountAggregateInputType | true
     }
 
-  export interface UserPointsDelegate<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> {
+  export interface UserPointsDelegate<GlobalRejectSettings extends Prisma.RejectOnNotFound | Prisma.RejectPerOperation | false | undefined, ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> {
     [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['UserPoints'], meta: { name: 'UserPoints' } }
     /**
      * Find zero or one UserPoints that matches the filter.
@@ -13339,9 +13898,9 @@ export namespace Prisma {
      *   }
      * })
     **/
-    findUnique<T extends UserPointsFindUniqueArgs<ExtArgs>>(
+    findUnique<T extends UserPointsFindUniqueArgs<ExtArgs>, LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
       args: SelectSubset<T, UserPointsFindUniqueArgs<ExtArgs>>
-    ): Prisma__UserPointsClient<$Result.GetResult<Prisma.$UserPointsPayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findUnique', 'UserPoints'> extends True ? Prisma__UserPointsClient<$Types.GetResult<UserPointsPayload<ExtArgs>, T, 'findUnique', never>, never, ExtArgs> : Prisma__UserPointsClient<$Types.GetResult<UserPointsPayload<ExtArgs>, T, 'findUnique', never> | null, null, ExtArgs>
 
     /**
      * Find one UserPoints that matches the filter or throw an error  with `error.code='P2025'` 
@@ -13357,7 +13916,7 @@ export namespace Prisma {
     **/
     findUniqueOrThrow<T extends UserPointsFindUniqueOrThrowArgs<ExtArgs>>(
       args?: SelectSubset<T, UserPointsFindUniqueOrThrowArgs<ExtArgs>>
-    ): Prisma__UserPointsClient<$Result.GetResult<Prisma.$UserPointsPayload<ExtArgs>, T, 'findUniqueOrThrow'>, never, ExtArgs>
+    ): Prisma__UserPointsClient<$Types.GetResult<UserPointsPayload<ExtArgs>, T, 'findUniqueOrThrow', never>, never, ExtArgs>
 
     /**
      * Find the first UserPoints that matches the filter.
@@ -13372,13 +13931,13 @@ export namespace Prisma {
      *   }
      * })
     **/
-    findFirst<T extends UserPointsFindFirstArgs<ExtArgs>>(
+    findFirst<T extends UserPointsFindFirstArgs<ExtArgs>, LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
       args?: SelectSubset<T, UserPointsFindFirstArgs<ExtArgs>>
-    ): Prisma__UserPointsClient<$Result.GetResult<Prisma.$UserPointsPayload<ExtArgs>, T, 'findFirst'> | null, null, ExtArgs>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findFirst', 'UserPoints'> extends True ? Prisma__UserPointsClient<$Types.GetResult<UserPointsPayload<ExtArgs>, T, 'findFirst', never>, never, ExtArgs> : Prisma__UserPointsClient<$Types.GetResult<UserPointsPayload<ExtArgs>, T, 'findFirst', never> | null, null, ExtArgs>
 
     /**
      * Find the first UserPoints that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * throw `NotFoundError` if no matches were found.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
      * @param {UserPointsFindFirstOrThrowArgs} args - Arguments to find a UserPoints
@@ -13392,7 +13951,7 @@ export namespace Prisma {
     **/
     findFirstOrThrow<T extends UserPointsFindFirstOrThrowArgs<ExtArgs>>(
       args?: SelectSubset<T, UserPointsFindFirstOrThrowArgs<ExtArgs>>
-    ): Prisma__UserPointsClient<$Result.GetResult<Prisma.$UserPointsPayload<ExtArgs>, T, 'findFirstOrThrow'>, never, ExtArgs>
+    ): Prisma__UserPointsClient<$Types.GetResult<UserPointsPayload<ExtArgs>, T, 'findFirstOrThrow', never>, never, ExtArgs>
 
     /**
      * Find zero or more UserPoints that matches the filter.
@@ -13412,7 +13971,7 @@ export namespace Prisma {
     **/
     findMany<T extends UserPointsFindManyArgs<ExtArgs>>(
       args?: SelectSubset<T, UserPointsFindManyArgs<ExtArgs>>
-    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPointsPayload<ExtArgs>, T, 'findMany'>>
+    ): Prisma.PrismaPromise<$Types.GetResult<UserPointsPayload<ExtArgs>, T, 'findMany', never>>
 
     /**
      * Create a UserPoints.
@@ -13428,7 +13987,7 @@ export namespace Prisma {
     **/
     create<T extends UserPointsCreateArgs<ExtArgs>>(
       args: SelectSubset<T, UserPointsCreateArgs<ExtArgs>>
-    ): Prisma__UserPointsClient<$Result.GetResult<Prisma.$UserPointsPayload<ExtArgs>, T, 'create'>, never, ExtArgs>
+    ): Prisma__UserPointsClient<$Types.GetResult<UserPointsPayload<ExtArgs>, T, 'create', never>, never, ExtArgs>
 
     /**
      * Create many UserPoints.
@@ -13460,7 +14019,7 @@ export namespace Prisma {
     **/
     delete<T extends UserPointsDeleteArgs<ExtArgs>>(
       args: SelectSubset<T, UserPointsDeleteArgs<ExtArgs>>
-    ): Prisma__UserPointsClient<$Result.GetResult<Prisma.$UserPointsPayload<ExtArgs>, T, 'delete'>, never, ExtArgs>
+    ): Prisma__UserPointsClient<$Types.GetResult<UserPointsPayload<ExtArgs>, T, 'delete', never>, never, ExtArgs>
 
     /**
      * Update one UserPoints.
@@ -13479,7 +14038,7 @@ export namespace Prisma {
     **/
     update<T extends UserPointsUpdateArgs<ExtArgs>>(
       args: SelectSubset<T, UserPointsUpdateArgs<ExtArgs>>
-    ): Prisma__UserPointsClient<$Result.GetResult<Prisma.$UserPointsPayload<ExtArgs>, T, 'update'>, never, ExtArgs>
+    ): Prisma__UserPointsClient<$Types.GetResult<UserPointsPayload<ExtArgs>, T, 'update', never>, never, ExtArgs>
 
     /**
      * Delete zero or more UserPoints.
@@ -13537,7 +14096,7 @@ export namespace Prisma {
     **/
     upsert<T extends UserPointsUpsertArgs<ExtArgs>>(
       args: SelectSubset<T, UserPointsUpsertArgs<ExtArgs>>
-    ): Prisma__UserPointsClient<$Result.GetResult<Prisma.$UserPointsPayload<ExtArgs>, T, 'upsert'>, never, ExtArgs>
+    ): Prisma__UserPointsClient<$Types.GetResult<UserPointsPayload<ExtArgs>, T, 'upsert', never>, never, ExtArgs>
 
     /**
      * Count the number of UserPoints.
@@ -13616,7 +14175,7 @@ export namespace Prisma {
         ? { orderBy: UserPointsGroupByArgs['orderBy'] }
         : { orderBy?: UserPointsGroupByArgs['orderBy'] },
       OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByFields extends TupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
       HavingFields extends GetHavingFields<T['having']>,
       HavingValid extends Has<ByFields, HavingFields>,
@@ -13664,10 +14223,7 @@ export namespace Prisma {
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
     >(args: SubsetIntersection<T, UserPointsGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetUserPointsGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the UserPoints model
-   */
-  readonly fields: UserPointsFieldRefs;
+
   }
 
   /**
@@ -13676,51 +14232,54 @@ export namespace Prisma {
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__UserPointsClient<T, Null = never, ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+  export class Prisma__UserPointsClient<T, Null = never, ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> implements Prisma.PrismaPromise<T> {
+    private readonly _dmmf;
+    private readonly _queryType;
+    private readonly _rootField;
+    private readonly _clientMethod;
+    private readonly _args;
+    private readonly _dataPath;
+    private readonly _errorFormat;
+    private readonly _measurePerformance?;
+    private _isList;
+    private _callsite;
+    private _requestPromise?;
     readonly [Symbol.toStringTag]: 'PrismaPromise';
+    constructor(_dmmf: runtime.DMMFClass, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
 
-    user<T extends UserPoints$userArgs<ExtArgs> = {}>(args?: Subset<T, UserPoints$userArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
+    user<T extends UserPoints$userArgs<ExtArgs> = {}>(args?: Subset<T, UserPoints$userArgs<ExtArgs>>): Prisma__UserClient<$Types.GetResult<UserPayload<ExtArgs>, T, 'findUnique', never> | Null, never, ExtArgs>;
 
+    private get _document();
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
      * @param onrejected The callback to execute when the Promise is rejected.
      * @returns A Promise for the completion of which ever callback is executed.
      */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>;
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): Promise<TResult1 | TResult2>;
     /**
      * Attaches a callback for only the rejection of the Promise.
      * @param onrejected The callback to execute when the Promise is rejected.
      * @returns A Promise for the completion of the callback.
      */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>;
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): Promise<T | TResult>;
     /**
      * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
      * resolved value cannot be modified from the callback.
      * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
      * @returns A Promise for the completion of the callback.
      */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>;
+    finally(onfinally?: (() => void) | undefined | null): Promise<T>;
   }
 
 
-
-  /**
-   * Fields of the UserPoints model
-   */ 
-  interface UserPointsFieldRefs {
-    readonly id: FieldRef<"UserPoints", 'BigInt'>
-    readonly value: FieldRef<"UserPoints", 'BigInt'>
-    readonly userId: FieldRef<"UserPoints", 'BigInt'>
-  }
-    
 
   // Custom InputTypes
 
   /**
-   * UserPoints findUnique
+   * UserPoints base type for findUnique actions
    */
-  export type UserPointsFindUniqueArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+  export type UserPointsFindUniqueArgsBase<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the UserPoints
      */
@@ -13735,6 +14294,17 @@ export namespace Prisma {
     where: UserPointsWhereUniqueInput
   }
 
+  /**
+   * UserPoints findUnique
+   */
+  export interface UserPointsFindUniqueArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> extends UserPointsFindUniqueArgsBase<ExtArgs> {
+   /**
+    * Throw an Error if query returns no results
+    * @deprecated since 4.0.0: use `findUniqueOrThrow` method instead
+    */
+    rejectOnNotFound?: RejectOnNotFound
+  }
+      
 
   /**
    * UserPoints findUniqueOrThrow
@@ -13756,9 +14326,9 @@ export namespace Prisma {
 
 
   /**
-   * UserPoints findFirst
+   * UserPoints base type for findFirst actions
    */
-  export type UserPointsFindFirstArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+  export type UserPointsFindFirstArgsBase<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the UserPoints
      */
@@ -13776,7 +14346,7 @@ export namespace Prisma {
      * 
      * Determine the order of UserPoints to fetch.
      */
-    orderBy?: UserPointsOrderByWithRelationInput | UserPointsOrderByWithRelationInput[]
+    orderBy?: Enumerable<UserPointsOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
@@ -13800,9 +14370,20 @@ export namespace Prisma {
      * 
      * Filter by unique combinations of UserPoints.
      */
-    distinct?: UserPointsScalarFieldEnum | UserPointsScalarFieldEnum[]
+    distinct?: Enumerable<UserPointsScalarFieldEnum>
   }
 
+  /**
+   * UserPoints findFirst
+   */
+  export interface UserPointsFindFirstArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> extends UserPointsFindFirstArgsBase<ExtArgs> {
+   /**
+    * Throw an Error if query returns no results
+    * @deprecated since 4.0.0: use `findFirstOrThrow` method instead
+    */
+    rejectOnNotFound?: RejectOnNotFound
+  }
+      
 
   /**
    * UserPoints findFirstOrThrow
@@ -13825,7 +14406,7 @@ export namespace Prisma {
      * 
      * Determine the order of UserPoints to fetch.
      */
-    orderBy?: UserPointsOrderByWithRelationInput | UserPointsOrderByWithRelationInput[]
+    orderBy?: Enumerable<UserPointsOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
@@ -13849,7 +14430,7 @@ export namespace Prisma {
      * 
      * Filter by unique combinations of UserPoints.
      */
-    distinct?: UserPointsScalarFieldEnum | UserPointsScalarFieldEnum[]
+    distinct?: Enumerable<UserPointsScalarFieldEnum>
   }
 
 
@@ -13874,7 +14455,7 @@ export namespace Prisma {
      * 
      * Determine the order of UserPoints to fetch.
      */
-    orderBy?: UserPointsOrderByWithRelationInput | UserPointsOrderByWithRelationInput[]
+    orderBy?: Enumerable<UserPointsOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
@@ -13893,7 +14474,7 @@ export namespace Prisma {
      * Skip the first `n` UserPoints.
      */
     skip?: number
-    distinct?: UserPointsScalarFieldEnum | UserPointsScalarFieldEnum[]
+    distinct?: Enumerable<UserPointsScalarFieldEnum>
   }
 
 
@@ -13923,7 +14504,7 @@ export namespace Prisma {
     /**
      * The data used to create many UserPoints.
      */
-    data: UserPointsCreateManyInput | UserPointsCreateManyInput[]
+    data: Enumerable<UserPointsCreateManyInput>
     skipDuplicates?: boolean
   }
 
@@ -14042,7 +14623,7 @@ export namespace Prisma {
   /**
    * UserPoints without action
    */
-  export type UserPointsDefaultArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+  export type UserPointsArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the UserPoints
      */
@@ -14058,6 +14639,7 @@ export namespace Prisma {
   /**
    * Model Feed
    */
+
 
   export type AggregateFeed = {
     _count: FeedCountAggregateOutputType | null
@@ -14095,6 +14677,8 @@ export namespace Prisma {
     react_smile: bigint | null
     react_lovely: bigint | null
     userId: bigint | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type FeedMaxAggregateOutputType = {
@@ -14107,6 +14691,8 @@ export namespace Prisma {
     react_smile: bigint | null
     react_lovely: bigint | null
     userId: bigint | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type FeedCountAggregateOutputType = {
@@ -14119,6 +14705,8 @@ export namespace Prisma {
     react_smile: number
     react_lovely: number
     userId: number
+    createdAt: number
+    updatedAt: number
     _all: number
   }
 
@@ -14151,6 +14739,8 @@ export namespace Prisma {
     react_smile?: true
     react_lovely?: true
     userId?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type FeedMaxAggregateInputType = {
@@ -14163,6 +14753,8 @@ export namespace Prisma {
     react_smile?: true
     react_lovely?: true
     userId?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type FeedCountAggregateInputType = {
@@ -14175,6 +14767,8 @@ export namespace Prisma {
     react_smile?: true
     react_lovely?: true
     userId?: true
+    createdAt?: true
+    updatedAt?: true
     _all?: true
   }
 
@@ -14188,7 +14782,7 @@ export namespace Prisma {
      * 
      * Determine the order of Feeds to fetch.
      */
-    orderBy?: FeedOrderByWithRelationInput | FeedOrderByWithRelationInput[]
+    orderBy?: Enumerable<FeedOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
@@ -14252,8 +14846,8 @@ export namespace Prisma {
 
   export type FeedGroupByArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     where?: FeedWhereInput
-    orderBy?: FeedOrderByWithAggregationInput | FeedOrderByWithAggregationInput[]
-    by: FeedScalarFieldEnum[] | FeedScalarFieldEnum
+    orderBy?: Enumerable<FeedOrderByWithAggregationInput>
+    by: FeedScalarFieldEnum[]
     having?: FeedScalarWhereWithAggregatesInput
     take?: number
     skip?: number
@@ -14263,6 +14857,7 @@ export namespace Prisma {
     _min?: FeedMinAggregateInputType
     _max?: FeedMaxAggregateInputType
   }
+
 
   export type FeedGroupByOutputType = {
     id: bigint
@@ -14274,6 +14869,8 @@ export namespace Prisma {
     react_smile: bigint | null
     react_lovely: bigint | null
     userId: bigint | null
+    createdAt: Date
+    updatedAt: Date | null
     _count: FeedCountAggregateOutputType | null
     _avg: FeedAvgAggregateOutputType | null
     _sum: FeedSumAggregateOutputType | null
@@ -14283,7 +14880,7 @@ export namespace Prisma {
 
   type GetFeedGroupByPayload<T extends FeedGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<FeedGroupByOutputType, T['by']> &
+      PickArray<FeedGroupByOutputType, T['by']> &
         {
           [P in ((keyof T) & (keyof FeedGroupByOutputType))]: P extends '_count'
             ? T[P] extends boolean
@@ -14305,6 +14902,8 @@ export namespace Prisma {
     react_smile?: boolean
     react_lovely?: boolean
     userId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
     user?: boolean | Feed$userArgs<ExtArgs>
   }, ExtArgs["result"]["feed"]>
 
@@ -14318,6 +14917,8 @@ export namespace Prisma {
     react_smile?: boolean
     react_lovely?: boolean
     userId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
   }
 
   export type FeedInclude<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
@@ -14325,34 +14926,14 @@ export namespace Prisma {
   }
 
 
-  export type $FeedPayload<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
-    name: "Feed"
-    objects: {
-      user: Prisma.$UserPayload<ExtArgs> | null
-    }
-    scalars: $Extensions.GetResult<{
-      id: bigint
-      title: string
-      img: string | null
-      description: string | null
-      react_positive: bigint | null
-      react_negative: bigint | null
-      react_smile: bigint | null
-      react_lovely: bigint | null
-      userId: bigint | null
-    }, ExtArgs["result"]["feed"]>
-    composites: {}
-  }
-
-
-  type FeedGetPayload<S extends boolean | null | undefined | FeedDefaultArgs> = $Result.GetResult<Prisma.$FeedPayload, S>
+  type FeedGetPayload<S extends boolean | null | undefined | FeedArgs> = $Types.GetResult<FeedPayload, S>
 
   type FeedCountArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = 
     Omit<FeedFindManyArgs, 'select' | 'include'> & {
       select?: FeedCountAggregateInputType | true
     }
 
-  export interface FeedDelegate<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> {
+  export interface FeedDelegate<GlobalRejectSettings extends Prisma.RejectOnNotFound | Prisma.RejectPerOperation | false | undefined, ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> {
     [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Feed'], meta: { name: 'Feed' } }
     /**
      * Find zero or one Feed that matches the filter.
@@ -14365,9 +14946,9 @@ export namespace Prisma {
      *   }
      * })
     **/
-    findUnique<T extends FeedFindUniqueArgs<ExtArgs>>(
+    findUnique<T extends FeedFindUniqueArgs<ExtArgs>, LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
       args: SelectSubset<T, FeedFindUniqueArgs<ExtArgs>>
-    ): Prisma__FeedClient<$Result.GetResult<Prisma.$FeedPayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findUnique', 'Feed'> extends True ? Prisma__FeedClient<$Types.GetResult<FeedPayload<ExtArgs>, T, 'findUnique', never>, never, ExtArgs> : Prisma__FeedClient<$Types.GetResult<FeedPayload<ExtArgs>, T, 'findUnique', never> | null, null, ExtArgs>
 
     /**
      * Find one Feed that matches the filter or throw an error  with `error.code='P2025'` 
@@ -14383,7 +14964,7 @@ export namespace Prisma {
     **/
     findUniqueOrThrow<T extends FeedFindUniqueOrThrowArgs<ExtArgs>>(
       args?: SelectSubset<T, FeedFindUniqueOrThrowArgs<ExtArgs>>
-    ): Prisma__FeedClient<$Result.GetResult<Prisma.$FeedPayload<ExtArgs>, T, 'findUniqueOrThrow'>, never, ExtArgs>
+    ): Prisma__FeedClient<$Types.GetResult<FeedPayload<ExtArgs>, T, 'findUniqueOrThrow', never>, never, ExtArgs>
 
     /**
      * Find the first Feed that matches the filter.
@@ -14398,13 +14979,13 @@ export namespace Prisma {
      *   }
      * })
     **/
-    findFirst<T extends FeedFindFirstArgs<ExtArgs>>(
+    findFirst<T extends FeedFindFirstArgs<ExtArgs>, LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
       args?: SelectSubset<T, FeedFindFirstArgs<ExtArgs>>
-    ): Prisma__FeedClient<$Result.GetResult<Prisma.$FeedPayload<ExtArgs>, T, 'findFirst'> | null, null, ExtArgs>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findFirst', 'Feed'> extends True ? Prisma__FeedClient<$Types.GetResult<FeedPayload<ExtArgs>, T, 'findFirst', never>, never, ExtArgs> : Prisma__FeedClient<$Types.GetResult<FeedPayload<ExtArgs>, T, 'findFirst', never> | null, null, ExtArgs>
 
     /**
      * Find the first Feed that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * throw `NotFoundError` if no matches were found.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
      * @param {FeedFindFirstOrThrowArgs} args - Arguments to find a Feed
@@ -14418,7 +14999,7 @@ export namespace Prisma {
     **/
     findFirstOrThrow<T extends FeedFindFirstOrThrowArgs<ExtArgs>>(
       args?: SelectSubset<T, FeedFindFirstOrThrowArgs<ExtArgs>>
-    ): Prisma__FeedClient<$Result.GetResult<Prisma.$FeedPayload<ExtArgs>, T, 'findFirstOrThrow'>, never, ExtArgs>
+    ): Prisma__FeedClient<$Types.GetResult<FeedPayload<ExtArgs>, T, 'findFirstOrThrow', never>, never, ExtArgs>
 
     /**
      * Find zero or more Feeds that matches the filter.
@@ -14438,7 +15019,7 @@ export namespace Prisma {
     **/
     findMany<T extends FeedFindManyArgs<ExtArgs>>(
       args?: SelectSubset<T, FeedFindManyArgs<ExtArgs>>
-    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FeedPayload<ExtArgs>, T, 'findMany'>>
+    ): Prisma.PrismaPromise<$Types.GetResult<FeedPayload<ExtArgs>, T, 'findMany', never>>
 
     /**
      * Create a Feed.
@@ -14454,7 +15035,7 @@ export namespace Prisma {
     **/
     create<T extends FeedCreateArgs<ExtArgs>>(
       args: SelectSubset<T, FeedCreateArgs<ExtArgs>>
-    ): Prisma__FeedClient<$Result.GetResult<Prisma.$FeedPayload<ExtArgs>, T, 'create'>, never, ExtArgs>
+    ): Prisma__FeedClient<$Types.GetResult<FeedPayload<ExtArgs>, T, 'create', never>, never, ExtArgs>
 
     /**
      * Create many Feeds.
@@ -14486,7 +15067,7 @@ export namespace Prisma {
     **/
     delete<T extends FeedDeleteArgs<ExtArgs>>(
       args: SelectSubset<T, FeedDeleteArgs<ExtArgs>>
-    ): Prisma__FeedClient<$Result.GetResult<Prisma.$FeedPayload<ExtArgs>, T, 'delete'>, never, ExtArgs>
+    ): Prisma__FeedClient<$Types.GetResult<FeedPayload<ExtArgs>, T, 'delete', never>, never, ExtArgs>
 
     /**
      * Update one Feed.
@@ -14505,7 +15086,7 @@ export namespace Prisma {
     **/
     update<T extends FeedUpdateArgs<ExtArgs>>(
       args: SelectSubset<T, FeedUpdateArgs<ExtArgs>>
-    ): Prisma__FeedClient<$Result.GetResult<Prisma.$FeedPayload<ExtArgs>, T, 'update'>, never, ExtArgs>
+    ): Prisma__FeedClient<$Types.GetResult<FeedPayload<ExtArgs>, T, 'update', never>, never, ExtArgs>
 
     /**
      * Delete zero or more Feeds.
@@ -14563,7 +15144,7 @@ export namespace Prisma {
     **/
     upsert<T extends FeedUpsertArgs<ExtArgs>>(
       args: SelectSubset<T, FeedUpsertArgs<ExtArgs>>
-    ): Prisma__FeedClient<$Result.GetResult<Prisma.$FeedPayload<ExtArgs>, T, 'upsert'>, never, ExtArgs>
+    ): Prisma__FeedClient<$Types.GetResult<FeedPayload<ExtArgs>, T, 'upsert', never>, never, ExtArgs>
 
     /**
      * Count the number of Feeds.
@@ -14642,7 +15223,7 @@ export namespace Prisma {
         ? { orderBy: FeedGroupByArgs['orderBy'] }
         : { orderBy?: FeedGroupByArgs['orderBy'] },
       OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByFields extends TupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
       HavingFields extends GetHavingFields<T['having']>,
       HavingValid extends Has<ByFields, HavingFields>,
@@ -14690,10 +15271,7 @@ export namespace Prisma {
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
     >(args: SubsetIntersection<T, FeedGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetFeedGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the Feed model
-   */
-  readonly fields: FeedFieldRefs;
+
   }
 
   /**
@@ -14702,57 +15280,54 @@ export namespace Prisma {
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__FeedClient<T, Null = never, ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+  export class Prisma__FeedClient<T, Null = never, ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> implements Prisma.PrismaPromise<T> {
+    private readonly _dmmf;
+    private readonly _queryType;
+    private readonly _rootField;
+    private readonly _clientMethod;
+    private readonly _args;
+    private readonly _dataPath;
+    private readonly _errorFormat;
+    private readonly _measurePerformance?;
+    private _isList;
+    private _callsite;
+    private _requestPromise?;
     readonly [Symbol.toStringTag]: 'PrismaPromise';
+    constructor(_dmmf: runtime.DMMFClass, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
 
-    user<T extends Feed$userArgs<ExtArgs> = {}>(args?: Subset<T, Feed$userArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
+    user<T extends Feed$userArgs<ExtArgs> = {}>(args?: Subset<T, Feed$userArgs<ExtArgs>>): Prisma__UserClient<$Types.GetResult<UserPayload<ExtArgs>, T, 'findUnique', never> | Null, never, ExtArgs>;
 
+    private get _document();
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
      * @param onrejected The callback to execute when the Promise is rejected.
      * @returns A Promise for the completion of which ever callback is executed.
      */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>;
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): Promise<TResult1 | TResult2>;
     /**
      * Attaches a callback for only the rejection of the Promise.
      * @param onrejected The callback to execute when the Promise is rejected.
      * @returns A Promise for the completion of the callback.
      */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>;
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): Promise<T | TResult>;
     /**
      * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
      * resolved value cannot be modified from the callback.
      * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
      * @returns A Promise for the completion of the callback.
      */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>;
+    finally(onfinally?: (() => void) | undefined | null): Promise<T>;
   }
 
 
-
-  /**
-   * Fields of the Feed model
-   */ 
-  interface FeedFieldRefs {
-    readonly id: FieldRef<"Feed", 'BigInt'>
-    readonly title: FieldRef<"Feed", 'String'>
-    readonly img: FieldRef<"Feed", 'String'>
-    readonly description: FieldRef<"Feed", 'String'>
-    readonly react_positive: FieldRef<"Feed", 'BigInt'>
-    readonly react_negative: FieldRef<"Feed", 'BigInt'>
-    readonly react_smile: FieldRef<"Feed", 'BigInt'>
-    readonly react_lovely: FieldRef<"Feed", 'BigInt'>
-    readonly userId: FieldRef<"Feed", 'BigInt'>
-  }
-    
 
   // Custom InputTypes
 
   /**
-   * Feed findUnique
+   * Feed base type for findUnique actions
    */
-  export type FeedFindUniqueArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+  export type FeedFindUniqueArgsBase<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Feed
      */
@@ -14767,6 +15342,17 @@ export namespace Prisma {
     where: FeedWhereUniqueInput
   }
 
+  /**
+   * Feed findUnique
+   */
+  export interface FeedFindUniqueArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> extends FeedFindUniqueArgsBase<ExtArgs> {
+   /**
+    * Throw an Error if query returns no results
+    * @deprecated since 4.0.0: use `findUniqueOrThrow` method instead
+    */
+    rejectOnNotFound?: RejectOnNotFound
+  }
+      
 
   /**
    * Feed findUniqueOrThrow
@@ -14788,9 +15374,9 @@ export namespace Prisma {
 
 
   /**
-   * Feed findFirst
+   * Feed base type for findFirst actions
    */
-  export type FeedFindFirstArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+  export type FeedFindFirstArgsBase<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Feed
      */
@@ -14808,7 +15394,7 @@ export namespace Prisma {
      * 
      * Determine the order of Feeds to fetch.
      */
-    orderBy?: FeedOrderByWithRelationInput | FeedOrderByWithRelationInput[]
+    orderBy?: Enumerable<FeedOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
@@ -14832,9 +15418,20 @@ export namespace Prisma {
      * 
      * Filter by unique combinations of Feeds.
      */
-    distinct?: FeedScalarFieldEnum | FeedScalarFieldEnum[]
+    distinct?: Enumerable<FeedScalarFieldEnum>
   }
 
+  /**
+   * Feed findFirst
+   */
+  export interface FeedFindFirstArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> extends FeedFindFirstArgsBase<ExtArgs> {
+   /**
+    * Throw an Error if query returns no results
+    * @deprecated since 4.0.0: use `findFirstOrThrow` method instead
+    */
+    rejectOnNotFound?: RejectOnNotFound
+  }
+      
 
   /**
    * Feed findFirstOrThrow
@@ -14857,7 +15454,7 @@ export namespace Prisma {
      * 
      * Determine the order of Feeds to fetch.
      */
-    orderBy?: FeedOrderByWithRelationInput | FeedOrderByWithRelationInput[]
+    orderBy?: Enumerable<FeedOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
@@ -14881,7 +15478,7 @@ export namespace Prisma {
      * 
      * Filter by unique combinations of Feeds.
      */
-    distinct?: FeedScalarFieldEnum | FeedScalarFieldEnum[]
+    distinct?: Enumerable<FeedScalarFieldEnum>
   }
 
 
@@ -14906,7 +15503,7 @@ export namespace Prisma {
      * 
      * Determine the order of Feeds to fetch.
      */
-    orderBy?: FeedOrderByWithRelationInput | FeedOrderByWithRelationInput[]
+    orderBy?: Enumerable<FeedOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
@@ -14925,7 +15522,7 @@ export namespace Prisma {
      * Skip the first `n` Feeds.
      */
     skip?: number
-    distinct?: FeedScalarFieldEnum | FeedScalarFieldEnum[]
+    distinct?: Enumerable<FeedScalarFieldEnum>
   }
 
 
@@ -14955,7 +15552,7 @@ export namespace Prisma {
     /**
      * The data used to create many Feeds.
      */
-    data: FeedCreateManyInput | FeedCreateManyInput[]
+    data: Enumerable<FeedCreateManyInput>
     skipDuplicates?: boolean
   }
 
@@ -15074,7 +15671,7 @@ export namespace Prisma {
   /**
    * Feed without action
    */
-  export type FeedDefaultArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+  export type FeedArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Feed
      */
@@ -15090,6 +15687,7 @@ export namespace Prisma {
   /**
    * Model FeedComments
    */
+
 
   export type AggregateFeedComments = {
     _count: FeedCommentsCountAggregateOutputType | null
@@ -15113,18 +15711,24 @@ export namespace Prisma {
     id: bigint | null
     comment: string | null
     userId: bigint | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type FeedCommentsMaxAggregateOutputType = {
     id: bigint | null
     comment: string | null
     userId: bigint | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type FeedCommentsCountAggregateOutputType = {
     id: number
     comment: number
     userId: number
+    createdAt: number
+    updatedAt: number
     _all: number
   }
 
@@ -15143,18 +15747,24 @@ export namespace Prisma {
     id?: true
     comment?: true
     userId?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type FeedCommentsMaxAggregateInputType = {
     id?: true
     comment?: true
     userId?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type FeedCommentsCountAggregateInputType = {
     id?: true
     comment?: true
     userId?: true
+    createdAt?: true
+    updatedAt?: true
     _all?: true
   }
 
@@ -15168,7 +15778,7 @@ export namespace Prisma {
      * 
      * Determine the order of FeedComments to fetch.
      */
-    orderBy?: FeedCommentsOrderByWithRelationInput | FeedCommentsOrderByWithRelationInput[]
+    orderBy?: Enumerable<FeedCommentsOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
@@ -15232,8 +15842,8 @@ export namespace Prisma {
 
   export type FeedCommentsGroupByArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     where?: FeedCommentsWhereInput
-    orderBy?: FeedCommentsOrderByWithAggregationInput | FeedCommentsOrderByWithAggregationInput[]
-    by: FeedCommentsScalarFieldEnum[] | FeedCommentsScalarFieldEnum
+    orderBy?: Enumerable<FeedCommentsOrderByWithAggregationInput>
+    by: FeedCommentsScalarFieldEnum[]
     having?: FeedCommentsScalarWhereWithAggregatesInput
     take?: number
     skip?: number
@@ -15244,10 +15854,13 @@ export namespace Prisma {
     _max?: FeedCommentsMaxAggregateInputType
   }
 
+
   export type FeedCommentsGroupByOutputType = {
     id: bigint
     comment: string
     userId: bigint
+    createdAt: Date
+    updatedAt: Date | null
     _count: FeedCommentsCountAggregateOutputType | null
     _avg: FeedCommentsAvgAggregateOutputType | null
     _sum: FeedCommentsSumAggregateOutputType | null
@@ -15257,7 +15870,7 @@ export namespace Prisma {
 
   type GetFeedCommentsGroupByPayload<T extends FeedCommentsGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<FeedCommentsGroupByOutputType, T['by']> &
+      PickArray<FeedCommentsGroupByOutputType, T['by']> &
         {
           [P in ((keyof T) & (keyof FeedCommentsGroupByOutputType))]: P extends '_count'
             ? T[P] extends boolean
@@ -15273,6 +15886,8 @@ export namespace Prisma {
     id?: boolean
     comment?: boolean
     userId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
     user?: boolean | FeedComments$userArgs<ExtArgs>
   }, ExtArgs["result"]["feedComments"]>
 
@@ -15280,6 +15895,8 @@ export namespace Prisma {
     id?: boolean
     comment?: boolean
     userId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
   }
 
   export type FeedCommentsInclude<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
@@ -15287,28 +15904,14 @@ export namespace Prisma {
   }
 
 
-  export type $FeedCommentsPayload<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
-    name: "FeedComments"
-    objects: {
-      user: Prisma.$UserPayload<ExtArgs> | null
-    }
-    scalars: $Extensions.GetResult<{
-      id: bigint
-      comment: string
-      userId: bigint
-    }, ExtArgs["result"]["feedComments"]>
-    composites: {}
-  }
-
-
-  type FeedCommentsGetPayload<S extends boolean | null | undefined | FeedCommentsDefaultArgs> = $Result.GetResult<Prisma.$FeedCommentsPayload, S>
+  type FeedCommentsGetPayload<S extends boolean | null | undefined | FeedCommentsArgs> = $Types.GetResult<FeedCommentsPayload, S>
 
   type FeedCommentsCountArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = 
     Omit<FeedCommentsFindManyArgs, 'select' | 'include'> & {
       select?: FeedCommentsCountAggregateInputType | true
     }
 
-  export interface FeedCommentsDelegate<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> {
+  export interface FeedCommentsDelegate<GlobalRejectSettings extends Prisma.RejectOnNotFound | Prisma.RejectPerOperation | false | undefined, ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> {
     [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['FeedComments'], meta: { name: 'FeedComments' } }
     /**
      * Find zero or one FeedComments that matches the filter.
@@ -15321,9 +15924,9 @@ export namespace Prisma {
      *   }
      * })
     **/
-    findUnique<T extends FeedCommentsFindUniqueArgs<ExtArgs>>(
+    findUnique<T extends FeedCommentsFindUniqueArgs<ExtArgs>, LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
       args: SelectSubset<T, FeedCommentsFindUniqueArgs<ExtArgs>>
-    ): Prisma__FeedCommentsClient<$Result.GetResult<Prisma.$FeedCommentsPayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findUnique', 'FeedComments'> extends True ? Prisma__FeedCommentsClient<$Types.GetResult<FeedCommentsPayload<ExtArgs>, T, 'findUnique', never>, never, ExtArgs> : Prisma__FeedCommentsClient<$Types.GetResult<FeedCommentsPayload<ExtArgs>, T, 'findUnique', never> | null, null, ExtArgs>
 
     /**
      * Find one FeedComments that matches the filter or throw an error  with `error.code='P2025'` 
@@ -15339,7 +15942,7 @@ export namespace Prisma {
     **/
     findUniqueOrThrow<T extends FeedCommentsFindUniqueOrThrowArgs<ExtArgs>>(
       args?: SelectSubset<T, FeedCommentsFindUniqueOrThrowArgs<ExtArgs>>
-    ): Prisma__FeedCommentsClient<$Result.GetResult<Prisma.$FeedCommentsPayload<ExtArgs>, T, 'findUniqueOrThrow'>, never, ExtArgs>
+    ): Prisma__FeedCommentsClient<$Types.GetResult<FeedCommentsPayload<ExtArgs>, T, 'findUniqueOrThrow', never>, never, ExtArgs>
 
     /**
      * Find the first FeedComments that matches the filter.
@@ -15354,13 +15957,13 @@ export namespace Prisma {
      *   }
      * })
     **/
-    findFirst<T extends FeedCommentsFindFirstArgs<ExtArgs>>(
+    findFirst<T extends FeedCommentsFindFirstArgs<ExtArgs>, LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
       args?: SelectSubset<T, FeedCommentsFindFirstArgs<ExtArgs>>
-    ): Prisma__FeedCommentsClient<$Result.GetResult<Prisma.$FeedCommentsPayload<ExtArgs>, T, 'findFirst'> | null, null, ExtArgs>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findFirst', 'FeedComments'> extends True ? Prisma__FeedCommentsClient<$Types.GetResult<FeedCommentsPayload<ExtArgs>, T, 'findFirst', never>, never, ExtArgs> : Prisma__FeedCommentsClient<$Types.GetResult<FeedCommentsPayload<ExtArgs>, T, 'findFirst', never> | null, null, ExtArgs>
 
     /**
      * Find the first FeedComments that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * throw `NotFoundError` if no matches were found.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
      * @param {FeedCommentsFindFirstOrThrowArgs} args - Arguments to find a FeedComments
@@ -15374,7 +15977,7 @@ export namespace Prisma {
     **/
     findFirstOrThrow<T extends FeedCommentsFindFirstOrThrowArgs<ExtArgs>>(
       args?: SelectSubset<T, FeedCommentsFindFirstOrThrowArgs<ExtArgs>>
-    ): Prisma__FeedCommentsClient<$Result.GetResult<Prisma.$FeedCommentsPayload<ExtArgs>, T, 'findFirstOrThrow'>, never, ExtArgs>
+    ): Prisma__FeedCommentsClient<$Types.GetResult<FeedCommentsPayload<ExtArgs>, T, 'findFirstOrThrow', never>, never, ExtArgs>
 
     /**
      * Find zero or more FeedComments that matches the filter.
@@ -15394,7 +15997,7 @@ export namespace Prisma {
     **/
     findMany<T extends FeedCommentsFindManyArgs<ExtArgs>>(
       args?: SelectSubset<T, FeedCommentsFindManyArgs<ExtArgs>>
-    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FeedCommentsPayload<ExtArgs>, T, 'findMany'>>
+    ): Prisma.PrismaPromise<$Types.GetResult<FeedCommentsPayload<ExtArgs>, T, 'findMany', never>>
 
     /**
      * Create a FeedComments.
@@ -15410,7 +16013,7 @@ export namespace Prisma {
     **/
     create<T extends FeedCommentsCreateArgs<ExtArgs>>(
       args: SelectSubset<T, FeedCommentsCreateArgs<ExtArgs>>
-    ): Prisma__FeedCommentsClient<$Result.GetResult<Prisma.$FeedCommentsPayload<ExtArgs>, T, 'create'>, never, ExtArgs>
+    ): Prisma__FeedCommentsClient<$Types.GetResult<FeedCommentsPayload<ExtArgs>, T, 'create', never>, never, ExtArgs>
 
     /**
      * Create many FeedComments.
@@ -15442,7 +16045,7 @@ export namespace Prisma {
     **/
     delete<T extends FeedCommentsDeleteArgs<ExtArgs>>(
       args: SelectSubset<T, FeedCommentsDeleteArgs<ExtArgs>>
-    ): Prisma__FeedCommentsClient<$Result.GetResult<Prisma.$FeedCommentsPayload<ExtArgs>, T, 'delete'>, never, ExtArgs>
+    ): Prisma__FeedCommentsClient<$Types.GetResult<FeedCommentsPayload<ExtArgs>, T, 'delete', never>, never, ExtArgs>
 
     /**
      * Update one FeedComments.
@@ -15461,7 +16064,7 @@ export namespace Prisma {
     **/
     update<T extends FeedCommentsUpdateArgs<ExtArgs>>(
       args: SelectSubset<T, FeedCommentsUpdateArgs<ExtArgs>>
-    ): Prisma__FeedCommentsClient<$Result.GetResult<Prisma.$FeedCommentsPayload<ExtArgs>, T, 'update'>, never, ExtArgs>
+    ): Prisma__FeedCommentsClient<$Types.GetResult<FeedCommentsPayload<ExtArgs>, T, 'update', never>, never, ExtArgs>
 
     /**
      * Delete zero or more FeedComments.
@@ -15519,7 +16122,7 @@ export namespace Prisma {
     **/
     upsert<T extends FeedCommentsUpsertArgs<ExtArgs>>(
       args: SelectSubset<T, FeedCommentsUpsertArgs<ExtArgs>>
-    ): Prisma__FeedCommentsClient<$Result.GetResult<Prisma.$FeedCommentsPayload<ExtArgs>, T, 'upsert'>, never, ExtArgs>
+    ): Prisma__FeedCommentsClient<$Types.GetResult<FeedCommentsPayload<ExtArgs>, T, 'upsert', never>, never, ExtArgs>
 
     /**
      * Count the number of FeedComments.
@@ -15598,7 +16201,7 @@ export namespace Prisma {
         ? { orderBy: FeedCommentsGroupByArgs['orderBy'] }
         : { orderBy?: FeedCommentsGroupByArgs['orderBy'] },
       OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByFields extends TupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
       HavingFields extends GetHavingFields<T['having']>,
       HavingValid extends Has<ByFields, HavingFields>,
@@ -15646,10 +16249,7 @@ export namespace Prisma {
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
     >(args: SubsetIntersection<T, FeedCommentsGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetFeedCommentsGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the FeedComments model
-   */
-  readonly fields: FeedCommentsFieldRefs;
+
   }
 
   /**
@@ -15658,51 +16258,54 @@ export namespace Prisma {
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__FeedCommentsClient<T, Null = never, ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+  export class Prisma__FeedCommentsClient<T, Null = never, ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> implements Prisma.PrismaPromise<T> {
+    private readonly _dmmf;
+    private readonly _queryType;
+    private readonly _rootField;
+    private readonly _clientMethod;
+    private readonly _args;
+    private readonly _dataPath;
+    private readonly _errorFormat;
+    private readonly _measurePerformance?;
+    private _isList;
+    private _callsite;
+    private _requestPromise?;
     readonly [Symbol.toStringTag]: 'PrismaPromise';
+    constructor(_dmmf: runtime.DMMFClass, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
 
-    user<T extends FeedComments$userArgs<ExtArgs> = {}>(args?: Subset<T, FeedComments$userArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
+    user<T extends FeedComments$userArgs<ExtArgs> = {}>(args?: Subset<T, FeedComments$userArgs<ExtArgs>>): Prisma__UserClient<$Types.GetResult<UserPayload<ExtArgs>, T, 'findUnique', never> | Null, never, ExtArgs>;
 
+    private get _document();
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
      * @param onrejected The callback to execute when the Promise is rejected.
      * @returns A Promise for the completion of which ever callback is executed.
      */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>;
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): Promise<TResult1 | TResult2>;
     /**
      * Attaches a callback for only the rejection of the Promise.
      * @param onrejected The callback to execute when the Promise is rejected.
      * @returns A Promise for the completion of the callback.
      */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>;
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): Promise<T | TResult>;
     /**
      * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
      * resolved value cannot be modified from the callback.
      * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
      * @returns A Promise for the completion of the callback.
      */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>;
+    finally(onfinally?: (() => void) | undefined | null): Promise<T>;
   }
 
 
-
-  /**
-   * Fields of the FeedComments model
-   */ 
-  interface FeedCommentsFieldRefs {
-    readonly id: FieldRef<"FeedComments", 'BigInt'>
-    readonly comment: FieldRef<"FeedComments", 'String'>
-    readonly userId: FieldRef<"FeedComments", 'BigInt'>
-  }
-    
 
   // Custom InputTypes
 
   /**
-   * FeedComments findUnique
+   * FeedComments base type for findUnique actions
    */
-  export type FeedCommentsFindUniqueArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+  export type FeedCommentsFindUniqueArgsBase<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the FeedComments
      */
@@ -15717,6 +16320,17 @@ export namespace Prisma {
     where: FeedCommentsWhereUniqueInput
   }
 
+  /**
+   * FeedComments findUnique
+   */
+  export interface FeedCommentsFindUniqueArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> extends FeedCommentsFindUniqueArgsBase<ExtArgs> {
+   /**
+    * Throw an Error if query returns no results
+    * @deprecated since 4.0.0: use `findUniqueOrThrow` method instead
+    */
+    rejectOnNotFound?: RejectOnNotFound
+  }
+      
 
   /**
    * FeedComments findUniqueOrThrow
@@ -15738,9 +16352,9 @@ export namespace Prisma {
 
 
   /**
-   * FeedComments findFirst
+   * FeedComments base type for findFirst actions
    */
-  export type FeedCommentsFindFirstArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+  export type FeedCommentsFindFirstArgsBase<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the FeedComments
      */
@@ -15758,7 +16372,7 @@ export namespace Prisma {
      * 
      * Determine the order of FeedComments to fetch.
      */
-    orderBy?: FeedCommentsOrderByWithRelationInput | FeedCommentsOrderByWithRelationInput[]
+    orderBy?: Enumerable<FeedCommentsOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
@@ -15782,9 +16396,20 @@ export namespace Prisma {
      * 
      * Filter by unique combinations of FeedComments.
      */
-    distinct?: FeedCommentsScalarFieldEnum | FeedCommentsScalarFieldEnum[]
+    distinct?: Enumerable<FeedCommentsScalarFieldEnum>
   }
 
+  /**
+   * FeedComments findFirst
+   */
+  export interface FeedCommentsFindFirstArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> extends FeedCommentsFindFirstArgsBase<ExtArgs> {
+   /**
+    * Throw an Error if query returns no results
+    * @deprecated since 4.0.0: use `findFirstOrThrow` method instead
+    */
+    rejectOnNotFound?: RejectOnNotFound
+  }
+      
 
   /**
    * FeedComments findFirstOrThrow
@@ -15807,7 +16432,7 @@ export namespace Prisma {
      * 
      * Determine the order of FeedComments to fetch.
      */
-    orderBy?: FeedCommentsOrderByWithRelationInput | FeedCommentsOrderByWithRelationInput[]
+    orderBy?: Enumerable<FeedCommentsOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
@@ -15831,7 +16456,7 @@ export namespace Prisma {
      * 
      * Filter by unique combinations of FeedComments.
      */
-    distinct?: FeedCommentsScalarFieldEnum | FeedCommentsScalarFieldEnum[]
+    distinct?: Enumerable<FeedCommentsScalarFieldEnum>
   }
 
 
@@ -15856,7 +16481,7 @@ export namespace Prisma {
      * 
      * Determine the order of FeedComments to fetch.
      */
-    orderBy?: FeedCommentsOrderByWithRelationInput | FeedCommentsOrderByWithRelationInput[]
+    orderBy?: Enumerable<FeedCommentsOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
@@ -15875,7 +16500,7 @@ export namespace Prisma {
      * Skip the first `n` FeedComments.
      */
     skip?: number
-    distinct?: FeedCommentsScalarFieldEnum | FeedCommentsScalarFieldEnum[]
+    distinct?: Enumerable<FeedCommentsScalarFieldEnum>
   }
 
 
@@ -15905,7 +16530,7 @@ export namespace Prisma {
     /**
      * The data used to create many FeedComments.
      */
-    data: FeedCommentsCreateManyInput | FeedCommentsCreateManyInput[]
+    data: Enumerable<FeedCommentsCreateManyInput>
     skipDuplicates?: boolean
   }
 
@@ -16024,7 +16649,7 @@ export namespace Prisma {
   /**
    * FeedComments without action
    */
-  export type FeedCommentsDefaultArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+  export type FeedCommentsArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the FeedComments
      */
@@ -16054,7 +16679,9 @@ export namespace Prisma {
   export const UserScalarFieldEnum: {
     id: 'id',
     email: 'email',
-    password: 'password'
+    password: 'password',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
   };
 
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -16067,22 +16694,28 @@ export namespace Prisma {
     secondname: 'secondname',
     socialname: 'socialname',
     birthday: 'birthday',
-    userId: 'userId'
+    userId: 'userId',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
   };
 
   export type PerfilScalarFieldEnum = (typeof PerfilScalarFieldEnum)[keyof typeof PerfilScalarFieldEnum]
 
 
-  export const AddresScalarFieldEnum: {
+  export const AddressScalarFieldEnum: {
     id: 'id',
-    address: 'address',
+    street: 'street',
+    number: 'number',
     complement: 'complement',
+    city: 'city',
     state: 'state',
     country: 'country',
-    userId: 'userId'
+    userId: 'userId',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
   };
 
-  export type AddresScalarFieldEnum = (typeof AddresScalarFieldEnum)[keyof typeof AddresScalarFieldEnum]
+  export type AddressScalarFieldEnum = (typeof AddressScalarFieldEnum)[keyof typeof AddressScalarFieldEnum]
 
 
   export const ContactScalarFieldEnum: {
@@ -16090,7 +16723,9 @@ export namespace Prisma {
     email: 'email',
     phone: 'phone',
     another: 'another',
-    userId: 'userId'
+    userId: 'userId',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
   };
 
   export type ContactScalarFieldEnum = (typeof ContactScalarFieldEnum)[keyof typeof ContactScalarFieldEnum]
@@ -16099,7 +16734,9 @@ export namespace Prisma {
   export const KnowledgespaceScalarFieldEnum: {
     id: 'id',
     code: 'code',
-    description: 'description'
+    description: 'description',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
   };
 
   export type KnowledgespaceScalarFieldEnum = (typeof KnowledgespaceScalarFieldEnum)[keyof typeof KnowledgespaceScalarFieldEnum]
@@ -16110,7 +16747,9 @@ export namespace Prisma {
     code: 'code',
     description: 'description',
     KnowledgespaceId: 'KnowledgespaceId',
-    userId: 'userId'
+    userId: 'userId',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
   };
 
   export type DegreeScalarFieldEnum = (typeof DegreeScalarFieldEnum)[keyof typeof DegreeScalarFieldEnum]
@@ -16120,7 +16759,9 @@ export namespace Prisma {
     id: 'id',
     code: 'code',
     description: 'description',
-    userId: 'userId'
+    userId: 'userId',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
   };
 
   export type SkillsScalarFieldEnum = (typeof SkillsScalarFieldEnum)[keyof typeof SkillsScalarFieldEnum]
@@ -16132,7 +16773,9 @@ export namespace Prisma {
     start: 'start',
     end: 'end',
     iscurrent: 'iscurrent',
-    userId: 'userId'
+    userId: 'userId',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
   };
 
   export type ExperiencesScalarFieldEnum = (typeof ExperiencesScalarFieldEnum)[keyof typeof ExperiencesScalarFieldEnum]
@@ -16145,7 +16788,9 @@ export namespace Prisma {
     start: 'start',
     end: 'end',
     iscurrent: 'iscurrent',
-    userId: 'userId'
+    userId: 'userId',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
   };
 
   export type ProjectsScalarFieldEnum = (typeof ProjectsScalarFieldEnum)[keyof typeof ProjectsScalarFieldEnum]
@@ -16155,7 +16800,9 @@ export namespace Prisma {
     id: 'id',
     description: 'description',
     value: 'value',
-    userId: 'userId'
+    userId: 'userId',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
   };
 
   export type ReferecesScalarFieldEnum = (typeof ReferecesScalarFieldEnum)[keyof typeof ReferecesScalarFieldEnum]
@@ -16166,7 +16813,9 @@ export namespace Prisma {
     name: 'name',
     description: 'description',
     contacts: 'contacts',
-    userId: 'userId'
+    userId: 'userId',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
   };
 
   export type ReferecePricesScalarFieldEnum = (typeof ReferecePricesScalarFieldEnum)[keyof typeof ReferecePricesScalarFieldEnum]
@@ -16175,7 +16824,9 @@ export namespace Prisma {
   export const UserPointsScalarFieldEnum: {
     id: 'id',
     value: 'value',
-    userId: 'userId'
+    userId: 'userId',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
   };
 
   export type UserPointsScalarFieldEnum = (typeof UserPointsScalarFieldEnum)[keyof typeof UserPointsScalarFieldEnum]
@@ -16190,7 +16841,9 @@ export namespace Prisma {
     react_negative: 'react_negative',
     react_smile: 'react_smile',
     react_lovely: 'react_lovely',
-    userId: 'userId'
+    userId: 'userId',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
   };
 
   export type FeedScalarFieldEnum = (typeof FeedScalarFieldEnum)[keyof typeof FeedScalarFieldEnum]
@@ -16199,7 +16852,9 @@ export namespace Prisma {
   export const FeedCommentsScalarFieldEnum: {
     id: 'id',
     comment: 'comment',
-    userId: 'userId'
+    userId: 'userId',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
   };
 
   export type FeedCommentsScalarFieldEnum = (typeof FeedCommentsScalarFieldEnum)[keyof typeof FeedCommentsScalarFieldEnum]
@@ -16272,14 +16927,16 @@ export namespace Prisma {
 
 
   export type UserWhereInput = {
-    AND?: UserWhereInput | UserWhereInput[]
-    OR?: UserWhereInput[]
-    NOT?: UserWhereInput | UserWhereInput[]
+    AND?: Enumerable<UserWhereInput>
+    OR?: Enumerable<UserWhereInput>
+    NOT?: Enumerable<UserWhereInput>
     id?: BigIntFilter<"User"> | bigint | number
     email?: StringFilter<"User"> | string
     password?: StringFilter<"User"> | string
+    createdAt?: DateTimeFilter<"User"> | Date | string
+    updatedAt?: DateTimeNullableFilter<"User"> | Date | string | null
     perfil?: XOR<PerfilNullableRelationFilter, PerfilWhereInput> | null
-    addres?: AddresListRelationFilter
+    address?: AddressListRelationFilter
     contact?: ContactListRelationFilter
     degree?: DegreeListRelationFilter
     skills?: SkillsListRelationFilter
@@ -16296,8 +16953,10 @@ export namespace Prisma {
     id?: SortOrder
     email?: SortOrder
     password?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrderInput | SortOrder
     perfil?: PerfilOrderByWithRelationInput
-    addres?: AddresOrderByRelationAggregateInput
+    address?: AddressOrderByRelationAggregateInput
     contact?: ContactOrderByRelationAggregateInput
     degree?: DegreeOrderByRelationAggregateInput
     skills?: SkillsOrderByRelationAggregateInput
@@ -16313,12 +16972,14 @@ export namespace Prisma {
   export type UserWhereUniqueInput = Prisma.AtLeast<{
     id?: bigint | number
     email?: string
-    AND?: UserWhereInput | UserWhereInput[]
-    OR?: UserWhereInput[]
-    NOT?: UserWhereInput | UserWhereInput[]
+    AND?: Enumerable<UserWhereInput>
+    OR?: Enumerable<UserWhereInput>
+    NOT?: Enumerable<UserWhereInput>
     password?: StringFilter<"User"> | string
+    createdAt?: DateTimeFilter<"User"> | Date | string
+    updatedAt?: DateTimeNullableFilter<"User"> | Date | string | null
     perfil?: XOR<PerfilNullableRelationFilter, PerfilWhereInput> | null
-    addres?: AddresListRelationFilter
+    address?: AddressListRelationFilter
     contact?: ContactListRelationFilter
     degree?: DegreeListRelationFilter
     skills?: SkillsListRelationFilter
@@ -16335,6 +16996,8 @@ export namespace Prisma {
     id?: SortOrder
     email?: SortOrder
     password?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrderInput | SortOrder
     _count?: UserCountOrderByAggregateInput
     _avg?: UserAvgOrderByAggregateInput
     _max?: UserMaxOrderByAggregateInput
@@ -16343,18 +17006,20 @@ export namespace Prisma {
   }
 
   export type UserScalarWhereWithAggregatesInput = {
-    AND?: UserScalarWhereWithAggregatesInput | UserScalarWhereWithAggregatesInput[]
-    OR?: UserScalarWhereWithAggregatesInput[]
-    NOT?: UserScalarWhereWithAggregatesInput | UserScalarWhereWithAggregatesInput[]
+    AND?: Enumerable<UserScalarWhereWithAggregatesInput>
+    OR?: Enumerable<UserScalarWhereWithAggregatesInput>
+    NOT?: Enumerable<UserScalarWhereWithAggregatesInput>
     id?: BigIntWithAggregatesFilter<"User"> | bigint | number
     email?: StringWithAggregatesFilter<"User"> | string
     password?: StringWithAggregatesFilter<"User"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
+    updatedAt?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
   }
 
   export type PerfilWhereInput = {
-    AND?: PerfilWhereInput | PerfilWhereInput[]
-    OR?: PerfilWhereInput[]
-    NOT?: PerfilWhereInput | PerfilWhereInput[]
+    AND?: Enumerable<PerfilWhereInput>
+    OR?: Enumerable<PerfilWhereInput>
+    NOT?: Enumerable<PerfilWhereInput>
     id?: BigIntFilter<"Perfil"> | bigint | number
     photo?: StringNullableFilter<"Perfil"> | string | null
     name?: StringNullableFilter<"Perfil"> | string | null
@@ -16362,6 +17027,8 @@ export namespace Prisma {
     socialname?: StringNullableFilter<"Perfil"> | string | null
     birthday?: DateTimeNullableFilter<"Perfil"> | Date | string | null
     userId?: BigIntNullableFilter<"Perfil"> | bigint | number | null
+    createdAt?: DateTimeFilter<"Perfil"> | Date | string
+    updatedAt?: DateTimeNullableFilter<"Perfil"> | Date | string | null
     user?: XOR<UserNullableRelationFilter, UserWhereInput> | null
   }
 
@@ -16373,20 +17040,24 @@ export namespace Prisma {
     socialname?: SortOrderInput | SortOrder
     birthday?: SortOrderInput | SortOrder
     userId?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrderInput | SortOrder
     user?: UserOrderByWithRelationInput
   }
 
   export type PerfilWhereUniqueInput = Prisma.AtLeast<{
     id?: bigint | number
     userId?: bigint | number
-    AND?: PerfilWhereInput | PerfilWhereInput[]
-    OR?: PerfilWhereInput[]
-    NOT?: PerfilWhereInput | PerfilWhereInput[]
+    AND?: Enumerable<PerfilWhereInput>
+    OR?: Enumerable<PerfilWhereInput>
+    NOT?: Enumerable<PerfilWhereInput>
     photo?: StringNullableFilter<"Perfil"> | string | null
     name?: StringNullableFilter<"Perfil"> | string | null
     secondname?: StringNullableFilter<"Perfil"> | string | null
     socialname?: StringNullableFilter<"Perfil"> | string | null
     birthday?: DateTimeNullableFilter<"Perfil"> | Date | string | null
+    createdAt?: DateTimeFilter<"Perfil"> | Date | string
+    updatedAt?: DateTimeNullableFilter<"Perfil"> | Date | string | null
     user?: XOR<UserNullableRelationFilter, UserWhereInput> | null
   }, "id" | "userId">
 
@@ -16398,6 +17069,8 @@ export namespace Prisma {
     socialname?: SortOrderInput | SortOrder
     birthday?: SortOrderInput | SortOrder
     userId?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrderInput | SortOrder
     _count?: PerfilCountOrderByAggregateInput
     _avg?: PerfilAvgOrderByAggregateInput
     _max?: PerfilMaxOrderByAggregateInput
@@ -16406,9 +17079,9 @@ export namespace Prisma {
   }
 
   export type PerfilScalarWhereWithAggregatesInput = {
-    AND?: PerfilScalarWhereWithAggregatesInput | PerfilScalarWhereWithAggregatesInput[]
-    OR?: PerfilScalarWhereWithAggregatesInput[]
-    NOT?: PerfilScalarWhereWithAggregatesInput | PerfilScalarWhereWithAggregatesInput[]
+    AND?: Enumerable<PerfilScalarWhereWithAggregatesInput>
+    OR?: Enumerable<PerfilScalarWhereWithAggregatesInput>
+    NOT?: Enumerable<PerfilScalarWhereWithAggregatesInput>
     id?: BigIntWithAggregatesFilter<"Perfil"> | bigint | number
     photo?: StringNullableWithAggregatesFilter<"Perfil"> | string | null
     name?: StringNullableWithAggregatesFilter<"Perfil"> | string | null
@@ -16416,79 +17089,103 @@ export namespace Prisma {
     socialname?: StringNullableWithAggregatesFilter<"Perfil"> | string | null
     birthday?: DateTimeNullableWithAggregatesFilter<"Perfil"> | Date | string | null
     userId?: BigIntNullableWithAggregatesFilter<"Perfil"> | bigint | number | null
+    createdAt?: DateTimeWithAggregatesFilter<"Perfil"> | Date | string
+    updatedAt?: DateTimeNullableWithAggregatesFilter<"Perfil"> | Date | string | null
   }
 
-  export type AddresWhereInput = {
-    AND?: AddresWhereInput | AddresWhereInput[]
-    OR?: AddresWhereInput[]
-    NOT?: AddresWhereInput | AddresWhereInput[]
-    id?: BigIntFilter<"Addres"> | bigint | number
-    address?: StringNullableFilter<"Addres"> | string | null
-    complement?: StringNullableFilter<"Addres"> | string | null
-    state?: StringNullableFilter<"Addres"> | string | null
-    country?: StringNullableFilter<"Addres"> | string | null
-    userId?: BigIntNullableFilter<"Addres"> | bigint | number | null
+  export type AddressWhereInput = {
+    AND?: Enumerable<AddressWhereInput>
+    OR?: Enumerable<AddressWhereInput>
+    NOT?: Enumerable<AddressWhereInput>
+    id?: BigIntFilter<"Address"> | bigint | number
+    street?: StringNullableFilter<"Address"> | string | null
+    number?: StringNullableFilter<"Address"> | string | null
+    complement?: StringNullableFilter<"Address"> | string | null
+    city?: StringNullableFilter<"Address"> | string | null
+    state?: StringNullableFilter<"Address"> | string | null
+    country?: StringNullableFilter<"Address"> | string | null
+    userId?: BigIntNullableFilter<"Address"> | bigint | number | null
+    createdAt?: DateTimeFilter<"Address"> | Date | string
+    updatedAt?: DateTimeNullableFilter<"Address"> | Date | string | null
     user?: XOR<UserNullableRelationFilter, UserWhereInput> | null
   }
 
-  export type AddresOrderByWithRelationInput = {
+  export type AddressOrderByWithRelationInput = {
     id?: SortOrder
-    address?: SortOrderInput | SortOrder
+    street?: SortOrderInput | SortOrder
+    number?: SortOrderInput | SortOrder
     complement?: SortOrderInput | SortOrder
+    city?: SortOrderInput | SortOrder
     state?: SortOrderInput | SortOrder
     country?: SortOrderInput | SortOrder
     userId?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrderInput | SortOrder
     user?: UserOrderByWithRelationInput
   }
 
-  export type AddresWhereUniqueInput = Prisma.AtLeast<{
+  export type AddressWhereUniqueInput = Prisma.AtLeast<{
     id?: bigint | number
-    AND?: AddresWhereInput | AddresWhereInput[]
-    OR?: AddresWhereInput[]
-    NOT?: AddresWhereInput | AddresWhereInput[]
-    address?: StringNullableFilter<"Addres"> | string | null
-    complement?: StringNullableFilter<"Addres"> | string | null
-    state?: StringNullableFilter<"Addres"> | string | null
-    country?: StringNullableFilter<"Addres"> | string | null
-    userId?: BigIntNullableFilter<"Addres"> | bigint | number | null
+    AND?: Enumerable<AddressWhereInput>
+    OR?: Enumerable<AddressWhereInput>
+    NOT?: Enumerable<AddressWhereInput>
+    street?: StringNullableFilter<"Address"> | string | null
+    number?: StringNullableFilter<"Address"> | string | null
+    complement?: StringNullableFilter<"Address"> | string | null
+    city?: StringNullableFilter<"Address"> | string | null
+    state?: StringNullableFilter<"Address"> | string | null
+    country?: StringNullableFilter<"Address"> | string | null
+    userId?: BigIntNullableFilter<"Address"> | bigint | number | null
+    createdAt?: DateTimeFilter<"Address"> | Date | string
+    updatedAt?: DateTimeNullableFilter<"Address"> | Date | string | null
     user?: XOR<UserNullableRelationFilter, UserWhereInput> | null
   }, "id">
 
-  export type AddresOrderByWithAggregationInput = {
+  export type AddressOrderByWithAggregationInput = {
     id?: SortOrder
-    address?: SortOrderInput | SortOrder
+    street?: SortOrderInput | SortOrder
+    number?: SortOrderInput | SortOrder
     complement?: SortOrderInput | SortOrder
+    city?: SortOrderInput | SortOrder
     state?: SortOrderInput | SortOrder
     country?: SortOrderInput | SortOrder
     userId?: SortOrderInput | SortOrder
-    _count?: AddresCountOrderByAggregateInput
-    _avg?: AddresAvgOrderByAggregateInput
-    _max?: AddresMaxOrderByAggregateInput
-    _min?: AddresMinOrderByAggregateInput
-    _sum?: AddresSumOrderByAggregateInput
+    createdAt?: SortOrder
+    updatedAt?: SortOrderInput | SortOrder
+    _count?: AddressCountOrderByAggregateInput
+    _avg?: AddressAvgOrderByAggregateInput
+    _max?: AddressMaxOrderByAggregateInput
+    _min?: AddressMinOrderByAggregateInput
+    _sum?: AddressSumOrderByAggregateInput
   }
 
-  export type AddresScalarWhereWithAggregatesInput = {
-    AND?: AddresScalarWhereWithAggregatesInput | AddresScalarWhereWithAggregatesInput[]
-    OR?: AddresScalarWhereWithAggregatesInput[]
-    NOT?: AddresScalarWhereWithAggregatesInput | AddresScalarWhereWithAggregatesInput[]
-    id?: BigIntWithAggregatesFilter<"Addres"> | bigint | number
-    address?: StringNullableWithAggregatesFilter<"Addres"> | string | null
-    complement?: StringNullableWithAggregatesFilter<"Addres"> | string | null
-    state?: StringNullableWithAggregatesFilter<"Addres"> | string | null
-    country?: StringNullableWithAggregatesFilter<"Addres"> | string | null
-    userId?: BigIntNullableWithAggregatesFilter<"Addres"> | bigint | number | null
+  export type AddressScalarWhereWithAggregatesInput = {
+    AND?: Enumerable<AddressScalarWhereWithAggregatesInput>
+    OR?: Enumerable<AddressScalarWhereWithAggregatesInput>
+    NOT?: Enumerable<AddressScalarWhereWithAggregatesInput>
+    id?: BigIntWithAggregatesFilter<"Address"> | bigint | number
+    street?: StringNullableWithAggregatesFilter<"Address"> | string | null
+    number?: StringNullableWithAggregatesFilter<"Address"> | string | null
+    complement?: StringNullableWithAggregatesFilter<"Address"> | string | null
+    city?: StringNullableWithAggregatesFilter<"Address"> | string | null
+    state?: StringNullableWithAggregatesFilter<"Address"> | string | null
+    country?: StringNullableWithAggregatesFilter<"Address"> | string | null
+    userId?: BigIntNullableWithAggregatesFilter<"Address"> | bigint | number | null
+    createdAt?: DateTimeWithAggregatesFilter<"Address"> | Date | string
+    updatedAt?: DateTimeNullableWithAggregatesFilter<"Address"> | Date | string | null
   }
 
   export type ContactWhereInput = {
-    AND?: ContactWhereInput | ContactWhereInput[]
-    OR?: ContactWhereInput[]
-    NOT?: ContactWhereInput | ContactWhereInput[]
+    AND?: Enumerable<ContactWhereInput>
+    OR?: Enumerable<ContactWhereInput>
+    NOT?: Enumerable<ContactWhereInput>
     id?: BigIntFilter<"Contact"> | bigint | number
     email?: StringNullableFilter<"Contact"> | string | null
     phone?: StringNullableFilter<"Contact"> | string | null
     another?: StringNullableFilter<"Contact"> | string | null
     userId?: BigIntNullableFilter<"Contact"> | bigint | number | null
+    createdAt?: DateTimeFilter<"Contact"> | Date | string
+    updatedAt?: DateTimeNullableFilter<"Contact"> | Date | string | null
     user?: XOR<UserNullableRelationFilter, UserWhereInput> | null
   }
 
@@ -16498,18 +17195,22 @@ export namespace Prisma {
     phone?: SortOrderInput | SortOrder
     another?: SortOrderInput | SortOrder
     userId?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrderInput | SortOrder
     user?: UserOrderByWithRelationInput
   }
 
   export type ContactWhereUniqueInput = Prisma.AtLeast<{
     id?: bigint | number
-    AND?: ContactWhereInput | ContactWhereInput[]
-    OR?: ContactWhereInput[]
-    NOT?: ContactWhereInput | ContactWhereInput[]
+    AND?: Enumerable<ContactWhereInput>
+    OR?: Enumerable<ContactWhereInput>
+    NOT?: Enumerable<ContactWhereInput>
     email?: StringNullableFilter<"Contact"> | string | null
     phone?: StringNullableFilter<"Contact"> | string | null
     another?: StringNullableFilter<"Contact"> | string | null
     userId?: BigIntNullableFilter<"Contact"> | bigint | number | null
+    createdAt?: DateTimeFilter<"Contact"> | Date | string
+    updatedAt?: DateTimeNullableFilter<"Contact"> | Date | string | null
     user?: XOR<UserNullableRelationFilter, UserWhereInput> | null
   }, "id">
 
@@ -16519,6 +17220,8 @@ export namespace Prisma {
     phone?: SortOrderInput | SortOrder
     another?: SortOrderInput | SortOrder
     userId?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrderInput | SortOrder
     _count?: ContactCountOrderByAggregateInput
     _avg?: ContactAvgOrderByAggregateInput
     _max?: ContactMaxOrderByAggregateInput
@@ -16527,23 +17230,27 @@ export namespace Prisma {
   }
 
   export type ContactScalarWhereWithAggregatesInput = {
-    AND?: ContactScalarWhereWithAggregatesInput | ContactScalarWhereWithAggregatesInput[]
-    OR?: ContactScalarWhereWithAggregatesInput[]
-    NOT?: ContactScalarWhereWithAggregatesInput | ContactScalarWhereWithAggregatesInput[]
+    AND?: Enumerable<ContactScalarWhereWithAggregatesInput>
+    OR?: Enumerable<ContactScalarWhereWithAggregatesInput>
+    NOT?: Enumerable<ContactScalarWhereWithAggregatesInput>
     id?: BigIntWithAggregatesFilter<"Contact"> | bigint | number
     email?: StringNullableWithAggregatesFilter<"Contact"> | string | null
     phone?: StringNullableWithAggregatesFilter<"Contact"> | string | null
     another?: StringNullableWithAggregatesFilter<"Contact"> | string | null
     userId?: BigIntNullableWithAggregatesFilter<"Contact"> | bigint | number | null
+    createdAt?: DateTimeWithAggregatesFilter<"Contact"> | Date | string
+    updatedAt?: DateTimeNullableWithAggregatesFilter<"Contact"> | Date | string | null
   }
 
   export type KnowledgespaceWhereInput = {
-    AND?: KnowledgespaceWhereInput | KnowledgespaceWhereInput[]
-    OR?: KnowledgespaceWhereInput[]
-    NOT?: KnowledgespaceWhereInput | KnowledgespaceWhereInput[]
+    AND?: Enumerable<KnowledgespaceWhereInput>
+    OR?: Enumerable<KnowledgespaceWhereInput>
+    NOT?: Enumerable<KnowledgespaceWhereInput>
     id?: BigIntFilter<"Knowledgespace"> | bigint | number
     code?: StringNullableFilter<"Knowledgespace"> | string | null
     description?: StringNullableFilter<"Knowledgespace"> | string | null
+    createdAt?: DateTimeFilter<"Knowledgespace"> | Date | string
+    updatedAt?: DateTimeNullableFilter<"Knowledgespace"> | Date | string | null
     degree?: DegreeListRelationFilter
   }
 
@@ -16551,16 +17258,20 @@ export namespace Prisma {
     id?: SortOrder
     code?: SortOrderInput | SortOrder
     description?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrderInput | SortOrder
     degree?: DegreeOrderByRelationAggregateInput
   }
 
   export type KnowledgespaceWhereUniqueInput = Prisma.AtLeast<{
     id?: bigint | number
-    AND?: KnowledgespaceWhereInput | KnowledgespaceWhereInput[]
-    OR?: KnowledgespaceWhereInput[]
-    NOT?: KnowledgespaceWhereInput | KnowledgespaceWhereInput[]
+    AND?: Enumerable<KnowledgespaceWhereInput>
+    OR?: Enumerable<KnowledgespaceWhereInput>
+    NOT?: Enumerable<KnowledgespaceWhereInput>
     code?: StringNullableFilter<"Knowledgespace"> | string | null
     description?: StringNullableFilter<"Knowledgespace"> | string | null
+    createdAt?: DateTimeFilter<"Knowledgespace"> | Date | string
+    updatedAt?: DateTimeNullableFilter<"Knowledgespace"> | Date | string | null
     degree?: DegreeListRelationFilter
   }, "id">
 
@@ -16568,6 +17279,8 @@ export namespace Prisma {
     id?: SortOrder
     code?: SortOrderInput | SortOrder
     description?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrderInput | SortOrder
     _count?: KnowledgespaceCountOrderByAggregateInput
     _avg?: KnowledgespaceAvgOrderByAggregateInput
     _max?: KnowledgespaceMaxOrderByAggregateInput
@@ -16576,23 +17289,27 @@ export namespace Prisma {
   }
 
   export type KnowledgespaceScalarWhereWithAggregatesInput = {
-    AND?: KnowledgespaceScalarWhereWithAggregatesInput | KnowledgespaceScalarWhereWithAggregatesInput[]
-    OR?: KnowledgespaceScalarWhereWithAggregatesInput[]
-    NOT?: KnowledgespaceScalarWhereWithAggregatesInput | KnowledgespaceScalarWhereWithAggregatesInput[]
+    AND?: Enumerable<KnowledgespaceScalarWhereWithAggregatesInput>
+    OR?: Enumerable<KnowledgespaceScalarWhereWithAggregatesInput>
+    NOT?: Enumerable<KnowledgespaceScalarWhereWithAggregatesInput>
     id?: BigIntWithAggregatesFilter<"Knowledgespace"> | bigint | number
     code?: StringNullableWithAggregatesFilter<"Knowledgespace"> | string | null
     description?: StringNullableWithAggregatesFilter<"Knowledgespace"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"Knowledgespace"> | Date | string
+    updatedAt?: DateTimeNullableWithAggregatesFilter<"Knowledgespace"> | Date | string | null
   }
 
   export type DegreeWhereInput = {
-    AND?: DegreeWhereInput | DegreeWhereInput[]
-    OR?: DegreeWhereInput[]
-    NOT?: DegreeWhereInput | DegreeWhereInput[]
+    AND?: Enumerable<DegreeWhereInput>
+    OR?: Enumerable<DegreeWhereInput>
+    NOT?: Enumerable<DegreeWhereInput>
     id?: BigIntFilter<"Degree"> | bigint | number
     code?: StringNullableFilter<"Degree"> | string | null
     description?: StringNullableFilter<"Degree"> | string | null
     KnowledgespaceId?: BigIntNullableFilter<"Degree"> | bigint | number | null
     userId?: BigIntNullableFilter<"Degree"> | bigint | number | null
+    createdAt?: DateTimeFilter<"Degree"> | Date | string
+    updatedAt?: DateTimeNullableFilter<"Degree"> | Date | string | null
     Knowledgespace?: XOR<KnowledgespaceNullableRelationFilter, KnowledgespaceWhereInput> | null
     user?: XOR<UserNullableRelationFilter, UserWhereInput> | null
   }
@@ -16603,6 +17320,8 @@ export namespace Prisma {
     description?: SortOrderInput | SortOrder
     KnowledgespaceId?: SortOrderInput | SortOrder
     userId?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrderInput | SortOrder
     Knowledgespace?: KnowledgespaceOrderByWithRelationInput
     user?: UserOrderByWithRelationInput
   }
@@ -16611,11 +17330,13 @@ export namespace Prisma {
     id?: bigint | number
     KnowledgespaceId?: bigint | number
     userId?: bigint | number
-    AND?: DegreeWhereInput | DegreeWhereInput[]
-    OR?: DegreeWhereInput[]
-    NOT?: DegreeWhereInput | DegreeWhereInput[]
+    AND?: Enumerable<DegreeWhereInput>
+    OR?: Enumerable<DegreeWhereInput>
+    NOT?: Enumerable<DegreeWhereInput>
     code?: StringNullableFilter<"Degree"> | string | null
     description?: StringNullableFilter<"Degree"> | string | null
+    createdAt?: DateTimeFilter<"Degree"> | Date | string
+    updatedAt?: DateTimeNullableFilter<"Degree"> | Date | string | null
     Knowledgespace?: XOR<KnowledgespaceNullableRelationFilter, KnowledgespaceWhereInput> | null
     user?: XOR<UserNullableRelationFilter, UserWhereInput> | null
   }, "id" | "KnowledgespaceId" | "userId">
@@ -16626,6 +17347,8 @@ export namespace Prisma {
     description?: SortOrderInput | SortOrder
     KnowledgespaceId?: SortOrderInput | SortOrder
     userId?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrderInput | SortOrder
     _count?: DegreeCountOrderByAggregateInput
     _avg?: DegreeAvgOrderByAggregateInput
     _max?: DegreeMaxOrderByAggregateInput
@@ -16634,24 +17357,28 @@ export namespace Prisma {
   }
 
   export type DegreeScalarWhereWithAggregatesInput = {
-    AND?: DegreeScalarWhereWithAggregatesInput | DegreeScalarWhereWithAggregatesInput[]
-    OR?: DegreeScalarWhereWithAggregatesInput[]
-    NOT?: DegreeScalarWhereWithAggregatesInput | DegreeScalarWhereWithAggregatesInput[]
+    AND?: Enumerable<DegreeScalarWhereWithAggregatesInput>
+    OR?: Enumerable<DegreeScalarWhereWithAggregatesInput>
+    NOT?: Enumerable<DegreeScalarWhereWithAggregatesInput>
     id?: BigIntWithAggregatesFilter<"Degree"> | bigint | number
     code?: StringNullableWithAggregatesFilter<"Degree"> | string | null
     description?: StringNullableWithAggregatesFilter<"Degree"> | string | null
     KnowledgespaceId?: BigIntNullableWithAggregatesFilter<"Degree"> | bigint | number | null
     userId?: BigIntNullableWithAggregatesFilter<"Degree"> | bigint | number | null
+    createdAt?: DateTimeWithAggregatesFilter<"Degree"> | Date | string
+    updatedAt?: DateTimeNullableWithAggregatesFilter<"Degree"> | Date | string | null
   }
 
   export type SkillsWhereInput = {
-    AND?: SkillsWhereInput | SkillsWhereInput[]
-    OR?: SkillsWhereInput[]
-    NOT?: SkillsWhereInput | SkillsWhereInput[]
+    AND?: Enumerable<SkillsWhereInput>
+    OR?: Enumerable<SkillsWhereInput>
+    NOT?: Enumerable<SkillsWhereInput>
     id?: BigIntFilter<"Skills"> | bigint | number
     code?: StringNullableFilter<"Skills"> | string | null
     description?: StringNullableFilter<"Skills"> | string | null
     userId?: BigIntNullableFilter<"Skills"> | bigint | number | null
+    createdAt?: DateTimeFilter<"Skills"> | Date | string
+    updatedAt?: DateTimeNullableFilter<"Skills"> | Date | string | null
     user?: XOR<UserNullableRelationFilter, UserWhereInput> | null
   }
 
@@ -16660,17 +17387,21 @@ export namespace Prisma {
     code?: SortOrderInput | SortOrder
     description?: SortOrderInput | SortOrder
     userId?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrderInput | SortOrder
     user?: UserOrderByWithRelationInput
   }
 
   export type SkillsWhereUniqueInput = Prisma.AtLeast<{
     id?: bigint | number
-    AND?: SkillsWhereInput | SkillsWhereInput[]
-    OR?: SkillsWhereInput[]
-    NOT?: SkillsWhereInput | SkillsWhereInput[]
+    AND?: Enumerable<SkillsWhereInput>
+    OR?: Enumerable<SkillsWhereInput>
+    NOT?: Enumerable<SkillsWhereInput>
     code?: StringNullableFilter<"Skills"> | string | null
     description?: StringNullableFilter<"Skills"> | string | null
     userId?: BigIntNullableFilter<"Skills"> | bigint | number | null
+    createdAt?: DateTimeFilter<"Skills"> | Date | string
+    updatedAt?: DateTimeNullableFilter<"Skills"> | Date | string | null
     user?: XOR<UserNullableRelationFilter, UserWhereInput> | null
   }, "id">
 
@@ -16679,6 +17410,8 @@ export namespace Prisma {
     code?: SortOrderInput | SortOrder
     description?: SortOrderInput | SortOrder
     userId?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrderInput | SortOrder
     _count?: SkillsCountOrderByAggregateInput
     _avg?: SkillsAvgOrderByAggregateInput
     _max?: SkillsMaxOrderByAggregateInput
@@ -16687,25 +17420,29 @@ export namespace Prisma {
   }
 
   export type SkillsScalarWhereWithAggregatesInput = {
-    AND?: SkillsScalarWhereWithAggregatesInput | SkillsScalarWhereWithAggregatesInput[]
-    OR?: SkillsScalarWhereWithAggregatesInput[]
-    NOT?: SkillsScalarWhereWithAggregatesInput | SkillsScalarWhereWithAggregatesInput[]
+    AND?: Enumerable<SkillsScalarWhereWithAggregatesInput>
+    OR?: Enumerable<SkillsScalarWhereWithAggregatesInput>
+    NOT?: Enumerable<SkillsScalarWhereWithAggregatesInput>
     id?: BigIntWithAggregatesFilter<"Skills"> | bigint | number
     code?: StringNullableWithAggregatesFilter<"Skills"> | string | null
     description?: StringNullableWithAggregatesFilter<"Skills"> | string | null
     userId?: BigIntNullableWithAggregatesFilter<"Skills"> | bigint | number | null
+    createdAt?: DateTimeWithAggregatesFilter<"Skills"> | Date | string
+    updatedAt?: DateTimeNullableWithAggregatesFilter<"Skills"> | Date | string | null
   }
 
   export type ExperiencesWhereInput = {
-    AND?: ExperiencesWhereInput | ExperiencesWhereInput[]
-    OR?: ExperiencesWhereInput[]
-    NOT?: ExperiencesWhereInput | ExperiencesWhereInput[]
+    AND?: Enumerable<ExperiencesWhereInput>
+    OR?: Enumerable<ExperiencesWhereInput>
+    NOT?: Enumerable<ExperiencesWhereInput>
     id?: BigIntFilter<"Experiences"> | bigint | number
     company?: StringFilter<"Experiences"> | string
     start?: DateTimeFilter<"Experiences"> | Date | string
     end?: DateTimeNullableFilter<"Experiences"> | Date | string | null
     iscurrent?: BoolNullableFilter<"Experiences"> | boolean | null
     userId?: BigIntNullableFilter<"Experiences"> | bigint | number | null
+    createdAt?: DateTimeFilter<"Experiences"> | Date | string
+    updatedAt?: DateTimeNullableFilter<"Experiences"> | Date | string | null
     user?: XOR<UserNullableRelationFilter, UserWhereInput> | null
   }
 
@@ -16716,19 +17453,23 @@ export namespace Prisma {
     end?: SortOrderInput | SortOrder
     iscurrent?: SortOrderInput | SortOrder
     userId?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrderInput | SortOrder
     user?: UserOrderByWithRelationInput
   }
 
   export type ExperiencesWhereUniqueInput = Prisma.AtLeast<{
     id?: bigint | number
-    AND?: ExperiencesWhereInput | ExperiencesWhereInput[]
-    OR?: ExperiencesWhereInput[]
-    NOT?: ExperiencesWhereInput | ExperiencesWhereInput[]
+    AND?: Enumerable<ExperiencesWhereInput>
+    OR?: Enumerable<ExperiencesWhereInput>
+    NOT?: Enumerable<ExperiencesWhereInput>
     company?: StringFilter<"Experiences"> | string
     start?: DateTimeFilter<"Experiences"> | Date | string
     end?: DateTimeNullableFilter<"Experiences"> | Date | string | null
     iscurrent?: BoolNullableFilter<"Experiences"> | boolean | null
     userId?: BigIntNullableFilter<"Experiences"> | bigint | number | null
+    createdAt?: DateTimeFilter<"Experiences"> | Date | string
+    updatedAt?: DateTimeNullableFilter<"Experiences"> | Date | string | null
     user?: XOR<UserNullableRelationFilter, UserWhereInput> | null
   }, "id">
 
@@ -16739,6 +17480,8 @@ export namespace Prisma {
     end?: SortOrderInput | SortOrder
     iscurrent?: SortOrderInput | SortOrder
     userId?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrderInput | SortOrder
     _count?: ExperiencesCountOrderByAggregateInput
     _avg?: ExperiencesAvgOrderByAggregateInput
     _max?: ExperiencesMaxOrderByAggregateInput
@@ -16747,21 +17490,23 @@ export namespace Prisma {
   }
 
   export type ExperiencesScalarWhereWithAggregatesInput = {
-    AND?: ExperiencesScalarWhereWithAggregatesInput | ExperiencesScalarWhereWithAggregatesInput[]
-    OR?: ExperiencesScalarWhereWithAggregatesInput[]
-    NOT?: ExperiencesScalarWhereWithAggregatesInput | ExperiencesScalarWhereWithAggregatesInput[]
+    AND?: Enumerable<ExperiencesScalarWhereWithAggregatesInput>
+    OR?: Enumerable<ExperiencesScalarWhereWithAggregatesInput>
+    NOT?: Enumerable<ExperiencesScalarWhereWithAggregatesInput>
     id?: BigIntWithAggregatesFilter<"Experiences"> | bigint | number
     company?: StringWithAggregatesFilter<"Experiences"> | string
     start?: DateTimeWithAggregatesFilter<"Experiences"> | Date | string
     end?: DateTimeNullableWithAggregatesFilter<"Experiences"> | Date | string | null
     iscurrent?: BoolNullableWithAggregatesFilter<"Experiences"> | boolean | null
     userId?: BigIntNullableWithAggregatesFilter<"Experiences"> | bigint | number | null
+    createdAt?: DateTimeWithAggregatesFilter<"Experiences"> | Date | string
+    updatedAt?: DateTimeNullableWithAggregatesFilter<"Experiences"> | Date | string | null
   }
 
   export type ProjectsWhereInput = {
-    AND?: ProjectsWhereInput | ProjectsWhereInput[]
-    OR?: ProjectsWhereInput[]
-    NOT?: ProjectsWhereInput | ProjectsWhereInput[]
+    AND?: Enumerable<ProjectsWhereInput>
+    OR?: Enumerable<ProjectsWhereInput>
+    NOT?: Enumerable<ProjectsWhereInput>
     id?: BigIntFilter<"Projects"> | bigint | number
     name?: StringFilter<"Projects"> | string
     description?: StringNullableFilter<"Projects"> | string | null
@@ -16769,6 +17514,8 @@ export namespace Prisma {
     end?: DateTimeNullableFilter<"Projects"> | Date | string | null
     iscurrent?: BoolNullableFilter<"Projects"> | boolean | null
     userId?: BigIntNullableFilter<"Projects"> | bigint | number | null
+    createdAt?: DateTimeFilter<"Projects"> | Date | string
+    updatedAt?: DateTimeNullableFilter<"Projects"> | Date | string | null
     user?: XOR<UserNullableRelationFilter, UserWhereInput> | null
   }
 
@@ -16780,20 +17527,24 @@ export namespace Prisma {
     end?: SortOrderInput | SortOrder
     iscurrent?: SortOrderInput | SortOrder
     userId?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrderInput | SortOrder
     user?: UserOrderByWithRelationInput
   }
 
   export type ProjectsWhereUniqueInput = Prisma.AtLeast<{
     id?: bigint | number
-    AND?: ProjectsWhereInput | ProjectsWhereInput[]
-    OR?: ProjectsWhereInput[]
-    NOT?: ProjectsWhereInput | ProjectsWhereInput[]
+    AND?: Enumerable<ProjectsWhereInput>
+    OR?: Enumerable<ProjectsWhereInput>
+    NOT?: Enumerable<ProjectsWhereInput>
     name?: StringFilter<"Projects"> | string
     description?: StringNullableFilter<"Projects"> | string | null
     start?: DateTimeFilter<"Projects"> | Date | string
     end?: DateTimeNullableFilter<"Projects"> | Date | string | null
     iscurrent?: BoolNullableFilter<"Projects"> | boolean | null
     userId?: BigIntNullableFilter<"Projects"> | bigint | number | null
+    createdAt?: DateTimeFilter<"Projects"> | Date | string
+    updatedAt?: DateTimeNullableFilter<"Projects"> | Date | string | null
     user?: XOR<UserNullableRelationFilter, UserWhereInput> | null
   }, "id">
 
@@ -16805,6 +17556,8 @@ export namespace Prisma {
     end?: SortOrderInput | SortOrder
     iscurrent?: SortOrderInput | SortOrder
     userId?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrderInput | SortOrder
     _count?: ProjectsCountOrderByAggregateInput
     _avg?: ProjectsAvgOrderByAggregateInput
     _max?: ProjectsMaxOrderByAggregateInput
@@ -16813,9 +17566,9 @@ export namespace Prisma {
   }
 
   export type ProjectsScalarWhereWithAggregatesInput = {
-    AND?: ProjectsScalarWhereWithAggregatesInput | ProjectsScalarWhereWithAggregatesInput[]
-    OR?: ProjectsScalarWhereWithAggregatesInput[]
-    NOT?: ProjectsScalarWhereWithAggregatesInput | ProjectsScalarWhereWithAggregatesInput[]
+    AND?: Enumerable<ProjectsScalarWhereWithAggregatesInput>
+    OR?: Enumerable<ProjectsScalarWhereWithAggregatesInput>
+    NOT?: Enumerable<ProjectsScalarWhereWithAggregatesInput>
     id?: BigIntWithAggregatesFilter<"Projects"> | bigint | number
     name?: StringWithAggregatesFilter<"Projects"> | string
     description?: StringNullableWithAggregatesFilter<"Projects"> | string | null
@@ -16823,16 +17576,20 @@ export namespace Prisma {
     end?: DateTimeNullableWithAggregatesFilter<"Projects"> | Date | string | null
     iscurrent?: BoolNullableWithAggregatesFilter<"Projects"> | boolean | null
     userId?: BigIntNullableWithAggregatesFilter<"Projects"> | bigint | number | null
+    createdAt?: DateTimeWithAggregatesFilter<"Projects"> | Date | string
+    updatedAt?: DateTimeNullableWithAggregatesFilter<"Projects"> | Date | string | null
   }
 
   export type ReferecesWhereInput = {
-    AND?: ReferecesWhereInput | ReferecesWhereInput[]
-    OR?: ReferecesWhereInput[]
-    NOT?: ReferecesWhereInput | ReferecesWhereInput[]
+    AND?: Enumerable<ReferecesWhereInput>
+    OR?: Enumerable<ReferecesWhereInput>
+    NOT?: Enumerable<ReferecesWhereInput>
     id?: BigIntFilter<"Refereces"> | bigint | number
     description?: StringFilter<"Refereces"> | string
     value?: FloatFilter<"Refereces"> | number
     userId?: BigIntNullableFilter<"Refereces"> | bigint | number | null
+    createdAt?: DateTimeFilter<"Refereces"> | Date | string
+    updatedAt?: DateTimeNullableFilter<"Refereces"> | Date | string | null
     user?: XOR<UserNullableRelationFilter, UserWhereInput> | null
   }
 
@@ -16841,17 +17598,21 @@ export namespace Prisma {
     description?: SortOrder
     value?: SortOrder
     userId?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrderInput | SortOrder
     user?: UserOrderByWithRelationInput
   }
 
   export type ReferecesWhereUniqueInput = Prisma.AtLeast<{
     id?: bigint | number
-    AND?: ReferecesWhereInput | ReferecesWhereInput[]
-    OR?: ReferecesWhereInput[]
-    NOT?: ReferecesWhereInput | ReferecesWhereInput[]
+    AND?: Enumerable<ReferecesWhereInput>
+    OR?: Enumerable<ReferecesWhereInput>
+    NOT?: Enumerable<ReferecesWhereInput>
     description?: StringFilter<"Refereces"> | string
     value?: FloatFilter<"Refereces"> | number
     userId?: BigIntNullableFilter<"Refereces"> | bigint | number | null
+    createdAt?: DateTimeFilter<"Refereces"> | Date | string
+    updatedAt?: DateTimeNullableFilter<"Refereces"> | Date | string | null
     user?: XOR<UserNullableRelationFilter, UserWhereInput> | null
   }, "id">
 
@@ -16860,6 +17621,8 @@ export namespace Prisma {
     description?: SortOrder
     value?: SortOrder
     userId?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrderInput | SortOrder
     _count?: ReferecesCountOrderByAggregateInput
     _avg?: ReferecesAvgOrderByAggregateInput
     _max?: ReferecesMaxOrderByAggregateInput
@@ -16868,24 +17631,28 @@ export namespace Prisma {
   }
 
   export type ReferecesScalarWhereWithAggregatesInput = {
-    AND?: ReferecesScalarWhereWithAggregatesInput | ReferecesScalarWhereWithAggregatesInput[]
-    OR?: ReferecesScalarWhereWithAggregatesInput[]
-    NOT?: ReferecesScalarWhereWithAggregatesInput | ReferecesScalarWhereWithAggregatesInput[]
+    AND?: Enumerable<ReferecesScalarWhereWithAggregatesInput>
+    OR?: Enumerable<ReferecesScalarWhereWithAggregatesInput>
+    NOT?: Enumerable<ReferecesScalarWhereWithAggregatesInput>
     id?: BigIntWithAggregatesFilter<"Refereces"> | bigint | number
     description?: StringWithAggregatesFilter<"Refereces"> | string
     value?: FloatWithAggregatesFilter<"Refereces"> | number
     userId?: BigIntNullableWithAggregatesFilter<"Refereces"> | bigint | number | null
+    createdAt?: DateTimeWithAggregatesFilter<"Refereces"> | Date | string
+    updatedAt?: DateTimeNullableWithAggregatesFilter<"Refereces"> | Date | string | null
   }
 
   export type ReferecePricesWhereInput = {
-    AND?: ReferecePricesWhereInput | ReferecePricesWhereInput[]
-    OR?: ReferecePricesWhereInput[]
-    NOT?: ReferecePricesWhereInput | ReferecePricesWhereInput[]
+    AND?: Enumerable<ReferecePricesWhereInput>
+    OR?: Enumerable<ReferecePricesWhereInput>
+    NOT?: Enumerable<ReferecePricesWhereInput>
     id?: BigIntFilter<"ReferecePrices"> | bigint | number
     name?: StringFilter<"ReferecePrices"> | string
     description?: StringFilter<"ReferecePrices"> | string
     contacts?: StringFilter<"ReferecePrices"> | string
     userId?: BigIntNullableFilter<"ReferecePrices"> | bigint | number | null
+    createdAt?: DateTimeFilter<"ReferecePrices"> | Date | string
+    updatedAt?: DateTimeNullableFilter<"ReferecePrices"> | Date | string | null
     user?: XOR<UserNullableRelationFilter, UserWhereInput> | null
   }
 
@@ -16895,18 +17662,22 @@ export namespace Prisma {
     description?: SortOrder
     contacts?: SortOrder
     userId?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrderInput | SortOrder
     user?: UserOrderByWithRelationInput
   }
 
   export type ReferecePricesWhereUniqueInput = Prisma.AtLeast<{
     id?: bigint | number
-    AND?: ReferecePricesWhereInput | ReferecePricesWhereInput[]
-    OR?: ReferecePricesWhereInput[]
-    NOT?: ReferecePricesWhereInput | ReferecePricesWhereInput[]
+    AND?: Enumerable<ReferecePricesWhereInput>
+    OR?: Enumerable<ReferecePricesWhereInput>
+    NOT?: Enumerable<ReferecePricesWhereInput>
     name?: StringFilter<"ReferecePrices"> | string
     description?: StringFilter<"ReferecePrices"> | string
     contacts?: StringFilter<"ReferecePrices"> | string
     userId?: BigIntNullableFilter<"ReferecePrices"> | bigint | number | null
+    createdAt?: DateTimeFilter<"ReferecePrices"> | Date | string
+    updatedAt?: DateTimeNullableFilter<"ReferecePrices"> | Date | string | null
     user?: XOR<UserNullableRelationFilter, UserWhereInput> | null
   }, "id">
 
@@ -16916,6 +17687,8 @@ export namespace Prisma {
     description?: SortOrder
     contacts?: SortOrder
     userId?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrderInput | SortOrder
     _count?: ReferecePricesCountOrderByAggregateInput
     _avg?: ReferecePricesAvgOrderByAggregateInput
     _max?: ReferecePricesMaxOrderByAggregateInput
@@ -16924,23 +17697,27 @@ export namespace Prisma {
   }
 
   export type ReferecePricesScalarWhereWithAggregatesInput = {
-    AND?: ReferecePricesScalarWhereWithAggregatesInput | ReferecePricesScalarWhereWithAggregatesInput[]
-    OR?: ReferecePricesScalarWhereWithAggregatesInput[]
-    NOT?: ReferecePricesScalarWhereWithAggregatesInput | ReferecePricesScalarWhereWithAggregatesInput[]
+    AND?: Enumerable<ReferecePricesScalarWhereWithAggregatesInput>
+    OR?: Enumerable<ReferecePricesScalarWhereWithAggregatesInput>
+    NOT?: Enumerable<ReferecePricesScalarWhereWithAggregatesInput>
     id?: BigIntWithAggregatesFilter<"ReferecePrices"> | bigint | number
     name?: StringWithAggregatesFilter<"ReferecePrices"> | string
     description?: StringWithAggregatesFilter<"ReferecePrices"> | string
     contacts?: StringWithAggregatesFilter<"ReferecePrices"> | string
     userId?: BigIntNullableWithAggregatesFilter<"ReferecePrices"> | bigint | number | null
+    createdAt?: DateTimeWithAggregatesFilter<"ReferecePrices"> | Date | string
+    updatedAt?: DateTimeNullableWithAggregatesFilter<"ReferecePrices"> | Date | string | null
   }
 
   export type UserPointsWhereInput = {
-    AND?: UserPointsWhereInput | UserPointsWhereInput[]
-    OR?: UserPointsWhereInput[]
-    NOT?: UserPointsWhereInput | UserPointsWhereInput[]
+    AND?: Enumerable<UserPointsWhereInput>
+    OR?: Enumerable<UserPointsWhereInput>
+    NOT?: Enumerable<UserPointsWhereInput>
     id?: BigIntFilter<"UserPoints"> | bigint | number
     value?: BigIntFilter<"UserPoints"> | bigint | number
     userId?: BigIntNullableFilter<"UserPoints"> | bigint | number | null
+    createdAt?: DateTimeFilter<"UserPoints"> | Date | string
+    updatedAt?: DateTimeNullableFilter<"UserPoints"> | Date | string | null
     user?: XOR<UserNullableRelationFilter, UserWhereInput> | null
   }
 
@@ -16948,16 +17725,20 @@ export namespace Prisma {
     id?: SortOrder
     value?: SortOrder
     userId?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrderInput | SortOrder
     user?: UserOrderByWithRelationInput
   }
 
   export type UserPointsWhereUniqueInput = Prisma.AtLeast<{
     id?: bigint | number
-    AND?: UserPointsWhereInput | UserPointsWhereInput[]
-    OR?: UserPointsWhereInput[]
-    NOT?: UserPointsWhereInput | UserPointsWhereInput[]
+    AND?: Enumerable<UserPointsWhereInput>
+    OR?: Enumerable<UserPointsWhereInput>
+    NOT?: Enumerable<UserPointsWhereInput>
     value?: BigIntFilter<"UserPoints"> | bigint | number
     userId?: BigIntNullableFilter<"UserPoints"> | bigint | number | null
+    createdAt?: DateTimeFilter<"UserPoints"> | Date | string
+    updatedAt?: DateTimeNullableFilter<"UserPoints"> | Date | string | null
     user?: XOR<UserNullableRelationFilter, UserWhereInput> | null
   }, "id">
 
@@ -16965,6 +17746,8 @@ export namespace Prisma {
     id?: SortOrder
     value?: SortOrder
     userId?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrderInput | SortOrder
     _count?: UserPointsCountOrderByAggregateInput
     _avg?: UserPointsAvgOrderByAggregateInput
     _max?: UserPointsMaxOrderByAggregateInput
@@ -16973,18 +17756,20 @@ export namespace Prisma {
   }
 
   export type UserPointsScalarWhereWithAggregatesInput = {
-    AND?: UserPointsScalarWhereWithAggregatesInput | UserPointsScalarWhereWithAggregatesInput[]
-    OR?: UserPointsScalarWhereWithAggregatesInput[]
-    NOT?: UserPointsScalarWhereWithAggregatesInput | UserPointsScalarWhereWithAggregatesInput[]
+    AND?: Enumerable<UserPointsScalarWhereWithAggregatesInput>
+    OR?: Enumerable<UserPointsScalarWhereWithAggregatesInput>
+    NOT?: Enumerable<UserPointsScalarWhereWithAggregatesInput>
     id?: BigIntWithAggregatesFilter<"UserPoints"> | bigint | number
     value?: BigIntWithAggregatesFilter<"UserPoints"> | bigint | number
     userId?: BigIntNullableWithAggregatesFilter<"UserPoints"> | bigint | number | null
+    createdAt?: DateTimeWithAggregatesFilter<"UserPoints"> | Date | string
+    updatedAt?: DateTimeNullableWithAggregatesFilter<"UserPoints"> | Date | string | null
   }
 
   export type FeedWhereInput = {
-    AND?: FeedWhereInput | FeedWhereInput[]
-    OR?: FeedWhereInput[]
-    NOT?: FeedWhereInput | FeedWhereInput[]
+    AND?: Enumerable<FeedWhereInput>
+    OR?: Enumerable<FeedWhereInput>
+    NOT?: Enumerable<FeedWhereInput>
     id?: BigIntFilter<"Feed"> | bigint | number
     title?: StringFilter<"Feed"> | string
     img?: StringNullableFilter<"Feed"> | string | null
@@ -16994,6 +17779,8 @@ export namespace Prisma {
     react_smile?: BigIntNullableFilter<"Feed"> | bigint | number | null
     react_lovely?: BigIntNullableFilter<"Feed"> | bigint | number | null
     userId?: BigIntNullableFilter<"Feed"> | bigint | number | null
+    createdAt?: DateTimeFilter<"Feed"> | Date | string
+    updatedAt?: DateTimeNullableFilter<"Feed"> | Date | string | null
     user?: XOR<UserNullableRelationFilter, UserWhereInput> | null
   }
 
@@ -17007,14 +17794,16 @@ export namespace Prisma {
     react_smile?: SortOrderInput | SortOrder
     react_lovely?: SortOrderInput | SortOrder
     userId?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrderInput | SortOrder
     user?: UserOrderByWithRelationInput
   }
 
   export type FeedWhereUniqueInput = Prisma.AtLeast<{
     id?: bigint | number
-    AND?: FeedWhereInput | FeedWhereInput[]
-    OR?: FeedWhereInput[]
-    NOT?: FeedWhereInput | FeedWhereInput[]
+    AND?: Enumerable<FeedWhereInput>
+    OR?: Enumerable<FeedWhereInput>
+    NOT?: Enumerable<FeedWhereInput>
     title?: StringFilter<"Feed"> | string
     img?: StringNullableFilter<"Feed"> | string | null
     description?: StringNullableFilter<"Feed"> | string | null
@@ -17023,6 +17812,8 @@ export namespace Prisma {
     react_smile?: BigIntNullableFilter<"Feed"> | bigint | number | null
     react_lovely?: BigIntNullableFilter<"Feed"> | bigint | number | null
     userId?: BigIntNullableFilter<"Feed"> | bigint | number | null
+    createdAt?: DateTimeFilter<"Feed"> | Date | string
+    updatedAt?: DateTimeNullableFilter<"Feed"> | Date | string | null
     user?: XOR<UserNullableRelationFilter, UserWhereInput> | null
   }, "id">
 
@@ -17036,6 +17827,8 @@ export namespace Prisma {
     react_smile?: SortOrderInput | SortOrder
     react_lovely?: SortOrderInput | SortOrder
     userId?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrderInput | SortOrder
     _count?: FeedCountOrderByAggregateInput
     _avg?: FeedAvgOrderByAggregateInput
     _max?: FeedMaxOrderByAggregateInput
@@ -17044,9 +17837,9 @@ export namespace Prisma {
   }
 
   export type FeedScalarWhereWithAggregatesInput = {
-    AND?: FeedScalarWhereWithAggregatesInput | FeedScalarWhereWithAggregatesInput[]
-    OR?: FeedScalarWhereWithAggregatesInput[]
-    NOT?: FeedScalarWhereWithAggregatesInput | FeedScalarWhereWithAggregatesInput[]
+    AND?: Enumerable<FeedScalarWhereWithAggregatesInput>
+    OR?: Enumerable<FeedScalarWhereWithAggregatesInput>
+    NOT?: Enumerable<FeedScalarWhereWithAggregatesInput>
     id?: BigIntWithAggregatesFilter<"Feed"> | bigint | number
     title?: StringWithAggregatesFilter<"Feed"> | string
     img?: StringNullableWithAggregatesFilter<"Feed"> | string | null
@@ -17056,15 +17849,19 @@ export namespace Prisma {
     react_smile?: BigIntNullableWithAggregatesFilter<"Feed"> | bigint | number | null
     react_lovely?: BigIntNullableWithAggregatesFilter<"Feed"> | bigint | number | null
     userId?: BigIntNullableWithAggregatesFilter<"Feed"> | bigint | number | null
+    createdAt?: DateTimeWithAggregatesFilter<"Feed"> | Date | string
+    updatedAt?: DateTimeNullableWithAggregatesFilter<"Feed"> | Date | string | null
   }
 
   export type FeedCommentsWhereInput = {
-    AND?: FeedCommentsWhereInput | FeedCommentsWhereInput[]
-    OR?: FeedCommentsWhereInput[]
-    NOT?: FeedCommentsWhereInput | FeedCommentsWhereInput[]
+    AND?: Enumerable<FeedCommentsWhereInput>
+    OR?: Enumerable<FeedCommentsWhereInput>
+    NOT?: Enumerable<FeedCommentsWhereInput>
     id?: BigIntFilter<"FeedComments"> | bigint | number
     comment?: StringFilter<"FeedComments"> | string
     userId?: BigIntFilter<"FeedComments"> | bigint | number
+    createdAt?: DateTimeFilter<"FeedComments"> | Date | string
+    updatedAt?: DateTimeNullableFilter<"FeedComments"> | Date | string | null
     user?: XOR<UserNullableRelationFilter, UserWhereInput> | null
   }
 
@@ -17072,16 +17869,20 @@ export namespace Prisma {
     id?: SortOrder
     comment?: SortOrder
     userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrderInput | SortOrder
     user?: UserOrderByWithRelationInput
   }
 
   export type FeedCommentsWhereUniqueInput = Prisma.AtLeast<{
     id?: bigint | number
-    AND?: FeedCommentsWhereInput | FeedCommentsWhereInput[]
-    OR?: FeedCommentsWhereInput[]
-    NOT?: FeedCommentsWhereInput | FeedCommentsWhereInput[]
+    AND?: Enumerable<FeedCommentsWhereInput>
+    OR?: Enumerable<FeedCommentsWhereInput>
+    NOT?: Enumerable<FeedCommentsWhereInput>
     comment?: StringFilter<"FeedComments"> | string
     userId?: BigIntFilter<"FeedComments"> | bigint | number
+    createdAt?: DateTimeFilter<"FeedComments"> | Date | string
+    updatedAt?: DateTimeNullableFilter<"FeedComments"> | Date | string | null
     user?: XOR<UserNullableRelationFilter, UserWhereInput> | null
   }, "id">
 
@@ -17089,6 +17890,8 @@ export namespace Prisma {
     id?: SortOrder
     comment?: SortOrder
     userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrderInput | SortOrder
     _count?: FeedCommentsCountOrderByAggregateInput
     _avg?: FeedCommentsAvgOrderByAggregateInput
     _max?: FeedCommentsMaxOrderByAggregateInput
@@ -17097,20 +17900,24 @@ export namespace Prisma {
   }
 
   export type FeedCommentsScalarWhereWithAggregatesInput = {
-    AND?: FeedCommentsScalarWhereWithAggregatesInput | FeedCommentsScalarWhereWithAggregatesInput[]
-    OR?: FeedCommentsScalarWhereWithAggregatesInput[]
-    NOT?: FeedCommentsScalarWhereWithAggregatesInput | FeedCommentsScalarWhereWithAggregatesInput[]
+    AND?: Enumerable<FeedCommentsScalarWhereWithAggregatesInput>
+    OR?: Enumerable<FeedCommentsScalarWhereWithAggregatesInput>
+    NOT?: Enumerable<FeedCommentsScalarWhereWithAggregatesInput>
     id?: BigIntWithAggregatesFilter<"FeedComments"> | bigint | number
     comment?: StringWithAggregatesFilter<"FeedComments"> | string
     userId?: BigIntWithAggregatesFilter<"FeedComments"> | bigint | number
+    createdAt?: DateTimeWithAggregatesFilter<"FeedComments"> | Date | string
+    updatedAt?: DateTimeNullableWithAggregatesFilter<"FeedComments"> | Date | string | null
   }
 
   export type UserCreateInput = {
     id?: bigint | number
     email: string
     password: string
+    createdAt?: Date | string
+    updatedAt?: Date | string | null
     perfil?: PerfilCreateNestedOneWithoutUserInput
-    addres?: AddresCreateNestedManyWithoutUserInput
+    address?: AddressCreateNestedManyWithoutUserInput
     contact?: ContactCreateNestedManyWithoutUserInput
     degree?: DegreeCreateNestedManyWithoutUserInput
     skills?: SkillsCreateNestedManyWithoutUserInput
@@ -17127,8 +17934,10 @@ export namespace Prisma {
     id?: bigint | number
     email: string
     password: string
+    createdAt?: Date | string
+    updatedAt?: Date | string | null
     perfil?: PerfilUncheckedCreateNestedOneWithoutUserInput
-    addres?: AddresUncheckedCreateNestedManyWithoutUserInput
+    address?: AddressUncheckedCreateNestedManyWithoutUserInput
     contact?: ContactUncheckedCreateNestedManyWithoutUserInput
     degree?: DegreeUncheckedCreateNestedManyWithoutUserInput
     skills?: SkillsUncheckedCreateNestedManyWithoutUserInput
@@ -17145,8 +17954,10 @@ export namespace Prisma {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     perfil?: PerfilUpdateOneWithoutUserNestedInput
-    addres?: AddresUpdateManyWithoutUserNestedInput
+    address?: AddressUpdateManyWithoutUserNestedInput
     contact?: ContactUpdateManyWithoutUserNestedInput
     degree?: DegreeUpdateManyWithoutUserNestedInput
     skills?: SkillsUpdateManyWithoutUserNestedInput
@@ -17163,8 +17974,10 @@ export namespace Prisma {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     perfil?: PerfilUncheckedUpdateOneWithoutUserNestedInput
-    addres?: AddresUncheckedUpdateManyWithoutUserNestedInput
+    address?: AddressUncheckedUpdateManyWithoutUserNestedInput
     contact?: ContactUncheckedUpdateManyWithoutUserNestedInput
     degree?: DegreeUncheckedUpdateManyWithoutUserNestedInput
     skills?: SkillsUncheckedUpdateManyWithoutUserNestedInput
@@ -17181,18 +17994,24 @@ export namespace Prisma {
     id?: bigint | number
     email: string
     password: string
+    createdAt?: Date | string
+    updatedAt?: Date | string | null
   }
 
   export type UserUpdateManyMutationInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type UserUncheckedUpdateManyInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type PerfilCreateInput = {
@@ -17202,6 +18021,8 @@ export namespace Prisma {
     secondname?: string | null
     socialname?: string | null
     birthday?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string | null
     user?: UserCreateNestedOneWithoutPerfilInput
   }
 
@@ -17213,6 +18034,8 @@ export namespace Prisma {
     socialname?: string | null
     birthday?: Date | string | null
     userId?: bigint | number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string | null
   }
 
   export type PerfilUpdateInput = {
@@ -17222,6 +18045,8 @@ export namespace Prisma {
     secondname?: NullableStringFieldUpdateOperationsInput | string | null
     socialname?: NullableStringFieldUpdateOperationsInput | string | null
     birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     user?: UserUpdateOneWithoutPerfilNestedInput
   }
 
@@ -17233,6 +18058,8 @@ export namespace Prisma {
     socialname?: NullableStringFieldUpdateOperationsInput | string | null
     birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     userId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type PerfilCreateManyInput = {
@@ -17243,6 +18070,8 @@ export namespace Prisma {
     socialname?: string | null
     birthday?: Date | string | null
     userId?: bigint | number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string | null
   }
 
   export type PerfilUpdateManyMutationInput = {
@@ -17252,6 +18081,8 @@ export namespace Prisma {
     secondname?: NullableStringFieldUpdateOperationsInput | string | null
     socialname?: NullableStringFieldUpdateOperationsInput | string | null
     birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type PerfilUncheckedUpdateManyInput = {
@@ -17262,68 +18093,98 @@ export namespace Prisma {
     socialname?: NullableStringFieldUpdateOperationsInput | string | null
     birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     userId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
-  export type AddresCreateInput = {
+  export type AddressCreateInput = {
     id?: bigint | number
-    address?: string | null
+    street?: string | null
+    number?: string | null
     complement?: string | null
+    city?: string | null
     state?: string | null
     country?: string | null
-    user?: UserCreateNestedOneWithoutAddresInput
+    createdAt?: Date | string
+    updatedAt?: Date | string | null
+    user?: UserCreateNestedOneWithoutAddressInput
   }
 
-  export type AddresUncheckedCreateInput = {
+  export type AddressUncheckedCreateInput = {
     id?: bigint | number
-    address?: string | null
+    street?: string | null
+    number?: string | null
     complement?: string | null
-    state?: string | null
-    country?: string | null
-    userId?: bigint | number | null
-  }
-
-  export type AddresUpdateInput = {
-    id?: BigIntFieldUpdateOperationsInput | bigint | number
-    address?: NullableStringFieldUpdateOperationsInput | string | null
-    complement?: NullableStringFieldUpdateOperationsInput | string | null
-    state?: NullableStringFieldUpdateOperationsInput | string | null
-    country?: NullableStringFieldUpdateOperationsInput | string | null
-    user?: UserUpdateOneWithoutAddresNestedInput
-  }
-
-  export type AddresUncheckedUpdateInput = {
-    id?: BigIntFieldUpdateOperationsInput | bigint | number
-    address?: NullableStringFieldUpdateOperationsInput | string | null
-    complement?: NullableStringFieldUpdateOperationsInput | string | null
-    state?: NullableStringFieldUpdateOperationsInput | string | null
-    country?: NullableStringFieldUpdateOperationsInput | string | null
-    userId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
-  }
-
-  export type AddresCreateManyInput = {
-    id?: bigint | number
-    address?: string | null
-    complement?: string | null
+    city?: string | null
     state?: string | null
     country?: string | null
     userId?: bigint | number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string | null
   }
 
-  export type AddresUpdateManyMutationInput = {
+  export type AddressUpdateInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
-    address?: NullableStringFieldUpdateOperationsInput | string | null
+    street?: NullableStringFieldUpdateOperationsInput | string | null
+    number?: NullableStringFieldUpdateOperationsInput | string | null
     complement?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
     state?: NullableStringFieldUpdateOperationsInput | string | null
     country?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    user?: UserUpdateOneWithoutAddressNestedInput
   }
 
-  export type AddresUncheckedUpdateManyInput = {
+  export type AddressUncheckedUpdateInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
-    address?: NullableStringFieldUpdateOperationsInput | string | null
+    street?: NullableStringFieldUpdateOperationsInput | string | null
+    number?: NullableStringFieldUpdateOperationsInput | string | null
     complement?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
     state?: NullableStringFieldUpdateOperationsInput | string | null
     country?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type AddressCreateManyInput = {
+    id?: bigint | number
+    street?: string | null
+    number?: string | null
+    complement?: string | null
+    city?: string | null
+    state?: string | null
+    country?: string | null
+    userId?: bigint | number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string | null
+  }
+
+  export type AddressUpdateManyMutationInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    street?: NullableStringFieldUpdateOperationsInput | string | null
+    number?: NullableStringFieldUpdateOperationsInput | string | null
+    complement?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type AddressUncheckedUpdateManyInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    street?: NullableStringFieldUpdateOperationsInput | string | null
+    number?: NullableStringFieldUpdateOperationsInput | string | null
+    complement?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    userId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type ContactCreateInput = {
@@ -17331,6 +18192,8 @@ export namespace Prisma {
     email?: string | null
     phone?: string | null
     another?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string | null
     user?: UserCreateNestedOneWithoutContactInput
   }
 
@@ -17340,6 +18203,8 @@ export namespace Prisma {
     phone?: string | null
     another?: string | null
     userId?: bigint | number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string | null
   }
 
   export type ContactUpdateInput = {
@@ -17347,6 +18212,8 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     another?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     user?: UserUpdateOneWithoutContactNestedInput
   }
 
@@ -17356,6 +18223,8 @@ export namespace Prisma {
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     another?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type ContactCreateManyInput = {
@@ -17364,6 +18233,8 @@ export namespace Prisma {
     phone?: string | null
     another?: string | null
     userId?: bigint | number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string | null
   }
 
   export type ContactUpdateManyMutationInput = {
@@ -17371,6 +18242,8 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     another?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type ContactUncheckedUpdateManyInput = {
@@ -17379,12 +18252,16 @@ export namespace Prisma {
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     another?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type KnowledgespaceCreateInput = {
     id?: bigint | number
     code?: string | null
     description?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string | null
     degree?: DegreeCreateNestedManyWithoutKnowledgespaceInput
   }
 
@@ -17392,6 +18269,8 @@ export namespace Prisma {
     id?: bigint | number
     code?: string | null
     description?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string | null
     degree?: DegreeUncheckedCreateNestedManyWithoutKnowledgespaceInput
   }
 
@@ -17399,6 +18278,8 @@ export namespace Prisma {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     code?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     degree?: DegreeUpdateManyWithoutKnowledgespaceNestedInput
   }
 
@@ -17406,6 +18287,8 @@ export namespace Prisma {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     code?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     degree?: DegreeUncheckedUpdateManyWithoutKnowledgespaceNestedInput
   }
 
@@ -17413,24 +18296,32 @@ export namespace Prisma {
     id?: bigint | number
     code?: string | null
     description?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string | null
   }
 
   export type KnowledgespaceUpdateManyMutationInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     code?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type KnowledgespaceUncheckedUpdateManyInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     code?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type DegreeCreateInput = {
     id?: bigint | number
     code?: string | null
     description?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string | null
     Knowledgespace?: KnowledgespaceCreateNestedOneWithoutDegreeInput
     user?: UserCreateNestedOneWithoutDegreeInput
   }
@@ -17441,12 +18332,16 @@ export namespace Prisma {
     description?: string | null
     KnowledgespaceId?: bigint | number | null
     userId?: bigint | number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string | null
   }
 
   export type DegreeUpdateInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     code?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     Knowledgespace?: KnowledgespaceUpdateOneWithoutDegreeNestedInput
     user?: UserUpdateOneWithoutDegreeNestedInput
   }
@@ -17457,6 +18352,8 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     KnowledgespaceId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     userId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type DegreeCreateManyInput = {
@@ -17465,12 +18362,16 @@ export namespace Prisma {
     description?: string | null
     KnowledgespaceId?: bigint | number | null
     userId?: bigint | number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string | null
   }
 
   export type DegreeUpdateManyMutationInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     code?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type DegreeUncheckedUpdateManyInput = {
@@ -17479,12 +18380,16 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     KnowledgespaceId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     userId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type SkillsCreateInput = {
     id?: bigint | number
     code?: string | null
     description?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string | null
     user?: UserCreateNestedOneWithoutSkillsInput
   }
 
@@ -17493,12 +18398,16 @@ export namespace Prisma {
     code?: string | null
     description?: string | null
     userId?: bigint | number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string | null
   }
 
   export type SkillsUpdateInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     code?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     user?: UserUpdateOneWithoutSkillsNestedInput
   }
 
@@ -17507,6 +18416,8 @@ export namespace Prisma {
     code?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type SkillsCreateManyInput = {
@@ -17514,12 +18425,16 @@ export namespace Prisma {
     code?: string | null
     description?: string | null
     userId?: bigint | number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string | null
   }
 
   export type SkillsUpdateManyMutationInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     code?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type SkillsUncheckedUpdateManyInput = {
@@ -17527,6 +18442,8 @@ export namespace Prisma {
     code?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type ExperiencesCreateInput = {
@@ -17535,6 +18452,8 @@ export namespace Prisma {
     start: Date | string
     end?: Date | string | null
     iscurrent?: boolean | null
+    createdAt?: Date | string
+    updatedAt?: Date | string | null
     user?: UserCreateNestedOneWithoutExperiencesInput
   }
 
@@ -17545,6 +18464,8 @@ export namespace Prisma {
     end?: Date | string | null
     iscurrent?: boolean | null
     userId?: bigint | number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string | null
   }
 
   export type ExperiencesUpdateInput = {
@@ -17553,6 +18474,8 @@ export namespace Prisma {
     start?: DateTimeFieldUpdateOperationsInput | Date | string
     end?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     iscurrent?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     user?: UserUpdateOneWithoutExperiencesNestedInput
   }
 
@@ -17563,6 +18486,8 @@ export namespace Prisma {
     end?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     iscurrent?: NullableBoolFieldUpdateOperationsInput | boolean | null
     userId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type ExperiencesCreateManyInput = {
@@ -17572,6 +18497,8 @@ export namespace Prisma {
     end?: Date | string | null
     iscurrent?: boolean | null
     userId?: bigint | number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string | null
   }
 
   export type ExperiencesUpdateManyMutationInput = {
@@ -17580,6 +18507,8 @@ export namespace Prisma {
     start?: DateTimeFieldUpdateOperationsInput | Date | string
     end?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     iscurrent?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type ExperiencesUncheckedUpdateManyInput = {
@@ -17589,6 +18518,8 @@ export namespace Prisma {
     end?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     iscurrent?: NullableBoolFieldUpdateOperationsInput | boolean | null
     userId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type ProjectsCreateInput = {
@@ -17598,6 +18529,8 @@ export namespace Prisma {
     start: Date | string
     end?: Date | string | null
     iscurrent?: boolean | null
+    createdAt?: Date | string
+    updatedAt?: Date | string | null
     user?: UserCreateNestedOneWithoutProjectsInput
   }
 
@@ -17609,6 +18542,8 @@ export namespace Prisma {
     end?: Date | string | null
     iscurrent?: boolean | null
     userId?: bigint | number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string | null
   }
 
   export type ProjectsUpdateInput = {
@@ -17618,6 +18553,8 @@ export namespace Prisma {
     start?: DateTimeFieldUpdateOperationsInput | Date | string
     end?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     iscurrent?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     user?: UserUpdateOneWithoutProjectsNestedInput
   }
 
@@ -17629,6 +18566,8 @@ export namespace Prisma {
     end?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     iscurrent?: NullableBoolFieldUpdateOperationsInput | boolean | null
     userId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type ProjectsCreateManyInput = {
@@ -17639,6 +18578,8 @@ export namespace Prisma {
     end?: Date | string | null
     iscurrent?: boolean | null
     userId?: bigint | number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string | null
   }
 
   export type ProjectsUpdateManyMutationInput = {
@@ -17648,6 +18589,8 @@ export namespace Prisma {
     start?: DateTimeFieldUpdateOperationsInput | Date | string
     end?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     iscurrent?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type ProjectsUncheckedUpdateManyInput = {
@@ -17658,12 +18601,16 @@ export namespace Prisma {
     end?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     iscurrent?: NullableBoolFieldUpdateOperationsInput | boolean | null
     userId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type ReferecesCreateInput = {
     id?: bigint | number
     description: string
     value: number
+    createdAt?: Date | string
+    updatedAt?: Date | string | null
     user?: UserCreateNestedOneWithoutReferecesInput
   }
 
@@ -17672,12 +18619,16 @@ export namespace Prisma {
     description: string
     value: number
     userId?: bigint | number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string | null
   }
 
   export type ReferecesUpdateInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     description?: StringFieldUpdateOperationsInput | string
     value?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     user?: UserUpdateOneWithoutReferecesNestedInput
   }
 
@@ -17686,6 +18637,8 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     value?: FloatFieldUpdateOperationsInput | number
     userId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type ReferecesCreateManyInput = {
@@ -17693,12 +18646,16 @@ export namespace Prisma {
     description: string
     value: number
     userId?: bigint | number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string | null
   }
 
   export type ReferecesUpdateManyMutationInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     description?: StringFieldUpdateOperationsInput | string
     value?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type ReferecesUncheckedUpdateManyInput = {
@@ -17706,6 +18663,8 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     value?: FloatFieldUpdateOperationsInput | number
     userId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type ReferecePricesCreateInput = {
@@ -17713,6 +18672,8 @@ export namespace Prisma {
     name: string
     description: string
     contacts: string
+    createdAt?: Date | string
+    updatedAt?: Date | string | null
     user?: UserCreateNestedOneWithoutReferecePricesInput
   }
 
@@ -17722,6 +18683,8 @@ export namespace Prisma {
     description: string
     contacts: string
     userId?: bigint | number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string | null
   }
 
   export type ReferecePricesUpdateInput = {
@@ -17729,6 +18692,8 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     contacts?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     user?: UserUpdateOneWithoutReferecePricesNestedInput
   }
 
@@ -17738,6 +18703,8 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     contacts?: StringFieldUpdateOperationsInput | string
     userId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type ReferecePricesCreateManyInput = {
@@ -17746,6 +18713,8 @@ export namespace Prisma {
     description: string
     contacts: string
     userId?: bigint | number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string | null
   }
 
   export type ReferecePricesUpdateManyMutationInput = {
@@ -17753,6 +18722,8 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     contacts?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type ReferecePricesUncheckedUpdateManyInput = {
@@ -17761,11 +18732,15 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     contacts?: StringFieldUpdateOperationsInput | string
     userId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type UserPointsCreateInput = {
     id?: bigint | number
     value: bigint | number
+    createdAt?: Date | string
+    updatedAt?: Date | string | null
     user?: UserCreateNestedOneWithoutUserPointsInput
   }
 
@@ -17773,11 +18748,15 @@ export namespace Prisma {
     id?: bigint | number
     value: bigint | number
     userId?: bigint | number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string | null
   }
 
   export type UserPointsUpdateInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     value?: BigIntFieldUpdateOperationsInput | bigint | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     user?: UserUpdateOneWithoutUserPointsNestedInput
   }
 
@@ -17785,23 +18764,31 @@ export namespace Prisma {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     value?: BigIntFieldUpdateOperationsInput | bigint | number
     userId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type UserPointsCreateManyInput = {
     id?: bigint | number
     value: bigint | number
     userId?: bigint | number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string | null
   }
 
   export type UserPointsUpdateManyMutationInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     value?: BigIntFieldUpdateOperationsInput | bigint | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type UserPointsUncheckedUpdateManyInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     value?: BigIntFieldUpdateOperationsInput | bigint | number
     userId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type FeedCreateInput = {
@@ -17813,6 +18800,8 @@ export namespace Prisma {
     react_negative?: bigint | number | null
     react_smile?: bigint | number | null
     react_lovely?: bigint | number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string | null
     user?: UserCreateNestedOneWithoutFeedsInput
   }
 
@@ -17826,6 +18815,8 @@ export namespace Prisma {
     react_smile?: bigint | number | null
     react_lovely?: bigint | number | null
     userId?: bigint | number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string | null
   }
 
   export type FeedUpdateInput = {
@@ -17837,6 +18828,8 @@ export namespace Prisma {
     react_negative?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     react_smile?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     react_lovely?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     user?: UserUpdateOneWithoutFeedsNestedInput
   }
 
@@ -17850,6 +18843,8 @@ export namespace Prisma {
     react_smile?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     react_lovely?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     userId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type FeedCreateManyInput = {
@@ -17862,6 +18857,8 @@ export namespace Prisma {
     react_smile?: bigint | number | null
     react_lovely?: bigint | number | null
     userId?: bigint | number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string | null
   }
 
   export type FeedUpdateManyMutationInput = {
@@ -17873,6 +18870,8 @@ export namespace Prisma {
     react_negative?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     react_smile?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     react_lovely?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type FeedUncheckedUpdateManyInput = {
@@ -17885,11 +18884,15 @@ export namespace Prisma {
     react_smile?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     react_lovely?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     userId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type FeedCommentsCreateInput = {
     id?: bigint | number
     comment: string
+    createdAt?: Date | string
+    updatedAt?: Date | string | null
     user?: UserCreateNestedOneWithoutCommentsInput
   }
 
@@ -17897,11 +18900,15 @@ export namespace Prisma {
     id?: bigint | number
     comment: string
     userId: bigint | number
+    createdAt?: Date | string
+    updatedAt?: Date | string | null
   }
 
   export type FeedCommentsUpdateInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     comment?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     user?: UserUpdateOneWithoutCommentsNestedInput
   }
 
@@ -17909,29 +18916,37 @@ export namespace Prisma {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     comment?: StringFieldUpdateOperationsInput | string
     userId?: BigIntFieldUpdateOperationsInput | bigint | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type FeedCommentsCreateManyInput = {
     id?: bigint | number
     comment: string
     userId: bigint | number
+    createdAt?: Date | string
+    updatedAt?: Date | string | null
   }
 
   export type FeedCommentsUpdateManyMutationInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     comment?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type FeedCommentsUncheckedUpdateManyInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     comment?: StringFieldUpdateOperationsInput | string
     userId?: BigIntFieldUpdateOperationsInput | bigint | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type BigIntFilter<$PrismaModel = never> = {
     equals?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    in?: bigint[] | number[]
-    notIn?: bigint[] | number[]
+    in?: Enumerable<bigint> | Enumerable<number>
+    notIn?: Enumerable<bigint> | Enumerable<number>
     lt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
     lte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
     gt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
@@ -17941,8 +18956,8 @@ export namespace Prisma {
 
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
-    in?: string[]
-    notIn?: string[]
+    in?: Enumerable<string>
+    notIn?: Enumerable<string>
     lt?: string | StringFieldRefInput<$PrismaModel>
     lte?: string | StringFieldRefInput<$PrismaModel>
     gt?: string | StringFieldRefInput<$PrismaModel>
@@ -17953,15 +18968,37 @@ export namespace Prisma {
     not?: NestedStringFilter<$PrismaModel> | string
   }
 
+  export type DateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Enumerable<Date> | Enumerable<string>
+    notIn?: Enumerable<Date> | Enumerable<string>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
+  export type DateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Enumerable<Date> | Enumerable<string> | null
+    notIn?: Enumerable<Date> | Enumerable<string> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
   export type PerfilNullableRelationFilter = {
     is?: PerfilWhereInput | null
     isNot?: PerfilWhereInput | null
   }
 
-  export type AddresListRelationFilter = {
-    every?: AddresWhereInput
-    some?: AddresWhereInput
-    none?: AddresWhereInput
+  export type AddressListRelationFilter = {
+    every?: AddressWhereInput
+    some?: AddressWhereInput
+    none?: AddressWhereInput
   }
 
   export type ContactListRelationFilter = {
@@ -18024,7 +19061,12 @@ export namespace Prisma {
     none?: FeedCommentsWhereInput
   }
 
-  export type AddresOrderByRelationAggregateInput = {
+  export type SortOrderInput = {
+    sort: SortOrder
+    nulls?: NullsOrder
+  }
+
+  export type AddressOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -18072,6 +19114,8 @@ export namespace Prisma {
     id?: SortOrder
     email?: SortOrder
     password?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type UserAvgOrderByAggregateInput = {
@@ -18082,12 +19126,16 @@ export namespace Prisma {
     id?: SortOrder
     email?: SortOrder
     password?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type UserMinOrderByAggregateInput = {
     id?: SortOrder
     email?: SortOrder
     password?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type UserSumOrderByAggregateInput = {
@@ -18096,8 +19144,8 @@ export namespace Prisma {
 
   export type BigIntWithAggregatesFilter<$PrismaModel = never> = {
     equals?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    in?: bigint[] | number[]
-    notIn?: bigint[] | number[]
+    in?: Enumerable<bigint> | Enumerable<number>
+    notIn?: Enumerable<bigint> | Enumerable<number>
     lt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
     lte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
     gt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
@@ -18112,8 +19160,8 @@ export namespace Prisma {
 
   export type StringWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
-    in?: string[]
-    notIn?: string[]
+    in?: Enumerable<string>
+    notIn?: Enumerable<string>
     lt?: string | StringFieldRefInput<$PrismaModel>
     lte?: string | StringFieldRefInput<$PrismaModel>
     gt?: string | StringFieldRefInput<$PrismaModel>
@@ -18127,10 +19175,38 @@ export namespace Prisma {
     _max?: NestedStringFilter<$PrismaModel>
   }
 
+  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Enumerable<Date> | Enumerable<string>
+    notIn?: Enumerable<Date> | Enumerable<string>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Enumerable<Date> | Enumerable<string> | null
+    notIn?: Enumerable<Date> | Enumerable<string> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
   export type StringNullableFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | null
-    notIn?: string[] | null
+    in?: Enumerable<string> | null
+    notIn?: Enumerable<string> | null
     lt?: string | StringFieldRefInput<$PrismaModel>
     lte?: string | StringFieldRefInput<$PrismaModel>
     gt?: string | StringFieldRefInput<$PrismaModel>
@@ -18141,21 +19217,10 @@ export namespace Prisma {
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
-  export type DateTimeNullableFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | null
-    notIn?: Date[] | string[] | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
-  }
-
   export type BigIntNullableFilter<$PrismaModel = never> = {
     equals?: bigint | number | BigIntFieldRefInput<$PrismaModel> | null
-    in?: bigint[] | number[] | null
-    notIn?: bigint[] | number[] | null
+    in?: Enumerable<bigint> | Enumerable<number> | null
+    notIn?: Enumerable<bigint> | Enumerable<number> | null
     lt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
     lte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
     gt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
@@ -18168,11 +19233,6 @@ export namespace Prisma {
     isNot?: UserWhereInput | null
   }
 
-  export type SortOrderInput = {
-    sort: SortOrder
-    nulls?: NullsOrder
-  }
-
   export type PerfilCountOrderByAggregateInput = {
     id?: SortOrder
     photo?: SortOrder
@@ -18181,6 +19241,8 @@ export namespace Prisma {
     socialname?: SortOrder
     birthday?: SortOrder
     userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type PerfilAvgOrderByAggregateInput = {
@@ -18196,6 +19258,8 @@ export namespace Prisma {
     socialname?: SortOrder
     birthday?: SortOrder
     userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type PerfilMinOrderByAggregateInput = {
@@ -18206,6 +19270,8 @@ export namespace Prisma {
     socialname?: SortOrder
     birthday?: SortOrder
     userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type PerfilSumOrderByAggregateInput = {
@@ -18215,8 +19281,8 @@ export namespace Prisma {
 
   export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | null
-    notIn?: string[] | null
+    in?: Enumerable<string> | null
+    notIn?: Enumerable<string> | null
     lt?: string | StringFieldRefInput<$PrismaModel>
     lte?: string | StringFieldRefInput<$PrismaModel>
     gt?: string | StringFieldRefInput<$PrismaModel>
@@ -18230,24 +19296,10 @@ export namespace Prisma {
     _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
-  export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | null
-    notIn?: Date[] | string[] | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedDateTimeNullableFilter<$PrismaModel>
-    _max?: NestedDateTimeNullableFilter<$PrismaModel>
-  }
-
   export type BigIntNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: bigint | number | BigIntFieldRefInput<$PrismaModel> | null
-    in?: bigint[] | number[] | null
-    notIn?: bigint[] | number[] | null
+    in?: Enumerable<bigint> | Enumerable<number> | null
+    notIn?: Enumerable<bigint> | Enumerable<number> | null
     lt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
     lte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
     gt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
@@ -18260,39 +19312,51 @@ export namespace Prisma {
     _max?: NestedBigIntNullableFilter<$PrismaModel>
   }
 
-  export type AddresCountOrderByAggregateInput = {
+  export type AddressCountOrderByAggregateInput = {
     id?: SortOrder
-    address?: SortOrder
+    street?: SortOrder
+    number?: SortOrder
     complement?: SortOrder
+    city?: SortOrder
     state?: SortOrder
     country?: SortOrder
     userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
-  export type AddresAvgOrderByAggregateInput = {
+  export type AddressAvgOrderByAggregateInput = {
     id?: SortOrder
     userId?: SortOrder
   }
 
-  export type AddresMaxOrderByAggregateInput = {
+  export type AddressMaxOrderByAggregateInput = {
     id?: SortOrder
-    address?: SortOrder
+    street?: SortOrder
+    number?: SortOrder
     complement?: SortOrder
+    city?: SortOrder
     state?: SortOrder
     country?: SortOrder
     userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
-  export type AddresMinOrderByAggregateInput = {
+  export type AddressMinOrderByAggregateInput = {
     id?: SortOrder
-    address?: SortOrder
+    street?: SortOrder
+    number?: SortOrder
     complement?: SortOrder
+    city?: SortOrder
     state?: SortOrder
     country?: SortOrder
     userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
-  export type AddresSumOrderByAggregateInput = {
+  export type AddressSumOrderByAggregateInput = {
     id?: SortOrder
     userId?: SortOrder
   }
@@ -18303,6 +19367,8 @@ export namespace Prisma {
     phone?: SortOrder
     another?: SortOrder
     userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type ContactAvgOrderByAggregateInput = {
@@ -18316,6 +19382,8 @@ export namespace Prisma {
     phone?: SortOrder
     another?: SortOrder
     userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type ContactMinOrderByAggregateInput = {
@@ -18324,6 +19392,8 @@ export namespace Prisma {
     phone?: SortOrder
     another?: SortOrder
     userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type ContactSumOrderByAggregateInput = {
@@ -18335,6 +19405,8 @@ export namespace Prisma {
     id?: SortOrder
     code?: SortOrder
     description?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type KnowledgespaceAvgOrderByAggregateInput = {
@@ -18345,12 +19417,16 @@ export namespace Prisma {
     id?: SortOrder
     code?: SortOrder
     description?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type KnowledgespaceMinOrderByAggregateInput = {
     id?: SortOrder
     code?: SortOrder
     description?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type KnowledgespaceSumOrderByAggregateInput = {
@@ -18368,6 +19444,8 @@ export namespace Prisma {
     description?: SortOrder
     KnowledgespaceId?: SortOrder
     userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type DegreeAvgOrderByAggregateInput = {
@@ -18382,6 +19460,8 @@ export namespace Prisma {
     description?: SortOrder
     KnowledgespaceId?: SortOrder
     userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type DegreeMinOrderByAggregateInput = {
@@ -18390,6 +19470,8 @@ export namespace Prisma {
     description?: SortOrder
     KnowledgespaceId?: SortOrder
     userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type DegreeSumOrderByAggregateInput = {
@@ -18403,6 +19485,8 @@ export namespace Prisma {
     code?: SortOrder
     description?: SortOrder
     userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type SkillsAvgOrderByAggregateInput = {
@@ -18415,6 +19499,8 @@ export namespace Prisma {
     code?: SortOrder
     description?: SortOrder
     userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type SkillsMinOrderByAggregateInput = {
@@ -18422,22 +19508,13 @@ export namespace Prisma {
     code?: SortOrder
     description?: SortOrder
     userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type SkillsSumOrderByAggregateInput = {
     id?: SortOrder
     userId?: SortOrder
-  }
-
-  export type DateTimeFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[]
-    notIn?: Date[] | string[]
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
   export type BoolNullableFilter<$PrismaModel = never> = {
@@ -18452,6 +19529,8 @@ export namespace Prisma {
     end?: SortOrder
     iscurrent?: SortOrder
     userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type ExperiencesAvgOrderByAggregateInput = {
@@ -18466,6 +19545,8 @@ export namespace Prisma {
     end?: SortOrder
     iscurrent?: SortOrder
     userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type ExperiencesMinOrderByAggregateInput = {
@@ -18475,25 +19556,13 @@ export namespace Prisma {
     end?: SortOrder
     iscurrent?: SortOrder
     userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type ExperiencesSumOrderByAggregateInput = {
     id?: SortOrder
     userId?: SortOrder
-  }
-
-  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[]
-    notIn?: Date[] | string[]
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedDateTimeFilter<$PrismaModel>
-    _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
   export type BoolNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -18512,6 +19581,8 @@ export namespace Prisma {
     end?: SortOrder
     iscurrent?: SortOrder
     userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type ProjectsAvgOrderByAggregateInput = {
@@ -18527,6 +19598,8 @@ export namespace Prisma {
     end?: SortOrder
     iscurrent?: SortOrder
     userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type ProjectsMinOrderByAggregateInput = {
@@ -18537,6 +19610,8 @@ export namespace Prisma {
     end?: SortOrder
     iscurrent?: SortOrder
     userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type ProjectsSumOrderByAggregateInput = {
@@ -18546,8 +19621,8 @@ export namespace Prisma {
 
   export type FloatFilter<$PrismaModel = never> = {
     equals?: number | FloatFieldRefInput<$PrismaModel>
-    in?: number[]
-    notIn?: number[]
+    in?: Enumerable<number>
+    notIn?: Enumerable<number>
     lt?: number | FloatFieldRefInput<$PrismaModel>
     lte?: number | FloatFieldRefInput<$PrismaModel>
     gt?: number | FloatFieldRefInput<$PrismaModel>
@@ -18560,6 +19635,8 @@ export namespace Prisma {
     description?: SortOrder
     value?: SortOrder
     userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type ReferecesAvgOrderByAggregateInput = {
@@ -18573,6 +19650,8 @@ export namespace Prisma {
     description?: SortOrder
     value?: SortOrder
     userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type ReferecesMinOrderByAggregateInput = {
@@ -18580,6 +19659,8 @@ export namespace Prisma {
     description?: SortOrder
     value?: SortOrder
     userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type ReferecesSumOrderByAggregateInput = {
@@ -18590,8 +19671,8 @@ export namespace Prisma {
 
   export type FloatWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | FloatFieldRefInput<$PrismaModel>
-    in?: number[]
-    notIn?: number[]
+    in?: Enumerable<number>
+    notIn?: Enumerable<number>
     lt?: number | FloatFieldRefInput<$PrismaModel>
     lte?: number | FloatFieldRefInput<$PrismaModel>
     gt?: number | FloatFieldRefInput<$PrismaModel>
@@ -18610,6 +19691,8 @@ export namespace Prisma {
     description?: SortOrder
     contacts?: SortOrder
     userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type ReferecePricesAvgOrderByAggregateInput = {
@@ -18623,6 +19706,8 @@ export namespace Prisma {
     description?: SortOrder
     contacts?: SortOrder
     userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type ReferecePricesMinOrderByAggregateInput = {
@@ -18631,6 +19716,8 @@ export namespace Prisma {
     description?: SortOrder
     contacts?: SortOrder
     userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type ReferecePricesSumOrderByAggregateInput = {
@@ -18642,6 +19729,8 @@ export namespace Prisma {
     id?: SortOrder
     value?: SortOrder
     userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type UserPointsAvgOrderByAggregateInput = {
@@ -18654,12 +19743,16 @@ export namespace Prisma {
     id?: SortOrder
     value?: SortOrder
     userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type UserPointsMinOrderByAggregateInput = {
     id?: SortOrder
     value?: SortOrder
     userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type UserPointsSumOrderByAggregateInput = {
@@ -18678,6 +19771,8 @@ export namespace Prisma {
     react_smile?: SortOrder
     react_lovely?: SortOrder
     userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type FeedAvgOrderByAggregateInput = {
@@ -18699,6 +19794,8 @@ export namespace Prisma {
     react_smile?: SortOrder
     react_lovely?: SortOrder
     userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type FeedMinOrderByAggregateInput = {
@@ -18711,6 +19808,8 @@ export namespace Prisma {
     react_smile?: SortOrder
     react_lovely?: SortOrder
     userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type FeedSumOrderByAggregateInput = {
@@ -18726,6 +19825,8 @@ export namespace Prisma {
     id?: SortOrder
     comment?: SortOrder
     userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type FeedCommentsAvgOrderByAggregateInput = {
@@ -18737,12 +19838,16 @@ export namespace Prisma {
     id?: SortOrder
     comment?: SortOrder
     userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type FeedCommentsMinOrderByAggregateInput = {
     id?: SortOrder
     comment?: SortOrder
     userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type FeedCommentsSumOrderByAggregateInput = {
@@ -18756,81 +19861,81 @@ export namespace Prisma {
     connect?: PerfilWhereUniqueInput
   }
 
-  export type AddresCreateNestedManyWithoutUserInput = {
-    create?: XOR<AddresCreateWithoutUserInput, AddresUncheckedCreateWithoutUserInput> | AddresCreateWithoutUserInput[] | AddresUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: AddresCreateOrConnectWithoutUserInput | AddresCreateOrConnectWithoutUserInput[]
-    createMany?: AddresCreateManyUserInputEnvelope
-    connect?: AddresWhereUniqueInput | AddresWhereUniqueInput[]
+  export type AddressCreateNestedManyWithoutUserInput = {
+    create?: XOR<Enumerable<AddressCreateWithoutUserInput>, Enumerable<AddressUncheckedCreateWithoutUserInput>>
+    connectOrCreate?: Enumerable<AddressCreateOrConnectWithoutUserInput>
+    createMany?: AddressCreateManyUserInputEnvelope
+    connect?: Enumerable<AddressWhereUniqueInput>
   }
 
   export type ContactCreateNestedManyWithoutUserInput = {
-    create?: XOR<ContactCreateWithoutUserInput, ContactUncheckedCreateWithoutUserInput> | ContactCreateWithoutUserInput[] | ContactUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: ContactCreateOrConnectWithoutUserInput | ContactCreateOrConnectWithoutUserInput[]
+    create?: XOR<Enumerable<ContactCreateWithoutUserInput>, Enumerable<ContactUncheckedCreateWithoutUserInput>>
+    connectOrCreate?: Enumerable<ContactCreateOrConnectWithoutUserInput>
     createMany?: ContactCreateManyUserInputEnvelope
-    connect?: ContactWhereUniqueInput | ContactWhereUniqueInput[]
+    connect?: Enumerable<ContactWhereUniqueInput>
   }
 
   export type DegreeCreateNestedManyWithoutUserInput = {
-    create?: XOR<DegreeCreateWithoutUserInput, DegreeUncheckedCreateWithoutUserInput> | DegreeCreateWithoutUserInput[] | DegreeUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: DegreeCreateOrConnectWithoutUserInput | DegreeCreateOrConnectWithoutUserInput[]
+    create?: XOR<Enumerable<DegreeCreateWithoutUserInput>, Enumerable<DegreeUncheckedCreateWithoutUserInput>>
+    connectOrCreate?: Enumerable<DegreeCreateOrConnectWithoutUserInput>
     createMany?: DegreeCreateManyUserInputEnvelope
-    connect?: DegreeWhereUniqueInput | DegreeWhereUniqueInput[]
+    connect?: Enumerable<DegreeWhereUniqueInput>
   }
 
   export type SkillsCreateNestedManyWithoutUserInput = {
-    create?: XOR<SkillsCreateWithoutUserInput, SkillsUncheckedCreateWithoutUserInput> | SkillsCreateWithoutUserInput[] | SkillsUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: SkillsCreateOrConnectWithoutUserInput | SkillsCreateOrConnectWithoutUserInput[]
+    create?: XOR<Enumerable<SkillsCreateWithoutUserInput>, Enumerable<SkillsUncheckedCreateWithoutUserInput>>
+    connectOrCreate?: Enumerable<SkillsCreateOrConnectWithoutUserInput>
     createMany?: SkillsCreateManyUserInputEnvelope
-    connect?: SkillsWhereUniqueInput | SkillsWhereUniqueInput[]
+    connect?: Enumerable<SkillsWhereUniqueInput>
   }
 
   export type ExperiencesCreateNestedManyWithoutUserInput = {
-    create?: XOR<ExperiencesCreateWithoutUserInput, ExperiencesUncheckedCreateWithoutUserInput> | ExperiencesCreateWithoutUserInput[] | ExperiencesUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: ExperiencesCreateOrConnectWithoutUserInput | ExperiencesCreateOrConnectWithoutUserInput[]
+    create?: XOR<Enumerable<ExperiencesCreateWithoutUserInput>, Enumerable<ExperiencesUncheckedCreateWithoutUserInput>>
+    connectOrCreate?: Enumerable<ExperiencesCreateOrConnectWithoutUserInput>
     createMany?: ExperiencesCreateManyUserInputEnvelope
-    connect?: ExperiencesWhereUniqueInput | ExperiencesWhereUniqueInput[]
+    connect?: Enumerable<ExperiencesWhereUniqueInput>
   }
 
   export type ProjectsCreateNestedManyWithoutUserInput = {
-    create?: XOR<ProjectsCreateWithoutUserInput, ProjectsUncheckedCreateWithoutUserInput> | ProjectsCreateWithoutUserInput[] | ProjectsUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: ProjectsCreateOrConnectWithoutUserInput | ProjectsCreateOrConnectWithoutUserInput[]
+    create?: XOR<Enumerable<ProjectsCreateWithoutUserInput>, Enumerable<ProjectsUncheckedCreateWithoutUserInput>>
+    connectOrCreate?: Enumerable<ProjectsCreateOrConnectWithoutUserInput>
     createMany?: ProjectsCreateManyUserInputEnvelope
-    connect?: ProjectsWhereUniqueInput | ProjectsWhereUniqueInput[]
+    connect?: Enumerable<ProjectsWhereUniqueInput>
   }
 
   export type ReferecePricesCreateNestedManyWithoutUserInput = {
-    create?: XOR<ReferecePricesCreateWithoutUserInput, ReferecePricesUncheckedCreateWithoutUserInput> | ReferecePricesCreateWithoutUserInput[] | ReferecePricesUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: ReferecePricesCreateOrConnectWithoutUserInput | ReferecePricesCreateOrConnectWithoutUserInput[]
+    create?: XOR<Enumerable<ReferecePricesCreateWithoutUserInput>, Enumerable<ReferecePricesUncheckedCreateWithoutUserInput>>
+    connectOrCreate?: Enumerable<ReferecePricesCreateOrConnectWithoutUserInput>
     createMany?: ReferecePricesCreateManyUserInputEnvelope
-    connect?: ReferecePricesWhereUniqueInput | ReferecePricesWhereUniqueInput[]
+    connect?: Enumerable<ReferecePricesWhereUniqueInput>
   }
 
   export type ReferecesCreateNestedManyWithoutUserInput = {
-    create?: XOR<ReferecesCreateWithoutUserInput, ReferecesUncheckedCreateWithoutUserInput> | ReferecesCreateWithoutUserInput[] | ReferecesUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: ReferecesCreateOrConnectWithoutUserInput | ReferecesCreateOrConnectWithoutUserInput[]
+    create?: XOR<Enumerable<ReferecesCreateWithoutUserInput>, Enumerable<ReferecesUncheckedCreateWithoutUserInput>>
+    connectOrCreate?: Enumerable<ReferecesCreateOrConnectWithoutUserInput>
     createMany?: ReferecesCreateManyUserInputEnvelope
-    connect?: ReferecesWhereUniqueInput | ReferecesWhereUniqueInput[]
+    connect?: Enumerable<ReferecesWhereUniqueInput>
   }
 
   export type UserPointsCreateNestedManyWithoutUserInput = {
-    create?: XOR<UserPointsCreateWithoutUserInput, UserPointsUncheckedCreateWithoutUserInput> | UserPointsCreateWithoutUserInput[] | UserPointsUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: UserPointsCreateOrConnectWithoutUserInput | UserPointsCreateOrConnectWithoutUserInput[]
+    create?: XOR<Enumerable<UserPointsCreateWithoutUserInput>, Enumerable<UserPointsUncheckedCreateWithoutUserInput>>
+    connectOrCreate?: Enumerable<UserPointsCreateOrConnectWithoutUserInput>
     createMany?: UserPointsCreateManyUserInputEnvelope
-    connect?: UserPointsWhereUniqueInput | UserPointsWhereUniqueInput[]
+    connect?: Enumerable<UserPointsWhereUniqueInput>
   }
 
   export type FeedCreateNestedManyWithoutUserInput = {
-    create?: XOR<FeedCreateWithoutUserInput, FeedUncheckedCreateWithoutUserInput> | FeedCreateWithoutUserInput[] | FeedUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: FeedCreateOrConnectWithoutUserInput | FeedCreateOrConnectWithoutUserInput[]
+    create?: XOR<Enumerable<FeedCreateWithoutUserInput>, Enumerable<FeedUncheckedCreateWithoutUserInput>>
+    connectOrCreate?: Enumerable<FeedCreateOrConnectWithoutUserInput>
     createMany?: FeedCreateManyUserInputEnvelope
-    connect?: FeedWhereUniqueInput | FeedWhereUniqueInput[]
+    connect?: Enumerable<FeedWhereUniqueInput>
   }
 
   export type FeedCommentsCreateNestedManyWithoutUserInput = {
-    create?: XOR<FeedCommentsCreateWithoutUserInput, FeedCommentsUncheckedCreateWithoutUserInput> | FeedCommentsCreateWithoutUserInput[] | FeedCommentsUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: FeedCommentsCreateOrConnectWithoutUserInput | FeedCommentsCreateOrConnectWithoutUserInput[]
+    create?: XOR<Enumerable<FeedCommentsCreateWithoutUserInput>, Enumerable<FeedCommentsUncheckedCreateWithoutUserInput>>
+    connectOrCreate?: Enumerable<FeedCommentsCreateOrConnectWithoutUserInput>
     createMany?: FeedCommentsCreateManyUserInputEnvelope
-    connect?: FeedCommentsWhereUniqueInput | FeedCommentsWhereUniqueInput[]
+    connect?: Enumerable<FeedCommentsWhereUniqueInput>
   }
 
   export type PerfilUncheckedCreateNestedOneWithoutUserInput = {
@@ -18839,81 +19944,81 @@ export namespace Prisma {
     connect?: PerfilWhereUniqueInput
   }
 
-  export type AddresUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<AddresCreateWithoutUserInput, AddresUncheckedCreateWithoutUserInput> | AddresCreateWithoutUserInput[] | AddresUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: AddresCreateOrConnectWithoutUserInput | AddresCreateOrConnectWithoutUserInput[]
-    createMany?: AddresCreateManyUserInputEnvelope
-    connect?: AddresWhereUniqueInput | AddresWhereUniqueInput[]
+  export type AddressUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<Enumerable<AddressCreateWithoutUserInput>, Enumerable<AddressUncheckedCreateWithoutUserInput>>
+    connectOrCreate?: Enumerable<AddressCreateOrConnectWithoutUserInput>
+    createMany?: AddressCreateManyUserInputEnvelope
+    connect?: Enumerable<AddressWhereUniqueInput>
   }
 
   export type ContactUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<ContactCreateWithoutUserInput, ContactUncheckedCreateWithoutUserInput> | ContactCreateWithoutUserInput[] | ContactUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: ContactCreateOrConnectWithoutUserInput | ContactCreateOrConnectWithoutUserInput[]
+    create?: XOR<Enumerable<ContactCreateWithoutUserInput>, Enumerable<ContactUncheckedCreateWithoutUserInput>>
+    connectOrCreate?: Enumerable<ContactCreateOrConnectWithoutUserInput>
     createMany?: ContactCreateManyUserInputEnvelope
-    connect?: ContactWhereUniqueInput | ContactWhereUniqueInput[]
+    connect?: Enumerable<ContactWhereUniqueInput>
   }
 
   export type DegreeUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<DegreeCreateWithoutUserInput, DegreeUncheckedCreateWithoutUserInput> | DegreeCreateWithoutUserInput[] | DegreeUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: DegreeCreateOrConnectWithoutUserInput | DegreeCreateOrConnectWithoutUserInput[]
+    create?: XOR<Enumerable<DegreeCreateWithoutUserInput>, Enumerable<DegreeUncheckedCreateWithoutUserInput>>
+    connectOrCreate?: Enumerable<DegreeCreateOrConnectWithoutUserInput>
     createMany?: DegreeCreateManyUserInputEnvelope
-    connect?: DegreeWhereUniqueInput | DegreeWhereUniqueInput[]
+    connect?: Enumerable<DegreeWhereUniqueInput>
   }
 
   export type SkillsUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<SkillsCreateWithoutUserInput, SkillsUncheckedCreateWithoutUserInput> | SkillsCreateWithoutUserInput[] | SkillsUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: SkillsCreateOrConnectWithoutUserInput | SkillsCreateOrConnectWithoutUserInput[]
+    create?: XOR<Enumerable<SkillsCreateWithoutUserInput>, Enumerable<SkillsUncheckedCreateWithoutUserInput>>
+    connectOrCreate?: Enumerable<SkillsCreateOrConnectWithoutUserInput>
     createMany?: SkillsCreateManyUserInputEnvelope
-    connect?: SkillsWhereUniqueInput | SkillsWhereUniqueInput[]
+    connect?: Enumerable<SkillsWhereUniqueInput>
   }
 
   export type ExperiencesUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<ExperiencesCreateWithoutUserInput, ExperiencesUncheckedCreateWithoutUserInput> | ExperiencesCreateWithoutUserInput[] | ExperiencesUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: ExperiencesCreateOrConnectWithoutUserInput | ExperiencesCreateOrConnectWithoutUserInput[]
+    create?: XOR<Enumerable<ExperiencesCreateWithoutUserInput>, Enumerable<ExperiencesUncheckedCreateWithoutUserInput>>
+    connectOrCreate?: Enumerable<ExperiencesCreateOrConnectWithoutUserInput>
     createMany?: ExperiencesCreateManyUserInputEnvelope
-    connect?: ExperiencesWhereUniqueInput | ExperiencesWhereUniqueInput[]
+    connect?: Enumerable<ExperiencesWhereUniqueInput>
   }
 
   export type ProjectsUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<ProjectsCreateWithoutUserInput, ProjectsUncheckedCreateWithoutUserInput> | ProjectsCreateWithoutUserInput[] | ProjectsUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: ProjectsCreateOrConnectWithoutUserInput | ProjectsCreateOrConnectWithoutUserInput[]
+    create?: XOR<Enumerable<ProjectsCreateWithoutUserInput>, Enumerable<ProjectsUncheckedCreateWithoutUserInput>>
+    connectOrCreate?: Enumerable<ProjectsCreateOrConnectWithoutUserInput>
     createMany?: ProjectsCreateManyUserInputEnvelope
-    connect?: ProjectsWhereUniqueInput | ProjectsWhereUniqueInput[]
+    connect?: Enumerable<ProjectsWhereUniqueInput>
   }
 
   export type ReferecePricesUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<ReferecePricesCreateWithoutUserInput, ReferecePricesUncheckedCreateWithoutUserInput> | ReferecePricesCreateWithoutUserInput[] | ReferecePricesUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: ReferecePricesCreateOrConnectWithoutUserInput | ReferecePricesCreateOrConnectWithoutUserInput[]
+    create?: XOR<Enumerable<ReferecePricesCreateWithoutUserInput>, Enumerable<ReferecePricesUncheckedCreateWithoutUserInput>>
+    connectOrCreate?: Enumerable<ReferecePricesCreateOrConnectWithoutUserInput>
     createMany?: ReferecePricesCreateManyUserInputEnvelope
-    connect?: ReferecePricesWhereUniqueInput | ReferecePricesWhereUniqueInput[]
+    connect?: Enumerable<ReferecePricesWhereUniqueInput>
   }
 
   export type ReferecesUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<ReferecesCreateWithoutUserInput, ReferecesUncheckedCreateWithoutUserInput> | ReferecesCreateWithoutUserInput[] | ReferecesUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: ReferecesCreateOrConnectWithoutUserInput | ReferecesCreateOrConnectWithoutUserInput[]
+    create?: XOR<Enumerable<ReferecesCreateWithoutUserInput>, Enumerable<ReferecesUncheckedCreateWithoutUserInput>>
+    connectOrCreate?: Enumerable<ReferecesCreateOrConnectWithoutUserInput>
     createMany?: ReferecesCreateManyUserInputEnvelope
-    connect?: ReferecesWhereUniqueInput | ReferecesWhereUniqueInput[]
+    connect?: Enumerable<ReferecesWhereUniqueInput>
   }
 
   export type UserPointsUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<UserPointsCreateWithoutUserInput, UserPointsUncheckedCreateWithoutUserInput> | UserPointsCreateWithoutUserInput[] | UserPointsUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: UserPointsCreateOrConnectWithoutUserInput | UserPointsCreateOrConnectWithoutUserInput[]
+    create?: XOR<Enumerable<UserPointsCreateWithoutUserInput>, Enumerable<UserPointsUncheckedCreateWithoutUserInput>>
+    connectOrCreate?: Enumerable<UserPointsCreateOrConnectWithoutUserInput>
     createMany?: UserPointsCreateManyUserInputEnvelope
-    connect?: UserPointsWhereUniqueInput | UserPointsWhereUniqueInput[]
+    connect?: Enumerable<UserPointsWhereUniqueInput>
   }
 
   export type FeedUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<FeedCreateWithoutUserInput, FeedUncheckedCreateWithoutUserInput> | FeedCreateWithoutUserInput[] | FeedUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: FeedCreateOrConnectWithoutUserInput | FeedCreateOrConnectWithoutUserInput[]
+    create?: XOR<Enumerable<FeedCreateWithoutUserInput>, Enumerable<FeedUncheckedCreateWithoutUserInput>>
+    connectOrCreate?: Enumerable<FeedCreateOrConnectWithoutUserInput>
     createMany?: FeedCreateManyUserInputEnvelope
-    connect?: FeedWhereUniqueInput | FeedWhereUniqueInput[]
+    connect?: Enumerable<FeedWhereUniqueInput>
   }
 
   export type FeedCommentsUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<FeedCommentsCreateWithoutUserInput, FeedCommentsUncheckedCreateWithoutUserInput> | FeedCommentsCreateWithoutUserInput[] | FeedCommentsUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: FeedCommentsCreateOrConnectWithoutUserInput | FeedCommentsCreateOrConnectWithoutUserInput[]
+    create?: XOR<Enumerable<FeedCommentsCreateWithoutUserInput>, Enumerable<FeedCommentsUncheckedCreateWithoutUserInput>>
+    connectOrCreate?: Enumerable<FeedCommentsCreateOrConnectWithoutUserInput>
     createMany?: FeedCommentsCreateManyUserInputEnvelope
-    connect?: FeedCommentsWhereUniqueInput | FeedCommentsWhereUniqueInput[]
+    connect?: Enumerable<FeedCommentsWhereUniqueInput>
   }
 
   export type BigIntFieldUpdateOperationsInput = {
@@ -18928,6 +20033,14 @@ export namespace Prisma {
     set?: string
   }
 
+  export type DateTimeFieldUpdateOperationsInput = {
+    set?: Date | string
+  }
+
+  export type NullableDateTimeFieldUpdateOperationsInput = {
+    set?: Date | string | null
+  }
+
   export type PerfilUpdateOneWithoutUserNestedInput = {
     create?: XOR<PerfilCreateWithoutUserInput, PerfilUncheckedCreateWithoutUserInput>
     connectOrCreate?: PerfilCreateOrConnectWithoutUserInput
@@ -18938,158 +20051,158 @@ export namespace Prisma {
     update?: XOR<XOR<PerfilUpdateToOneWithWhereWithoutUserInput, PerfilUpdateWithoutUserInput>, PerfilUncheckedUpdateWithoutUserInput>
   }
 
-  export type AddresUpdateManyWithoutUserNestedInput = {
-    create?: XOR<AddresCreateWithoutUserInput, AddresUncheckedCreateWithoutUserInput> | AddresCreateWithoutUserInput[] | AddresUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: AddresCreateOrConnectWithoutUserInput | AddresCreateOrConnectWithoutUserInput[]
-    upsert?: AddresUpsertWithWhereUniqueWithoutUserInput | AddresUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: AddresCreateManyUserInputEnvelope
-    set?: AddresWhereUniqueInput | AddresWhereUniqueInput[]
-    disconnect?: AddresWhereUniqueInput | AddresWhereUniqueInput[]
-    delete?: AddresWhereUniqueInput | AddresWhereUniqueInput[]
-    connect?: AddresWhereUniqueInput | AddresWhereUniqueInput[]
-    update?: AddresUpdateWithWhereUniqueWithoutUserInput | AddresUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: AddresUpdateManyWithWhereWithoutUserInput | AddresUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: AddresScalarWhereInput | AddresScalarWhereInput[]
+  export type AddressUpdateManyWithoutUserNestedInput = {
+    create?: XOR<Enumerable<AddressCreateWithoutUserInput>, Enumerable<AddressUncheckedCreateWithoutUserInput>>
+    connectOrCreate?: Enumerable<AddressCreateOrConnectWithoutUserInput>
+    upsert?: Enumerable<AddressUpsertWithWhereUniqueWithoutUserInput>
+    createMany?: AddressCreateManyUserInputEnvelope
+    set?: Enumerable<AddressWhereUniqueInput>
+    disconnect?: Enumerable<AddressWhereUniqueInput>
+    delete?: Enumerable<AddressWhereUniqueInput>
+    connect?: Enumerable<AddressWhereUniqueInput>
+    update?: Enumerable<AddressUpdateWithWhereUniqueWithoutUserInput>
+    updateMany?: Enumerable<AddressUpdateManyWithWhereWithoutUserInput>
+    deleteMany?: Enumerable<AddressScalarWhereInput>
   }
 
   export type ContactUpdateManyWithoutUserNestedInput = {
-    create?: XOR<ContactCreateWithoutUserInput, ContactUncheckedCreateWithoutUserInput> | ContactCreateWithoutUserInput[] | ContactUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: ContactCreateOrConnectWithoutUserInput | ContactCreateOrConnectWithoutUserInput[]
-    upsert?: ContactUpsertWithWhereUniqueWithoutUserInput | ContactUpsertWithWhereUniqueWithoutUserInput[]
+    create?: XOR<Enumerable<ContactCreateWithoutUserInput>, Enumerable<ContactUncheckedCreateWithoutUserInput>>
+    connectOrCreate?: Enumerable<ContactCreateOrConnectWithoutUserInput>
+    upsert?: Enumerable<ContactUpsertWithWhereUniqueWithoutUserInput>
     createMany?: ContactCreateManyUserInputEnvelope
-    set?: ContactWhereUniqueInput | ContactWhereUniqueInput[]
-    disconnect?: ContactWhereUniqueInput | ContactWhereUniqueInput[]
-    delete?: ContactWhereUniqueInput | ContactWhereUniqueInput[]
-    connect?: ContactWhereUniqueInput | ContactWhereUniqueInput[]
-    update?: ContactUpdateWithWhereUniqueWithoutUserInput | ContactUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: ContactUpdateManyWithWhereWithoutUserInput | ContactUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: ContactScalarWhereInput | ContactScalarWhereInput[]
+    set?: Enumerable<ContactWhereUniqueInput>
+    disconnect?: Enumerable<ContactWhereUniqueInput>
+    delete?: Enumerable<ContactWhereUniqueInput>
+    connect?: Enumerable<ContactWhereUniqueInput>
+    update?: Enumerable<ContactUpdateWithWhereUniqueWithoutUserInput>
+    updateMany?: Enumerable<ContactUpdateManyWithWhereWithoutUserInput>
+    deleteMany?: Enumerable<ContactScalarWhereInput>
   }
 
   export type DegreeUpdateManyWithoutUserNestedInput = {
-    create?: XOR<DegreeCreateWithoutUserInput, DegreeUncheckedCreateWithoutUserInput> | DegreeCreateWithoutUserInput[] | DegreeUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: DegreeCreateOrConnectWithoutUserInput | DegreeCreateOrConnectWithoutUserInput[]
-    upsert?: DegreeUpsertWithWhereUniqueWithoutUserInput | DegreeUpsertWithWhereUniqueWithoutUserInput[]
+    create?: XOR<Enumerable<DegreeCreateWithoutUserInput>, Enumerable<DegreeUncheckedCreateWithoutUserInput>>
+    connectOrCreate?: Enumerable<DegreeCreateOrConnectWithoutUserInput>
+    upsert?: Enumerable<DegreeUpsertWithWhereUniqueWithoutUserInput>
     createMany?: DegreeCreateManyUserInputEnvelope
-    set?: DegreeWhereUniqueInput | DegreeWhereUniqueInput[]
-    disconnect?: DegreeWhereUniqueInput | DegreeWhereUniqueInput[]
-    delete?: DegreeWhereUniqueInput | DegreeWhereUniqueInput[]
-    connect?: DegreeWhereUniqueInput | DegreeWhereUniqueInput[]
-    update?: DegreeUpdateWithWhereUniqueWithoutUserInput | DegreeUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: DegreeUpdateManyWithWhereWithoutUserInput | DegreeUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: DegreeScalarWhereInput | DegreeScalarWhereInput[]
+    set?: Enumerable<DegreeWhereUniqueInput>
+    disconnect?: Enumerable<DegreeWhereUniqueInput>
+    delete?: Enumerable<DegreeWhereUniqueInput>
+    connect?: Enumerable<DegreeWhereUniqueInput>
+    update?: Enumerable<DegreeUpdateWithWhereUniqueWithoutUserInput>
+    updateMany?: Enumerable<DegreeUpdateManyWithWhereWithoutUserInput>
+    deleteMany?: Enumerable<DegreeScalarWhereInput>
   }
 
   export type SkillsUpdateManyWithoutUserNestedInput = {
-    create?: XOR<SkillsCreateWithoutUserInput, SkillsUncheckedCreateWithoutUserInput> | SkillsCreateWithoutUserInput[] | SkillsUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: SkillsCreateOrConnectWithoutUserInput | SkillsCreateOrConnectWithoutUserInput[]
-    upsert?: SkillsUpsertWithWhereUniqueWithoutUserInput | SkillsUpsertWithWhereUniqueWithoutUserInput[]
+    create?: XOR<Enumerable<SkillsCreateWithoutUserInput>, Enumerable<SkillsUncheckedCreateWithoutUserInput>>
+    connectOrCreate?: Enumerable<SkillsCreateOrConnectWithoutUserInput>
+    upsert?: Enumerable<SkillsUpsertWithWhereUniqueWithoutUserInput>
     createMany?: SkillsCreateManyUserInputEnvelope
-    set?: SkillsWhereUniqueInput | SkillsWhereUniqueInput[]
-    disconnect?: SkillsWhereUniqueInput | SkillsWhereUniqueInput[]
-    delete?: SkillsWhereUniqueInput | SkillsWhereUniqueInput[]
-    connect?: SkillsWhereUniqueInput | SkillsWhereUniqueInput[]
-    update?: SkillsUpdateWithWhereUniqueWithoutUserInput | SkillsUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: SkillsUpdateManyWithWhereWithoutUserInput | SkillsUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: SkillsScalarWhereInput | SkillsScalarWhereInput[]
+    set?: Enumerable<SkillsWhereUniqueInput>
+    disconnect?: Enumerable<SkillsWhereUniqueInput>
+    delete?: Enumerable<SkillsWhereUniqueInput>
+    connect?: Enumerable<SkillsWhereUniqueInput>
+    update?: Enumerable<SkillsUpdateWithWhereUniqueWithoutUserInput>
+    updateMany?: Enumerable<SkillsUpdateManyWithWhereWithoutUserInput>
+    deleteMany?: Enumerable<SkillsScalarWhereInput>
   }
 
   export type ExperiencesUpdateManyWithoutUserNestedInput = {
-    create?: XOR<ExperiencesCreateWithoutUserInput, ExperiencesUncheckedCreateWithoutUserInput> | ExperiencesCreateWithoutUserInput[] | ExperiencesUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: ExperiencesCreateOrConnectWithoutUserInput | ExperiencesCreateOrConnectWithoutUserInput[]
-    upsert?: ExperiencesUpsertWithWhereUniqueWithoutUserInput | ExperiencesUpsertWithWhereUniqueWithoutUserInput[]
+    create?: XOR<Enumerable<ExperiencesCreateWithoutUserInput>, Enumerable<ExperiencesUncheckedCreateWithoutUserInput>>
+    connectOrCreate?: Enumerable<ExperiencesCreateOrConnectWithoutUserInput>
+    upsert?: Enumerable<ExperiencesUpsertWithWhereUniqueWithoutUserInput>
     createMany?: ExperiencesCreateManyUserInputEnvelope
-    set?: ExperiencesWhereUniqueInput | ExperiencesWhereUniqueInput[]
-    disconnect?: ExperiencesWhereUniqueInput | ExperiencesWhereUniqueInput[]
-    delete?: ExperiencesWhereUniqueInput | ExperiencesWhereUniqueInput[]
-    connect?: ExperiencesWhereUniqueInput | ExperiencesWhereUniqueInput[]
-    update?: ExperiencesUpdateWithWhereUniqueWithoutUserInput | ExperiencesUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: ExperiencesUpdateManyWithWhereWithoutUserInput | ExperiencesUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: ExperiencesScalarWhereInput | ExperiencesScalarWhereInput[]
+    set?: Enumerable<ExperiencesWhereUniqueInput>
+    disconnect?: Enumerable<ExperiencesWhereUniqueInput>
+    delete?: Enumerable<ExperiencesWhereUniqueInput>
+    connect?: Enumerable<ExperiencesWhereUniqueInput>
+    update?: Enumerable<ExperiencesUpdateWithWhereUniqueWithoutUserInput>
+    updateMany?: Enumerable<ExperiencesUpdateManyWithWhereWithoutUserInput>
+    deleteMany?: Enumerable<ExperiencesScalarWhereInput>
   }
 
   export type ProjectsUpdateManyWithoutUserNestedInput = {
-    create?: XOR<ProjectsCreateWithoutUserInput, ProjectsUncheckedCreateWithoutUserInput> | ProjectsCreateWithoutUserInput[] | ProjectsUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: ProjectsCreateOrConnectWithoutUserInput | ProjectsCreateOrConnectWithoutUserInput[]
-    upsert?: ProjectsUpsertWithWhereUniqueWithoutUserInput | ProjectsUpsertWithWhereUniqueWithoutUserInput[]
+    create?: XOR<Enumerable<ProjectsCreateWithoutUserInput>, Enumerable<ProjectsUncheckedCreateWithoutUserInput>>
+    connectOrCreate?: Enumerable<ProjectsCreateOrConnectWithoutUserInput>
+    upsert?: Enumerable<ProjectsUpsertWithWhereUniqueWithoutUserInput>
     createMany?: ProjectsCreateManyUserInputEnvelope
-    set?: ProjectsWhereUniqueInput | ProjectsWhereUniqueInput[]
-    disconnect?: ProjectsWhereUniqueInput | ProjectsWhereUniqueInput[]
-    delete?: ProjectsWhereUniqueInput | ProjectsWhereUniqueInput[]
-    connect?: ProjectsWhereUniqueInput | ProjectsWhereUniqueInput[]
-    update?: ProjectsUpdateWithWhereUniqueWithoutUserInput | ProjectsUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: ProjectsUpdateManyWithWhereWithoutUserInput | ProjectsUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: ProjectsScalarWhereInput | ProjectsScalarWhereInput[]
+    set?: Enumerable<ProjectsWhereUniqueInput>
+    disconnect?: Enumerable<ProjectsWhereUniqueInput>
+    delete?: Enumerable<ProjectsWhereUniqueInput>
+    connect?: Enumerable<ProjectsWhereUniqueInput>
+    update?: Enumerable<ProjectsUpdateWithWhereUniqueWithoutUserInput>
+    updateMany?: Enumerable<ProjectsUpdateManyWithWhereWithoutUserInput>
+    deleteMany?: Enumerable<ProjectsScalarWhereInput>
   }
 
   export type ReferecePricesUpdateManyWithoutUserNestedInput = {
-    create?: XOR<ReferecePricesCreateWithoutUserInput, ReferecePricesUncheckedCreateWithoutUserInput> | ReferecePricesCreateWithoutUserInput[] | ReferecePricesUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: ReferecePricesCreateOrConnectWithoutUserInput | ReferecePricesCreateOrConnectWithoutUserInput[]
-    upsert?: ReferecePricesUpsertWithWhereUniqueWithoutUserInput | ReferecePricesUpsertWithWhereUniqueWithoutUserInput[]
+    create?: XOR<Enumerable<ReferecePricesCreateWithoutUserInput>, Enumerable<ReferecePricesUncheckedCreateWithoutUserInput>>
+    connectOrCreate?: Enumerable<ReferecePricesCreateOrConnectWithoutUserInput>
+    upsert?: Enumerable<ReferecePricesUpsertWithWhereUniqueWithoutUserInput>
     createMany?: ReferecePricesCreateManyUserInputEnvelope
-    set?: ReferecePricesWhereUniqueInput | ReferecePricesWhereUniqueInput[]
-    disconnect?: ReferecePricesWhereUniqueInput | ReferecePricesWhereUniqueInput[]
-    delete?: ReferecePricesWhereUniqueInput | ReferecePricesWhereUniqueInput[]
-    connect?: ReferecePricesWhereUniqueInput | ReferecePricesWhereUniqueInput[]
-    update?: ReferecePricesUpdateWithWhereUniqueWithoutUserInput | ReferecePricesUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: ReferecePricesUpdateManyWithWhereWithoutUserInput | ReferecePricesUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: ReferecePricesScalarWhereInput | ReferecePricesScalarWhereInput[]
+    set?: Enumerable<ReferecePricesWhereUniqueInput>
+    disconnect?: Enumerable<ReferecePricesWhereUniqueInput>
+    delete?: Enumerable<ReferecePricesWhereUniqueInput>
+    connect?: Enumerable<ReferecePricesWhereUniqueInput>
+    update?: Enumerable<ReferecePricesUpdateWithWhereUniqueWithoutUserInput>
+    updateMany?: Enumerable<ReferecePricesUpdateManyWithWhereWithoutUserInput>
+    deleteMany?: Enumerable<ReferecePricesScalarWhereInput>
   }
 
   export type ReferecesUpdateManyWithoutUserNestedInput = {
-    create?: XOR<ReferecesCreateWithoutUserInput, ReferecesUncheckedCreateWithoutUserInput> | ReferecesCreateWithoutUserInput[] | ReferecesUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: ReferecesCreateOrConnectWithoutUserInput | ReferecesCreateOrConnectWithoutUserInput[]
-    upsert?: ReferecesUpsertWithWhereUniqueWithoutUserInput | ReferecesUpsertWithWhereUniqueWithoutUserInput[]
+    create?: XOR<Enumerable<ReferecesCreateWithoutUserInput>, Enumerable<ReferecesUncheckedCreateWithoutUserInput>>
+    connectOrCreate?: Enumerable<ReferecesCreateOrConnectWithoutUserInput>
+    upsert?: Enumerable<ReferecesUpsertWithWhereUniqueWithoutUserInput>
     createMany?: ReferecesCreateManyUserInputEnvelope
-    set?: ReferecesWhereUniqueInput | ReferecesWhereUniqueInput[]
-    disconnect?: ReferecesWhereUniqueInput | ReferecesWhereUniqueInput[]
-    delete?: ReferecesWhereUniqueInput | ReferecesWhereUniqueInput[]
-    connect?: ReferecesWhereUniqueInput | ReferecesWhereUniqueInput[]
-    update?: ReferecesUpdateWithWhereUniqueWithoutUserInput | ReferecesUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: ReferecesUpdateManyWithWhereWithoutUserInput | ReferecesUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: ReferecesScalarWhereInput | ReferecesScalarWhereInput[]
+    set?: Enumerable<ReferecesWhereUniqueInput>
+    disconnect?: Enumerable<ReferecesWhereUniqueInput>
+    delete?: Enumerable<ReferecesWhereUniqueInput>
+    connect?: Enumerable<ReferecesWhereUniqueInput>
+    update?: Enumerable<ReferecesUpdateWithWhereUniqueWithoutUserInput>
+    updateMany?: Enumerable<ReferecesUpdateManyWithWhereWithoutUserInput>
+    deleteMany?: Enumerable<ReferecesScalarWhereInput>
   }
 
   export type UserPointsUpdateManyWithoutUserNestedInput = {
-    create?: XOR<UserPointsCreateWithoutUserInput, UserPointsUncheckedCreateWithoutUserInput> | UserPointsCreateWithoutUserInput[] | UserPointsUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: UserPointsCreateOrConnectWithoutUserInput | UserPointsCreateOrConnectWithoutUserInput[]
-    upsert?: UserPointsUpsertWithWhereUniqueWithoutUserInput | UserPointsUpsertWithWhereUniqueWithoutUserInput[]
+    create?: XOR<Enumerable<UserPointsCreateWithoutUserInput>, Enumerable<UserPointsUncheckedCreateWithoutUserInput>>
+    connectOrCreate?: Enumerable<UserPointsCreateOrConnectWithoutUserInput>
+    upsert?: Enumerable<UserPointsUpsertWithWhereUniqueWithoutUserInput>
     createMany?: UserPointsCreateManyUserInputEnvelope
-    set?: UserPointsWhereUniqueInput | UserPointsWhereUniqueInput[]
-    disconnect?: UserPointsWhereUniqueInput | UserPointsWhereUniqueInput[]
-    delete?: UserPointsWhereUniqueInput | UserPointsWhereUniqueInput[]
-    connect?: UserPointsWhereUniqueInput | UserPointsWhereUniqueInput[]
-    update?: UserPointsUpdateWithWhereUniqueWithoutUserInput | UserPointsUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: UserPointsUpdateManyWithWhereWithoutUserInput | UserPointsUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: UserPointsScalarWhereInput | UserPointsScalarWhereInput[]
+    set?: Enumerable<UserPointsWhereUniqueInput>
+    disconnect?: Enumerable<UserPointsWhereUniqueInput>
+    delete?: Enumerable<UserPointsWhereUniqueInput>
+    connect?: Enumerable<UserPointsWhereUniqueInput>
+    update?: Enumerable<UserPointsUpdateWithWhereUniqueWithoutUserInput>
+    updateMany?: Enumerable<UserPointsUpdateManyWithWhereWithoutUserInput>
+    deleteMany?: Enumerable<UserPointsScalarWhereInput>
   }
 
   export type FeedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<FeedCreateWithoutUserInput, FeedUncheckedCreateWithoutUserInput> | FeedCreateWithoutUserInput[] | FeedUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: FeedCreateOrConnectWithoutUserInput | FeedCreateOrConnectWithoutUserInput[]
-    upsert?: FeedUpsertWithWhereUniqueWithoutUserInput | FeedUpsertWithWhereUniqueWithoutUserInput[]
+    create?: XOR<Enumerable<FeedCreateWithoutUserInput>, Enumerable<FeedUncheckedCreateWithoutUserInput>>
+    connectOrCreate?: Enumerable<FeedCreateOrConnectWithoutUserInput>
+    upsert?: Enumerable<FeedUpsertWithWhereUniqueWithoutUserInput>
     createMany?: FeedCreateManyUserInputEnvelope
-    set?: FeedWhereUniqueInput | FeedWhereUniqueInput[]
-    disconnect?: FeedWhereUniqueInput | FeedWhereUniqueInput[]
-    delete?: FeedWhereUniqueInput | FeedWhereUniqueInput[]
-    connect?: FeedWhereUniqueInput | FeedWhereUniqueInput[]
-    update?: FeedUpdateWithWhereUniqueWithoutUserInput | FeedUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: FeedUpdateManyWithWhereWithoutUserInput | FeedUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: FeedScalarWhereInput | FeedScalarWhereInput[]
+    set?: Enumerable<FeedWhereUniqueInput>
+    disconnect?: Enumerable<FeedWhereUniqueInput>
+    delete?: Enumerable<FeedWhereUniqueInput>
+    connect?: Enumerable<FeedWhereUniqueInput>
+    update?: Enumerable<FeedUpdateWithWhereUniqueWithoutUserInput>
+    updateMany?: Enumerable<FeedUpdateManyWithWhereWithoutUserInput>
+    deleteMany?: Enumerable<FeedScalarWhereInput>
   }
 
   export type FeedCommentsUpdateManyWithoutUserNestedInput = {
-    create?: XOR<FeedCommentsCreateWithoutUserInput, FeedCommentsUncheckedCreateWithoutUserInput> | FeedCommentsCreateWithoutUserInput[] | FeedCommentsUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: FeedCommentsCreateOrConnectWithoutUserInput | FeedCommentsCreateOrConnectWithoutUserInput[]
-    upsert?: FeedCommentsUpsertWithWhereUniqueWithoutUserInput | FeedCommentsUpsertWithWhereUniqueWithoutUserInput[]
+    create?: XOR<Enumerable<FeedCommentsCreateWithoutUserInput>, Enumerable<FeedCommentsUncheckedCreateWithoutUserInput>>
+    connectOrCreate?: Enumerable<FeedCommentsCreateOrConnectWithoutUserInput>
+    upsert?: Enumerable<FeedCommentsUpsertWithWhereUniqueWithoutUserInput>
     createMany?: FeedCommentsCreateManyUserInputEnvelope
-    set?: FeedCommentsWhereUniqueInput | FeedCommentsWhereUniqueInput[]
-    disconnect?: FeedCommentsWhereUniqueInput | FeedCommentsWhereUniqueInput[]
-    delete?: FeedCommentsWhereUniqueInput | FeedCommentsWhereUniqueInput[]
-    connect?: FeedCommentsWhereUniqueInput | FeedCommentsWhereUniqueInput[]
-    update?: FeedCommentsUpdateWithWhereUniqueWithoutUserInput | FeedCommentsUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: FeedCommentsUpdateManyWithWhereWithoutUserInput | FeedCommentsUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: FeedCommentsScalarWhereInput | FeedCommentsScalarWhereInput[]
+    set?: Enumerable<FeedCommentsWhereUniqueInput>
+    disconnect?: Enumerable<FeedCommentsWhereUniqueInput>
+    delete?: Enumerable<FeedCommentsWhereUniqueInput>
+    connect?: Enumerable<FeedCommentsWhereUniqueInput>
+    update?: Enumerable<FeedCommentsUpdateWithWhereUniqueWithoutUserInput>
+    updateMany?: Enumerable<FeedCommentsUpdateManyWithWhereWithoutUserInput>
+    deleteMany?: Enumerable<FeedCommentsScalarWhereInput>
   }
 
   export type PerfilUncheckedUpdateOneWithoutUserNestedInput = {
@@ -19102,158 +20215,158 @@ export namespace Prisma {
     update?: XOR<XOR<PerfilUpdateToOneWithWhereWithoutUserInput, PerfilUpdateWithoutUserInput>, PerfilUncheckedUpdateWithoutUserInput>
   }
 
-  export type AddresUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<AddresCreateWithoutUserInput, AddresUncheckedCreateWithoutUserInput> | AddresCreateWithoutUserInput[] | AddresUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: AddresCreateOrConnectWithoutUserInput | AddresCreateOrConnectWithoutUserInput[]
-    upsert?: AddresUpsertWithWhereUniqueWithoutUserInput | AddresUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: AddresCreateManyUserInputEnvelope
-    set?: AddresWhereUniqueInput | AddresWhereUniqueInput[]
-    disconnect?: AddresWhereUniqueInput | AddresWhereUniqueInput[]
-    delete?: AddresWhereUniqueInput | AddresWhereUniqueInput[]
-    connect?: AddresWhereUniqueInput | AddresWhereUniqueInput[]
-    update?: AddresUpdateWithWhereUniqueWithoutUserInput | AddresUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: AddresUpdateManyWithWhereWithoutUserInput | AddresUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: AddresScalarWhereInput | AddresScalarWhereInput[]
+  export type AddressUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<Enumerable<AddressCreateWithoutUserInput>, Enumerable<AddressUncheckedCreateWithoutUserInput>>
+    connectOrCreate?: Enumerable<AddressCreateOrConnectWithoutUserInput>
+    upsert?: Enumerable<AddressUpsertWithWhereUniqueWithoutUserInput>
+    createMany?: AddressCreateManyUserInputEnvelope
+    set?: Enumerable<AddressWhereUniqueInput>
+    disconnect?: Enumerable<AddressWhereUniqueInput>
+    delete?: Enumerable<AddressWhereUniqueInput>
+    connect?: Enumerable<AddressWhereUniqueInput>
+    update?: Enumerable<AddressUpdateWithWhereUniqueWithoutUserInput>
+    updateMany?: Enumerable<AddressUpdateManyWithWhereWithoutUserInput>
+    deleteMany?: Enumerable<AddressScalarWhereInput>
   }
 
   export type ContactUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<ContactCreateWithoutUserInput, ContactUncheckedCreateWithoutUserInput> | ContactCreateWithoutUserInput[] | ContactUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: ContactCreateOrConnectWithoutUserInput | ContactCreateOrConnectWithoutUserInput[]
-    upsert?: ContactUpsertWithWhereUniqueWithoutUserInput | ContactUpsertWithWhereUniqueWithoutUserInput[]
+    create?: XOR<Enumerable<ContactCreateWithoutUserInput>, Enumerable<ContactUncheckedCreateWithoutUserInput>>
+    connectOrCreate?: Enumerable<ContactCreateOrConnectWithoutUserInput>
+    upsert?: Enumerable<ContactUpsertWithWhereUniqueWithoutUserInput>
     createMany?: ContactCreateManyUserInputEnvelope
-    set?: ContactWhereUniqueInput | ContactWhereUniqueInput[]
-    disconnect?: ContactWhereUniqueInput | ContactWhereUniqueInput[]
-    delete?: ContactWhereUniqueInput | ContactWhereUniqueInput[]
-    connect?: ContactWhereUniqueInput | ContactWhereUniqueInput[]
-    update?: ContactUpdateWithWhereUniqueWithoutUserInput | ContactUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: ContactUpdateManyWithWhereWithoutUserInput | ContactUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: ContactScalarWhereInput | ContactScalarWhereInput[]
+    set?: Enumerable<ContactWhereUniqueInput>
+    disconnect?: Enumerable<ContactWhereUniqueInput>
+    delete?: Enumerable<ContactWhereUniqueInput>
+    connect?: Enumerable<ContactWhereUniqueInput>
+    update?: Enumerable<ContactUpdateWithWhereUniqueWithoutUserInput>
+    updateMany?: Enumerable<ContactUpdateManyWithWhereWithoutUserInput>
+    deleteMany?: Enumerable<ContactScalarWhereInput>
   }
 
   export type DegreeUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<DegreeCreateWithoutUserInput, DegreeUncheckedCreateWithoutUserInput> | DegreeCreateWithoutUserInput[] | DegreeUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: DegreeCreateOrConnectWithoutUserInput | DegreeCreateOrConnectWithoutUserInput[]
-    upsert?: DegreeUpsertWithWhereUniqueWithoutUserInput | DegreeUpsertWithWhereUniqueWithoutUserInput[]
+    create?: XOR<Enumerable<DegreeCreateWithoutUserInput>, Enumerable<DegreeUncheckedCreateWithoutUserInput>>
+    connectOrCreate?: Enumerable<DegreeCreateOrConnectWithoutUserInput>
+    upsert?: Enumerable<DegreeUpsertWithWhereUniqueWithoutUserInput>
     createMany?: DegreeCreateManyUserInputEnvelope
-    set?: DegreeWhereUniqueInput | DegreeWhereUniqueInput[]
-    disconnect?: DegreeWhereUniqueInput | DegreeWhereUniqueInput[]
-    delete?: DegreeWhereUniqueInput | DegreeWhereUniqueInput[]
-    connect?: DegreeWhereUniqueInput | DegreeWhereUniqueInput[]
-    update?: DegreeUpdateWithWhereUniqueWithoutUserInput | DegreeUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: DegreeUpdateManyWithWhereWithoutUserInput | DegreeUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: DegreeScalarWhereInput | DegreeScalarWhereInput[]
+    set?: Enumerable<DegreeWhereUniqueInput>
+    disconnect?: Enumerable<DegreeWhereUniqueInput>
+    delete?: Enumerable<DegreeWhereUniqueInput>
+    connect?: Enumerable<DegreeWhereUniqueInput>
+    update?: Enumerable<DegreeUpdateWithWhereUniqueWithoutUserInput>
+    updateMany?: Enumerable<DegreeUpdateManyWithWhereWithoutUserInput>
+    deleteMany?: Enumerable<DegreeScalarWhereInput>
   }
 
   export type SkillsUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<SkillsCreateWithoutUserInput, SkillsUncheckedCreateWithoutUserInput> | SkillsCreateWithoutUserInput[] | SkillsUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: SkillsCreateOrConnectWithoutUserInput | SkillsCreateOrConnectWithoutUserInput[]
-    upsert?: SkillsUpsertWithWhereUniqueWithoutUserInput | SkillsUpsertWithWhereUniqueWithoutUserInput[]
+    create?: XOR<Enumerable<SkillsCreateWithoutUserInput>, Enumerable<SkillsUncheckedCreateWithoutUserInput>>
+    connectOrCreate?: Enumerable<SkillsCreateOrConnectWithoutUserInput>
+    upsert?: Enumerable<SkillsUpsertWithWhereUniqueWithoutUserInput>
     createMany?: SkillsCreateManyUserInputEnvelope
-    set?: SkillsWhereUniqueInput | SkillsWhereUniqueInput[]
-    disconnect?: SkillsWhereUniqueInput | SkillsWhereUniqueInput[]
-    delete?: SkillsWhereUniqueInput | SkillsWhereUniqueInput[]
-    connect?: SkillsWhereUniqueInput | SkillsWhereUniqueInput[]
-    update?: SkillsUpdateWithWhereUniqueWithoutUserInput | SkillsUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: SkillsUpdateManyWithWhereWithoutUserInput | SkillsUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: SkillsScalarWhereInput | SkillsScalarWhereInput[]
+    set?: Enumerable<SkillsWhereUniqueInput>
+    disconnect?: Enumerable<SkillsWhereUniqueInput>
+    delete?: Enumerable<SkillsWhereUniqueInput>
+    connect?: Enumerable<SkillsWhereUniqueInput>
+    update?: Enumerable<SkillsUpdateWithWhereUniqueWithoutUserInput>
+    updateMany?: Enumerable<SkillsUpdateManyWithWhereWithoutUserInput>
+    deleteMany?: Enumerable<SkillsScalarWhereInput>
   }
 
   export type ExperiencesUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<ExperiencesCreateWithoutUserInput, ExperiencesUncheckedCreateWithoutUserInput> | ExperiencesCreateWithoutUserInput[] | ExperiencesUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: ExperiencesCreateOrConnectWithoutUserInput | ExperiencesCreateOrConnectWithoutUserInput[]
-    upsert?: ExperiencesUpsertWithWhereUniqueWithoutUserInput | ExperiencesUpsertWithWhereUniqueWithoutUserInput[]
+    create?: XOR<Enumerable<ExperiencesCreateWithoutUserInput>, Enumerable<ExperiencesUncheckedCreateWithoutUserInput>>
+    connectOrCreate?: Enumerable<ExperiencesCreateOrConnectWithoutUserInput>
+    upsert?: Enumerable<ExperiencesUpsertWithWhereUniqueWithoutUserInput>
     createMany?: ExperiencesCreateManyUserInputEnvelope
-    set?: ExperiencesWhereUniqueInput | ExperiencesWhereUniqueInput[]
-    disconnect?: ExperiencesWhereUniqueInput | ExperiencesWhereUniqueInput[]
-    delete?: ExperiencesWhereUniqueInput | ExperiencesWhereUniqueInput[]
-    connect?: ExperiencesWhereUniqueInput | ExperiencesWhereUniqueInput[]
-    update?: ExperiencesUpdateWithWhereUniqueWithoutUserInput | ExperiencesUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: ExperiencesUpdateManyWithWhereWithoutUserInput | ExperiencesUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: ExperiencesScalarWhereInput | ExperiencesScalarWhereInput[]
+    set?: Enumerable<ExperiencesWhereUniqueInput>
+    disconnect?: Enumerable<ExperiencesWhereUniqueInput>
+    delete?: Enumerable<ExperiencesWhereUniqueInput>
+    connect?: Enumerable<ExperiencesWhereUniqueInput>
+    update?: Enumerable<ExperiencesUpdateWithWhereUniqueWithoutUserInput>
+    updateMany?: Enumerable<ExperiencesUpdateManyWithWhereWithoutUserInput>
+    deleteMany?: Enumerable<ExperiencesScalarWhereInput>
   }
 
   export type ProjectsUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<ProjectsCreateWithoutUserInput, ProjectsUncheckedCreateWithoutUserInput> | ProjectsCreateWithoutUserInput[] | ProjectsUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: ProjectsCreateOrConnectWithoutUserInput | ProjectsCreateOrConnectWithoutUserInput[]
-    upsert?: ProjectsUpsertWithWhereUniqueWithoutUserInput | ProjectsUpsertWithWhereUniqueWithoutUserInput[]
+    create?: XOR<Enumerable<ProjectsCreateWithoutUserInput>, Enumerable<ProjectsUncheckedCreateWithoutUserInput>>
+    connectOrCreate?: Enumerable<ProjectsCreateOrConnectWithoutUserInput>
+    upsert?: Enumerable<ProjectsUpsertWithWhereUniqueWithoutUserInput>
     createMany?: ProjectsCreateManyUserInputEnvelope
-    set?: ProjectsWhereUniqueInput | ProjectsWhereUniqueInput[]
-    disconnect?: ProjectsWhereUniqueInput | ProjectsWhereUniqueInput[]
-    delete?: ProjectsWhereUniqueInput | ProjectsWhereUniqueInput[]
-    connect?: ProjectsWhereUniqueInput | ProjectsWhereUniqueInput[]
-    update?: ProjectsUpdateWithWhereUniqueWithoutUserInput | ProjectsUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: ProjectsUpdateManyWithWhereWithoutUserInput | ProjectsUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: ProjectsScalarWhereInput | ProjectsScalarWhereInput[]
+    set?: Enumerable<ProjectsWhereUniqueInput>
+    disconnect?: Enumerable<ProjectsWhereUniqueInput>
+    delete?: Enumerable<ProjectsWhereUniqueInput>
+    connect?: Enumerable<ProjectsWhereUniqueInput>
+    update?: Enumerable<ProjectsUpdateWithWhereUniqueWithoutUserInput>
+    updateMany?: Enumerable<ProjectsUpdateManyWithWhereWithoutUserInput>
+    deleteMany?: Enumerable<ProjectsScalarWhereInput>
   }
 
   export type ReferecePricesUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<ReferecePricesCreateWithoutUserInput, ReferecePricesUncheckedCreateWithoutUserInput> | ReferecePricesCreateWithoutUserInput[] | ReferecePricesUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: ReferecePricesCreateOrConnectWithoutUserInput | ReferecePricesCreateOrConnectWithoutUserInput[]
-    upsert?: ReferecePricesUpsertWithWhereUniqueWithoutUserInput | ReferecePricesUpsertWithWhereUniqueWithoutUserInput[]
+    create?: XOR<Enumerable<ReferecePricesCreateWithoutUserInput>, Enumerable<ReferecePricesUncheckedCreateWithoutUserInput>>
+    connectOrCreate?: Enumerable<ReferecePricesCreateOrConnectWithoutUserInput>
+    upsert?: Enumerable<ReferecePricesUpsertWithWhereUniqueWithoutUserInput>
     createMany?: ReferecePricesCreateManyUserInputEnvelope
-    set?: ReferecePricesWhereUniqueInput | ReferecePricesWhereUniqueInput[]
-    disconnect?: ReferecePricesWhereUniqueInput | ReferecePricesWhereUniqueInput[]
-    delete?: ReferecePricesWhereUniqueInput | ReferecePricesWhereUniqueInput[]
-    connect?: ReferecePricesWhereUniqueInput | ReferecePricesWhereUniqueInput[]
-    update?: ReferecePricesUpdateWithWhereUniqueWithoutUserInput | ReferecePricesUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: ReferecePricesUpdateManyWithWhereWithoutUserInput | ReferecePricesUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: ReferecePricesScalarWhereInput | ReferecePricesScalarWhereInput[]
+    set?: Enumerable<ReferecePricesWhereUniqueInput>
+    disconnect?: Enumerable<ReferecePricesWhereUniqueInput>
+    delete?: Enumerable<ReferecePricesWhereUniqueInput>
+    connect?: Enumerable<ReferecePricesWhereUniqueInput>
+    update?: Enumerable<ReferecePricesUpdateWithWhereUniqueWithoutUserInput>
+    updateMany?: Enumerable<ReferecePricesUpdateManyWithWhereWithoutUserInput>
+    deleteMany?: Enumerable<ReferecePricesScalarWhereInput>
   }
 
   export type ReferecesUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<ReferecesCreateWithoutUserInput, ReferecesUncheckedCreateWithoutUserInput> | ReferecesCreateWithoutUserInput[] | ReferecesUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: ReferecesCreateOrConnectWithoutUserInput | ReferecesCreateOrConnectWithoutUserInput[]
-    upsert?: ReferecesUpsertWithWhereUniqueWithoutUserInput | ReferecesUpsertWithWhereUniqueWithoutUserInput[]
+    create?: XOR<Enumerable<ReferecesCreateWithoutUserInput>, Enumerable<ReferecesUncheckedCreateWithoutUserInput>>
+    connectOrCreate?: Enumerable<ReferecesCreateOrConnectWithoutUserInput>
+    upsert?: Enumerable<ReferecesUpsertWithWhereUniqueWithoutUserInput>
     createMany?: ReferecesCreateManyUserInputEnvelope
-    set?: ReferecesWhereUniqueInput | ReferecesWhereUniqueInput[]
-    disconnect?: ReferecesWhereUniqueInput | ReferecesWhereUniqueInput[]
-    delete?: ReferecesWhereUniqueInput | ReferecesWhereUniqueInput[]
-    connect?: ReferecesWhereUniqueInput | ReferecesWhereUniqueInput[]
-    update?: ReferecesUpdateWithWhereUniqueWithoutUserInput | ReferecesUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: ReferecesUpdateManyWithWhereWithoutUserInput | ReferecesUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: ReferecesScalarWhereInput | ReferecesScalarWhereInput[]
+    set?: Enumerable<ReferecesWhereUniqueInput>
+    disconnect?: Enumerable<ReferecesWhereUniqueInput>
+    delete?: Enumerable<ReferecesWhereUniqueInput>
+    connect?: Enumerable<ReferecesWhereUniqueInput>
+    update?: Enumerable<ReferecesUpdateWithWhereUniqueWithoutUserInput>
+    updateMany?: Enumerable<ReferecesUpdateManyWithWhereWithoutUserInput>
+    deleteMany?: Enumerable<ReferecesScalarWhereInput>
   }
 
   export type UserPointsUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<UserPointsCreateWithoutUserInput, UserPointsUncheckedCreateWithoutUserInput> | UserPointsCreateWithoutUserInput[] | UserPointsUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: UserPointsCreateOrConnectWithoutUserInput | UserPointsCreateOrConnectWithoutUserInput[]
-    upsert?: UserPointsUpsertWithWhereUniqueWithoutUserInput | UserPointsUpsertWithWhereUniqueWithoutUserInput[]
+    create?: XOR<Enumerable<UserPointsCreateWithoutUserInput>, Enumerable<UserPointsUncheckedCreateWithoutUserInput>>
+    connectOrCreate?: Enumerable<UserPointsCreateOrConnectWithoutUserInput>
+    upsert?: Enumerable<UserPointsUpsertWithWhereUniqueWithoutUserInput>
     createMany?: UserPointsCreateManyUserInputEnvelope
-    set?: UserPointsWhereUniqueInput | UserPointsWhereUniqueInput[]
-    disconnect?: UserPointsWhereUniqueInput | UserPointsWhereUniqueInput[]
-    delete?: UserPointsWhereUniqueInput | UserPointsWhereUniqueInput[]
-    connect?: UserPointsWhereUniqueInput | UserPointsWhereUniqueInput[]
-    update?: UserPointsUpdateWithWhereUniqueWithoutUserInput | UserPointsUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: UserPointsUpdateManyWithWhereWithoutUserInput | UserPointsUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: UserPointsScalarWhereInput | UserPointsScalarWhereInput[]
+    set?: Enumerable<UserPointsWhereUniqueInput>
+    disconnect?: Enumerable<UserPointsWhereUniqueInput>
+    delete?: Enumerable<UserPointsWhereUniqueInput>
+    connect?: Enumerable<UserPointsWhereUniqueInput>
+    update?: Enumerable<UserPointsUpdateWithWhereUniqueWithoutUserInput>
+    updateMany?: Enumerable<UserPointsUpdateManyWithWhereWithoutUserInput>
+    deleteMany?: Enumerable<UserPointsScalarWhereInput>
   }
 
   export type FeedUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<FeedCreateWithoutUserInput, FeedUncheckedCreateWithoutUserInput> | FeedCreateWithoutUserInput[] | FeedUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: FeedCreateOrConnectWithoutUserInput | FeedCreateOrConnectWithoutUserInput[]
-    upsert?: FeedUpsertWithWhereUniqueWithoutUserInput | FeedUpsertWithWhereUniqueWithoutUserInput[]
+    create?: XOR<Enumerable<FeedCreateWithoutUserInput>, Enumerable<FeedUncheckedCreateWithoutUserInput>>
+    connectOrCreate?: Enumerable<FeedCreateOrConnectWithoutUserInput>
+    upsert?: Enumerable<FeedUpsertWithWhereUniqueWithoutUserInput>
     createMany?: FeedCreateManyUserInputEnvelope
-    set?: FeedWhereUniqueInput | FeedWhereUniqueInput[]
-    disconnect?: FeedWhereUniqueInput | FeedWhereUniqueInput[]
-    delete?: FeedWhereUniqueInput | FeedWhereUniqueInput[]
-    connect?: FeedWhereUniqueInput | FeedWhereUniqueInput[]
-    update?: FeedUpdateWithWhereUniqueWithoutUserInput | FeedUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: FeedUpdateManyWithWhereWithoutUserInput | FeedUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: FeedScalarWhereInput | FeedScalarWhereInput[]
+    set?: Enumerable<FeedWhereUniqueInput>
+    disconnect?: Enumerable<FeedWhereUniqueInput>
+    delete?: Enumerable<FeedWhereUniqueInput>
+    connect?: Enumerable<FeedWhereUniqueInput>
+    update?: Enumerable<FeedUpdateWithWhereUniqueWithoutUserInput>
+    updateMany?: Enumerable<FeedUpdateManyWithWhereWithoutUserInput>
+    deleteMany?: Enumerable<FeedScalarWhereInput>
   }
 
   export type FeedCommentsUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<FeedCommentsCreateWithoutUserInput, FeedCommentsUncheckedCreateWithoutUserInput> | FeedCommentsCreateWithoutUserInput[] | FeedCommentsUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: FeedCommentsCreateOrConnectWithoutUserInput | FeedCommentsCreateOrConnectWithoutUserInput[]
-    upsert?: FeedCommentsUpsertWithWhereUniqueWithoutUserInput | FeedCommentsUpsertWithWhereUniqueWithoutUserInput[]
+    create?: XOR<Enumerable<FeedCommentsCreateWithoutUserInput>, Enumerable<FeedCommentsUncheckedCreateWithoutUserInput>>
+    connectOrCreate?: Enumerable<FeedCommentsCreateOrConnectWithoutUserInput>
+    upsert?: Enumerable<FeedCommentsUpsertWithWhereUniqueWithoutUserInput>
     createMany?: FeedCommentsCreateManyUserInputEnvelope
-    set?: FeedCommentsWhereUniqueInput | FeedCommentsWhereUniqueInput[]
-    disconnect?: FeedCommentsWhereUniqueInput | FeedCommentsWhereUniqueInput[]
-    delete?: FeedCommentsWhereUniqueInput | FeedCommentsWhereUniqueInput[]
-    connect?: FeedCommentsWhereUniqueInput | FeedCommentsWhereUniqueInput[]
-    update?: FeedCommentsUpdateWithWhereUniqueWithoutUserInput | FeedCommentsUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: FeedCommentsUpdateManyWithWhereWithoutUserInput | FeedCommentsUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: FeedCommentsScalarWhereInput | FeedCommentsScalarWhereInput[]
+    set?: Enumerable<FeedCommentsWhereUniqueInput>
+    disconnect?: Enumerable<FeedCommentsWhereUniqueInput>
+    delete?: Enumerable<FeedCommentsWhereUniqueInput>
+    connect?: Enumerable<FeedCommentsWhereUniqueInput>
+    update?: Enumerable<FeedCommentsUpdateWithWhereUniqueWithoutUserInput>
+    updateMany?: Enumerable<FeedCommentsUpdateManyWithWhereWithoutUserInput>
+    deleteMany?: Enumerable<FeedCommentsScalarWhereInput>
   }
 
   export type UserCreateNestedOneWithoutPerfilInput = {
@@ -19264,10 +20377,6 @@ export namespace Prisma {
 
   export type NullableStringFieldUpdateOperationsInput = {
     set?: string | null
-  }
-
-  export type NullableDateTimeFieldUpdateOperationsInput = {
-    set?: Date | string | null
   }
 
   export type UserUpdateOneWithoutPerfilNestedInput = {
@@ -19288,20 +20397,20 @@ export namespace Prisma {
     divide?: bigint | number
   }
 
-  export type UserCreateNestedOneWithoutAddresInput = {
-    create?: XOR<UserCreateWithoutAddresInput, UserUncheckedCreateWithoutAddresInput>
-    connectOrCreate?: UserCreateOrConnectWithoutAddresInput
+  export type UserCreateNestedOneWithoutAddressInput = {
+    create?: XOR<UserCreateWithoutAddressInput, UserUncheckedCreateWithoutAddressInput>
+    connectOrCreate?: UserCreateOrConnectWithoutAddressInput
     connect?: UserWhereUniqueInput
   }
 
-  export type UserUpdateOneWithoutAddresNestedInput = {
-    create?: XOR<UserCreateWithoutAddresInput, UserUncheckedCreateWithoutAddresInput>
-    connectOrCreate?: UserCreateOrConnectWithoutAddresInput
-    upsert?: UserUpsertWithoutAddresInput
+  export type UserUpdateOneWithoutAddressNestedInput = {
+    create?: XOR<UserCreateWithoutAddressInput, UserUncheckedCreateWithoutAddressInput>
+    connectOrCreate?: UserCreateOrConnectWithoutAddressInput
+    upsert?: UserUpsertWithoutAddressInput
     disconnect?: UserWhereInput | boolean
     delete?: UserWhereInput | boolean
     connect?: UserWhereUniqueInput
-    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutAddresInput, UserUpdateWithoutAddresInput>, UserUncheckedUpdateWithoutAddresInput>
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutAddressInput, UserUpdateWithoutAddressInput>, UserUncheckedUpdateWithoutAddressInput>
   }
 
   export type UserCreateNestedOneWithoutContactInput = {
@@ -19321,45 +20430,45 @@ export namespace Prisma {
   }
 
   export type DegreeCreateNestedManyWithoutKnowledgespaceInput = {
-    create?: XOR<DegreeCreateWithoutKnowledgespaceInput, DegreeUncheckedCreateWithoutKnowledgespaceInput> | DegreeCreateWithoutKnowledgespaceInput[] | DegreeUncheckedCreateWithoutKnowledgespaceInput[]
-    connectOrCreate?: DegreeCreateOrConnectWithoutKnowledgespaceInput | DegreeCreateOrConnectWithoutKnowledgespaceInput[]
+    create?: XOR<Enumerable<DegreeCreateWithoutKnowledgespaceInput>, Enumerable<DegreeUncheckedCreateWithoutKnowledgespaceInput>>
+    connectOrCreate?: Enumerable<DegreeCreateOrConnectWithoutKnowledgespaceInput>
     createMany?: DegreeCreateManyKnowledgespaceInputEnvelope
-    connect?: DegreeWhereUniqueInput | DegreeWhereUniqueInput[]
+    connect?: Enumerable<DegreeWhereUniqueInput>
   }
 
   export type DegreeUncheckedCreateNestedManyWithoutKnowledgespaceInput = {
-    create?: XOR<DegreeCreateWithoutKnowledgespaceInput, DegreeUncheckedCreateWithoutKnowledgespaceInput> | DegreeCreateWithoutKnowledgespaceInput[] | DegreeUncheckedCreateWithoutKnowledgespaceInput[]
-    connectOrCreate?: DegreeCreateOrConnectWithoutKnowledgespaceInput | DegreeCreateOrConnectWithoutKnowledgespaceInput[]
+    create?: XOR<Enumerable<DegreeCreateWithoutKnowledgespaceInput>, Enumerable<DegreeUncheckedCreateWithoutKnowledgespaceInput>>
+    connectOrCreate?: Enumerable<DegreeCreateOrConnectWithoutKnowledgespaceInput>
     createMany?: DegreeCreateManyKnowledgespaceInputEnvelope
-    connect?: DegreeWhereUniqueInput | DegreeWhereUniqueInput[]
+    connect?: Enumerable<DegreeWhereUniqueInput>
   }
 
   export type DegreeUpdateManyWithoutKnowledgespaceNestedInput = {
-    create?: XOR<DegreeCreateWithoutKnowledgespaceInput, DegreeUncheckedCreateWithoutKnowledgespaceInput> | DegreeCreateWithoutKnowledgespaceInput[] | DegreeUncheckedCreateWithoutKnowledgespaceInput[]
-    connectOrCreate?: DegreeCreateOrConnectWithoutKnowledgespaceInput | DegreeCreateOrConnectWithoutKnowledgespaceInput[]
-    upsert?: DegreeUpsertWithWhereUniqueWithoutKnowledgespaceInput | DegreeUpsertWithWhereUniqueWithoutKnowledgespaceInput[]
+    create?: XOR<Enumerable<DegreeCreateWithoutKnowledgespaceInput>, Enumerable<DegreeUncheckedCreateWithoutKnowledgespaceInput>>
+    connectOrCreate?: Enumerable<DegreeCreateOrConnectWithoutKnowledgespaceInput>
+    upsert?: Enumerable<DegreeUpsertWithWhereUniqueWithoutKnowledgespaceInput>
     createMany?: DegreeCreateManyKnowledgespaceInputEnvelope
-    set?: DegreeWhereUniqueInput | DegreeWhereUniqueInput[]
-    disconnect?: DegreeWhereUniqueInput | DegreeWhereUniqueInput[]
-    delete?: DegreeWhereUniqueInput | DegreeWhereUniqueInput[]
-    connect?: DegreeWhereUniqueInput | DegreeWhereUniqueInput[]
-    update?: DegreeUpdateWithWhereUniqueWithoutKnowledgespaceInput | DegreeUpdateWithWhereUniqueWithoutKnowledgespaceInput[]
-    updateMany?: DegreeUpdateManyWithWhereWithoutKnowledgespaceInput | DegreeUpdateManyWithWhereWithoutKnowledgespaceInput[]
-    deleteMany?: DegreeScalarWhereInput | DegreeScalarWhereInput[]
+    set?: Enumerable<DegreeWhereUniqueInput>
+    disconnect?: Enumerable<DegreeWhereUniqueInput>
+    delete?: Enumerable<DegreeWhereUniqueInput>
+    connect?: Enumerable<DegreeWhereUniqueInput>
+    update?: Enumerable<DegreeUpdateWithWhereUniqueWithoutKnowledgespaceInput>
+    updateMany?: Enumerable<DegreeUpdateManyWithWhereWithoutKnowledgespaceInput>
+    deleteMany?: Enumerable<DegreeScalarWhereInput>
   }
 
   export type DegreeUncheckedUpdateManyWithoutKnowledgespaceNestedInput = {
-    create?: XOR<DegreeCreateWithoutKnowledgespaceInput, DegreeUncheckedCreateWithoutKnowledgespaceInput> | DegreeCreateWithoutKnowledgespaceInput[] | DegreeUncheckedCreateWithoutKnowledgespaceInput[]
-    connectOrCreate?: DegreeCreateOrConnectWithoutKnowledgespaceInput | DegreeCreateOrConnectWithoutKnowledgespaceInput[]
-    upsert?: DegreeUpsertWithWhereUniqueWithoutKnowledgespaceInput | DegreeUpsertWithWhereUniqueWithoutKnowledgespaceInput[]
+    create?: XOR<Enumerable<DegreeCreateWithoutKnowledgespaceInput>, Enumerable<DegreeUncheckedCreateWithoutKnowledgespaceInput>>
+    connectOrCreate?: Enumerable<DegreeCreateOrConnectWithoutKnowledgespaceInput>
+    upsert?: Enumerable<DegreeUpsertWithWhereUniqueWithoutKnowledgespaceInput>
     createMany?: DegreeCreateManyKnowledgespaceInputEnvelope
-    set?: DegreeWhereUniqueInput | DegreeWhereUniqueInput[]
-    disconnect?: DegreeWhereUniqueInput | DegreeWhereUniqueInput[]
-    delete?: DegreeWhereUniqueInput | DegreeWhereUniqueInput[]
-    connect?: DegreeWhereUniqueInput | DegreeWhereUniqueInput[]
-    update?: DegreeUpdateWithWhereUniqueWithoutKnowledgespaceInput | DegreeUpdateWithWhereUniqueWithoutKnowledgespaceInput[]
-    updateMany?: DegreeUpdateManyWithWhereWithoutKnowledgespaceInput | DegreeUpdateManyWithWhereWithoutKnowledgespaceInput[]
-    deleteMany?: DegreeScalarWhereInput | DegreeScalarWhereInput[]
+    set?: Enumerable<DegreeWhereUniqueInput>
+    disconnect?: Enumerable<DegreeWhereUniqueInput>
+    delete?: Enumerable<DegreeWhereUniqueInput>
+    connect?: Enumerable<DegreeWhereUniqueInput>
+    update?: Enumerable<DegreeUpdateWithWhereUniqueWithoutKnowledgespaceInput>
+    updateMany?: Enumerable<DegreeUpdateManyWithWhereWithoutKnowledgespaceInput>
+    deleteMany?: Enumerable<DegreeScalarWhereInput>
   }
 
   export type KnowledgespaceCreateNestedOneWithoutDegreeInput = {
@@ -19414,10 +20523,6 @@ export namespace Prisma {
     create?: XOR<UserCreateWithoutExperiencesInput, UserUncheckedCreateWithoutExperiencesInput>
     connectOrCreate?: UserCreateOrConnectWithoutExperiencesInput
     connect?: UserWhereUniqueInput
-  }
-
-  export type DateTimeFieldUpdateOperationsInput = {
-    set?: Date | string
   }
 
   export type NullableBoolFieldUpdateOperationsInput = {
@@ -19540,8 +20645,8 @@ export namespace Prisma {
 
   export type NestedBigIntFilter<$PrismaModel = never> = {
     equals?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    in?: bigint[] | number[]
-    notIn?: bigint[] | number[]
+    in?: Enumerable<bigint> | Enumerable<number>
+    notIn?: Enumerable<bigint> | Enumerable<number>
     lt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
     lte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
     gt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
@@ -19551,8 +20656,8 @@ export namespace Prisma {
 
   export type NestedStringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
-    in?: string[]
-    notIn?: string[]
+    in?: Enumerable<string>
+    notIn?: Enumerable<string>
     lt?: string | StringFieldRefInput<$PrismaModel>
     lte?: string | StringFieldRefInput<$PrismaModel>
     gt?: string | StringFieldRefInput<$PrismaModel>
@@ -19563,10 +20668,32 @@ export namespace Prisma {
     not?: NestedStringFilter<$PrismaModel> | string
   }
 
+  export type NestedDateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Enumerable<Date> | Enumerable<string>
+    notIn?: Enumerable<Date> | Enumerable<string>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
+  export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Enumerable<Date> | Enumerable<string> | null
+    notIn?: Enumerable<Date> | Enumerable<string> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
   export type NestedBigIntWithAggregatesFilter<$PrismaModel = never> = {
     equals?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    in?: bigint[] | number[]
-    notIn?: bigint[] | number[]
+    in?: Enumerable<bigint> | Enumerable<number>
+    notIn?: Enumerable<bigint> | Enumerable<number>
     lt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
     lte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
     gt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
@@ -19581,8 +20708,8 @@ export namespace Prisma {
 
   export type NestedIntFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[]
-    notIn?: number[]
+    in?: Enumerable<number>
+    notIn?: Enumerable<number>
     lt?: number | IntFieldRefInput<$PrismaModel>
     lte?: number | IntFieldRefInput<$PrismaModel>
     gt?: number | IntFieldRefInput<$PrismaModel>
@@ -19592,8 +20719,8 @@ export namespace Prisma {
 
   export type NestedFloatFilter<$PrismaModel = never> = {
     equals?: number | FloatFieldRefInput<$PrismaModel>
-    in?: number[]
-    notIn?: number[]
+    in?: Enumerable<number>
+    notIn?: Enumerable<number>
     lt?: number | FloatFieldRefInput<$PrismaModel>
     lte?: number | FloatFieldRefInput<$PrismaModel>
     gt?: number | FloatFieldRefInput<$PrismaModel>
@@ -19603,8 +20730,8 @@ export namespace Prisma {
 
   export type NestedStringWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
-    in?: string[]
-    notIn?: string[]
+    in?: Enumerable<string>
+    notIn?: Enumerable<string>
     lt?: string | StringFieldRefInput<$PrismaModel>
     lte?: string | StringFieldRefInput<$PrismaModel>
     gt?: string | StringFieldRefInput<$PrismaModel>
@@ -19618,10 +20745,49 @@ export namespace Prisma {
     _max?: NestedStringFilter<$PrismaModel>
   }
 
+  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Enumerable<Date> | Enumerable<string>
+    notIn?: Enumerable<Date> | Enumerable<string>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Enumerable<Date> | Enumerable<string> | null
+    notIn?: Enumerable<Date> | Enumerable<string> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
+  export type NestedIntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: Enumerable<number> | null
+    notIn?: Enumerable<number> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
   export type NestedStringNullableFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | null
-    notIn?: string[] | null
+    in?: Enumerable<string> | null
+    notIn?: Enumerable<string> | null
     lt?: string | StringFieldRefInput<$PrismaModel>
     lte?: string | StringFieldRefInput<$PrismaModel>
     gt?: string | StringFieldRefInput<$PrismaModel>
@@ -19632,21 +20798,10 @@ export namespace Prisma {
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
-  export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | null
-    notIn?: Date[] | string[] | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
-  }
-
   export type NestedBigIntNullableFilter<$PrismaModel = never> = {
     equals?: bigint | number | BigIntFieldRefInput<$PrismaModel> | null
-    in?: bigint[] | number[] | null
-    notIn?: bigint[] | number[] | null
+    in?: Enumerable<bigint> | Enumerable<number> | null
+    notIn?: Enumerable<bigint> | Enumerable<number> | null
     lt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
     lte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
     gt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
@@ -19656,8 +20811,8 @@ export namespace Prisma {
 
   export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | null
-    notIn?: string[] | null
+    in?: Enumerable<string> | null
+    notIn?: Enumerable<string> | null
     lt?: string | StringFieldRefInput<$PrismaModel>
     lte?: string | StringFieldRefInput<$PrismaModel>
     gt?: string | StringFieldRefInput<$PrismaModel>
@@ -19671,35 +20826,10 @@ export namespace Prisma {
     _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
-  export type NestedIntNullableFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | null
-    notIn?: number[] | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableFilter<$PrismaModel> | number | null
-  }
-
-  export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | null
-    notIn?: Date[] | string[] | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedDateTimeNullableFilter<$PrismaModel>
-    _max?: NestedDateTimeNullableFilter<$PrismaModel>
-  }
-
   export type NestedBigIntNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: bigint | number | BigIntFieldRefInput<$PrismaModel> | null
-    in?: bigint[] | number[] | null
-    notIn?: bigint[] | number[] | null
+    in?: Enumerable<bigint> | Enumerable<number> | null
+    notIn?: Enumerable<bigint> | Enumerable<number> | null
     lt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
     lte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
     gt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
@@ -19714,8 +20844,8 @@ export namespace Prisma {
 
   export type NestedFloatNullableFilter<$PrismaModel = never> = {
     equals?: number | FloatFieldRefInput<$PrismaModel> | null
-    in?: number[] | null
-    notIn?: number[] | null
+    in?: Enumerable<number> | null
+    notIn?: Enumerable<number> | null
     lt?: number | FloatFieldRefInput<$PrismaModel>
     lte?: number | FloatFieldRefInput<$PrismaModel>
     gt?: number | FloatFieldRefInput<$PrismaModel>
@@ -19723,34 +20853,9 @@ export namespace Prisma {
     not?: NestedFloatNullableFilter<$PrismaModel> | number | null
   }
 
-  export type NestedDateTimeFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[]
-    notIn?: Date[] | string[]
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
-  }
-
   export type NestedBoolNullableFilter<$PrismaModel = never> = {
     equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
     not?: NestedBoolNullableFilter<$PrismaModel> | boolean | null
-  }
-
-  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[]
-    notIn?: Date[] | string[]
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedDateTimeFilter<$PrismaModel>
-    _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
   export type NestedBoolNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -19763,8 +20868,8 @@ export namespace Prisma {
 
   export type NestedFloatWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | FloatFieldRefInput<$PrismaModel>
-    in?: number[]
-    notIn?: number[]
+    in?: Enumerable<number>
+    notIn?: Enumerable<number>
     lt?: number | FloatFieldRefInput<$PrismaModel>
     lte?: number | FloatFieldRefInput<$PrismaModel>
     gt?: number | FloatFieldRefInput<$PrismaModel>
@@ -19784,6 +20889,8 @@ export namespace Prisma {
     secondname?: string | null
     socialname?: string | null
     birthday?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string | null
   }
 
   export type PerfilUncheckedCreateWithoutUserInput = {
@@ -19793,6 +20900,8 @@ export namespace Prisma {
     secondname?: string | null
     socialname?: string | null
     birthday?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string | null
   }
 
   export type PerfilCreateOrConnectWithoutUserInput = {
@@ -19800,29 +20909,37 @@ export namespace Prisma {
     create: XOR<PerfilCreateWithoutUserInput, PerfilUncheckedCreateWithoutUserInput>
   }
 
-  export type AddresCreateWithoutUserInput = {
+  export type AddressCreateWithoutUserInput = {
     id?: bigint | number
-    address?: string | null
+    street?: string | null
+    number?: string | null
     complement?: string | null
+    city?: string | null
     state?: string | null
     country?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string | null
   }
 
-  export type AddresUncheckedCreateWithoutUserInput = {
+  export type AddressUncheckedCreateWithoutUserInput = {
     id?: bigint | number
-    address?: string | null
+    street?: string | null
+    number?: string | null
     complement?: string | null
+    city?: string | null
     state?: string | null
     country?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string | null
   }
 
-  export type AddresCreateOrConnectWithoutUserInput = {
-    where: AddresWhereUniqueInput
-    create: XOR<AddresCreateWithoutUserInput, AddresUncheckedCreateWithoutUserInput>
+  export type AddressCreateOrConnectWithoutUserInput = {
+    where: AddressWhereUniqueInput
+    create: XOR<AddressCreateWithoutUserInput, AddressUncheckedCreateWithoutUserInput>
   }
 
-  export type AddresCreateManyUserInputEnvelope = {
-    data: AddresCreateManyUserInput | AddresCreateManyUserInput[]
+  export type AddressCreateManyUserInputEnvelope = {
+    data: Enumerable<AddressCreateManyUserInput>
     skipDuplicates?: boolean
   }
 
@@ -19831,6 +20948,8 @@ export namespace Prisma {
     email?: string | null
     phone?: string | null
     another?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string | null
   }
 
   export type ContactUncheckedCreateWithoutUserInput = {
@@ -19838,6 +20957,8 @@ export namespace Prisma {
     email?: string | null
     phone?: string | null
     another?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string | null
   }
 
   export type ContactCreateOrConnectWithoutUserInput = {
@@ -19846,7 +20967,7 @@ export namespace Prisma {
   }
 
   export type ContactCreateManyUserInputEnvelope = {
-    data: ContactCreateManyUserInput | ContactCreateManyUserInput[]
+    data: Enumerable<ContactCreateManyUserInput>
     skipDuplicates?: boolean
   }
 
@@ -19854,6 +20975,8 @@ export namespace Prisma {
     id?: bigint | number
     code?: string | null
     description?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string | null
     Knowledgespace?: KnowledgespaceCreateNestedOneWithoutDegreeInput
   }
 
@@ -19862,6 +20985,8 @@ export namespace Prisma {
     code?: string | null
     description?: string | null
     KnowledgespaceId?: bigint | number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string | null
   }
 
   export type DegreeCreateOrConnectWithoutUserInput = {
@@ -19870,7 +20995,7 @@ export namespace Prisma {
   }
 
   export type DegreeCreateManyUserInputEnvelope = {
-    data: DegreeCreateManyUserInput | DegreeCreateManyUserInput[]
+    data: Enumerable<DegreeCreateManyUserInput>
     skipDuplicates?: boolean
   }
 
@@ -19878,12 +21003,16 @@ export namespace Prisma {
     id?: bigint | number
     code?: string | null
     description?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string | null
   }
 
   export type SkillsUncheckedCreateWithoutUserInput = {
     id?: bigint | number
     code?: string | null
     description?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string | null
   }
 
   export type SkillsCreateOrConnectWithoutUserInput = {
@@ -19892,7 +21021,7 @@ export namespace Prisma {
   }
 
   export type SkillsCreateManyUserInputEnvelope = {
-    data: SkillsCreateManyUserInput | SkillsCreateManyUserInput[]
+    data: Enumerable<SkillsCreateManyUserInput>
     skipDuplicates?: boolean
   }
 
@@ -19902,6 +21031,8 @@ export namespace Prisma {
     start: Date | string
     end?: Date | string | null
     iscurrent?: boolean | null
+    createdAt?: Date | string
+    updatedAt?: Date | string | null
   }
 
   export type ExperiencesUncheckedCreateWithoutUserInput = {
@@ -19910,6 +21041,8 @@ export namespace Prisma {
     start: Date | string
     end?: Date | string | null
     iscurrent?: boolean | null
+    createdAt?: Date | string
+    updatedAt?: Date | string | null
   }
 
   export type ExperiencesCreateOrConnectWithoutUserInput = {
@@ -19918,7 +21051,7 @@ export namespace Prisma {
   }
 
   export type ExperiencesCreateManyUserInputEnvelope = {
-    data: ExperiencesCreateManyUserInput | ExperiencesCreateManyUserInput[]
+    data: Enumerable<ExperiencesCreateManyUserInput>
     skipDuplicates?: boolean
   }
 
@@ -19929,6 +21062,8 @@ export namespace Prisma {
     start: Date | string
     end?: Date | string | null
     iscurrent?: boolean | null
+    createdAt?: Date | string
+    updatedAt?: Date | string | null
   }
 
   export type ProjectsUncheckedCreateWithoutUserInput = {
@@ -19938,6 +21073,8 @@ export namespace Prisma {
     start: Date | string
     end?: Date | string | null
     iscurrent?: boolean | null
+    createdAt?: Date | string
+    updatedAt?: Date | string | null
   }
 
   export type ProjectsCreateOrConnectWithoutUserInput = {
@@ -19946,7 +21083,7 @@ export namespace Prisma {
   }
 
   export type ProjectsCreateManyUserInputEnvelope = {
-    data: ProjectsCreateManyUserInput | ProjectsCreateManyUserInput[]
+    data: Enumerable<ProjectsCreateManyUserInput>
     skipDuplicates?: boolean
   }
 
@@ -19955,6 +21092,8 @@ export namespace Prisma {
     name: string
     description: string
     contacts: string
+    createdAt?: Date | string
+    updatedAt?: Date | string | null
   }
 
   export type ReferecePricesUncheckedCreateWithoutUserInput = {
@@ -19962,6 +21101,8 @@ export namespace Prisma {
     name: string
     description: string
     contacts: string
+    createdAt?: Date | string
+    updatedAt?: Date | string | null
   }
 
   export type ReferecePricesCreateOrConnectWithoutUserInput = {
@@ -19970,7 +21111,7 @@ export namespace Prisma {
   }
 
   export type ReferecePricesCreateManyUserInputEnvelope = {
-    data: ReferecePricesCreateManyUserInput | ReferecePricesCreateManyUserInput[]
+    data: Enumerable<ReferecePricesCreateManyUserInput>
     skipDuplicates?: boolean
   }
 
@@ -19978,12 +21119,16 @@ export namespace Prisma {
     id?: bigint | number
     description: string
     value: number
+    createdAt?: Date | string
+    updatedAt?: Date | string | null
   }
 
   export type ReferecesUncheckedCreateWithoutUserInput = {
     id?: bigint | number
     description: string
     value: number
+    createdAt?: Date | string
+    updatedAt?: Date | string | null
   }
 
   export type ReferecesCreateOrConnectWithoutUserInput = {
@@ -19992,18 +21137,22 @@ export namespace Prisma {
   }
 
   export type ReferecesCreateManyUserInputEnvelope = {
-    data: ReferecesCreateManyUserInput | ReferecesCreateManyUserInput[]
+    data: Enumerable<ReferecesCreateManyUserInput>
     skipDuplicates?: boolean
   }
 
   export type UserPointsCreateWithoutUserInput = {
     id?: bigint | number
     value: bigint | number
+    createdAt?: Date | string
+    updatedAt?: Date | string | null
   }
 
   export type UserPointsUncheckedCreateWithoutUserInput = {
     id?: bigint | number
     value: bigint | number
+    createdAt?: Date | string
+    updatedAt?: Date | string | null
   }
 
   export type UserPointsCreateOrConnectWithoutUserInput = {
@@ -20012,7 +21161,7 @@ export namespace Prisma {
   }
 
   export type UserPointsCreateManyUserInputEnvelope = {
-    data: UserPointsCreateManyUserInput | UserPointsCreateManyUserInput[]
+    data: Enumerable<UserPointsCreateManyUserInput>
     skipDuplicates?: boolean
   }
 
@@ -20025,6 +21174,8 @@ export namespace Prisma {
     react_negative?: bigint | number | null
     react_smile?: bigint | number | null
     react_lovely?: bigint | number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string | null
   }
 
   export type FeedUncheckedCreateWithoutUserInput = {
@@ -20036,6 +21187,8 @@ export namespace Prisma {
     react_negative?: bigint | number | null
     react_smile?: bigint | number | null
     react_lovely?: bigint | number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string | null
   }
 
   export type FeedCreateOrConnectWithoutUserInput = {
@@ -20044,18 +21197,22 @@ export namespace Prisma {
   }
 
   export type FeedCreateManyUserInputEnvelope = {
-    data: FeedCreateManyUserInput | FeedCreateManyUserInput[]
+    data: Enumerable<FeedCreateManyUserInput>
     skipDuplicates?: boolean
   }
 
   export type FeedCommentsCreateWithoutUserInput = {
     id?: bigint | number
     comment: string
+    createdAt?: Date | string
+    updatedAt?: Date | string | null
   }
 
   export type FeedCommentsUncheckedCreateWithoutUserInput = {
     id?: bigint | number
     comment: string
+    createdAt?: Date | string
+    updatedAt?: Date | string | null
   }
 
   export type FeedCommentsCreateOrConnectWithoutUserInput = {
@@ -20064,7 +21221,7 @@ export namespace Prisma {
   }
 
   export type FeedCommentsCreateManyUserInputEnvelope = {
-    data: FeedCommentsCreateManyUserInput | FeedCommentsCreateManyUserInput[]
+    data: Enumerable<FeedCommentsCreateManyUserInput>
     skipDuplicates?: boolean
   }
 
@@ -20086,6 +21243,8 @@ export namespace Prisma {
     secondname?: NullableStringFieldUpdateOperationsInput | string | null
     socialname?: NullableStringFieldUpdateOperationsInput | string | null
     birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type PerfilUncheckedUpdateWithoutUserInput = {
@@ -20095,34 +21254,40 @@ export namespace Prisma {
     secondname?: NullableStringFieldUpdateOperationsInput | string | null
     socialname?: NullableStringFieldUpdateOperationsInput | string | null
     birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
-  export type AddresUpsertWithWhereUniqueWithoutUserInput = {
-    where: AddresWhereUniqueInput
-    update: XOR<AddresUpdateWithoutUserInput, AddresUncheckedUpdateWithoutUserInput>
-    create: XOR<AddresCreateWithoutUserInput, AddresUncheckedCreateWithoutUserInput>
+  export type AddressUpsertWithWhereUniqueWithoutUserInput = {
+    where: AddressWhereUniqueInput
+    update: XOR<AddressUpdateWithoutUserInput, AddressUncheckedUpdateWithoutUserInput>
+    create: XOR<AddressCreateWithoutUserInput, AddressUncheckedCreateWithoutUserInput>
   }
 
-  export type AddresUpdateWithWhereUniqueWithoutUserInput = {
-    where: AddresWhereUniqueInput
-    data: XOR<AddresUpdateWithoutUserInput, AddresUncheckedUpdateWithoutUserInput>
+  export type AddressUpdateWithWhereUniqueWithoutUserInput = {
+    where: AddressWhereUniqueInput
+    data: XOR<AddressUpdateWithoutUserInput, AddressUncheckedUpdateWithoutUserInput>
   }
 
-  export type AddresUpdateManyWithWhereWithoutUserInput = {
-    where: AddresScalarWhereInput
-    data: XOR<AddresUpdateManyMutationInput, AddresUncheckedUpdateManyWithoutUserInput>
+  export type AddressUpdateManyWithWhereWithoutUserInput = {
+    where: AddressScalarWhereInput
+    data: XOR<AddressUpdateManyMutationInput, AddressUncheckedUpdateManyWithoutUserInput>
   }
 
-  export type AddresScalarWhereInput = {
-    AND?: AddresScalarWhereInput | AddresScalarWhereInput[]
-    OR?: AddresScalarWhereInput[]
-    NOT?: AddresScalarWhereInput | AddresScalarWhereInput[]
-    id?: BigIntFilter<"Addres"> | bigint | number
-    address?: StringNullableFilter<"Addres"> | string | null
-    complement?: StringNullableFilter<"Addres"> | string | null
-    state?: StringNullableFilter<"Addres"> | string | null
-    country?: StringNullableFilter<"Addres"> | string | null
-    userId?: BigIntNullableFilter<"Addres"> | bigint | number | null
+  export type AddressScalarWhereInput = {
+    AND?: Enumerable<AddressScalarWhereInput>
+    OR?: Enumerable<AddressScalarWhereInput>
+    NOT?: Enumerable<AddressScalarWhereInput>
+    id?: BigIntFilter<"Address"> | bigint | number
+    street?: StringNullableFilter<"Address"> | string | null
+    number?: StringNullableFilter<"Address"> | string | null
+    complement?: StringNullableFilter<"Address"> | string | null
+    city?: StringNullableFilter<"Address"> | string | null
+    state?: StringNullableFilter<"Address"> | string | null
+    country?: StringNullableFilter<"Address"> | string | null
+    userId?: BigIntNullableFilter<"Address"> | bigint | number | null
+    createdAt?: DateTimeFilter<"Address"> | Date | string
+    updatedAt?: DateTimeNullableFilter<"Address"> | Date | string | null
   }
 
   export type ContactUpsertWithWhereUniqueWithoutUserInput = {
@@ -20142,14 +21307,16 @@ export namespace Prisma {
   }
 
   export type ContactScalarWhereInput = {
-    AND?: ContactScalarWhereInput | ContactScalarWhereInput[]
-    OR?: ContactScalarWhereInput[]
-    NOT?: ContactScalarWhereInput | ContactScalarWhereInput[]
+    AND?: Enumerable<ContactScalarWhereInput>
+    OR?: Enumerable<ContactScalarWhereInput>
+    NOT?: Enumerable<ContactScalarWhereInput>
     id?: BigIntFilter<"Contact"> | bigint | number
     email?: StringNullableFilter<"Contact"> | string | null
     phone?: StringNullableFilter<"Contact"> | string | null
     another?: StringNullableFilter<"Contact"> | string | null
     userId?: BigIntNullableFilter<"Contact"> | bigint | number | null
+    createdAt?: DateTimeFilter<"Contact"> | Date | string
+    updatedAt?: DateTimeNullableFilter<"Contact"> | Date | string | null
   }
 
   export type DegreeUpsertWithWhereUniqueWithoutUserInput = {
@@ -20169,14 +21336,16 @@ export namespace Prisma {
   }
 
   export type DegreeScalarWhereInput = {
-    AND?: DegreeScalarWhereInput | DegreeScalarWhereInput[]
-    OR?: DegreeScalarWhereInput[]
-    NOT?: DegreeScalarWhereInput | DegreeScalarWhereInput[]
+    AND?: Enumerable<DegreeScalarWhereInput>
+    OR?: Enumerable<DegreeScalarWhereInput>
+    NOT?: Enumerable<DegreeScalarWhereInput>
     id?: BigIntFilter<"Degree"> | bigint | number
     code?: StringNullableFilter<"Degree"> | string | null
     description?: StringNullableFilter<"Degree"> | string | null
     KnowledgespaceId?: BigIntNullableFilter<"Degree"> | bigint | number | null
     userId?: BigIntNullableFilter<"Degree"> | bigint | number | null
+    createdAt?: DateTimeFilter<"Degree"> | Date | string
+    updatedAt?: DateTimeNullableFilter<"Degree"> | Date | string | null
   }
 
   export type SkillsUpsertWithWhereUniqueWithoutUserInput = {
@@ -20196,13 +21365,15 @@ export namespace Prisma {
   }
 
   export type SkillsScalarWhereInput = {
-    AND?: SkillsScalarWhereInput | SkillsScalarWhereInput[]
-    OR?: SkillsScalarWhereInput[]
-    NOT?: SkillsScalarWhereInput | SkillsScalarWhereInput[]
+    AND?: Enumerable<SkillsScalarWhereInput>
+    OR?: Enumerable<SkillsScalarWhereInput>
+    NOT?: Enumerable<SkillsScalarWhereInput>
     id?: BigIntFilter<"Skills"> | bigint | number
     code?: StringNullableFilter<"Skills"> | string | null
     description?: StringNullableFilter<"Skills"> | string | null
     userId?: BigIntNullableFilter<"Skills"> | bigint | number | null
+    createdAt?: DateTimeFilter<"Skills"> | Date | string
+    updatedAt?: DateTimeNullableFilter<"Skills"> | Date | string | null
   }
 
   export type ExperiencesUpsertWithWhereUniqueWithoutUserInput = {
@@ -20222,15 +21393,17 @@ export namespace Prisma {
   }
 
   export type ExperiencesScalarWhereInput = {
-    AND?: ExperiencesScalarWhereInput | ExperiencesScalarWhereInput[]
-    OR?: ExperiencesScalarWhereInput[]
-    NOT?: ExperiencesScalarWhereInput | ExperiencesScalarWhereInput[]
+    AND?: Enumerable<ExperiencesScalarWhereInput>
+    OR?: Enumerable<ExperiencesScalarWhereInput>
+    NOT?: Enumerable<ExperiencesScalarWhereInput>
     id?: BigIntFilter<"Experiences"> | bigint | number
     company?: StringFilter<"Experiences"> | string
     start?: DateTimeFilter<"Experiences"> | Date | string
     end?: DateTimeNullableFilter<"Experiences"> | Date | string | null
     iscurrent?: BoolNullableFilter<"Experiences"> | boolean | null
     userId?: BigIntNullableFilter<"Experiences"> | bigint | number | null
+    createdAt?: DateTimeFilter<"Experiences"> | Date | string
+    updatedAt?: DateTimeNullableFilter<"Experiences"> | Date | string | null
   }
 
   export type ProjectsUpsertWithWhereUniqueWithoutUserInput = {
@@ -20250,9 +21423,9 @@ export namespace Prisma {
   }
 
   export type ProjectsScalarWhereInput = {
-    AND?: ProjectsScalarWhereInput | ProjectsScalarWhereInput[]
-    OR?: ProjectsScalarWhereInput[]
-    NOT?: ProjectsScalarWhereInput | ProjectsScalarWhereInput[]
+    AND?: Enumerable<ProjectsScalarWhereInput>
+    OR?: Enumerable<ProjectsScalarWhereInput>
+    NOT?: Enumerable<ProjectsScalarWhereInput>
     id?: BigIntFilter<"Projects"> | bigint | number
     name?: StringFilter<"Projects"> | string
     description?: StringNullableFilter<"Projects"> | string | null
@@ -20260,6 +21433,8 @@ export namespace Prisma {
     end?: DateTimeNullableFilter<"Projects"> | Date | string | null
     iscurrent?: BoolNullableFilter<"Projects"> | boolean | null
     userId?: BigIntNullableFilter<"Projects"> | bigint | number | null
+    createdAt?: DateTimeFilter<"Projects"> | Date | string
+    updatedAt?: DateTimeNullableFilter<"Projects"> | Date | string | null
   }
 
   export type ReferecePricesUpsertWithWhereUniqueWithoutUserInput = {
@@ -20279,14 +21454,16 @@ export namespace Prisma {
   }
 
   export type ReferecePricesScalarWhereInput = {
-    AND?: ReferecePricesScalarWhereInput | ReferecePricesScalarWhereInput[]
-    OR?: ReferecePricesScalarWhereInput[]
-    NOT?: ReferecePricesScalarWhereInput | ReferecePricesScalarWhereInput[]
+    AND?: Enumerable<ReferecePricesScalarWhereInput>
+    OR?: Enumerable<ReferecePricesScalarWhereInput>
+    NOT?: Enumerable<ReferecePricesScalarWhereInput>
     id?: BigIntFilter<"ReferecePrices"> | bigint | number
     name?: StringFilter<"ReferecePrices"> | string
     description?: StringFilter<"ReferecePrices"> | string
     contacts?: StringFilter<"ReferecePrices"> | string
     userId?: BigIntNullableFilter<"ReferecePrices"> | bigint | number | null
+    createdAt?: DateTimeFilter<"ReferecePrices"> | Date | string
+    updatedAt?: DateTimeNullableFilter<"ReferecePrices"> | Date | string | null
   }
 
   export type ReferecesUpsertWithWhereUniqueWithoutUserInput = {
@@ -20306,13 +21483,15 @@ export namespace Prisma {
   }
 
   export type ReferecesScalarWhereInput = {
-    AND?: ReferecesScalarWhereInput | ReferecesScalarWhereInput[]
-    OR?: ReferecesScalarWhereInput[]
-    NOT?: ReferecesScalarWhereInput | ReferecesScalarWhereInput[]
+    AND?: Enumerable<ReferecesScalarWhereInput>
+    OR?: Enumerable<ReferecesScalarWhereInput>
+    NOT?: Enumerable<ReferecesScalarWhereInput>
     id?: BigIntFilter<"Refereces"> | bigint | number
     description?: StringFilter<"Refereces"> | string
     value?: FloatFilter<"Refereces"> | number
     userId?: BigIntNullableFilter<"Refereces"> | bigint | number | null
+    createdAt?: DateTimeFilter<"Refereces"> | Date | string
+    updatedAt?: DateTimeNullableFilter<"Refereces"> | Date | string | null
   }
 
   export type UserPointsUpsertWithWhereUniqueWithoutUserInput = {
@@ -20332,12 +21511,14 @@ export namespace Prisma {
   }
 
   export type UserPointsScalarWhereInput = {
-    AND?: UserPointsScalarWhereInput | UserPointsScalarWhereInput[]
-    OR?: UserPointsScalarWhereInput[]
-    NOT?: UserPointsScalarWhereInput | UserPointsScalarWhereInput[]
+    AND?: Enumerable<UserPointsScalarWhereInput>
+    OR?: Enumerable<UserPointsScalarWhereInput>
+    NOT?: Enumerable<UserPointsScalarWhereInput>
     id?: BigIntFilter<"UserPoints"> | bigint | number
     value?: BigIntFilter<"UserPoints"> | bigint | number
     userId?: BigIntNullableFilter<"UserPoints"> | bigint | number | null
+    createdAt?: DateTimeFilter<"UserPoints"> | Date | string
+    updatedAt?: DateTimeNullableFilter<"UserPoints"> | Date | string | null
   }
 
   export type FeedUpsertWithWhereUniqueWithoutUserInput = {
@@ -20357,9 +21538,9 @@ export namespace Prisma {
   }
 
   export type FeedScalarWhereInput = {
-    AND?: FeedScalarWhereInput | FeedScalarWhereInput[]
-    OR?: FeedScalarWhereInput[]
-    NOT?: FeedScalarWhereInput | FeedScalarWhereInput[]
+    AND?: Enumerable<FeedScalarWhereInput>
+    OR?: Enumerable<FeedScalarWhereInput>
+    NOT?: Enumerable<FeedScalarWhereInput>
     id?: BigIntFilter<"Feed"> | bigint | number
     title?: StringFilter<"Feed"> | string
     img?: StringNullableFilter<"Feed"> | string | null
@@ -20369,6 +21550,8 @@ export namespace Prisma {
     react_smile?: BigIntNullableFilter<"Feed"> | bigint | number | null
     react_lovely?: BigIntNullableFilter<"Feed"> | bigint | number | null
     userId?: BigIntNullableFilter<"Feed"> | bigint | number | null
+    createdAt?: DateTimeFilter<"Feed"> | Date | string
+    updatedAt?: DateTimeNullableFilter<"Feed"> | Date | string | null
   }
 
   export type FeedCommentsUpsertWithWhereUniqueWithoutUserInput = {
@@ -20388,19 +21571,23 @@ export namespace Prisma {
   }
 
   export type FeedCommentsScalarWhereInput = {
-    AND?: FeedCommentsScalarWhereInput | FeedCommentsScalarWhereInput[]
-    OR?: FeedCommentsScalarWhereInput[]
-    NOT?: FeedCommentsScalarWhereInput | FeedCommentsScalarWhereInput[]
+    AND?: Enumerable<FeedCommentsScalarWhereInput>
+    OR?: Enumerable<FeedCommentsScalarWhereInput>
+    NOT?: Enumerable<FeedCommentsScalarWhereInput>
     id?: BigIntFilter<"FeedComments"> | bigint | number
     comment?: StringFilter<"FeedComments"> | string
     userId?: BigIntFilter<"FeedComments"> | bigint | number
+    createdAt?: DateTimeFilter<"FeedComments"> | Date | string
+    updatedAt?: DateTimeNullableFilter<"FeedComments"> | Date | string | null
   }
 
   export type UserCreateWithoutPerfilInput = {
     id?: bigint | number
     email: string
     password: string
-    addres?: AddresCreateNestedManyWithoutUserInput
+    createdAt?: Date | string
+    updatedAt?: Date | string | null
+    address?: AddressCreateNestedManyWithoutUserInput
     contact?: ContactCreateNestedManyWithoutUserInput
     degree?: DegreeCreateNestedManyWithoutUserInput
     skills?: SkillsCreateNestedManyWithoutUserInput
@@ -20417,7 +21604,9 @@ export namespace Prisma {
     id?: bigint | number
     email: string
     password: string
-    addres?: AddresUncheckedCreateNestedManyWithoutUserInput
+    createdAt?: Date | string
+    updatedAt?: Date | string | null
+    address?: AddressUncheckedCreateNestedManyWithoutUserInput
     contact?: ContactUncheckedCreateNestedManyWithoutUserInput
     degree?: DegreeUncheckedCreateNestedManyWithoutUserInput
     skills?: SkillsUncheckedCreateNestedManyWithoutUserInput
@@ -20450,7 +21639,9 @@ export namespace Prisma {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
-    addres?: AddresUpdateManyWithoutUserNestedInput
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    address?: AddressUpdateManyWithoutUserNestedInput
     contact?: ContactUpdateManyWithoutUserNestedInput
     degree?: DegreeUpdateManyWithoutUserNestedInput
     skills?: SkillsUpdateManyWithoutUserNestedInput
@@ -20467,7 +21658,9 @@ export namespace Prisma {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
-    addres?: AddresUncheckedUpdateManyWithoutUserNestedInput
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    address?: AddressUncheckedUpdateManyWithoutUserNestedInput
     contact?: ContactUncheckedUpdateManyWithoutUserNestedInput
     degree?: DegreeUncheckedUpdateManyWithoutUserNestedInput
     skills?: SkillsUncheckedUpdateManyWithoutUserNestedInput
@@ -20480,10 +21673,12 @@ export namespace Prisma {
     comments?: FeedCommentsUncheckedUpdateManyWithoutUserNestedInput
   }
 
-  export type UserCreateWithoutAddresInput = {
+  export type UserCreateWithoutAddressInput = {
     id?: bigint | number
     email: string
     password: string
+    createdAt?: Date | string
+    updatedAt?: Date | string | null
     perfil?: PerfilCreateNestedOneWithoutUserInput
     contact?: ContactCreateNestedManyWithoutUserInput
     degree?: DegreeCreateNestedManyWithoutUserInput
@@ -20497,10 +21692,12 @@ export namespace Prisma {
     comments?: FeedCommentsCreateNestedManyWithoutUserInput
   }
 
-  export type UserUncheckedCreateWithoutAddresInput = {
+  export type UserUncheckedCreateWithoutAddressInput = {
     id?: bigint | number
     email: string
     password: string
+    createdAt?: Date | string
+    updatedAt?: Date | string | null
     perfil?: PerfilUncheckedCreateNestedOneWithoutUserInput
     contact?: ContactUncheckedCreateNestedManyWithoutUserInput
     degree?: DegreeUncheckedCreateNestedManyWithoutUserInput
@@ -20514,26 +21711,28 @@ export namespace Prisma {
     comments?: FeedCommentsUncheckedCreateNestedManyWithoutUserInput
   }
 
-  export type UserCreateOrConnectWithoutAddresInput = {
+  export type UserCreateOrConnectWithoutAddressInput = {
     where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutAddresInput, UserUncheckedCreateWithoutAddresInput>
+    create: XOR<UserCreateWithoutAddressInput, UserUncheckedCreateWithoutAddressInput>
   }
 
-  export type UserUpsertWithoutAddresInput = {
-    update: XOR<UserUpdateWithoutAddresInput, UserUncheckedUpdateWithoutAddresInput>
-    create: XOR<UserCreateWithoutAddresInput, UserUncheckedCreateWithoutAddresInput>
+  export type UserUpsertWithoutAddressInput = {
+    update: XOR<UserUpdateWithoutAddressInput, UserUncheckedUpdateWithoutAddressInput>
+    create: XOR<UserCreateWithoutAddressInput, UserUncheckedCreateWithoutAddressInput>
     where?: UserWhereInput
   }
 
-  export type UserUpdateToOneWithWhereWithoutAddresInput = {
+  export type UserUpdateToOneWithWhereWithoutAddressInput = {
     where?: UserWhereInput
-    data: XOR<UserUpdateWithoutAddresInput, UserUncheckedUpdateWithoutAddresInput>
+    data: XOR<UserUpdateWithoutAddressInput, UserUncheckedUpdateWithoutAddressInput>
   }
 
-  export type UserUpdateWithoutAddresInput = {
+  export type UserUpdateWithoutAddressInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     perfil?: PerfilUpdateOneWithoutUserNestedInput
     contact?: ContactUpdateManyWithoutUserNestedInput
     degree?: DegreeUpdateManyWithoutUserNestedInput
@@ -20547,10 +21746,12 @@ export namespace Prisma {
     comments?: FeedCommentsUpdateManyWithoutUserNestedInput
   }
 
-  export type UserUncheckedUpdateWithoutAddresInput = {
+  export type UserUncheckedUpdateWithoutAddressInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     perfil?: PerfilUncheckedUpdateOneWithoutUserNestedInput
     contact?: ContactUncheckedUpdateManyWithoutUserNestedInput
     degree?: DegreeUncheckedUpdateManyWithoutUserNestedInput
@@ -20568,8 +21769,10 @@ export namespace Prisma {
     id?: bigint | number
     email: string
     password: string
+    createdAt?: Date | string
+    updatedAt?: Date | string | null
     perfil?: PerfilCreateNestedOneWithoutUserInput
-    addres?: AddresCreateNestedManyWithoutUserInput
+    address?: AddressCreateNestedManyWithoutUserInput
     degree?: DegreeCreateNestedManyWithoutUserInput
     skills?: SkillsCreateNestedManyWithoutUserInput
     experiences?: ExperiencesCreateNestedManyWithoutUserInput
@@ -20585,8 +21788,10 @@ export namespace Prisma {
     id?: bigint | number
     email: string
     password: string
+    createdAt?: Date | string
+    updatedAt?: Date | string | null
     perfil?: PerfilUncheckedCreateNestedOneWithoutUserInput
-    addres?: AddresUncheckedCreateNestedManyWithoutUserInput
+    address?: AddressUncheckedCreateNestedManyWithoutUserInput
     degree?: DegreeUncheckedCreateNestedManyWithoutUserInput
     skills?: SkillsUncheckedCreateNestedManyWithoutUserInput
     experiences?: ExperiencesUncheckedCreateNestedManyWithoutUserInput
@@ -20618,8 +21823,10 @@ export namespace Prisma {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     perfil?: PerfilUpdateOneWithoutUserNestedInput
-    addres?: AddresUpdateManyWithoutUserNestedInput
+    address?: AddressUpdateManyWithoutUserNestedInput
     degree?: DegreeUpdateManyWithoutUserNestedInput
     skills?: SkillsUpdateManyWithoutUserNestedInput
     experiences?: ExperiencesUpdateManyWithoutUserNestedInput
@@ -20635,8 +21842,10 @@ export namespace Prisma {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     perfil?: PerfilUncheckedUpdateOneWithoutUserNestedInput
-    addres?: AddresUncheckedUpdateManyWithoutUserNestedInput
+    address?: AddressUncheckedUpdateManyWithoutUserNestedInput
     degree?: DegreeUncheckedUpdateManyWithoutUserNestedInput
     skills?: SkillsUncheckedUpdateManyWithoutUserNestedInput
     experiences?: ExperiencesUncheckedUpdateManyWithoutUserNestedInput
@@ -20652,6 +21861,8 @@ export namespace Prisma {
     id?: bigint | number
     code?: string | null
     description?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string | null
     user?: UserCreateNestedOneWithoutDegreeInput
   }
 
@@ -20660,6 +21871,8 @@ export namespace Prisma {
     code?: string | null
     description?: string | null
     userId?: bigint | number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string | null
   }
 
   export type DegreeCreateOrConnectWithoutKnowledgespaceInput = {
@@ -20668,7 +21881,7 @@ export namespace Prisma {
   }
 
   export type DegreeCreateManyKnowledgespaceInputEnvelope = {
-    data: DegreeCreateManyKnowledgespaceInput | DegreeCreateManyKnowledgespaceInput[]
+    data: Enumerable<DegreeCreateManyKnowledgespaceInput>
     skipDuplicates?: boolean
   }
 
@@ -20692,12 +21905,16 @@ export namespace Prisma {
     id?: bigint | number
     code?: string | null
     description?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string | null
   }
 
   export type KnowledgespaceUncheckedCreateWithoutDegreeInput = {
     id?: bigint | number
     code?: string | null
     description?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string | null
   }
 
   export type KnowledgespaceCreateOrConnectWithoutDegreeInput = {
@@ -20709,8 +21926,10 @@ export namespace Prisma {
     id?: bigint | number
     email: string
     password: string
+    createdAt?: Date | string
+    updatedAt?: Date | string | null
     perfil?: PerfilCreateNestedOneWithoutUserInput
-    addres?: AddresCreateNestedManyWithoutUserInput
+    address?: AddressCreateNestedManyWithoutUserInput
     contact?: ContactCreateNestedManyWithoutUserInput
     skills?: SkillsCreateNestedManyWithoutUserInput
     experiences?: ExperiencesCreateNestedManyWithoutUserInput
@@ -20726,8 +21945,10 @@ export namespace Prisma {
     id?: bigint | number
     email: string
     password: string
+    createdAt?: Date | string
+    updatedAt?: Date | string | null
     perfil?: PerfilUncheckedCreateNestedOneWithoutUserInput
-    addres?: AddresUncheckedCreateNestedManyWithoutUserInput
+    address?: AddressUncheckedCreateNestedManyWithoutUserInput
     contact?: ContactUncheckedCreateNestedManyWithoutUserInput
     skills?: SkillsUncheckedCreateNestedManyWithoutUserInput
     experiences?: ExperiencesUncheckedCreateNestedManyWithoutUserInput
@@ -20759,12 +21980,16 @@ export namespace Prisma {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     code?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type KnowledgespaceUncheckedUpdateWithoutDegreeInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     code?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type UserUpsertWithoutDegreeInput = {
@@ -20782,8 +22007,10 @@ export namespace Prisma {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     perfil?: PerfilUpdateOneWithoutUserNestedInput
-    addres?: AddresUpdateManyWithoutUserNestedInput
+    address?: AddressUpdateManyWithoutUserNestedInput
     contact?: ContactUpdateManyWithoutUserNestedInput
     skills?: SkillsUpdateManyWithoutUserNestedInput
     experiences?: ExperiencesUpdateManyWithoutUserNestedInput
@@ -20799,8 +22026,10 @@ export namespace Prisma {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     perfil?: PerfilUncheckedUpdateOneWithoutUserNestedInput
-    addres?: AddresUncheckedUpdateManyWithoutUserNestedInput
+    address?: AddressUncheckedUpdateManyWithoutUserNestedInput
     contact?: ContactUncheckedUpdateManyWithoutUserNestedInput
     skills?: SkillsUncheckedUpdateManyWithoutUserNestedInput
     experiences?: ExperiencesUncheckedUpdateManyWithoutUserNestedInput
@@ -20816,8 +22045,10 @@ export namespace Prisma {
     id?: bigint | number
     email: string
     password: string
+    createdAt?: Date | string
+    updatedAt?: Date | string | null
     perfil?: PerfilCreateNestedOneWithoutUserInput
-    addres?: AddresCreateNestedManyWithoutUserInput
+    address?: AddressCreateNestedManyWithoutUserInput
     contact?: ContactCreateNestedManyWithoutUserInput
     degree?: DegreeCreateNestedManyWithoutUserInput
     experiences?: ExperiencesCreateNestedManyWithoutUserInput
@@ -20833,8 +22064,10 @@ export namespace Prisma {
     id?: bigint | number
     email: string
     password: string
+    createdAt?: Date | string
+    updatedAt?: Date | string | null
     perfil?: PerfilUncheckedCreateNestedOneWithoutUserInput
-    addres?: AddresUncheckedCreateNestedManyWithoutUserInput
+    address?: AddressUncheckedCreateNestedManyWithoutUserInput
     contact?: ContactUncheckedCreateNestedManyWithoutUserInput
     degree?: DegreeUncheckedCreateNestedManyWithoutUserInput
     experiences?: ExperiencesUncheckedCreateNestedManyWithoutUserInput
@@ -20866,8 +22099,10 @@ export namespace Prisma {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     perfil?: PerfilUpdateOneWithoutUserNestedInput
-    addres?: AddresUpdateManyWithoutUserNestedInput
+    address?: AddressUpdateManyWithoutUserNestedInput
     contact?: ContactUpdateManyWithoutUserNestedInput
     degree?: DegreeUpdateManyWithoutUserNestedInput
     experiences?: ExperiencesUpdateManyWithoutUserNestedInput
@@ -20883,8 +22118,10 @@ export namespace Prisma {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     perfil?: PerfilUncheckedUpdateOneWithoutUserNestedInput
-    addres?: AddresUncheckedUpdateManyWithoutUserNestedInput
+    address?: AddressUncheckedUpdateManyWithoutUserNestedInput
     contact?: ContactUncheckedUpdateManyWithoutUserNestedInput
     degree?: DegreeUncheckedUpdateManyWithoutUserNestedInput
     experiences?: ExperiencesUncheckedUpdateManyWithoutUserNestedInput
@@ -20900,8 +22137,10 @@ export namespace Prisma {
     id?: bigint | number
     email: string
     password: string
+    createdAt?: Date | string
+    updatedAt?: Date | string | null
     perfil?: PerfilCreateNestedOneWithoutUserInput
-    addres?: AddresCreateNestedManyWithoutUserInput
+    address?: AddressCreateNestedManyWithoutUserInput
     contact?: ContactCreateNestedManyWithoutUserInput
     degree?: DegreeCreateNestedManyWithoutUserInput
     skills?: SkillsCreateNestedManyWithoutUserInput
@@ -20917,8 +22156,10 @@ export namespace Prisma {
     id?: bigint | number
     email: string
     password: string
+    createdAt?: Date | string
+    updatedAt?: Date | string | null
     perfil?: PerfilUncheckedCreateNestedOneWithoutUserInput
-    addres?: AddresUncheckedCreateNestedManyWithoutUserInput
+    address?: AddressUncheckedCreateNestedManyWithoutUserInput
     contact?: ContactUncheckedCreateNestedManyWithoutUserInput
     degree?: DegreeUncheckedCreateNestedManyWithoutUserInput
     skills?: SkillsUncheckedCreateNestedManyWithoutUserInput
@@ -20950,8 +22191,10 @@ export namespace Prisma {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     perfil?: PerfilUpdateOneWithoutUserNestedInput
-    addres?: AddresUpdateManyWithoutUserNestedInput
+    address?: AddressUpdateManyWithoutUserNestedInput
     contact?: ContactUpdateManyWithoutUserNestedInput
     degree?: DegreeUpdateManyWithoutUserNestedInput
     skills?: SkillsUpdateManyWithoutUserNestedInput
@@ -20967,8 +22210,10 @@ export namespace Prisma {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     perfil?: PerfilUncheckedUpdateOneWithoutUserNestedInput
-    addres?: AddresUncheckedUpdateManyWithoutUserNestedInput
+    address?: AddressUncheckedUpdateManyWithoutUserNestedInput
     contact?: ContactUncheckedUpdateManyWithoutUserNestedInput
     degree?: DegreeUncheckedUpdateManyWithoutUserNestedInput
     skills?: SkillsUncheckedUpdateManyWithoutUserNestedInput
@@ -20984,8 +22229,10 @@ export namespace Prisma {
     id?: bigint | number
     email: string
     password: string
+    createdAt?: Date | string
+    updatedAt?: Date | string | null
     perfil?: PerfilCreateNestedOneWithoutUserInput
-    addres?: AddresCreateNestedManyWithoutUserInput
+    address?: AddressCreateNestedManyWithoutUserInput
     contact?: ContactCreateNestedManyWithoutUserInput
     degree?: DegreeCreateNestedManyWithoutUserInput
     skills?: SkillsCreateNestedManyWithoutUserInput
@@ -21001,8 +22248,10 @@ export namespace Prisma {
     id?: bigint | number
     email: string
     password: string
+    createdAt?: Date | string
+    updatedAt?: Date | string | null
     perfil?: PerfilUncheckedCreateNestedOneWithoutUserInput
-    addres?: AddresUncheckedCreateNestedManyWithoutUserInput
+    address?: AddressUncheckedCreateNestedManyWithoutUserInput
     contact?: ContactUncheckedCreateNestedManyWithoutUserInput
     degree?: DegreeUncheckedCreateNestedManyWithoutUserInput
     skills?: SkillsUncheckedCreateNestedManyWithoutUserInput
@@ -21034,8 +22283,10 @@ export namespace Prisma {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     perfil?: PerfilUpdateOneWithoutUserNestedInput
-    addres?: AddresUpdateManyWithoutUserNestedInput
+    address?: AddressUpdateManyWithoutUserNestedInput
     contact?: ContactUpdateManyWithoutUserNestedInput
     degree?: DegreeUpdateManyWithoutUserNestedInput
     skills?: SkillsUpdateManyWithoutUserNestedInput
@@ -21051,8 +22302,10 @@ export namespace Prisma {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     perfil?: PerfilUncheckedUpdateOneWithoutUserNestedInput
-    addres?: AddresUncheckedUpdateManyWithoutUserNestedInput
+    address?: AddressUncheckedUpdateManyWithoutUserNestedInput
     contact?: ContactUncheckedUpdateManyWithoutUserNestedInput
     degree?: DegreeUncheckedUpdateManyWithoutUserNestedInput
     skills?: SkillsUncheckedUpdateManyWithoutUserNestedInput
@@ -21068,8 +22321,10 @@ export namespace Prisma {
     id?: bigint | number
     email: string
     password: string
+    createdAt?: Date | string
+    updatedAt?: Date | string | null
     perfil?: PerfilCreateNestedOneWithoutUserInput
-    addres?: AddresCreateNestedManyWithoutUserInput
+    address?: AddressCreateNestedManyWithoutUserInput
     contact?: ContactCreateNestedManyWithoutUserInput
     degree?: DegreeCreateNestedManyWithoutUserInput
     skills?: SkillsCreateNestedManyWithoutUserInput
@@ -21085,8 +22340,10 @@ export namespace Prisma {
     id?: bigint | number
     email: string
     password: string
+    createdAt?: Date | string
+    updatedAt?: Date | string | null
     perfil?: PerfilUncheckedCreateNestedOneWithoutUserInput
-    addres?: AddresUncheckedCreateNestedManyWithoutUserInput
+    address?: AddressUncheckedCreateNestedManyWithoutUserInput
     contact?: ContactUncheckedCreateNestedManyWithoutUserInput
     degree?: DegreeUncheckedCreateNestedManyWithoutUserInput
     skills?: SkillsUncheckedCreateNestedManyWithoutUserInput
@@ -21118,8 +22375,10 @@ export namespace Prisma {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     perfil?: PerfilUpdateOneWithoutUserNestedInput
-    addres?: AddresUpdateManyWithoutUserNestedInput
+    address?: AddressUpdateManyWithoutUserNestedInput
     contact?: ContactUpdateManyWithoutUserNestedInput
     degree?: DegreeUpdateManyWithoutUserNestedInput
     skills?: SkillsUpdateManyWithoutUserNestedInput
@@ -21135,8 +22394,10 @@ export namespace Prisma {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     perfil?: PerfilUncheckedUpdateOneWithoutUserNestedInput
-    addres?: AddresUncheckedUpdateManyWithoutUserNestedInput
+    address?: AddressUncheckedUpdateManyWithoutUserNestedInput
     contact?: ContactUncheckedUpdateManyWithoutUserNestedInput
     degree?: DegreeUncheckedUpdateManyWithoutUserNestedInput
     skills?: SkillsUncheckedUpdateManyWithoutUserNestedInput
@@ -21152,8 +22413,10 @@ export namespace Prisma {
     id?: bigint | number
     email: string
     password: string
+    createdAt?: Date | string
+    updatedAt?: Date | string | null
     perfil?: PerfilCreateNestedOneWithoutUserInput
-    addres?: AddresCreateNestedManyWithoutUserInput
+    address?: AddressCreateNestedManyWithoutUserInput
     contact?: ContactCreateNestedManyWithoutUserInput
     degree?: DegreeCreateNestedManyWithoutUserInput
     skills?: SkillsCreateNestedManyWithoutUserInput
@@ -21169,8 +22432,10 @@ export namespace Prisma {
     id?: bigint | number
     email: string
     password: string
+    createdAt?: Date | string
+    updatedAt?: Date | string | null
     perfil?: PerfilUncheckedCreateNestedOneWithoutUserInput
-    addres?: AddresUncheckedCreateNestedManyWithoutUserInput
+    address?: AddressUncheckedCreateNestedManyWithoutUserInput
     contact?: ContactUncheckedCreateNestedManyWithoutUserInput
     degree?: DegreeUncheckedCreateNestedManyWithoutUserInput
     skills?: SkillsUncheckedCreateNestedManyWithoutUserInput
@@ -21202,8 +22467,10 @@ export namespace Prisma {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     perfil?: PerfilUpdateOneWithoutUserNestedInput
-    addres?: AddresUpdateManyWithoutUserNestedInput
+    address?: AddressUpdateManyWithoutUserNestedInput
     contact?: ContactUpdateManyWithoutUserNestedInput
     degree?: DegreeUpdateManyWithoutUserNestedInput
     skills?: SkillsUpdateManyWithoutUserNestedInput
@@ -21219,8 +22486,10 @@ export namespace Prisma {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     perfil?: PerfilUncheckedUpdateOneWithoutUserNestedInput
-    addres?: AddresUncheckedUpdateManyWithoutUserNestedInput
+    address?: AddressUncheckedUpdateManyWithoutUserNestedInput
     contact?: ContactUncheckedUpdateManyWithoutUserNestedInput
     degree?: DegreeUncheckedUpdateManyWithoutUserNestedInput
     skills?: SkillsUncheckedUpdateManyWithoutUserNestedInput
@@ -21236,8 +22505,10 @@ export namespace Prisma {
     id?: bigint | number
     email: string
     password: string
+    createdAt?: Date | string
+    updatedAt?: Date | string | null
     perfil?: PerfilCreateNestedOneWithoutUserInput
-    addres?: AddresCreateNestedManyWithoutUserInput
+    address?: AddressCreateNestedManyWithoutUserInput
     contact?: ContactCreateNestedManyWithoutUserInput
     degree?: DegreeCreateNestedManyWithoutUserInput
     skills?: SkillsCreateNestedManyWithoutUserInput
@@ -21253,8 +22524,10 @@ export namespace Prisma {
     id?: bigint | number
     email: string
     password: string
+    createdAt?: Date | string
+    updatedAt?: Date | string | null
     perfil?: PerfilUncheckedCreateNestedOneWithoutUserInput
-    addres?: AddresUncheckedCreateNestedManyWithoutUserInput
+    address?: AddressUncheckedCreateNestedManyWithoutUserInput
     contact?: ContactUncheckedCreateNestedManyWithoutUserInput
     degree?: DegreeUncheckedCreateNestedManyWithoutUserInput
     skills?: SkillsUncheckedCreateNestedManyWithoutUserInput
@@ -21286,8 +22559,10 @@ export namespace Prisma {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     perfil?: PerfilUpdateOneWithoutUserNestedInput
-    addres?: AddresUpdateManyWithoutUserNestedInput
+    address?: AddressUpdateManyWithoutUserNestedInput
     contact?: ContactUpdateManyWithoutUserNestedInput
     degree?: DegreeUpdateManyWithoutUserNestedInput
     skills?: SkillsUpdateManyWithoutUserNestedInput
@@ -21303,8 +22578,10 @@ export namespace Prisma {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     perfil?: PerfilUncheckedUpdateOneWithoutUserNestedInput
-    addres?: AddresUncheckedUpdateManyWithoutUserNestedInput
+    address?: AddressUncheckedUpdateManyWithoutUserNestedInput
     contact?: ContactUncheckedUpdateManyWithoutUserNestedInput
     degree?: DegreeUncheckedUpdateManyWithoutUserNestedInput
     skills?: SkillsUncheckedUpdateManyWithoutUserNestedInput
@@ -21320,8 +22597,10 @@ export namespace Prisma {
     id?: bigint | number
     email: string
     password: string
+    createdAt?: Date | string
+    updatedAt?: Date | string | null
     perfil?: PerfilCreateNestedOneWithoutUserInput
-    addres?: AddresCreateNestedManyWithoutUserInput
+    address?: AddressCreateNestedManyWithoutUserInput
     contact?: ContactCreateNestedManyWithoutUserInput
     degree?: DegreeCreateNestedManyWithoutUserInput
     skills?: SkillsCreateNestedManyWithoutUserInput
@@ -21337,8 +22616,10 @@ export namespace Prisma {
     id?: bigint | number
     email: string
     password: string
+    createdAt?: Date | string
+    updatedAt?: Date | string | null
     perfil?: PerfilUncheckedCreateNestedOneWithoutUserInput
-    addres?: AddresUncheckedCreateNestedManyWithoutUserInput
+    address?: AddressUncheckedCreateNestedManyWithoutUserInput
     contact?: ContactUncheckedCreateNestedManyWithoutUserInput
     degree?: DegreeUncheckedCreateNestedManyWithoutUserInput
     skills?: SkillsUncheckedCreateNestedManyWithoutUserInput
@@ -21370,8 +22651,10 @@ export namespace Prisma {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     perfil?: PerfilUpdateOneWithoutUserNestedInput
-    addres?: AddresUpdateManyWithoutUserNestedInput
+    address?: AddressUpdateManyWithoutUserNestedInput
     contact?: ContactUpdateManyWithoutUserNestedInput
     degree?: DegreeUpdateManyWithoutUserNestedInput
     skills?: SkillsUpdateManyWithoutUserNestedInput
@@ -21387,8 +22670,10 @@ export namespace Prisma {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     perfil?: PerfilUncheckedUpdateOneWithoutUserNestedInput
-    addres?: AddresUncheckedUpdateManyWithoutUserNestedInput
+    address?: AddressUncheckedUpdateManyWithoutUserNestedInput
     contact?: ContactUncheckedUpdateManyWithoutUserNestedInput
     degree?: DegreeUncheckedUpdateManyWithoutUserNestedInput
     skills?: SkillsUncheckedUpdateManyWithoutUserNestedInput
@@ -21404,8 +22689,10 @@ export namespace Prisma {
     id?: bigint | number
     email: string
     password: string
+    createdAt?: Date | string
+    updatedAt?: Date | string | null
     perfil?: PerfilCreateNestedOneWithoutUserInput
-    addres?: AddresCreateNestedManyWithoutUserInput
+    address?: AddressCreateNestedManyWithoutUserInput
     contact?: ContactCreateNestedManyWithoutUserInput
     degree?: DegreeCreateNestedManyWithoutUserInput
     skills?: SkillsCreateNestedManyWithoutUserInput
@@ -21421,8 +22708,10 @@ export namespace Prisma {
     id?: bigint | number
     email: string
     password: string
+    createdAt?: Date | string
+    updatedAt?: Date | string | null
     perfil?: PerfilUncheckedCreateNestedOneWithoutUserInput
-    addres?: AddresUncheckedCreateNestedManyWithoutUserInput
+    address?: AddressUncheckedCreateNestedManyWithoutUserInput
     contact?: ContactUncheckedCreateNestedManyWithoutUserInput
     degree?: DegreeUncheckedCreateNestedManyWithoutUserInput
     skills?: SkillsUncheckedCreateNestedManyWithoutUserInput
@@ -21454,8 +22743,10 @@ export namespace Prisma {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     perfil?: PerfilUpdateOneWithoutUserNestedInput
-    addres?: AddresUpdateManyWithoutUserNestedInput
+    address?: AddressUpdateManyWithoutUserNestedInput
     contact?: ContactUpdateManyWithoutUserNestedInput
     degree?: DegreeUpdateManyWithoutUserNestedInput
     skills?: SkillsUpdateManyWithoutUserNestedInput
@@ -21471,8 +22762,10 @@ export namespace Prisma {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     perfil?: PerfilUncheckedUpdateOneWithoutUserNestedInput
-    addres?: AddresUncheckedUpdateManyWithoutUserNestedInput
+    address?: AddressUncheckedUpdateManyWithoutUserNestedInput
     contact?: ContactUncheckedUpdateManyWithoutUserNestedInput
     degree?: DegreeUncheckedUpdateManyWithoutUserNestedInput
     skills?: SkillsUncheckedUpdateManyWithoutUserNestedInput
@@ -21484,12 +22777,16 @@ export namespace Prisma {
     feeds?: FeedUncheckedUpdateManyWithoutUserNestedInput
   }
 
-  export type AddresCreateManyUserInput = {
+  export type AddressCreateManyUserInput = {
     id?: bigint | number
-    address?: string | null
+    street?: string | null
+    number?: string | null
     complement?: string | null
+    city?: string | null
     state?: string | null
     country?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string | null
   }
 
   export type ContactCreateManyUserInput = {
@@ -21497,6 +22794,8 @@ export namespace Prisma {
     email?: string | null
     phone?: string | null
     another?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string | null
   }
 
   export type DegreeCreateManyUserInput = {
@@ -21504,12 +22803,16 @@ export namespace Prisma {
     code?: string | null
     description?: string | null
     KnowledgespaceId?: bigint | number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string | null
   }
 
   export type SkillsCreateManyUserInput = {
     id?: bigint | number
     code?: string | null
     description?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string | null
   }
 
   export type ExperiencesCreateManyUserInput = {
@@ -21518,6 +22821,8 @@ export namespace Prisma {
     start: Date | string
     end?: Date | string | null
     iscurrent?: boolean | null
+    createdAt?: Date | string
+    updatedAt?: Date | string | null
   }
 
   export type ProjectsCreateManyUserInput = {
@@ -21527,6 +22832,8 @@ export namespace Prisma {
     start: Date | string
     end?: Date | string | null
     iscurrent?: boolean | null
+    createdAt?: Date | string
+    updatedAt?: Date | string | null
   }
 
   export type ReferecePricesCreateManyUserInput = {
@@ -21534,17 +22841,23 @@ export namespace Prisma {
     name: string
     description: string
     contacts: string
+    createdAt?: Date | string
+    updatedAt?: Date | string | null
   }
 
   export type ReferecesCreateManyUserInput = {
     id?: bigint | number
     description: string
     value: number
+    createdAt?: Date | string
+    updatedAt?: Date | string | null
   }
 
   export type UserPointsCreateManyUserInput = {
     id?: bigint | number
     value: bigint | number
+    createdAt?: Date | string
+    updatedAt?: Date | string | null
   }
 
   export type FeedCreateManyUserInput = {
@@ -21556,35 +22869,51 @@ export namespace Prisma {
     react_negative?: bigint | number | null
     react_smile?: bigint | number | null
     react_lovely?: bigint | number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string | null
   }
 
   export type FeedCommentsCreateManyUserInput = {
     id?: bigint | number
     comment: string
+    createdAt?: Date | string
+    updatedAt?: Date | string | null
   }
 
-  export type AddresUpdateWithoutUserInput = {
+  export type AddressUpdateWithoutUserInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
-    address?: NullableStringFieldUpdateOperationsInput | string | null
+    street?: NullableStringFieldUpdateOperationsInput | string | null
+    number?: NullableStringFieldUpdateOperationsInput | string | null
     complement?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
     state?: NullableStringFieldUpdateOperationsInput | string | null
     country?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
-  export type AddresUncheckedUpdateWithoutUserInput = {
+  export type AddressUncheckedUpdateWithoutUserInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
-    address?: NullableStringFieldUpdateOperationsInput | string | null
+    street?: NullableStringFieldUpdateOperationsInput | string | null
+    number?: NullableStringFieldUpdateOperationsInput | string | null
     complement?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
     state?: NullableStringFieldUpdateOperationsInput | string | null
     country?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
-  export type AddresUncheckedUpdateManyWithoutUserInput = {
+  export type AddressUncheckedUpdateManyWithoutUserInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
-    address?: NullableStringFieldUpdateOperationsInput | string | null
+    street?: NullableStringFieldUpdateOperationsInput | string | null
+    number?: NullableStringFieldUpdateOperationsInput | string | null
     complement?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
     state?: NullableStringFieldUpdateOperationsInput | string | null
     country?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type ContactUpdateWithoutUserInput = {
@@ -21592,6 +22921,8 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     another?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type ContactUncheckedUpdateWithoutUserInput = {
@@ -21599,6 +22930,8 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     another?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type ContactUncheckedUpdateManyWithoutUserInput = {
@@ -21606,12 +22939,16 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     another?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type DegreeUpdateWithoutUserInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     code?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     Knowledgespace?: KnowledgespaceUpdateOneWithoutDegreeNestedInput
   }
 
@@ -21620,6 +22957,8 @@ export namespace Prisma {
     code?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     KnowledgespaceId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type DegreeUncheckedUpdateManyWithoutUserInput = {
@@ -21627,24 +22966,32 @@ export namespace Prisma {
     code?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     KnowledgespaceId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type SkillsUpdateWithoutUserInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     code?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type SkillsUncheckedUpdateWithoutUserInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     code?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type SkillsUncheckedUpdateManyWithoutUserInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     code?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type ExperiencesUpdateWithoutUserInput = {
@@ -21653,6 +23000,8 @@ export namespace Prisma {
     start?: DateTimeFieldUpdateOperationsInput | Date | string
     end?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     iscurrent?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type ExperiencesUncheckedUpdateWithoutUserInput = {
@@ -21661,6 +23010,8 @@ export namespace Prisma {
     start?: DateTimeFieldUpdateOperationsInput | Date | string
     end?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     iscurrent?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type ExperiencesUncheckedUpdateManyWithoutUserInput = {
@@ -21669,6 +23020,8 @@ export namespace Prisma {
     start?: DateTimeFieldUpdateOperationsInput | Date | string
     end?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     iscurrent?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type ProjectsUpdateWithoutUserInput = {
@@ -21678,6 +23031,8 @@ export namespace Prisma {
     start?: DateTimeFieldUpdateOperationsInput | Date | string
     end?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     iscurrent?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type ProjectsUncheckedUpdateWithoutUserInput = {
@@ -21687,6 +23042,8 @@ export namespace Prisma {
     start?: DateTimeFieldUpdateOperationsInput | Date | string
     end?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     iscurrent?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type ProjectsUncheckedUpdateManyWithoutUserInput = {
@@ -21696,6 +23053,8 @@ export namespace Prisma {
     start?: DateTimeFieldUpdateOperationsInput | Date | string
     end?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     iscurrent?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type ReferecePricesUpdateWithoutUserInput = {
@@ -21703,6 +23062,8 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     contacts?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type ReferecePricesUncheckedUpdateWithoutUserInput = {
@@ -21710,6 +23071,8 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     contacts?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type ReferecePricesUncheckedUpdateManyWithoutUserInput = {
@@ -21717,39 +23080,53 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     contacts?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type ReferecesUpdateWithoutUserInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     description?: StringFieldUpdateOperationsInput | string
     value?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type ReferecesUncheckedUpdateWithoutUserInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     description?: StringFieldUpdateOperationsInput | string
     value?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type ReferecesUncheckedUpdateManyWithoutUserInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     description?: StringFieldUpdateOperationsInput | string
     value?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type UserPointsUpdateWithoutUserInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     value?: BigIntFieldUpdateOperationsInput | bigint | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type UserPointsUncheckedUpdateWithoutUserInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     value?: BigIntFieldUpdateOperationsInput | bigint | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type UserPointsUncheckedUpdateManyWithoutUserInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     value?: BigIntFieldUpdateOperationsInput | bigint | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type FeedUpdateWithoutUserInput = {
@@ -21761,6 +23138,8 @@ export namespace Prisma {
     react_negative?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     react_smile?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     react_lovely?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type FeedUncheckedUpdateWithoutUserInput = {
@@ -21772,6 +23151,8 @@ export namespace Prisma {
     react_negative?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     react_smile?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     react_lovely?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type FeedUncheckedUpdateManyWithoutUserInput = {
@@ -21783,21 +23164,29 @@ export namespace Prisma {
     react_negative?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     react_smile?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     react_lovely?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type FeedCommentsUpdateWithoutUserInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     comment?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type FeedCommentsUncheckedUpdateWithoutUserInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     comment?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type FeedCommentsUncheckedUpdateManyWithoutUserInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     comment?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type DegreeCreateManyKnowledgespaceInput = {
@@ -21805,12 +23194,16 @@ export namespace Prisma {
     code?: string | null
     description?: string | null
     userId?: bigint | number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string | null
   }
 
   export type DegreeUpdateWithoutKnowledgespaceInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     code?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     user?: UserUpdateOneWithoutDegreeNestedInput
   }
 
@@ -21819,6 +23212,8 @@ export namespace Prisma {
     code?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type DegreeUncheckedUpdateManyWithoutKnowledgespaceInput = {
@@ -21826,77 +23221,11 @@ export namespace Prisma {
     code?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
 
-
-  /**
-   * Aliases for legacy arg types
-   */
-    /**
-     * @deprecated Use UserCountOutputTypeDefaultArgs instead
-     */
-    export type UserCountOutputTypeArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = UserCountOutputTypeDefaultArgs<ExtArgs>
-    /**
-     * @deprecated Use KnowledgespaceCountOutputTypeDefaultArgs instead
-     */
-    export type KnowledgespaceCountOutputTypeArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = KnowledgespaceCountOutputTypeDefaultArgs<ExtArgs>
-    /**
-     * @deprecated Use UserDefaultArgs instead
-     */
-    export type UserArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = UserDefaultArgs<ExtArgs>
-    /**
-     * @deprecated Use PerfilDefaultArgs instead
-     */
-    export type PerfilArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = PerfilDefaultArgs<ExtArgs>
-    /**
-     * @deprecated Use AddresDefaultArgs instead
-     */
-    export type AddresArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = AddresDefaultArgs<ExtArgs>
-    /**
-     * @deprecated Use ContactDefaultArgs instead
-     */
-    export type ContactArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = ContactDefaultArgs<ExtArgs>
-    /**
-     * @deprecated Use KnowledgespaceDefaultArgs instead
-     */
-    export type KnowledgespaceArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = KnowledgespaceDefaultArgs<ExtArgs>
-    /**
-     * @deprecated Use DegreeDefaultArgs instead
-     */
-    export type DegreeArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = DegreeDefaultArgs<ExtArgs>
-    /**
-     * @deprecated Use SkillsDefaultArgs instead
-     */
-    export type SkillsArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = SkillsDefaultArgs<ExtArgs>
-    /**
-     * @deprecated Use ExperiencesDefaultArgs instead
-     */
-    export type ExperiencesArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = ExperiencesDefaultArgs<ExtArgs>
-    /**
-     * @deprecated Use ProjectsDefaultArgs instead
-     */
-    export type ProjectsArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = ProjectsDefaultArgs<ExtArgs>
-    /**
-     * @deprecated Use ReferecesDefaultArgs instead
-     */
-    export type ReferecesArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = ReferecesDefaultArgs<ExtArgs>
-    /**
-     * @deprecated Use ReferecePricesDefaultArgs instead
-     */
-    export type ReferecePricesArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = ReferecePricesDefaultArgs<ExtArgs>
-    /**
-     * @deprecated Use UserPointsDefaultArgs instead
-     */
-    export type UserPointsArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = UserPointsDefaultArgs<ExtArgs>
-    /**
-     * @deprecated Use FeedDefaultArgs instead
-     */
-    export type FeedArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = FeedDefaultArgs<ExtArgs>
-    /**
-     * @deprecated Use FeedCommentsDefaultArgs instead
-     */
-    export type FeedCommentsArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = FeedCommentsDefaultArgs<ExtArgs>
 
   /**
    * Batch Payload for updateMany & deleteMany & createMany

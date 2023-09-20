@@ -3,6 +3,7 @@ import EStatusReturn from "../types/statusReturn";
 
 import { IPerfilPayload, IPerfilPayloadUpdate } from "../types/perfilTypes";
 import { TControllers } from "../types/controllersTypes";
+import tools from "../helpers/tools";
 
 //CREATE
 export const addOne: TControllers = async (req, res) => {
@@ -39,12 +40,8 @@ export const addOne: TControllers = async (req, res) => {
     });
     return;
   }
-
-  res.send({
-    data: result.data,
-    message: "Perfil adicionado!",
-    status: EStatusReturn.Success,
-  });
+  const _data = await tools.customJson(result);
+  res.send(_data);
   return;
 };
 //UPDATE
@@ -73,21 +70,11 @@ export const updateOne: TControllers = async (req, res) => {
     return;
   }
 
-  await update(userid, data)
-    .then(result => {
-      res.send({
-        data: result,
-        message: "Perfil atualizado!",
-        status: EStatusReturn.Success,
-      });
-    })
-    .catch(err => {
-      res.send({
-        err: err,
-        message: err.message,
-        status: EStatusReturn.Error,
-      });
-    });
+  await update(userid, data).then(async result => {
+    const _data = await tools.customJson(result.data);
+    result.data = _data;
+    res.send(result);
+  });
 
   return;
 };
@@ -104,11 +91,9 @@ export const getOne: TControllers = async (req, res) => {
     });
   }
 
-  await get(_id).then(value => {
-    res.send({
-      data: value,
-      message: "Perfil encontrado!",
-      status: EStatusReturn.Success,
-    });
+  await get(_id).then(async value => {
+    const _data = await tools.customJson(value.data);
+    value.data = _data;
+    res.send(value);
   });
 };

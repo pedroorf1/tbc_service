@@ -4,6 +4,7 @@ import EStatusReturn from "../types/statusReturn";
 import { add, get, update } from "../adapters/userAdapt";
 import { TUserRegister } from "../types/userTypes";
 import { TControllers } from "../types/controllersTypes";
+import tools from "../helpers/tools";
 
 export const addOne: TControllers = async (req, res) => {
   if (!req?.query) {
@@ -30,9 +31,9 @@ export const addOne: TControllers = async (req, res) => {
     });
     return;
   }
-
+  const _data = await tools.customJson(result.data);
   res.send({
-    data: JSON.stringify(result.data),
+    data: JSON.stringify(_data),
     message: "Usuário adicionado!",
     status: EStatusReturn.Success,
   });
@@ -50,7 +51,8 @@ export const getOne: TControllers = async (req, res) => {
     });
   }
 
-  const result = await get(_id);
+  let result = await get(_id);
+  result.data = await tools.customJson(result.data);
   res.send({
     data: JSON.stringify(result),
     message: "Usuário encontrado!",

@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 
 import EStatusReturn from "../types/statusReturn";
-import { add, get, update } from "../adapters/userAdapt";
+import { add, get } from "../adapters/userAdapt";
 import { TUserRegister } from "../types/userTypes";
 import { TControllers } from "../types/controllersTypes";
 import tools from "../helpers/tools";

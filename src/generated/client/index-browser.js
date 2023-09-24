@@ -225,7 +225,7 @@ exports.Prisma.UserPointsScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
-exports.Prisma.FeedScalarFieldEnum = {
+exports.Prisma.PostsScalarFieldEnum = {
   id: 'id',
   title: 'title',
   img: 'img',
@@ -271,7 +271,7 @@ exports.Prisma.ModelName = {
   Refereces: 'Refereces',
   ReferecePrices: 'ReferecePrices',
   UserPoints: 'UserPoints',
-  Feed: 'Feed',
+  Posts: 'Posts',
   FeedComments: 'FeedComments'
 };
 

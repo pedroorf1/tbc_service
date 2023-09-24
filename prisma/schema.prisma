@@ -30,7 +30,7 @@ model User {
   referecePrices    ReferecePrices[] @relation("referecePrices")  
   refereces         Refereces[] @relation("refereces")  
   userPoints        UserPoints[] @relation("userPoints")  
-  feeds             Feed[] @relation("feed")  
+  feeds             Posts[] @relation("posts")  
   comments          FeedComments[] @relation("comment")
   createdAt         DateTime @default(now())
   updatedAt         DateTime? @updatedAt  
@@ -163,7 +163,7 @@ model UserPoints {
 }
 
 
-model Feed {
+model Posts {
   id              BigInt     @id @default(autoincrement())
   title           String
   img             String?
@@ -173,7 +173,7 @@ model Feed {
   react_smile     BigInt?
   react_lovely    BigInt?
   userId          BigInt?
-  user            User? @relation("feed",fields: [userId], references: [id])
+  user            User? @relation("posts",fields: [userId], references: [id])
   createdAt       DateTime @default(now())
   updatedAt       DateTime? @updatedAt  
 }

@@ -5,10 +5,10 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon -e ts -w ./src -x npm run ts-node:local",
-    "buld": "tsc",
-    "start": "nodemon -r dotenv/config ./dist/index.js",
+    "test": "set NODE_ENV=test && jest --config ./jest.config.ts",
+    "dev": "set NODE_ENV=dev && nodemon -e ts -w ./src -x npm run ts-node:local",
+    "build": "tsc",
+    "start": "set NODE_ENV=production && nodemon -r dotenv/config ./dist/index.js",
     "format": "npx prettier --write --ignore-unknown .",
     "ts-node:local": "ts-node --esm --experimental-specifier-resolution=node src/index.ts"
   },
@@ -36,6 +36,7 @@
     "@types/dotenv": "^8.2.0",
     "@types/eslint": "^8.4.1",
     "@types/express": "^4.17.13",
+    "@types/jest": "^29.5.5",
     "@types/jsonwebtoken": "^9.0.2",
     "@types/typescript": "^2.0.0",
     "@typescript-eslint/eslint-plugin": "^5.17.0",
@@ -48,5 +49,9 @@
     "nodemon": "^3.0.1",
     "prettier": "^2.6.2",
     "typescript": "^5.2.2"
+  },
+  "jest": {
+    "preset": "ts-jest",
+    "testEnvironment": "node"
   }
 }

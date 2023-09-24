@@ -19,7 +19,6 @@ export const addOne: TControllers = async (req, res) => {
   };
 
   for (const [key, value] of Object.entries(data)) {
-    console.clear();
     if (value) {
       break;
     }
@@ -40,7 +39,8 @@ export const addOne: TControllers = async (req, res) => {
     });
     return;
   }
-  const _data = await tools.customJson(result);
+
+  const _data = await tools.customJson(result.data);
   res.send(_data);
   return;
 };
@@ -58,7 +58,6 @@ export const updateOne: TControllers = async (req, res) => {
   };
 
   for (const [key, value] of Object.entries(data)) {
-    console.clear();
     if (value) {
       break;
     }

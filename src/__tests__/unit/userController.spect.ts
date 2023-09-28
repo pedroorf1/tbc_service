@@ -1,13 +1,10 @@
 import { Request, Response } from "express";
 import EStatusReturn from "../../types/statusReturn";
 import { add, get } from "../../adapters/userAdapt";
-import { TUserRegister } from "../../types/userTypes";
-import { TControllers } from "../../types/controllersTypes";
-import tools from "../../helpers/tools";
 import { addOne, getOne, test } from "../../controllers/userController";
 
-jest.mock("../adapters/userAdapt");
-jest.mock("../helpers/tools");
+jest.mock("../../adapters/userAdapt");
+jest.mock("../../helpers/tools");
 
 describe("UserController", () => {
   describe("addOne", () => {

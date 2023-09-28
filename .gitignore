@@ -8,6 +8,8 @@ node_modules
 /dist
 # testing
 /coverage
+src/__tests__/__snapshots__
+src/generated
 
 # production
 /build

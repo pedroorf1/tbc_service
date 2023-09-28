@@ -268,7 +268,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "C:\\Users\\Pedro\\Desktop\\MVPS\\TRABALHO CASUAL\\TBC_service\\src\\generated\\client",
+      "value": "C:\\Users\\Pedro\\Desktop\\APPS\\TRABALHO_CASUAL\\TBC_service\\src\\generated\\client",
       "fromEnvVar": null
     },
     "config": {

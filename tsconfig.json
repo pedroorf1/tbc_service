@@ -28,7 +28,13 @@
     "esm": true,
     "require": ["tsconfig-paths/register"]
   },
-  "lib": ["esnext"],
+  "lib": [
+    "DOM",
+    "ES5",
+    "ES6",
+    "ES7",
+    "esnext"
+    ],
   "include": ["./src/**/*"],
   "exclude": ["node_modules"]
 }

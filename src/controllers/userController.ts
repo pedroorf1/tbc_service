@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
 
 import EStatusReturn from "../types/statusReturn";
-import { add, get } from "../adapters/userAdapt";
-import { TUserRegister } from "../types/userTypes";
+import { add, get, getByData } from "../adapters/userAdapt";
+import { TUserRegister, TUserLogin } from "../types/userTypes";
 import { TControllers } from "../types/controllersTypes";
 import tools from "../helpers/tools";
 
@@ -60,9 +60,17 @@ export const getOne: TControllers = async (req, res) => {
   });
 };
 
-export const test = async (req: Request, res: Response): Promise<any> => {
+export const updateOne: TControllers = async (req, res) => {
   res.send({
-    message: "Teste realizado com sucesso!",
+    data: JSON.stringify([]),
+    message: "Usuário atualizado!",
+    status: EStatusReturn.Success,
+  });
+};
+export const deactivateOne: TControllers = async (req, res) => {
+  res.send({
+    data: JSON.stringify([]),
+    message: "Usuário bloqueado!",
     status: EStatusReturn.Success,
   });
 };

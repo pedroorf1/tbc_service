@@ -1,5 +1,10 @@
 import dbclient from "../../prisma/client";
-import { TAddUser, TGetUser, TUpdateUser } from "../types/userTypes";
+import {
+  TAddUser,
+  TGetUser,
+  TGetByData,
+  TUpdateUser,
+} from "../types/userTypes";
 import tools from "../helpers/tools";
 
 export const add: TAddUser = async ({ email, password, confirmepassword }) => {
@@ -64,6 +69,17 @@ export const get: TGetUser = async (_id: string) => {
 };
 
 export const getByEmail: TGetUser = async (email: string) => {
+  return dbclient.user
+    .findUnique({ where: { email } })
+    .then((value: any) => {
+      return value;
+    })
+    .catch((err: any) => {
+      return err;
+    });
+};
+export const getByData: TGetByData = async data => {
+  const email = data?.email;
   return dbclient.user
     .findUnique({ where: { email } })
     .then((value: any) => {

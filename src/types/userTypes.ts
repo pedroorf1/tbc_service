@@ -5,6 +5,11 @@ export type TUserRegister = {
   confirmepassword: string;
 };
 
+export type TUserLogin = {
+  email: string;
+  password: string;
+};
+
 export type TUsUpdate = {
   _id: string;
   password: string;
@@ -32,4 +37,8 @@ export type TAddUser = ({
   confirmepassword,
 }: TUserRegister) => Promise<any>;
 export type TGetUser = (_id: string) => Promise<any>;
+export type TGetByData = (data: {
+  email: string;
+  password: string;
+}) => Promise<any>;
 export type TUpdateUser = ({ _id, password }: TUsUpdate) => Promise<any>;

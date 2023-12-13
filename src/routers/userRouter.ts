@@ -4,7 +4,9 @@ import * as user from "../controllers/userController";
 
 import { routeValidade } from "../helpers/service/routevalidade.midware";
 
-router.post("/signup", user.addOne);
-router.get("/test", routeValidade, user.test);
+router.get("/", routeValidade, user.getOne);
+router.post("/", user.addOne);
+router.put("/", routeValidade, user.updateOne);
+router.post("/deactivate", routeValidade, user.deactivateOne);
 
 export default router;
